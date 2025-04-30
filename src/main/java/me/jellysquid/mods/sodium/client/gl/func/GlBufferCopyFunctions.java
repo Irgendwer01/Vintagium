@@ -8,19 +8,23 @@ import org.lwjgl.opengl.GL31;
  * Requires OpenGL 3.1+ or the ARB_copy_buffer extension.
  */
 public enum GlBufferCopyFunctions {
+
     CORE {
+
         @Override
         public void glCopyBufferSubData(int readTarget, int writeTarget, long readOffset, long writeOffset, long size) {
             GL31.glCopyBufferSubData(readTarget, writeTarget, readOffset, writeOffset, size);
         }
     },
     ARB {
+
         @Override
         public void glCopyBufferSubData(int readTarget, int writeTarget, long readOffset, long writeOffset, long size) {
             ARBCopyBuffer.glCopyBufferSubData(readTarget, writeTarget, readOffset, writeOffset, size);
         }
     },
     UNSUPPORTED {
+
         @Override
         public void glCopyBufferSubData(int readTarget, int writeTarget, long readOffset, long writeOffset, long size) {
             throw new UnsupportedOperationException();
@@ -37,5 +41,6 @@ public enum GlBufferCopyFunctions {
         }
     }
 
-    public abstract void glCopyBufferSubData(int readTarget, int writeTarget, long readOffset, long writeOffset, long size);
+    public abstract void glCopyBufferSubData(int readTarget, int writeTarget, long readOffset, long writeOffset,
+                                             long size);
 }

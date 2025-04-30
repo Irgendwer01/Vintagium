@@ -1,5 +1,9 @@
 package me.jellysquid.mods.sodium.client.render.chunk.backends.oneshot;
 
+import java.util.Iterator;
+
+import org.lwjgl.opengl.GL20;
+
 import me.jellysquid.mods.sodium.client.gl.device.CommandList;
 import me.jellysquid.mods.sodium.client.gl.device.DrawCommandList;
 import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
@@ -16,12 +20,9 @@ import me.jellysquid.mods.sodium.client.render.chunk.lists.ChunkRenderListIterat
 import me.jellysquid.mods.sodium.client.render.chunk.passes.BlockRenderPass;
 import me.jellysquid.mods.sodium.client.render.chunk.shader.ChunkRenderShaderBackend;
 import me.jellysquid.mods.sodium.client.render.chunk.shader.ChunkShaderBindingPoints;
-import org.lwjgl.opengl.GL20;
-
-import java.nio.FloatBuffer;
-import java.util.Iterator;
 
 public class ChunkRenderBackendOneshot extends ChunkRenderShaderBackend<ChunkOneshotGraphicsState> {
+
     private final GlMultiDrawBatch batch = new GlMultiDrawBatch(ModelQuadFacing.COUNT);
 
     public ChunkRenderBackendOneshot(ChunkVertexType vertexType) {
@@ -49,7 +50,7 @@ public class ChunkRenderBackendOneshot extends ChunkRenderShaderBackend<ChunkOne
                     // For code simplicity, ChunkOneshotGraphicsState stores the buffer unconditionally
                     // Reset it here if the pass isn't translucent, as we don't want to store useless
                     // buffers
-                    if(!pass.isTranslucent())
+                    if (!pass.isTranslucent())
                         state.setTranslucencyData(null);
                 } else {
                     if (state != null) {
@@ -67,7 +68,8 @@ public class ChunkRenderBackendOneshot extends ChunkRenderShaderBackend<ChunkOne
     }
 
     @Override
-    public void render(CommandList commandList, ChunkRenderListIterator<ChunkOneshotGraphicsState> it, ChunkCameraContext camera) {
+    public void render(CommandList commandList, ChunkRenderListIterator<ChunkOneshotGraphicsState> it,
+                       ChunkCameraContext camera) {
         while (it.hasNext()) {
             ChunkOneshotGraphicsState state = it.getGraphicsState();
             int visibleFaces = it.getVisibleFaces();
@@ -88,7 +90,8 @@ public class ChunkRenderBackendOneshot extends ChunkRenderShaderBackend<ChunkOne
         float modelY = camera.getChunkModelOffset(state.getY(), camera.blockOriginY, camera.originY);
         float modelZ = camera.getChunkModelOffset(state.getZ(), camera.blockOriginZ, camera.originZ);
 
-        GL20.glVertexAttrib4f(ChunkShaderBindingPoints.MODEL_OFFSET.getGenericAttributeIndex(), modelX, modelY, modelZ, 0.0f);
+        GL20.glVertexAttrib4f(ChunkShaderBindingPoints.MODEL_OFFSET.getGenericAttributeIndex(), modelX, modelY, modelZ,
+                0.0f);
     }
 
     protected void buildBatch(ChunkOneshotGraphicsState state, int visibleFaces) {
@@ -109,9 +112,9 @@ public class ChunkRenderBackendOneshot extends ChunkRenderShaderBackend<ChunkOne
         this.batch.end();
 
         if (!batch.isEmpty()) {
-	        try (DrawCommandList drawCommandList = commandList.beginTessellating(state.tessellation)) {
-	            drawCommandList.multiDrawArrays(this.batch.getIndicesBuffer(), this.batch.getLengthBuffer());
-	        }
+            try (DrawCommandList drawCommandList = commandList.beginTessellating(state.tessellation)) {
+                drawCommandList.multiDrawArrays(this.batch.getIndicesBuffer(), this.batch.getLengthBuffer());
+            }
         }
     }
 

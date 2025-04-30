@@ -1,5 +1,21 @@
 package me.jellysquid.mods.sodium.client.gui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Stream;
+
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiVideoSettings;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
+
+import org.lwjgl.input.Keyboard;
+
 import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.gui.options.*;
 import me.jellysquid.mods.sodium.client.gui.options.control.Control;
@@ -9,20 +25,6 @@ import me.jellysquid.mods.sodium.client.gui.utils.Drawable;
 import me.jellysquid.mods.sodium.client.gui.utils.Element;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiVideoSettings;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
-import org.lwjgl.input.Keyboard;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Stream;
 
 public class SodiumOptionsGUI extends GuiScreen {
 
@@ -84,11 +86,17 @@ public class SodiumOptionsGUI extends GuiScreen {
         this.rebuildGUIPages();
         this.rebuildGUIOptions();
 
-        this.undoButton = new FlatButtonWidget(new Dim2i(this.width - 211, this.height - 26, 65, 20), new TextComponentTranslation("sodium.options.buttons.undo").getFormattedText(), this::undoChanges);
-        this.applyButton = new FlatButtonWidget(new Dim2i(this.width - 142, this.height - 26, 65, 20), new TextComponentTranslation("sodium.options.buttons.apply").getFormattedText(), this::applyChanges);
-        this.closeButton = new FlatButtonWidget(new Dim2i(this.width - 73, this.height - 26, 65, 20), new TextComponentTranslation("gui.done").getFormattedText(), this::onClose);
-        this.donateButton = new FlatButtonWidget(new Dim2i(this.width - 128, 6, 100, 20), new TextComponentTranslation("sodium.options.buttons.donate").getFormattedText(), this::openDonationPage);
-        this.hideDonateButton = new FlatButtonWidget(new Dim2i(this.width - 26, 6, 20, 20), "x", this::hideDonationButton);
+        this.undoButton = new FlatButtonWidget(new Dim2i(this.width - 211, this.height - 26, 65, 20),
+                new TextComponentTranslation("sodium.options.buttons.undo").getFormattedText(), this::undoChanges);
+        this.applyButton = new FlatButtonWidget(new Dim2i(this.width - 142, this.height - 26, 65, 20),
+                new TextComponentTranslation("sodium.options.buttons.apply").getFormattedText(), this::applyChanges);
+        this.closeButton = new FlatButtonWidget(new Dim2i(this.width - 73, this.height - 26, 65, 20),
+                new TextComponentTranslation("gui.done").getFormattedText(), this::onClose);
+        this.donateButton = new FlatButtonWidget(new Dim2i(this.width - 128, 6, 100, 20),
+                new TextComponentTranslation("sodium.options.buttons.donate").getFormattedText(),
+                this::openDonationPage);
+        this.hideDonateButton = new FlatButtonWidget(new Dim2i(this.width - 26, 6, 20, 20), "x",
+                this::hideDonationButton);
 
         if (SodiumClientMod.options().notifications.hideDonationButton) {
             this.setDonationButtonVisibility(false);
@@ -132,7 +140,8 @@ public class SodiumOptionsGUI extends GuiScreen {
         for (OptionPage page : this.pages) {
             int width = 12 + this.fontRenderer.getStringWidth(page.getNewName().getFormattedText());
 
-            FlatButtonWidget button = new FlatButtonWidget(new Dim2i(x, y, width, 18), page.getNewName(), () -> this.setPage(page));
+            FlatButtonWidget button = new FlatButtonWidget(new Dim2i(x, y, width, 18), page.getNewName(),
+                    () -> this.setPage(page));
             button.setSelected(this.currentPage == page);
 
             x += width + 6;
@@ -224,12 +233,14 @@ public class SodiumOptionsGUI extends GuiScreen {
         int boxX = dim.getLimitX() + boxPadding;
 
         Option<?> option = element.getOption();
-        List<String> tooltip = new ArrayList<>(this.fontRenderer.listFormattedStringToWidth(option.getTooltip().getFormattedText(), boxWidth - (textPadding * 2)));
+        List<String> tooltip = new ArrayList<>(this.fontRenderer
+                .listFormattedStringToWidth(option.getTooltip().getFormattedText(), boxWidth - (textPadding * 2)));
 
         OptionImpact impact = option.getImpact();
 
         if (impact != null) {
-            tooltip.add(TextFormatting.GRAY + I18n.format("sodium.options.performance_impact_string", impact.toDisplayString()));
+            tooltip.add(TextFormatting.GRAY +
+                    I18n.format("sodium.options.performance_impact_string", impact.toDisplayString()));
         }
 
         int boxHeight = (tooltip.size() * 12) + boxPadding;
@@ -247,7 +258,7 @@ public class SodiumOptionsGUI extends GuiScreen {
             this.fontRenderer.drawString(tooltip.get(i), boxX + textPadding, boxY + textPadding + (i * 12), 0xFFFFFFFF);
         }
     }
-    
+
     private void applyChanges() {
         final HashSet<OptionStorage<?>> dirtyStorages = new HashSet<>();
         final EnumSet<OptionFlag> flags = EnumSet.noneOf(OptionFlag.class);
@@ -263,7 +274,7 @@ public class SodiumOptionsGUI extends GuiScreen {
             dirtyStorages.add(option.getStorage());
         }));
 
-        if (flags.contains(OptionFlag.REQUIRES_RENDERER_RELOAD)) {    	
+        if (flags.contains(OptionFlag.REQUIRES_RENDERER_RELOAD)) {
             this.mc.renderGlobal.loadRenderers();
         }
 
@@ -288,7 +299,7 @@ public class SodiumOptionsGUI extends GuiScreen {
 
     @Override
     public void keyTyped(char typedChar, int keyCode) {
-        if(keyCode == Keyboard.KEY_ESCAPE && !shouldCloseOnEsc()) {
+        if (keyCode == Keyboard.KEY_ESCAPE && !shouldCloseOnEsc()) {
             return;
         } else if (keyCode == Keyboard.KEY_ESCAPE) {
             onClose();

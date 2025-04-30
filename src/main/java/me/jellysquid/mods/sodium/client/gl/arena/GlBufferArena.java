@@ -1,5 +1,7 @@
 package me.jellysquid.mods.sodium.client.gl.arena;
 
+import java.util.Set;
+
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import me.jellysquid.mods.sodium.client.gl.buffer.GlBuffer;
 import me.jellysquid.mods.sodium.client.gl.buffer.GlBufferTarget;
@@ -8,9 +10,8 @@ import me.jellysquid.mods.sodium.client.gl.buffer.GlMutableBuffer;
 import me.jellysquid.mods.sodium.client.gl.device.CommandList;
 import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
 
-import java.util.Set;
-
 public class GlBufferArena {
+
     private static final GlBufferUsage BUFFER_USAGE = GlBufferUsage.GL_DYNAMIC_DRAW;
 
     private final RenderDevice device;
@@ -86,17 +87,17 @@ public class GlBufferArena {
             }
         }
 
-        if(prev != null || next != null) {
+        if (prev != null || next != null) {
             int start, end;
 
-            if(prev != null) {
+            if (prev != null) {
                 this.freeRegions.remove(prev);
                 start = prev.getStart();
             } else {
                 start = segment.getStart();
             }
 
-            if(next != null) {
+            if (next != null) {
                 this.freeRegions.remove(next);
                 end = next.getEnd();
             } else {

@@ -1,10 +1,10 @@
 package me.jellysquid.mods.sodium.client.model.light.cache;
 
+import java.util.Arrays;
+
 import me.jellysquid.mods.sodium.client.model.light.data.LightDataAccess;
 import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
 import me.jellysquid.mods.sodium.client.world.WorldSlice;
-
-import java.util.Arrays;
 
 /**
  * A light data cache which uses a flat-array to store the light data for the blocks in a given chunk and its direct
@@ -12,6 +12,7 @@ import java.util.Arrays;
  * can be re-used by {@link WorldSlice} to avoid allocations.
  */
 public class ArrayLightDataCache extends LightDataAccess {
+
     private static final int NEIGHBOR_BLOCK_RADIUS = 2;
     private static final int BLOCK_LENGTH = 16 + (NEIGHBOR_BLOCK_RADIUS * 2);
 
@@ -52,5 +53,4 @@ public class ArrayLightDataCache extends LightDataAccess {
 
         return this.light[l] = this.compute(x, y, z);
     }
-
 }

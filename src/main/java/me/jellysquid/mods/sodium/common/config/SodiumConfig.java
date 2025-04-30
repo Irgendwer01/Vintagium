@@ -1,9 +1,5 @@
 package me.jellysquid.mods.sodium.common.config;
 
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,18 +8,23 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import me.jellysquid.mods.sodium.Tags;
+
 /**
  * Documentation of these options: https://github.com/jellysquid3/sodium-fabric/wiki/Configuration-File
  */
 public class SodiumConfig {
-    private static final Logger LOGGER = LogManager.getLogger(SodiumClientMod.MODNAME + "Config");
+
+    private static final Logger LOGGER = LogManager.getLogger(Tags.MODNAME + "Config");
 
     private static final String JSON_KEY_SODIUM_OPTIONS = "sodium:options";
 
     private static final Set<String> SYSTEM_OPTIONS = Stream.of(
             "core",
-            "features.chunk_rendering"
-    ).map(SodiumConfig::getMixinRuleName).collect(Collectors.toSet());
+            "features.chunk_rendering").map(SodiumConfig::getMixinRuleName).collect(Collectors.toSet());
 
     private final Map<String, Option> options = new HashMap<>();
 
@@ -65,8 +66,9 @@ public class SodiumConfig {
 
     /**
      * Defines a Mixin rule which can be configured by users and other mods.
+     * 
      * @throws IllegalStateException If a rule with that name already exists
-     * @param mixin The name of the mixin package which will be controlled by this rule
+     * @param mixin   The name of the mixin package which will be controlled by this rule
      * @param enabled True if the rule will be enabled by default, otherwise false
      */
     private void addMixinRule(String mixin, boolean enabled) {
@@ -100,7 +102,7 @@ public class SodiumConfig {
                 continue;
             }
 
-            if(!enabled && SYSTEM_OPTIONS.contains(key)) {
+            if (!enabled && SYSTEM_OPTIONS.contains(key)) {
                 LOGGER.warn("Configuration key '{}' is a required option and cannot be disabled", key);
                 continue;
             }
@@ -159,7 +161,7 @@ public class SodiumConfig {
 
         Properties props = new Properties();
 
-        try (FileInputStream fin = new FileInputStream(file)){
+        try (FileInputStream fin = new FileInputStream(file)) {
             props.load(fin);
         } catch (IOException e) {
             throw new RuntimeException("Could not load config file", e);
@@ -183,7 +185,7 @@ public class SodiumConfig {
         }
 
         try (Writer writer = new FileWriter(file)) {
-            writer.write("# This is the configuration file for " + SodiumClientMod.MODNAME + ".\n");
+            writer.write("# This is the configuration file for " + Tags.MODNAME + ".\n");
             writer.write("#\n");
             writer.write("# You can find information on editing this file and all the available options here:\n");
             writer.write("# https://github.com/jellysquid3/sodium-fabric/wiki/Configuration-File\n");

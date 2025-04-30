@@ -7,6 +7,7 @@ import java.util.Random;
 //
 // http://xoshiro.di.unimi.it/
 public class XoRoShiRoRandom extends Random {
+
     private static final long serialVersionUID = 1L;
 
     private SplitMixRandom mixer;
@@ -83,7 +84,6 @@ public class XoRoShiRoRandom extends Random {
         }
 
         return t;
-
     }
 
     @Override

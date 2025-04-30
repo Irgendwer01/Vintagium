@@ -1,5 +1,11 @@
 package me.jellysquid.mods.sodium.client.render.chunk.compile;
 
+import java.nio.ByteBuffer;
+import java.util.Map;
+
+import net.minecraft.client.renderer.GLAllocation;
+import net.minecraft.util.BlockRenderLayer;
+
 import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.gl.buffer.VertexData;
 import me.jellysquid.mods.sodium.client.gl.util.BufferSlice;
@@ -16,11 +22,6 @@ import me.jellysquid.mods.sodium.client.render.chunk.passes.BlockRenderPass;
 import me.jellysquid.mods.sodium.client.render.chunk.passes.BlockRenderPassManager;
 import me.jellysquid.mods.sodium.client.util.BufferSizeUtil;
 import me.jellysquid.mods.sodium.client.util.EnumUtil;
-import net.minecraft.client.renderer.GLAllocation;
-import net.minecraft.util.BlockRenderLayer;
-
-import java.nio.ByteBuffer;
-import java.util.Map;
 
 /**
  * A collection of temporary buffers for each worker thread which will be used to build chunk meshes for given render
@@ -28,6 +29,7 @@ import java.util.Map;
  * shrink a buffer.
  */
 public class ChunkBuildBuffers {
+
     private final ChunkModelBuffers[] delegates;
     private final VertexBufferBuilder[][] buffersByLayer;
     private final ChunkVertexType vertexType;
@@ -50,7 +52,8 @@ public class ChunkBuildBuffers {
             VertexBufferBuilder[] buffers = this.buffersByLayer[passId];
 
             for (ModelQuadFacing facing : ModelQuadFacing.VALUES) {
-                buffers[facing.ordinal()] = new VertexBufferBuilder(vertexType.getBufferVertexFormat(), BufferSizeUtil.BUFFER_SIZES.get(layer) / ModelQuadFacing.COUNT);
+                buffers[facing.ordinal()] = new VertexBufferBuilder(vertexType.getBufferVertexFormat(),
+                        BufferSizeUtil.BUFFER_SIZES.get(layer) / ModelQuadFacing.COUNT);
             }
         }
     }
@@ -60,7 +63,10 @@ public class ChunkBuildBuffers {
             ChunkModelVertexTransformer[] writers = new ChunkModelVertexTransformer[ModelQuadFacing.COUNT];
 
             for (ModelQuadFacing facing : ModelQuadFacing.VALUES) {
-                writers[facing.ordinal()] = new ChunkModelVertexTransformer(this.vertexType.createBufferWriter(this.buffersByLayer[i][facing.ordinal()], SodiumClientMod.isDirectMemoryAccessEnabled()), this.offset);
+                writers[facing.ordinal()] = new ChunkModelVertexTransformer(
+                        this.vertexType.createBufferWriter(this.buffersByLayer[i][facing.ordinal()],
+                                SodiumClientMod.isDirectMemoryAccessEnabled()),
+                        this.offset);
             }
 
             this.delegates[i] = new BakedChunkModelBuffers(writers, renderData);
@@ -95,7 +101,7 @@ public class ChunkBuildBuffers {
             int start = bufferLen;
             int size = builder.getSize();
 
-            if(meshData == null) {
+            if (meshData == null) {
                 meshData = new ChunkMeshData();
             }
 

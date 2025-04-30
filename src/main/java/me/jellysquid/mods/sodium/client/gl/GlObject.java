@@ -9,6 +9,7 @@ import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
  * relied on too heavily.
  */
 public class GlObject {
+
     private static final int INVALID_HANDLE = Integer.MIN_VALUE;
 
     protected final RenderDevice device;

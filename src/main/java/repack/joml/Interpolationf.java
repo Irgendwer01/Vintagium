@@ -60,10 +60,10 @@ public class Interpolationf {
      * @return the interpolated value of <i>f</i>
      */
     public static float interpolateTriangle(
-            float v0X, float v0Y, float f0,
-            float v1X, float v1Y, float f1,
-            float v2X, float v2Y, float f2,
-            float x, float y) {
+                                            float v0X, float v0Y, float f0,
+                                            float v1X, float v1Y, float f1,
+                                            float v2X, float v2Y, float f2,
+                                            float x, float y) {
         float v12Y = v1Y - v2Y;
         float v21X = v2X - v1X;
         float v02X = v0X - v2X;
@@ -77,47 +77,48 @@ public class Interpolationf {
     }
 
     /**
-     * Bilinearly interpolate the two-dimensional vector <i>f</i> over the given triangle and store the result in <code>dest</code>.
+     * Bilinearly interpolate the two-dimensional vector <i>f</i> over the given triangle and store the result in
+     * <code>dest</code>.
      * <p>
      * Reference: <a href="https://en.wikipedia.org/wiki/Barycentric_coordinate_system">https://en.wikipedia.org/</a>
      *
      * @param v0X
-     *            the x coordinate of the first triangle vertex
+     *             the x coordinate of the first triangle vertex
      * @param v0Y
-     *            the y coordinate of the first triangle vertex
+     *             the y coordinate of the first triangle vertex
      * @param f0X
-     *            the x component of the value of <i>f</i> at the first vertex
+     *             the x component of the value of <i>f</i> at the first vertex
      * @param f0Y
-     *            the y component of the value of <i>f</i> at the first vertex
+     *             the y component of the value of <i>f</i> at the first vertex
      * @param v1X
-     *            the x coordinate of the second triangle vertex
+     *             the x coordinate of the second triangle vertex
      * @param v1Y
-     *            the y coordinate of the second triangle vertex
+     *             the y coordinate of the second triangle vertex
      * @param f1X
-     *            the x component of the value of <i>f</i> at the second vertex
+     *             the x component of the value of <i>f</i> at the second vertex
      * @param f1Y
-     *            the y component of the value of <i>f</i> at the second vertex
+     *             the y component of the value of <i>f</i> at the second vertex
      * @param v2X
-     *            the x coordinate of the third triangle vertex
+     *             the x coordinate of the third triangle vertex
      * @param v2Y
-     *            the y coordinate of the third triangle vertex
+     *             the y coordinate of the third triangle vertex
      * @param f2X
-     *            the x component of the value of <i>f</i> at the third vertex
+     *             the x component of the value of <i>f</i> at the third vertex
      * @param f2Y
-     *            the y component of the value of <i>f</i> at the third vertex
+     *             the y component of the value of <i>f</i> at the third vertex
      * @param x
-     *            the x coordinate of the point to interpolate <i>f</i> at
+     *             the x coordinate of the point to interpolate <i>f</i> at
      * @param y
-     *            the y coordinate of the point to interpolate <i>f</i> at
+     *             the y coordinate of the point to interpolate <i>f</i> at
      * @param dest
-     *            will hold the interpolation result
+     *             will hold the interpolation result
      * @return dest
      */
     public static Vector2f interpolateTriangle(
-            float v0X, float v0Y, float f0X, float f0Y,
-            float v1X, float v1Y, float f1X, float f1Y,
-            float v2X, float v2Y, float f2X, float f2Y,
-            float x, float y, Vector2f dest) {
+                                               float v0X, float v0Y, float f0X, float f0Y,
+                                               float v1X, float v1Y, float f1X, float f1Y,
+                                               float v2X, float v2Y, float f2X, float f2Y,
+                                               float x, float y, Vector2f dest) {
         float v12Y = v1Y - v2Y;
         float v21X = v2X - v1X;
         float v02X = v0X - v2X;
@@ -141,37 +142,37 @@ public class Interpolationf {
      * at the specified three inputs <code>(v0X, v0Y)</code>, <code>(v1X, v1Y)</code> and <code>(v2X, v2Y)</code>.
      *
      * @param v0X
-     *            the x coordinate of the first triangle vertex
+     *             the x coordinate of the first triangle vertex
      * @param v0Y
-     *            the y coordinate of the first triangle vertex
+     *             the y coordinate of the first triangle vertex
      * @param f0X
-     *            the x component of the value of <i>f</i> at the first vertex
+     *             the x component of the value of <i>f</i> at the first vertex
      * @param f0Y
-     *            the y component of the value of <i>f</i> at the first vertex
+     *             the y component of the value of <i>f</i> at the first vertex
      * @param v1X
-     *            the x coordinate of the second triangle vertex
+     *             the x coordinate of the second triangle vertex
      * @param v1Y
-     *            the y coordinate of the second triangle vertex
+     *             the y coordinate of the second triangle vertex
      * @param f1X
-     *            the x component of the value of <i>f</i> at the second vertex
+     *             the x component of the value of <i>f</i> at the second vertex
      * @param f1Y
-     *            the y component of the value of <i>f</i> at the second vertex
+     *             the y component of the value of <i>f</i> at the second vertex
      * @param v2X
-     *            the x coordinate of the third triangle vertex
+     *             the x coordinate of the third triangle vertex
      * @param v2Y
-     *            the y coordinate of the third triangle vertex
+     *             the y coordinate of the third triangle vertex
      * @param f2X
-     *            the x component of the value of <i>f</i> at the third vertex
+     *             the x component of the value of <i>f</i> at the third vertex
      * @param f2Y
-     *            the y component of the value of <i>f</i> at the third vertex
+     *             the y component of the value of <i>f</i> at the third vertex
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public static Vector2f dFdxLinear(
-            float v0X, float v0Y, float f0X, float f0Y,
-            float v1X, float v1Y, float f1X, float f1Y,
-            float v2X, float v2Y, float f2X, float f2Y, Vector2f dest) {
+                                      float v0X, float v0Y, float f0X, float f0Y,
+                                      float v1X, float v1Y, float f1X, float f1Y,
+                                      float v2X, float v2Y, float f2X, float f2Y, Vector2f dest) {
         float v12Y = v1Y - v2Y;
         float v02Y = v0Y - v2Y;
         float den = v12Y * (v0X - v2X) + (v2X - v1X) * v02Y;
@@ -190,38 +191,38 @@ public class Interpolationf {
      * at the specified three inputs <code>(v0X, v0Y)</code>, <code>(v1X, v1Y)</code> and <code>(v2X, v2Y)</code>.
      *
      * @param v0X
-     *            the x coordinate of the first triangle vertex
+     *             the x coordinate of the first triangle vertex
      * @param v0Y
-     *            the y coordinate of the first triangle vertex
+     *             the y coordinate of the first triangle vertex
      * @param f0X
-     *            the x component of the value of <i>f</i> at the first vertex
+     *             the x component of the value of <i>f</i> at the first vertex
      * @param f0Y
-     *            the y component of the value of <i>f</i> at the first vertex
+     *             the y component of the value of <i>f</i> at the first vertex
      * @param v1X
-     *            the x coordinate of the second triangle vertex
+     *             the x coordinate of the second triangle vertex
      * @param v1Y
-     *            the y coordinate of the second triangle vertex
+     *             the y coordinate of the second triangle vertex
      * @param f1X
-     *            the x component of the value of <i>f</i> at the second vertex
+     *             the x component of the value of <i>f</i> at the second vertex
      * @param f1Y
-     *            the y component of the value of <i>f</i> at the second vertex
+     *             the y component of the value of <i>f</i> at the second vertex
      * @param v2X
-     *            the x coordinate of the third triangle vertex
+     *             the x coordinate of the third triangle vertex
      * @param v2Y
-     *            the y coordinate of the third triangle vertex
+     *             the y coordinate of the third triangle vertex
      * @param f2X
-     *            the x component of the value of <i>f</i> at the third vertex
+     *             the x component of the value of <i>f</i> at the third vertex
      * @param f2Y
-     *            the y component of the value of <i>f</i> at the third vertex
+     *             the y component of the value of <i>f</i> at the third vertex
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public static Vector2f dFdyLinear(
-            float v0X, float v0Y, float f0X, float f0Y,
-            float v1X, float v1Y, float f1X, float f1Y,
-            float v2X, float v2Y, float f2X, float f2Y,
-            Vector2f dest) {
+                                      float v0X, float v0Y, float f0X, float f0Y,
+                                      float v1X, float v1Y, float f1X, float f1Y,
+                                      float v2X, float v2Y, float f2X, float f2Y,
+                                      Vector2f dest) {
         float v21X = v2X - v1X;
         float v02X = v0X - v2X;
         float den = (v1Y - v2Y) * v02X + v21X * (v0Y - v2Y);
@@ -233,94 +234,100 @@ public class Interpolationf {
     }
 
     /**
-     * Bilinearly interpolate the three-dimensional vector <i>f</i> over the given triangle and store the result in <code>dest</code>.
+     * Bilinearly interpolate the three-dimensional vector <i>f</i> over the given triangle and store the result in
+     * <code>dest</code>.
      * <p>
      * Reference: <a href="https://en.wikipedia.org/wiki/Barycentric_coordinate_system">https://en.wikipedia.org/</a>
      *
      * @param v0X
-     *            the x coordinate of the first triangle vertex
+     *             the x coordinate of the first triangle vertex
      * @param v0Y
-     *            the y coordinate of the first triangle vertex
+     *             the y coordinate of the first triangle vertex
      * @param f0X
-     *            the x component of the value of <i>f</i> at the first vertex
+     *             the x component of the value of <i>f</i> at the first vertex
      * @param f0Y
-     *            the y component of the value of <i>f</i> at the first vertex
+     *             the y component of the value of <i>f</i> at the first vertex
      * @param f0Z
-     *            the z component of the value of <i>f</i> at the first vertex
+     *             the z component of the value of <i>f</i> at the first vertex
      * @param v1X
-     *            the x coordinate of the second triangle vertex
+     *             the x coordinate of the second triangle vertex
      * @param v1Y
-     *            the y coordinate of the second triangle vertex
+     *             the y coordinate of the second triangle vertex
      * @param f1X
-     *            the x component of the value of <i>f</i> at the second vertex
+     *             the x component of the value of <i>f</i> at the second vertex
      * @param f1Y
-     *            the y component of the value of <i>f</i> at the second vertex
+     *             the y component of the value of <i>f</i> at the second vertex
      * @param f1Z
-     *            the z component of the value of <i>f</i> at the second vertex
+     *             the z component of the value of <i>f</i> at the second vertex
      * @param v2X
-     *            the x coordinate of the third triangle vertex
+     *             the x coordinate of the third triangle vertex
      * @param v2Y
-     *            the y coordinate of the third triangle vertex
+     *             the y coordinate of the third triangle vertex
      * @param f2X
-     *            the x component of the value of <i>f</i> at the third vertex
+     *             the x component of the value of <i>f</i> at the third vertex
      * @param f2Y
-     *            the y component of the value of <i>f</i> at the third vertex
+     *             the y component of the value of <i>f</i> at the third vertex
      * @param f2Z
-     *            the z component of the value of <i>f</i> at the third vertex
+     *             the z component of the value of <i>f</i> at the third vertex
      * @param x
-     *            the x coordinate of the point to interpolate <i>f</i> at
+     *             the x coordinate of the point to interpolate <i>f</i> at
      * @param y
-     *            the y coordinate of the point to interpolate <i>f</i> at
+     *             the y coordinate of the point to interpolate <i>f</i> at
      * @param dest
-     *            will hold the interpolation result
+     *             will hold the interpolation result
      * @return dest
      */
     public static Vector3f interpolateTriangle(
-            float v0X, float v0Y, float f0X, float f0Y, float f0Z,
-            float v1X, float v1Y, float f1X, float f1Y, float f1Z,
-            float v2X, float v2Y, float f2X, float f2Y, float f2Z,
-            float x, float y, Vector3f dest) {
+                                               float v0X, float v0Y, float f0X, float f0Y, float f0Z,
+                                               float v1X, float v1Y, float f1X, float f1Y, float f1Z,
+                                               float v2X, float v2Y, float f2X, float f2Y, float f2Z,
+                                               float x, float y, Vector3f dest) {
         // compute interpolation factors
         Vector3f t = dest;
         interpolationFactorsTriangle(v0X, v0Y, v1X, v1Y, v2X, v2Y, x, y, t);
         // interpolate using these factors
         return dest.set(t.x * f0X + t.y * f1X + t.z * f2X,
-                        t.x * f0Y + t.y * f1Y + t.z * f2Y,
-                        t.x * f0Z + t.y * f1Z + t.z * f2Z);
+                t.x * f0Y + t.y * f1Y + t.z * f2Y,
+                t.x * f0Z + t.y * f1Z + t.z * f2Z);
     }
 
     /**
-     * Compute the interpolation factors <code>(t0, t1, t2)</code> in order to interpolate an arbitrary value over a given
+     * Compute the interpolation factors <code>(t0, t1, t2)</code> in order to interpolate an arbitrary value over a
+     * given
      * triangle at the given point <code>(x, y)</code>.
      * <p>
-     * This method takes in the 2D vertex positions of the three vertices of a triangle and stores in <code>dest</code> the
-     * factors <code>(t0, t1, t2)</code> in the equation <code>v' = v0 * t0 + v1 * t1 + v2 * t2</code> where <code>(v0, v1, v2)</code> are
-     * arbitrary (scalar or vector) values associated with the respective vertices of the triangle. The computed value <code>v'</code>
+     * This method takes in the 2D vertex positions of the three vertices of a triangle and stores in <code>dest</code>
+     * the
+     * factors <code>(t0, t1, t2)</code> in the equation <code>v' = v0 * t0 + v1 * t1 + v2 * t2</code> where
+     * <code>(v0, v1, v2)</code> are
+     * arbitrary (scalar or vector) values associated with the respective vertices of the triangle. The computed value
+     * <code>v'</code>
      * is the interpolated value at the given position <code>(x, y)</code>.
      *
      * @param v0X
-     *            the x coordinate of the first triangle vertex
+     *             the x coordinate of the first triangle vertex
      * @param v0Y
-     *            the y coordinate of the first triangle vertex
+     *             the y coordinate of the first triangle vertex
      * @param v1X
-     *            the x coordinate of the second triangle vertex
+     *             the x coordinate of the second triangle vertex
      * @param v1Y
-     *            the y coordinate of the second triangle vertex
+     *             the y coordinate of the second triangle vertex
      * @param v2X
-     *            the x coordinate of the third triangle vertex
+     *             the x coordinate of the third triangle vertex
      * @param v2Y
-     *            the y coordinate of the third triangle vertex
+     *             the y coordinate of the third triangle vertex
      * @param x
-     *            the x coordinate of the point to interpolate at
+     *             the x coordinate of the point to interpolate at
      * @param y
-     *            the y coordinate of the point to interpolate at
+     *             the y coordinate of the point to interpolate at
      * @param dest
-     *            will hold the interpolation factors <code>(t0, t1, t2)</code>
+     *             will hold the interpolation factors <code>(t0, t1, t2)</code>
      * @return dest
      */
     public static Vector3f interpolationFactorsTriangle(
-            float v0X, float v0Y, float v1X, float v1Y, float v2X, float v2Y,
-            float x, float y, Vector3f dest) {
+                                                        float v0X, float v0Y, float v1X, float v1Y, float v2X,
+                                                        float v2Y,
+                                                        float x, float y, Vector3f dest) {
         float v12Y = v1Y - v2Y;
         float v21X = v2X - v1X;
         float v02X = v0X - v2X;
@@ -333,5 +340,4 @@ public class Interpolationf {
         dest.z = 1.0f - dest.x - dest.y;
         return dest;
     }
-
 }

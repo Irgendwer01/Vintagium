@@ -1,6 +1,7 @@
 package me.jellysquid.mods.sodium.client.util.color;
 
 public class ColorMixer {
+
     private static final long MASK1 = 0x00FF00FF;
     private static final long MASK2 = 0xFF00FF00;
 
@@ -19,11 +20,12 @@ public class ColorMixer {
      */
     public static long mixARGB(long c1, long c2, int f1, int f2) {
         return ((((((c1 & MASK1) * f1) + ((c2 & MASK1) * f2)) >> 8) & MASK1) |
-                        (((((c1 & MASK2) * f1) + ((c2 & MASK2) * f2)) >> 8) & MASK2));
+                (((((c1 & MASK2) * f1) + ((c2 & MASK2) * f2)) >> 8) & MASK2));
     }
 
     /**
      * Helper method to convert 32-bit integers to 64-bit integers and back.
+     * 
      * @see ColorMixer#mixARGB(long, long, int, int)
      */
     public static int mixARGB(int c1, int c2, int f1, int f2) {

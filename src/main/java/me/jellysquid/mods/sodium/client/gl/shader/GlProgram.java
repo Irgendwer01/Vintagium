@@ -1,17 +1,20 @@
 package me.jellysquid.mods.sodium.client.gl.shader;
 
-import me.jellysquid.mods.sodium.client.gl.GlObject;
-import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
 import net.minecraft.util.ResourceLocation;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
+import me.jellysquid.mods.sodium.client.gl.GlObject;
+import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
+
 /**
  * An OpenGL shader program.
  */
 public abstract class GlProgram extends GlObject {
+
     private static final Logger LOGGER = LogManager.getLogger(GlProgram.class);
 
     private final ResourceLocation name;
@@ -41,6 +44,7 @@ public abstract class GlProgram extends GlObject {
 
     /**
      * Retrieves the index of the uniform with the given name.
+     * 
      * @param name The name of the uniform to find the index of
      * @return The uniform's index
      * @throws NullPointerException If no uniform exists with the given name
@@ -62,6 +66,7 @@ public abstract class GlProgram extends GlObject {
     }
 
     public static class Builder {
+
         private final ResourceLocation name;
         private final int program;
 
@@ -82,7 +87,7 @@ public abstract class GlProgram extends GlObject {
          * set.
          *
          * @param factory The factory which will create the shader program's container
-         * @param <P> The type which should be instantiated with the new program's handle
+         * @param <P>     The type which should be instantiated with the new program's handle
          * @return An instantiated shader container as provided by the factory
          */
         public <P extends GlProgram> P build(ProgramFactory<P> factory) {
@@ -111,6 +116,7 @@ public abstract class GlProgram extends GlObject {
     }
 
     public interface ProgramFactory<P extends GlProgram> {
+
         P create(ResourceLocation name, int handle);
     }
 }

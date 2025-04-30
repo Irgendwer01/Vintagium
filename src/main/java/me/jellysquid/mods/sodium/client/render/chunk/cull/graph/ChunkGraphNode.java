@@ -1,14 +1,17 @@
 package me.jellysquid.mods.sodium.client.render.chunk.cull.graph;
 
-import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkRenderData;
-import me.jellysquid.mods.sodium.client.util.math.FrustumExtended;
-import me.jellysquid.mods.sodium.common.util.DirectionUtil;
 import net.minecraft.client.renderer.chunk.SetVisibility;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
+import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkRenderData;
+import me.jellysquid.mods.sodium.client.util.math.FrustumExtended;
+import me.jellysquid.mods.sodium.common.util.DirectionUtil;
+
 public class ChunkGraphNode {
-    private static final long DEFAULT_VISIBILITY_DATA = calculateVisibilityData(ChunkRenderData.EMPTY.getOcclusionData());
+
+    private static final long DEFAULT_VISIBILITY_DATA = calculateVisibilityData(
+            ChunkRenderData.EMPTY.getOcclusionData());
     private static final float FRUSTUM_EPSILON = 1.0f /* block model margin */ + 0.125f /* epsilon */;
 
     private final ChunkGraphNode[] nodes = new ChunkGraphNode[DirectionUtil.ALL_DIRECTIONS.length];
@@ -76,14 +79,14 @@ public class ChunkGraphNode {
         return visibilityData;
     }
 
-    //The way this works now is that the culling state contains 2 inner states
+    // The way this works now is that the culling state contains 2 inner states
     // visited directions mask, and visitable direction mask
-    //On graph start, the root node(s) have the visit and visitable masks set to all visible
+    // On graph start, the root node(s) have the visit and visitable masks set to all visible
     // when a chunk section is popped off the queue, the visited direction mask is anded with the
     // visitable direction mask to return a bitfield containing what directions the graph can flow too
-    //When a chunk is visited in the graph the inbound direction is masked off from the visited direction mask
+    // When a chunk is visited in the graph the inbound direction is masked off from the visited direction mask
     // and the visitable direction mask is updated (ored) with the visibilityData of the inbound direction
-    //When a chunk hasnt been visited before, it uses the parents data as the initial visited direction mask
+    // When a chunk hasnt been visited before, it uses the parents data as the initial visited direction mask
 
     public short computeQueuePop() {
         short retVal = (short) (cullingState & (((cullingState >> 8) & 0xFF) | 0xFF00));
@@ -93,11 +96,11 @@ public class ChunkGraphNode {
 
     public void updateCullingState(EnumFacing flow, short parent) {
         int inbound = flow.ordinal();
-        this.cullingState |= (visibilityData >> (inbound<<3)) & 0xFF;
+        this.cullingState |= (visibilityData >> (inbound << 3)) & 0xFF;
         this.cullingState &= ~(1 << (inbound + 8));
-        //NOTE: this isnt strictly needed, due to the properties provided from the bfs search (never backtracking),
+        // NOTE: this isnt strictly needed, due to the properties provided from the bfs search (never backtracking),
         // but just incase/better readability/understandability
-        this.cullingState &= parent|0x00FF;
+        this.cullingState &= parent | 0x00FF;
     }
 
     public void setCullingState(short parent) {
@@ -144,7 +147,7 @@ public class ChunkGraphNode {
 
     /**
      * @return The squared distance from the center of this chunk in the world to the center of the block position
-     * given by {@param pos}
+     *         given by {@param pos}
      */
     public double getSquaredDistance(BlockPos pos) {
         return this.getSquaredDistance(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);

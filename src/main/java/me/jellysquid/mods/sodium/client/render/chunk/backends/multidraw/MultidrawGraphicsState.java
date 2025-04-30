@@ -1,5 +1,7 @@
 package me.jellysquid.mods.sodium.client.render.chunk.backends.multidraw;
 
+import java.util.Map;
+
 import me.jellysquid.mods.sodium.client.gl.arena.GlBufferSegment;
 import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexFormat;
 import me.jellysquid.mods.sodium.client.gl.device.CommandList;
@@ -10,15 +12,15 @@ import me.jellysquid.mods.sodium.client.render.chunk.ChunkRenderContainer;
 import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkMeshData;
 import me.jellysquid.mods.sodium.client.render.chunk.region.ChunkRegion;
 
-import java.util.Map;
-
 public class MultidrawGraphicsState extends ChunkGraphicsState {
+
     private final ChunkRegion<MultidrawGraphicsState> region;
 
     private final GlBufferSegment segment;
     private final long[] parts;
 
-    public MultidrawGraphicsState(ChunkRenderContainer<?> container, ChunkRegion<MultidrawGraphicsState> region, GlBufferSegment segment, ChunkMeshData meshData, GlVertexFormat<?> vertexFormat) {
+    public MultidrawGraphicsState(ChunkRenderContainer<?> container, ChunkRegion<MultidrawGraphicsState> region,
+                                  GlBufferSegment segment, ChunkMeshData meshData, GlVertexFormat<?> vertexFormat) {
         super(container);
 
         this.region = region;
@@ -49,5 +51,4 @@ public class MultidrawGraphicsState extends ChunkGraphicsState {
     public long getModelPart(int facing) {
         return this.parts[facing];
     }
-
 }

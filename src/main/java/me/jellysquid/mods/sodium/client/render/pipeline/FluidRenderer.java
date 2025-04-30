@@ -1,5 +1,22 @@
 package me.jellysquid.mods.sodium.client.render.pipeline;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fluids.Fluid;
+
+import org.embeddedt.embeddium.render.fluid.EmbeddiumFluidSpriteCache;
+
 import me.jellysquid.mods.sodium.client.model.light.LightMode;
 import me.jellysquid.mods.sodium.client.model.light.LightPipeline;
 import me.jellysquid.mods.sodium.client.model.light.LightPipelineProvider;
@@ -18,32 +35,14 @@ import me.jellysquid.mods.sodium.client.util.color.ColorABGR;
 import me.jellysquid.mods.sodium.client.world.biome.BlockColorsExtended;
 import me.jellysquid.mods.sodium.common.util.DirectionUtil;
 import me.jellysquid.mods.sodium.common.util.WorldUtil;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.IFluidBlock;
-import org.embeddedt.embeddium.render.fluid.EmbeddiumFluidSpriteCache;
 import repack.joml.Vector3d;
-
-import java.util.Objects;
 
 public class FluidRenderer {
 
     private static final float EPSILON = 0.001f;
 
-    private static final IBlockColor FLUID_COLOR_PROVIDER = (state, world, pos, tintIndex) -> WorldUtil.getFluid(state).getColor();
+    private static final IBlockColor FLUID_COLOR_PROVIDER = (state, world, pos, tintIndex) -> WorldUtil.getFluid(state)
+            .getColor();
 
     private final BlockPos.MutableBlockPos scratchPos = new BlockPos.MutableBlockPos();
 
@@ -78,7 +77,7 @@ public class FluidRenderer {
         Fluid adjFluid = WorldUtil.getFluid(world.getBlockState(adjPos));
 
         if (blockState.getMaterial().isOpaque()) {
-            return fluid == adjFluid || blockState.isSideSolid(world,pos,dir);
+            return fluid == adjFluid || blockState.isSideSolid(world, pos, dir);
             // fluidlogged or next to water, occlude sides that are solid or the same liquid
         }
         return fluid == adjFluid;
@@ -315,7 +314,8 @@ public class FluidRenderer {
                     BlockPos adjPos = this.scratchPos.setPos(adjX, adjY, adjZ);
                     IBlockState adjBlock = world.getBlockState(adjPos);
 
-                    if (adjBlock.getBlockFaceShape(world, adjPos, dir.getOpposite()) == net.minecraft.block.state.BlockFaceShape.SOLID) {
+                    if (adjBlock.getBlockFaceShape(world, adjPos, dir.getOpposite()) ==
+                            net.minecraft.block.state.BlockFaceShape.SOLID) {
                         sprite = oSprite;
                     }
                 }
@@ -356,7 +356,8 @@ public class FluidRenderer {
         return rendered;
     }
 
-    private void calculateQuadColors(ModelQuadView quad, IBlockAccess world, BlockPos pos, LightPipeline lighter, EnumFacing dir, float brightness, boolean colorized) {
+    private void calculateQuadColors(ModelQuadView quad, IBlockAccess world, BlockPos pos, LightPipeline lighter,
+                                     EnumFacing dir, float brightness, boolean colorized) {
         QuadLightData light = this.quadLightData;
         lighter.calculate(quad, pos, light, null, dir, false);
 
@@ -364,24 +365,25 @@ public class FluidRenderer {
 
         if (colorized) {
             IBlockState state = world.getBlockState(pos);
-            IBlockColor colorProvider = ((BlockColorsExtended)this.vanillaBlockColors).getColorProvider(state);
+            IBlockColor colorProvider = ((BlockColorsExtended) this.vanillaBlockColors).getColorProvider(state);
             boolean containsColoredQuad = false;
-            if(colorProvider != null) {
+            if (colorProvider != null) {
                 biomeColors = this.biomeColorBlender.getColors(colorProvider, world, state, pos, quad);
-                for(int color : biomeColors) {
-                    if(color != 0xFFFFFF) {
+                for (int color : biomeColors) {
+                    if (color != 0xFFFFFF) {
                         containsColoredQuad = true;
                         break;
                     }
                 }
             }
-            if(!containsColoredQuad) {
+            if (!containsColoredQuad) {
                 biomeColors = this.biomeColorBlender.getColors(FLUID_COLOR_PROVIDER, world, state, pos, quad);
             }
         }
 
         for (int i = 0; i < 4; i++) {
-            this.quadColors[i] = ColorABGR.mul(biomeColors != null ? biomeColors[i] : 0xFFFFFFFF, light.br[i] * brightness);
+            this.quadColors[i] = ColorABGR.mul(biomeColors != null ? biomeColors[i] : 0xFFFFFFFF,
+                    light.br[i] * brightness);
         }
     }
 

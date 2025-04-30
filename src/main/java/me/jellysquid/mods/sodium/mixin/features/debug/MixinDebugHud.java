@@ -1,33 +1,41 @@
 package me.jellysquid.mods.sodium.mixin.features.debug;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
-import me.jellysquid.mods.sodium.client.render.SodiumWorldRenderer;
-import me.jellysquid.mods.sodium.client.render.chunk.ChunkRenderBackend;
+import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.gui.GuiOverlayDebug;
 import net.minecraft.util.text.TextFormatting;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import java.lang.management.ManagementFactory;
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+
+import me.jellysquid.mods.sodium.Tags;
+import me.jellysquid.mods.sodium.client.SodiumClientMod;
+import me.jellysquid.mods.sodium.client.render.SodiumWorldRenderer;
+import me.jellysquid.mods.sodium.client.render.chunk.ChunkRenderBackend;
 
 @Mixin(GuiOverlayDebug.class)
 public abstract class MixinDebugHud {
+
     @Shadow
     private static long bytesToMb(long bytes) {
         throw new UnsupportedOperationException();
     }
 
-    @Redirect(method = "getDebugInfoRight", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/Lists;newArrayList([Ljava/lang/Object;)Ljava/util/ArrayList;"))
+    @Redirect(method = "getDebugInfoRight",
+              at = @At(value = "INVOKE",
+                       target = "Lcom/google/common/collect/Lists;newArrayList([Ljava/lang/Object;)Ljava/util/ArrayList;"),
+              remap = false)
     private ArrayList<String> redirectRightTextEarly(Object[] elements) {
         ArrayList<String> strings = Lists.newArrayList((String[]) elements);
         strings.add("");
-        strings.add(SodiumClientMod.MODNAME + " Renderer");
+        strings.add(Tags.MODNAME + " Renderer");
         strings.add(TextFormatting.UNDERLINE + getFormattedVersionText());
         strings.add("");
         strings.addAll(getChunkRendererDebugStrings());

@@ -1,13 +1,15 @@
 package me.jellysquid.mods.sodium.client.model.light.data;
 
-import me.jellysquid.mods.sodium.client.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
+import me.jellysquid.mods.sodium.client.world.WorldSlice;
+
 /**
  * The light data cache is used to make accessing the light data and occlusion properties of blocks cheaper. The data
- * for each block is stored as a long integer with packed fields in order to work around the lack of value types in Java.
+ * for each block is stored as a long integer with packed fields in order to work around the lack of value types in
+ * Java.
  *
  * This code is not very pretty, but it does perform significantly faster than the vanilla implementation and has
  * good cache locality.
@@ -21,6 +23,7 @@ import net.minecraft.util.math.BlockPos;
  * You can use the various static pack/unpack methods to extract these values in a usable format.
  */
 public abstract class LightDataAccess {
+
     private final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
     protected WorldSlice world;
 
@@ -61,7 +64,7 @@ public abstract class LightDataAccess {
 
         if (state.getLightValue(world, pos) == 0) {
             ao = state.getAmbientOcclusionLightValue();
-            em = false;/*state.hasEmissiveLighting(world, pos);*/
+            em = false;/* state.hasEmissiveLighting(world, pos); */
         } else {
             ao = 1.0f;
             em = true;
@@ -102,7 +105,7 @@ public abstract class LightDataAccess {
     public static boolean unpackFC(long word) {
         return ((word >>> 58) & 0b1) != 0;
     }
-    
+
     public static long packLM(int lm) {
         return (long) lm & 0xFFFFFFFFL;
     }

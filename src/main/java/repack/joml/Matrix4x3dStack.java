@@ -42,7 +42,8 @@ public class Matrix4x3dStack extends Matrix4x3d {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The matrix stack as a non-growable array. The size of the stack must be specified in the {@link #Matrix4x3dStack(int) constructor}.
+     * The matrix stack as a non-growable array. The size of the stack must be specified in the
+     * {@link #Matrix4x3dStack(int) constructor}.
      */
     private Matrix4x3d[] mats;
 
@@ -57,8 +58,9 @@ public class Matrix4x3dStack extends Matrix4x3d {
      * Initially the stack pointer is at zero and the current matrix is set to identity.
      *
      * @param stackSize
-     *            the size of the stack. This must be at least 1, in which case the {@link Matrix4x3dStack} simply only consists of <code>this</code>
-     *            {@link Matrix4x3d}
+     *                  the size of the stack. This must be at least 1, in which case the {@link Matrix4x3dStack} simply
+     *                  only consists of <code>this</code>
+     *                  {@link Matrix4x3d}
      */
     public Matrix4x3dStack(int stackSize) {
         if (stackSize < 1) {
@@ -135,7 +137,8 @@ public class Matrix4x3dStack extends Matrix4x3d {
      *
      * - Matrix4x3d.equals(Matrix4x3dStack) is true iff all the 12 matrix elements are equal
      * - Matrix4x3dStack.equals(Matrix4x3d) is true iff all the 12 matrix elements are equal
-     * - Matrix4x3dStack.equals(Matrix4x3dStack) is true iff all 12 matrix elements are equal AND the matrix arrays as well as the stack pointer are equal
+     * - Matrix4x3dStack.equals(Matrix4x3dStack) is true iff all 12 matrix elements are equal AND the matrix arrays as
+     * well as the stack pointer are equal
      * - everything else is inequal
      */
     public boolean equals(Object obj) {
@@ -182,5 +185,4 @@ public class Matrix4x3dStack extends Matrix4x3d {
         cloned.mats = clonedMats;
         return cloned;
     }
-
 }

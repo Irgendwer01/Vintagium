@@ -61,7 +61,7 @@ public interface Vector3ic {
      * @see #get(int, IntBuffer)
      *
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z</code> order
+     *               will receive the values of this vector in <code>x, y, z</code> order
      * @return the passed in buffer
      */
     IntBuffer get(IntBuffer buffer);
@@ -73,9 +73,9 @@ public interface Vector3ic {
      * This method will not increment the position of the given IntBuffer.
      *
      * @param index
-     *          the absolute position into the IntBuffer
+     *               the absolute position into the IntBuffer
      * @param
-     *          buffer will receive the values of this vector in <code>x, y, z</code> order
+     * buffer        will receive the values of this vector in <code>x, y, z</code> order
      * @return the passed in buffer
      */
     IntBuffer get(int index, IntBuffer buffer);
@@ -93,7 +93,7 @@ public interface Vector3ic {
      * @see #get(int, ByteBuffer)
      *
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z</code> order
+     *               will receive the values of this vector in <code>x, y, z</code> order
      * @return the passed in buffer
      */
     ByteBuffer get(ByteBuffer buffer);
@@ -105,9 +105,9 @@ public interface Vector3ic {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z</code> order
+     *               will receive the values of this vector in <code>x, y, z</code> order
      * @return the passed in buffer
      */
     ByteBuffer get(int index, ByteBuffer buffer);
@@ -117,10 +117,11 @@ public interface Vector3ic {
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *            the off-heap address where to store this vector
+     *                the off-heap address where to store this vector
      * @return this
      */
     Vector3ic getToAddress(long address);
@@ -130,9 +131,9 @@ public interface Vector3ic {
      * <code>dest</code>.
      *
      * @param v
-     *          the vector to subtract
+     *             the vector to subtract
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i sub(Vector3ic v, Vector3i dest);
@@ -142,13 +143,13 @@ public interface Vector3ic {
      * result in <code>dest</code>.
      *
      * @param x
-     *          the x component to subtract
+     *             the x component to subtract
      * @param y
-     *          the y component to subtract
+     *             the y component to subtract
      * @param z
-     *          the z component to subtract
+     *             the z component to subtract
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i sub(int x, int y, int z, Vector3i dest);
@@ -158,9 +159,9 @@ public interface Vector3ic {
      * <code>dest</code>.
      *
      * @param v
-     *          the vector to add
+     *             the vector to add
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i add(Vector3ic v, Vector3i dest);
@@ -170,13 +171,13 @@ public interface Vector3ic {
      * result in <code>dest</code>.
      *
      * @param x
-     *          the x component to add
+     *             the x component to add
      * @param y
-     *          the y component to add
+     *             the y component to add
      * @param z
-     *          the z component to add
+     *             the z component to add
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i add(int x, int y, int z, Vector3i dest);
@@ -185,9 +186,9 @@ public interface Vector3ic {
      * Multiply the components of this vector by the given scalar and store the result in <code>dest</code>.
      *
      * @param scalar
-     *        the value to multiply this vector's components by
+     *               the value to multiply this vector's components by
      * @param dest
-     *        will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector3i mul(int scalar, Vector3i dest);
@@ -197,9 +198,9 @@ public interface Vector3ic {
      * <code>dest</code>.
      *
      * @param v
-     *          the vector to multiply
+     *             the vector to multiply
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i mul(Vector3ic v, Vector3i dest);
@@ -209,13 +210,13 @@ public interface Vector3ic {
      * result in <code>dest</code>.
      *
      * @param x
-     *          the x component to multiply
+     *             the x component to multiply
      * @param y
-     *          the y component to multiply
+     *             the y component to multiply
      * @param z
-     *          the z component to multiply
+     *             the z component to multiply
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i mul(int x, int y, int z, Vector3i dest);
@@ -225,9 +226,9 @@ public interface Vector3ic {
      * and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector3i div(float scalar, Vector3i dest);
@@ -237,9 +238,9 @@ public interface Vector3ic {
      * and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector3i div(int scalar, Vector3i dest);
@@ -279,7 +280,6 @@ public interface Vector3ic {
      * @return the euclidean distance
      */
     double distance(int x, int y, int z);
-
 
     /**
      * Return the grid distance in between (aka 1-Norm, Minkowski or Manhattan distance)
@@ -331,7 +331,7 @@ public interface Vector3ic {
      * Negate this vector and store the result in <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i negate(Vector3i dest);
@@ -340,9 +340,9 @@ public interface Vector3ic {
      * Set the components of <code>dest</code> to be the component-wise minimum of this and the other vector.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i min(Vector3ic v, Vector3i dest);
@@ -351,9 +351,9 @@ public interface Vector3ic {
      * Set the components of <code>dest</code> to be the component-wise maximum of this and the other vector.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i max(Vector3ic v, Vector3i dest);
@@ -362,7 +362,7 @@ public interface Vector3ic {
      * Get the value of the specified component of this vector.
      *
      * @param component
-     *          the component, within <code>[0..2]</code>
+     *                  the component, within <code>[0..2]</code>
      * @return the value
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..2]</code>
      */
@@ -387,7 +387,7 @@ public interface Vector3ic {
      * and store the result into <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i absolute(Vector3i dest);
@@ -405,5 +405,4 @@ public interface Vector3ic {
      * @return <code>true</code> if all the vector components are equal
      */
     boolean equals(int x, int y, int z);
-
 }

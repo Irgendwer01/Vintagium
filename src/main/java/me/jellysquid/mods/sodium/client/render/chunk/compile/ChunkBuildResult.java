@@ -11,6 +11,7 @@ import me.jellysquid.mods.sodium.client.render.chunk.passes.BlockRenderPass;
  * will instead be discarded.
  */
 public class ChunkBuildResult<T extends ChunkGraphicsState> {
+
     public final ChunkRenderContainer<T> render;
     public final ChunkRenderData data;
     public BlockRenderPass[] passesToUpload;

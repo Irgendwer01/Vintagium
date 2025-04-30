@@ -60,8 +60,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
     /**
      * Create a new {@link Vector3i} of <code>(0, 0, 0)</code>.
      */
-    public Vector3i() {
-    }
+    public Vector3i() {}
 
     /**
      * Create a new {@link Vector3i} and initialize all three components with
@@ -124,13 +123,13 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * round using the given {@link RoundingMode}.
      *
      * @param x
-     *          the value of x
+     *             the value of x
      * @param y
-     *          the value of y
+     *             the value of y
      * @param z
-     *          the value of z
+     *             the value of z
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector3i(float x, float y, float z, int mode) {
         this.x = Math.roundUsing(x, mode);
@@ -143,13 +142,13 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * round using the given {@link RoundingMode}.
      *
      * @param x
-     *          the value of x
+     *             the value of x
      * @param y
-     *          the value of y
+     *             the value of y
      * @param z
-     *          the value of z
+     *             the value of z
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector3i(double x, double y, double z, int mode) {
         this.x = Math.roundUsing(x, mode);
@@ -162,11 +161,11 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * given <code>v</code> and the given <code>z</code> and round using the given {@link RoundingMode}.
      *
      * @param v
-     *          the {@link Vector2fc} to copy the values from
+     *             the {@link Vector2fc} to copy the values from
      * @param z
-     *          the z component
+     *             the z component
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector3i(Vector2fc v, float z, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
@@ -179,9 +178,9 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * the given vector.
      *
      * @param v
-     *          the {@link Vector3fc} to round and copy the values from
+     *             the {@link Vector3fc} to round and copy the values from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector3i(Vector3fc v, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
@@ -194,11 +193,11 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * given <code>v</code> and the given <code>z</code> and round using the given {@link RoundingMode}.
      *
      * @param v
-     *          the {@link Vector2dc} to copy the values from
+     *             the {@link Vector2dc} to copy the values from
      * @param z
-     *          the z component
+     *             the z component
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector3i(Vector2dc v, float z, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
@@ -211,9 +210,9 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * the given vector.
      *
      * @param v
-     *          the {@link Vector3dc} to round and copy the values from
+     *             the {@link Vector3dc} to round and copy the values from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector3i(Vector3dc v, int mode) {
         this.x = Math.roundUsing(v.x(), mode);
@@ -226,7 +225,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * three elements of the given array.
      *
      * @param xyz
-     *          the array containing at least three elements
+     *            the array containing at least three elements
      */
     public Vector3i(int[] xyz) {
         this.x = xyz[0];
@@ -248,7 +247,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @see #Vector3i(int, ByteBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y, z</code> order
+     *               values will be read in <code>x, y, z</code> order
      */
     public Vector3i(ByteBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
@@ -262,9 +261,9 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          values will be read in <code>x, y, z</code> order
+     *               values will be read in <code>x, y, z</code> order
      */
     public Vector3i(int index, ByteBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
@@ -284,7 +283,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @see #Vector3i(int, IntBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y, z</code> order
+     *               values will be read in <code>x, y, z</code> order
      */
     public Vector3i(IntBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
@@ -298,9 +297,9 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * This method will not increment the position of the given IntBuffer.
      *
      * @param index
-     *          the absolute position into the IntBuffer
+     *               the absolute position into the IntBuffer
      * @param buffer
-     *          values will be read in <code>x, y, z</code> order
+     *               values will be read in <code>x, y, z</code> order
      */
     public Vector3i(int index, IntBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
@@ -356,9 +355,9 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * in double-precision, there is the possibility to lose precision.
      *
      * @param v
-     *          the vector to copy from
+     *             the vector to copy from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      * @return this
      */
     public Vector3i set(Vector3dc v, int mode) {
@@ -375,9 +374,9 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * in double-precision, there is the possibility to lose precision.
      *
      * @param v
-     *          the vector to copy from
+     *             the vector to copy from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      * @return this
      */
     public Vector3i set(Vector3fc v, int mode) {
@@ -440,7 +439,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * Set the three components of this vector to the first three elements of the given array.
      *
      * @param xyz
-     *          the array containing at least three elements
+     *            the array containing at least three elements
      * @return this
      */
     public Vector3i set(int[] xyz) {
@@ -463,7 +462,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @see #set(int, ByteBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y, z</code> order
+     *               values will be read in <code>x, y, z</code> order
      * @return this
      */
     public Vector3i set(ByteBuffer buffer) {
@@ -478,9 +477,9 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          values will be read in <code>x, y, z</code> order
+     *               values will be read in <code>x, y, z</code> order
      * @return this
      */
     public Vector3i set(int index, ByteBuffer buffer) {
@@ -501,7 +500,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * @see #set(int, IntBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y, z</code> order
+     *               values will be read in <code>x, y, z</code> order
      * @return this
      */
     public Vector3i set(IntBuffer buffer) {
@@ -516,9 +515,9 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * This method will not increment the position of the given IntBuffer.
      *
      * @param index
-     *          the absolute position into the IntBuffer
+     *               the absolute position into the IntBuffer
      * @param buffer
-     *          values will be read in <code>x, y, z</code> order
+     *               values will be read in <code>x, y, z</code> order
      * @return this
      */
     public Vector3i set(int index, IntBuffer buffer) {
@@ -532,10 +531,11 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *              the off-heap memory address to read the vector values from
+     *                the off-heap memory address to read the vector values from
      * @return this
      */
     public Vector3i setFromAddress(long address) {
@@ -547,14 +547,14 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
 
     public int get(int component) throws IllegalArgumentException {
         switch (component) {
-        case 0:
-            return x;
-        case 1:
-            return y;
-        case 2:
-            return z;
-        default:
-            throw new IllegalArgumentException();
+            case 0:
+                return x;
+            case 1:
+                return y;
+            case 2:
+                return z;
+            default:
+                throw new IllegalArgumentException();
         }
     }
 
@@ -562,9 +562,9 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * Set the value of the specified component of this vector.
      *
      * @param component
-     *          the component whose value to set, within <code>[0..2]</code>
+     *                  the component whose value to set, within <code>[0..2]</code>
      * @param value
-     *          the value to set
+     *                  the value to set
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..2]</code>
      */
@@ -710,7 +710,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * value.
      *
      * @param scalar
-     *          the scalar to multiply this vector by
+     *               the scalar to multiply this vector by
      * @return this
      */
     public Vector3i mul(int scalar) {
@@ -777,7 +777,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * Divide all components of this {@link Vector3i} by the given scalar value.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @return this
      */
     public Vector3i div(float scalar) {
@@ -800,7 +800,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * Divide all components of this {@link Vector3i} by the given scalar value.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @return this
      */
     public Vector3i div(int scalar) {
@@ -866,7 +866,7 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
     }
 
     public long gridDistance(Vector3ic v) {
-        return Math.abs(v.x() - x()) + Math.abs(v.y() - y())  + Math.abs(v.z() - z());
+        return Math.abs(v.x() - x()) + Math.abs(v.y() - y()) + Math.abs(v.z() - z());
     }
 
     public long gridDistance(int x, int y, int z) {
@@ -891,17 +891,17 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * Return the distance between <code>(x1, y1, z1)</code> and <code>(x2, y2, z2)</code>.
      *
      * @param x1
-     *          the x component of the first vector
+     *           the x component of the first vector
      * @param y1
-     *          the y component of the first vector
+     *           the y component of the first vector
      * @param z1
-     *          the z component of the first vector
+     *           the z component of the first vector
      * @param x2
-     *          the x component of the second vector
+     *           the x component of the second vector
      * @param y2
-     *          the y component of the second vector
+     *           the y component of the second vector
      * @param z2
-     *          the z component of the second vector
+     *           the z component of the second vector
      * @return the euclidean distance
      */
     public static double distance(int x1, int y1, int z1, int x2, int y2, int z2) {
@@ -912,17 +912,17 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
      * Return the squared distance between <code>(x1, y1, z1)</code> and <code>(x2, y2, z2)</code>.
      *
      * @param x1
-     *          the x component of the first vector
+     *           the x component of the first vector
      * @param y1
-     *          the y component of the first vector
+     *           the y component of the first vector
      * @param z1
-     *          the z component of the first vector
+     *           the z component of the first vector
      * @param x2
-     *          the x component of the second vector
+     *           the x component of the second vector
      * @param y2
-     *          the y component of the second vector
+     *           the y component of the second vector
      * @param z2
-     *          the z component of the second vector
+     *           the z component of the second vector
      * @return the euclidean distance squared
      */
     public static long distanceSquared(int x1, int y1, int z1, int x2, int y2, int z2) {
@@ -947,7 +947,8 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
     /**
      * Return a string representation of this vector.
      * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
+     * This method creates a new {@link DecimalFormat} on every invocation with the format string
+     * "<code>0.000E0;-</code>".
      *
      * @return the string representation
      */
@@ -956,10 +957,11 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
     }
 
     /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
+     * Return a string representation of this vector by formatting the vector components with the given
+     * {@link NumberFormat}.
      *
      * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
+     *                  the {@link NumberFormat} used to format the vector components with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {
@@ -1127,5 +1129,4 @@ public class Vector3i implements Externalizable, Cloneable, Vector3ic {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-
 }

@@ -1,11 +1,12 @@
 package me.jellysquid.mods.sodium.client.render.chunk.shader;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.List;
 import java.util.function.Function;
 
+import com.google.common.collect.ImmutableList;
+
 public enum ChunkFogMode {
+
     NONE(ChunkShaderFogComponent.None::new, ImmutableList.of()),
     LINEAR(ChunkShaderFogComponent.Linear::new, ImmutableList.of("USE_FOG", "USE_FOG_LINEAR")),
     EXP2(ChunkShaderFogComponent.Exp2::new, ImmutableList.of("USE_FOG", "USE_FOG_EXP2"));

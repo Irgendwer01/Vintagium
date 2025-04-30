@@ -2,21 +2,22 @@ package me.jellysquid.mods.sodium.mixin.features.model;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+
+import javax.annotation.Nullable;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.WeightedBakedModel;
 import net.minecraft.util.EnumFacing;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import javax.annotation.Nullable;
-
 @Mixin(WeightedBakedModel.class)
 public class MixinWeightedBakedModel {
+
     @Shadow
     @Final
     private List<WeightedBakedModel.WeightedModel> models;
@@ -31,7 +32,7 @@ public class MixinWeightedBakedModel {
      */
     @Overwrite
     public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing face, long random) {
-    	WeightedBakedModel.WeightedModel entry = getAt(this.models, Math.abs((int) random) % this.totalWeight);
+        WeightedBakedModel.WeightedModel entry = getAt(this.models, Math.abs((int) random) % this.totalWeight);
 
         if (entry != null) {
             return entry.model.getQuads(state, face, random);

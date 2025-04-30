@@ -1,13 +1,16 @@
 package me.jellysquid.mods.sodium.client.render.chunk.passes;
 
-import it.unimi.dsi.fastutil.objects.Reference2IntArrayMap;
 import net.minecraft.util.BlockRenderLayer;
 
+import it.unimi.dsi.fastutil.objects.Reference2IntArrayMap;
+
 /**
- * Maps vanilla render layers to render passes used by Sodium. This provides compatibility with the render layers already
+ * Maps vanilla render layers to render passes used by Sodium. This provides compatibility with the render layers
+ * already
  * used by the base game.
  */
 public class BlockRenderPassManager {
+
     private final Reference2IntArrayMap<BlockRenderLayer> mappingsId = new Reference2IntArrayMap<>();
 
     public BlockRenderPassManager() {
@@ -43,6 +46,7 @@ public class BlockRenderPassManager {
 
         return mapper;
     }
+
     public BlockRenderPass getRenderPassForLayer(BlockRenderLayer layer) {
         return this.getRenderPass(this.getRenderPassId(layer));
     }

@@ -1,14 +1,16 @@
 package me.jellysquid.mods.sodium.client.render.chunk.region;
 
+import org.apache.commons.lang3.Validate;
+
 import it.unimi.dsi.fastutil.longs.Long2ReferenceOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
 import me.jellysquid.mods.sodium.client.render.chunk.ChunkGraphicsState;
 import me.jellysquid.mods.sodium.client.util.MathUtil;
 import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
-import org.apache.commons.lang3.Validate;
 
 public class ChunkRegionManager<T extends ChunkGraphicsState> {
+
     public static final int BUFFER_WIDTH = 8;
     public static final int BUFFER_HEIGHT = 4;
     public static final int BUFFER_LENGTH = 8;
@@ -42,7 +44,8 @@ public class ChunkRegionManager<T extends ChunkGraphicsState> {
         ChunkRegion<T> region = this.regions.get(key);
 
         if (region == null) {
-            this.regions.put(key, region = new ChunkRegion<>(this.device, BUFFER_SIZE, x >> BUFFER_WIDTH_SH, y >> BUFFER_HEIGHT_SH, z >> BUFFER_LENGTH_SH));
+            this.regions.put(key, region = new ChunkRegion<>(this.device, BUFFER_SIZE, x >> BUFFER_WIDTH_SH,
+                    y >> BUFFER_HEIGHT_SH, z >> BUFFER_LENGTH_SH));
         }
 
         return region;
@@ -61,7 +64,7 @@ public class ChunkRegionManager<T extends ChunkGraphicsState> {
     }
 
     public void cleanup() {
-        for (ObjectIterator<ChunkRegion<T>> iterator = this.regions.values().iterator(); iterator.hasNext(); ) {
+        for (ObjectIterator<ChunkRegion<T>> iterator = this.regions.values().iterator(); iterator.hasNext();) {
             ChunkRegion<T> region = iterator.next();
 
             if (region.isArenaEmpty()) {

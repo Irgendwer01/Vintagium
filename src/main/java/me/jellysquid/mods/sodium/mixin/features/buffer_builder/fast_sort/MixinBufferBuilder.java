@@ -1,19 +1,22 @@
 package me.jellysquid.mods.sodium.mixin.features.buffer_builder.fast_sort;
 
-import com.google.common.primitives.Floats;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.vertex.VertexFormat;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
-
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.Arrays;
 import java.util.BitSet;
 
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.vertex.VertexFormat;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
+
+import com.google.common.primitives.Floats;
+
 @Mixin(BufferBuilder.class)
 public class MixinBufferBuilder {
+
     @Shadow
     private ByteBuffer byteBuffer;
 
@@ -42,7 +45,8 @@ public class MixinBufferBuilder {
         int[] indicesArray = new int[quadCount];
 
         for (int quadIdx = 0; quadIdx < quadCount; ++quadIdx) {
-            distanceArray[quadIdx] = getDistanceSq(floatBuffer, cameraX, cameraY, cameraZ, vertexSizeInteger, quadIdx * vertexStride);
+            distanceArray[quadIdx] = getDistanceSq(floatBuffer, cameraX, cameraY, cameraZ, vertexSizeInteger,
+                    quadIdx * vertexStride);
             indicesArray[quadIdx] = quadIdx;
         }
 
@@ -84,7 +88,8 @@ public class MixinBufferBuilder {
     }
 
     private static void mergeSort(int[] indicesArray, float[] distanceArray) {
-        mergeSort(indicesArray, 0, indicesArray.length, distanceArray, Arrays.copyOf(indicesArray, indicesArray.length));
+        mergeSort(indicesArray, 0, indicesArray.length, distanceArray,
+                Arrays.copyOf(indicesArray, indicesArray.length));
     }
 
     private static void sliceQuad(FloatBuffer floatBuffer, int quadIdx, int quadStride) {
@@ -94,7 +99,8 @@ public class MixinBufferBuilder {
         floatBuffer.position(base);
     }
 
-    private static float getDistanceSq(FloatBuffer buffer, float xCenter, float yCenter, float zCenter, int stride, int start) {
+    private static float getDistanceSq(FloatBuffer buffer, float xCenter, float yCenter, float zCenter, int stride,
+                                       int start) {
         int vertexBase = start;
         float x1 = buffer.get(vertexBase);
         float y1 = buffer.get(vertexBase + 1);
@@ -154,7 +160,7 @@ public class MixinBufferBuilder {
     }
 
     private static void insertionSort(final int[] a, final int from, final int to, final float[] dist) {
-        for (int i = from; ++i < to; ) {
+        for (int i = from; ++i < to;) {
             int t = a[i];
             int j = i;
 
@@ -169,5 +175,4 @@ public class MixinBufferBuilder {
             a[j] = t;
         }
     }
-
 }

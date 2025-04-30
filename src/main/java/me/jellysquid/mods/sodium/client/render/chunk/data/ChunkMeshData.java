@@ -1,13 +1,14 @@
 package me.jellysquid.mods.sodium.client.render.chunk.data;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 import me.jellysquid.mods.sodium.client.gl.buffer.VertexData;
 import me.jellysquid.mods.sodium.client.gl.util.BufferSlice;
 import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFacing;
 
-import java.util.EnumMap;
-import java.util.Map;
-
 public class ChunkMeshData {
+
     public static final ChunkMeshData EMPTY = new ChunkMeshData();
 
     private final EnumMap<ModelQuadFacing, BufferSlice> parts = new EnumMap<>(ModelQuadFacing.class);

@@ -36,7 +36,8 @@ import java.util.Locale;
 public final class Options {
 
     /**
-     * Whether certain debugging checks should be made, such as that only direct NIO Buffers are used when Unsafe is active,
+     * Whether certain debugging checks should be made, such as that only direct NIO Buffers are used when Unsafe is
+     * active,
      * and a proxy should be created on calls to readOnlyView().
      */
     public static final boolean DEBUG = hasOption(System.getProperty("joml.debug", "false"));
@@ -73,7 +74,8 @@ public final class Options {
 
     /**
      * Whether to try using java.lang.Math.fma() in most matrix/vector/quaternion operations if it is available.
-     * If the CPU does <i>not</i> support it, it will be a lot slower than `a*b+c` and potentially generate a lot of memory allocations
+     * If the CPU does <i>not</i> support it, it will be a lot slower than `a*b+c` and potentially generate a lot of
+     * memory allocations
      * for the emulation with `java.util.BigDecimal`, though.
      */
     public static final boolean USE_MATH_FMA = hasOption(System.getProperty("joml.useMathFma", "false"));
@@ -89,8 +91,7 @@ public final class Options {
      */
     public static final NumberFormat NUMBER_FORMAT = decimalFormat();
 
-    private Options() {
-    }
+    private Options() {}
 
     private static NumberFormat decimalFormat() {
         NumberFormat df;
@@ -112,5 +113,4 @@ public final class Options {
             return true;
         return Boolean.valueOf(v).booleanValue();
     }
-
 }

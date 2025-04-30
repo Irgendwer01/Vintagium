@@ -1,9 +1,9 @@
 package me.jellysquid.mods.sodium.client.util;
 
-import net.minecraft.util.BlockRenderLayer;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import net.minecraft.util.BlockRenderLayer;
 
 // Values was taken from RegionRenderCacheBuilder
 public class BufferSizeUtil {
@@ -16,5 +16,4 @@ public class BufferSizeUtil {
         BUFFER_SIZES.put(BlockRenderLayer.CUTOUT_MIPPED, 131072);
         BUFFER_SIZES.put(BlockRenderLayer.TRANSLUCENT, 262144);
     }
-
 }

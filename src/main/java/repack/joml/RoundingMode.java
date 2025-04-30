@@ -29,7 +29,9 @@ package repack.joml;
  * @author Kai Burjack
  */
 public class RoundingMode {
+
     private RoundingMode() {}
+
     /**
      * Discards the fractional part.
      */

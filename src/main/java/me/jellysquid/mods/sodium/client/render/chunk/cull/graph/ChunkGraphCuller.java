@@ -1,14 +1,10 @@
 package me.jellysquid.mods.sodium.client.render.chunk.cull.graph;
 
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import me.jellysquid.mods.sodium.client.render.chunk.cull.ChunkCuller;
-import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
-import me.jellysquid.mods.sodium.client.util.math.FrustumExtended;
-import me.jellysquid.mods.sodium.common.util.DirectionUtil;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.chunk.SetVisibility;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -16,11 +12,16 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import me.jellysquid.mods.sodium.client.render.chunk.cull.ChunkCuller;
+import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
+import me.jellysquid.mods.sodium.client.util.math.FrustumExtended;
+import me.jellysquid.mods.sodium.common.util.DirectionUtil;
 
 public class ChunkGraphCuller implements ChunkCuller {
+
     private final Long2ObjectMap<ChunkGraphNode> nodes = new Long2ObjectOpenHashMap<>();
 
     private final ChunkGraphIterationQueue visible = new ChunkGraphIterationQueue();
@@ -127,7 +128,6 @@ public class ChunkGraphCuller implements ChunkCuller {
         }
     }
 
-
     private void bfsEnqueue(ChunkGraphNode parent, ChunkGraphNode node, EnumFacing flow, short parentalData) {
         if (node.getLastVisibleFrame() == this.activeFrame) {
             node.updateCullingState(flow, parentalData);
@@ -170,7 +170,8 @@ public class ChunkGraphCuller implements ChunkCuller {
     }
 
     private ChunkGraphNode findAdjacentNode(ChunkGraphNode node, EnumFacing dir) {
-        return this.getNode(node.getChunkX() + dir.getXOffset(), node.getChunkY() + dir.getYOffset(), node.getChunkZ() + dir.getZOffset());
+        return this.getNode(node.getChunkX() + dir.getXOffset(), node.getChunkY() + dir.getYOffset(),
+                node.getChunkZ() + dir.getZOffset());
     }
 
     private ChunkGraphNode getNode(int x, int y, int z) {

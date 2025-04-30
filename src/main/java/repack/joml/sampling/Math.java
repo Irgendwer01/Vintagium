@@ -60,5 +60,4 @@ class Math extends repack.joml.Math {
         r = r * x2 + s1;
         return x * r;
     }
-
 }

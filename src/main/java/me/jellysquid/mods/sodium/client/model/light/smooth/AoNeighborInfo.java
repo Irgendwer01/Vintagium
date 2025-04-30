@@ -7,7 +7,9 @@ import net.minecraft.util.EnumFacing;
  * the occlusion of each corner.
  */
 enum AoNeighborInfo {
+
     DOWN(new EnumFacing[] { EnumFacing.WEST, EnumFacing.EAST, EnumFacing.NORTH, EnumFacing.SOUTH }, 0.5F) {
+
         @Override
         public void calculateCornerWeights(float x, float y, float z, float[] out) {
             final float u = z;
@@ -38,6 +40,7 @@ enum AoNeighborInfo {
         }
     },
     UP(new EnumFacing[] { EnumFacing.EAST, EnumFacing.WEST, EnumFacing.NORTH, EnumFacing.SOUTH }, 1.0F) {
+
         @Override
         public void calculateCornerWeights(float x, float y, float z, float[] out) {
             final float u = z;
@@ -68,6 +71,7 @@ enum AoNeighborInfo {
         }
     },
     NORTH(new EnumFacing[] { EnumFacing.UP, EnumFacing.DOWN, EnumFacing.EAST, EnumFacing.WEST }, 0.8F) {
+
         @Override
         public void calculateCornerWeights(float x, float y, float z, float[] out) {
             final float u = 1.0f - x;
@@ -98,6 +102,7 @@ enum AoNeighborInfo {
         }
     },
     SOUTH(new EnumFacing[] { EnumFacing.WEST, EnumFacing.EAST, EnumFacing.DOWN, EnumFacing.UP }, 0.8F) {
+
         @Override
         public void calculateCornerWeights(float x, float y, float z, float[] out) {
             final float u = y;
@@ -128,6 +133,7 @@ enum AoNeighborInfo {
         }
     },
     WEST(new EnumFacing[] { EnumFacing.UP, EnumFacing.DOWN, EnumFacing.NORTH, EnumFacing.SOUTH }, 0.6F) {
+
         @Override
         public void calculateCornerWeights(float x, float y, float z, float[] out) {
             final float u = z;
@@ -158,6 +164,7 @@ enum AoNeighborInfo {
         }
     },
     EAST(new EnumFacing[] { EnumFacing.DOWN, EnumFacing.UP, EnumFacing.NORTH, EnumFacing.SOUTH }, 0.6F) {
+
         @Override
         public void calculateCornerWeights(float x, float y, float z, float[] out) {
             final float u = z;
@@ -189,7 +196,8 @@ enum AoNeighborInfo {
     };
 
     /**
-     * The direction of each corner block from this face, which can be retrieved by offsetting the position of the origin
+     * The direction of each corner block from this face, which can be retrieved by offsetting the position of the
+     * origin
      * block by the direction vector.
      */
     public final EnumFacing[] faces;
@@ -209,9 +217,9 @@ enum AoNeighborInfo {
      * Calculates how much each corner contributes to the final "darkening" of the vertex at the specified position. The
      * weight is a function of the distance from the vertex's position to the corner block's position.
      *
-     * @param x The x-position of the vertex
-     * @param y The y-position of the vertex
-     * @param z The z-position of the vertex
+     * @param x   The x-position of the vertex
+     * @param y   The y-position of the vertex
+     * @param z   The z-position of the vertex
      * @param out The weight values for each corner
      */
     public abstract void calculateCornerWeights(float x, float y, float z, float[] out);

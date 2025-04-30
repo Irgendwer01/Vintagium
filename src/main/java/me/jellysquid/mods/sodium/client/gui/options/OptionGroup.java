@@ -1,12 +1,14 @@
 package me.jellysquid.mods.sodium.client.gui.options;
 
-import com.google.common.collect.ImmutableList;
-import org.apache.commons.lang3.Validate;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
+import com.google.common.collect.ImmutableList;
+
 public class OptionGroup {
+
     private final ImmutableList<Option<?>> options;
 
     private OptionGroup(ImmutableList<Option<?>> options) {
@@ -22,6 +24,7 @@ public class OptionGroup {
     }
 
     public static class Builder {
+
         private final List<Option<?>> options = new ArrayList<>();
 
         public Builder add(Option<?> option) {

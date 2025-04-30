@@ -1,7 +1,8 @@
 package me.jellysquid.mods.sodium.mixin.features.chunk_rendering;
 
-import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
-import me.jellysquid.mods.sodium.client.render.SodiumWorldRenderer;
+import java.util.Map;
+import java.util.Set;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;
@@ -11,6 +12,7 @@ import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.BlockRenderLayer;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -20,8 +22,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Map;
-import java.util.Set;
+import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
+import me.jellysquid.mods.sodium.client.render.SodiumWorldRenderer;
 
 @Mixin(RenderGlobal.class)
 public abstract class MixinWorldRenderer {
@@ -31,13 +33,17 @@ public abstract class MixinWorldRenderer {
     private Map<Integer, DestroyBlockProgress> damagedBlocks;
 
     @Shadow
-    private void renderBlockLayer(BlockRenderLayer blockLayerIn) {
-    }
+    private void renderBlockLayer(BlockRenderLayer blockLayerIn) {}
 
-    @Shadow @Final private Minecraft mc;
+    @Shadow
+    @Final
+    private Minecraft mc;
     private SodiumWorldRenderer renderer;
 
-    @Redirect(method = "loadRenderers", at = @At(value = "FIELD", target = "Lnet/minecraft/client/settings/GameSettings;renderDistanceChunks:I", ordinal = 1))
+    @Redirect(method = "loadRenderers",
+              at = @At(value = "FIELD",
+                       target = "Lnet/minecraft/client/settings/GameSettings;renderDistanceChunks:I",
+                       ordinal = 1))
     private int nullifyBuiltChunkStorage(GameSettings settings) {
         // Do not allow any resources to be allocated
         return 0;
@@ -123,7 +129,7 @@ public abstract class MixinWorldRenderer {
 
         boolean hasForcedFrustum = false;
         try {
-            this.renderer.updateChunks((Frustum) camera, (float)tick, hasForcedFrustum, frame, spectator);
+            this.renderer.updateChunks((Frustum) camera, (float) tick, hasForcedFrustum, frame, spectator);
         } finally {
             RenderDevice.exitManagedCode();
         }
@@ -140,7 +146,9 @@ public abstract class MixinWorldRenderer {
 
     // The following two redirects force light updates to trigger chunk updates and not check vanilla's chunk renderer
     // flags
-    @Redirect(method = "updateClouds", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher;hasNoFreeRenderBuilders()Z"))
+    @Redirect(method = "updateClouds",
+              at = @At(value = "INVOKE",
+                       target = "Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher;hasNoFreeRenderBuilders()Z"))
     private boolean alwaysHaveBuilders(ChunkRenderDispatcher instance) {
         return false;
     }
@@ -161,7 +169,12 @@ public abstract class MixinWorldRenderer {
         }
     }
 
-    @Inject(method = "renderEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderHelper;enableStandardItemLighting()V", shift = At.Shift.AFTER, ordinal = 1), cancellable = true)
+    @Inject(method = "renderEntities",
+            at = @At(value = "INVOKE",
+                     target = "Lnet/minecraft/client/renderer/RenderHelper;enableStandardItemLighting()V",
+                     shift = At.Shift.AFTER,
+                     ordinal = 1),
+            cancellable = true)
     public void sodium$renderTileEntities(Entity entity, ICamera camera, float partialTicks, CallbackInfo ci) {
         this.renderer.renderTileEntities(partialTicks, damagedBlocks);
 

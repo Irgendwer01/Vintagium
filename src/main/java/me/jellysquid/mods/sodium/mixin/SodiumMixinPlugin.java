@@ -1,8 +1,8 @@
 package me.jellysquid.mods.sodium.mixin;
 
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
-import me.jellysquid.mods.sodium.common.config.Option;
-import me.jellysquid.mods.sodium.common.config.SodiumConfig;
+import java.io.File;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,25 +10,28 @@ import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import java.io.File;
-import java.util.List;
-import java.util.Set;
+import me.jellysquid.mods.sodium.Tags;
+import me.jellysquid.mods.sodium.common.config.Option;
+import me.jellysquid.mods.sodium.common.config.SodiumConfig;
 
 public class SodiumMixinPlugin implements IMixinConfigPlugin {
+
     private static final String MIXIN_PACKAGE_ROOT = "me.jellysquid.mods.sodium.mixin.";
 
-    private final Logger logger = LogManager.getLogger(SodiumClientMod.MODNAME);
+    private final Logger logger = LogManager.getLogger(Tags.MODNAME);
     private SodiumConfig config;
 
     @Override
     public void onLoad(String mixinPackage) {
         try {
-            this.config = SodiumConfig.load(new File(".").toPath().resolve("config").resolve(SodiumClientMod.MODID + "-mixins.properties").toFile());
+            this.config = SodiumConfig
+                    .load(new File(".").toPath().resolve("config").resolve(Tags.MODID + "-mixins.properties").toFile());
         } catch (Exception e) {
-            throw new RuntimeException("Could not load configuration file for " + SodiumClientMod.MODNAME, e);
+            throw new RuntimeException("Could not load configuration file for " + Tags.MODNAME, e);
         }
 
-        this.logger.info("Loaded configuration file for " + SodiumClientMod.MODNAME + ": {} options available, {} override(s) found",
+        this.logger.info(
+                "Loaded configuration file for " + Tags.MODNAME + ": {} options available, {} override(s) found",
                 this.config.getOptionCount(), this.config.getOptionOverrideCount());
     }
 
@@ -45,7 +48,7 @@ public class SodiumMixinPlugin implements IMixinConfigPlugin {
 
             return false;
         }
-        
+
         String mixin = mixinClassName.substring(MIXIN_PACKAGE_ROOT.length());
         Option option = this.config.getEffectiveOptionForMixin(mixin);
 
@@ -68,17 +71,17 @@ public class SodiumMixinPlugin implements IMixinConfigPlugin {
                 this.logger.warn("Force-enabling mixin '{}' as rule '{}' (added by {}) enables it", mixin,
                         option.getName(), source);
             } else {
-                this.logger.warn("Force-disabling mixin '{}' as rule '{}' (added by {}) disables it and children", mixin,
+                this.logger.warn("Force-disabling mixin '{}' as rule '{}' (added by {}) disables it and children",
+                        mixin,
                         option.getName(), source);
             }
         }
 
         return option.isEnabled();
     }
-    @Override
-    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
 
-    }
+    @Override
+    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {}
 
     @Override
     public List<String> getMixins() {
@@ -86,12 +89,8 @@ public class SodiumMixinPlugin implements IMixinConfigPlugin {
     }
 
     @Override
-    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-
-    }
+    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {}
 
     @Override
-    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-
-    }
+    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {}
 }

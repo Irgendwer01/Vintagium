@@ -13,6 +13,7 @@ import me.jellysquid.mods.sodium.client.model.vertex.formats.screen_quad.BasicSc
 import me.jellysquid.mods.sodium.client.model.vertex.type.VanillaVertexType;
 
 public class VanillaVertexTypes {
+
     public static final VanillaVertexType<QuadVertexSink> QUADS = new QuadVertexType();
     public static final VanillaVertexType<LineVertexSink> LINES = new LineVertexType();
     public static final VanillaVertexType<GlyphVertexSink> GLYPHS = new GlyphVertexType();

@@ -1,13 +1,14 @@
 package me.jellysquid.mods.sodium.client.model.vertex.formats.quad.writer;
 
+import java.nio.ByteBuffer;
+
 import me.jellysquid.mods.sodium.client.model.vertex.VanillaVertexTypes;
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferView;
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferWriterNio;
 import me.jellysquid.mods.sodium.client.model.vertex.formats.quad.QuadVertexSink;
 
-import java.nio.ByteBuffer;
-
 public class QuadVertexBufferWriterNio extends VertexBufferWriterNio implements QuadVertexSink {
+
     public QuadVertexBufferWriterNio(VertexBufferView backingBuffer) {
         super(backingBuffer, VanillaVertexTypes.QUADS);
     }

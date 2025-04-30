@@ -7,6 +7,7 @@ import me.jellysquid.mods.sodium.client.model.vertex.formats.quad.QuadVertexSink
 import me.jellysquid.mods.sodium.client.util.CompatMemoryUtil;
 
 public class QuadVertexBufferWriterUnsafe extends VertexBufferWriterUnsafe implements QuadVertexSink {
+
     public QuadVertexBufferWriterUnsafe(VertexBufferView backingBuffer) {
         super(backingBuffer, VanillaVertexTypes.QUADS);
     }

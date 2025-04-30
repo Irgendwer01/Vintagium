@@ -1,5 +1,27 @@
 package me.jellysquid.mods.sodium.client.render;
 
+import java.util.Map;
+import java.util.Set;
+
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.DestroyBlockProgress;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.entity.Entity;
+import net.minecraft.profiler.Profiler;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.client.MinecraftForgeClient;
+
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -21,32 +43,12 @@ import me.jellysquid.mods.sodium.client.util.math.FrustumExtended;
 import me.jellysquid.mods.sodium.client.world.ChunkStatusListener;
 import me.jellysquid.mods.sodium.client.world.ChunkStatusListenerManager;
 import me.jellysquid.mods.sodium.common.util.ListUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.renderer.DestroyBlockProgress;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.culling.Frustum;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.entity.Entity;
-import net.minecraft.profiler.Profiler;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.client.MinecraftForgeClient;
-
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Provides an extension to vanilla's {@link net.minecraft.client.renderer.RenderGlobal}.
  */
 public class SodiumWorldRenderer implements ChunkStatusListener {
+
     private static SodiumWorldRenderer instance;
 
     private final Minecraft client;
@@ -175,7 +177,7 @@ public class SodiumWorldRenderer implements ChunkStatusListener {
 
     // We'll keep it to have compatibility with Oculus' older versions
     public static boolean hasChanges = false;
-    
+
     /**
      * Called prior to any chunk rendering in order to update necessary state.
      */
@@ -198,7 +200,8 @@ public class SodiumWorldRenderer implements ChunkStatusListener {
         }
 
         double x = viewEntity.lastTickPosX + (viewEntity.posX - viewEntity.lastTickPosX) * ticks;
-        double y = viewEntity.lastTickPosY + (viewEntity.posY - viewEntity.lastTickPosY) * ticks + (double) viewEntity.getEyeHeight();
+        double y = viewEntity.lastTickPosY + (viewEntity.posY - viewEntity.lastTickPosY) * ticks +
+                (double) viewEntity.getEyeHeight();
         double z = viewEntity.lastTickPosZ + (viewEntity.posZ - viewEntity.lastTickPosZ) * ticks;
 
         this.chunkRenderManager.setCameraPosition(x, y, z);
@@ -207,7 +210,7 @@ public class SodiumWorldRenderer implements ChunkStatusListener {
 
         boolean dirty = x != this.lastCameraX || y != this.lastCameraY ||
                 z != this.lastCameraZ || (double) viewEntity.rotationPitch != this.lastCameraPitch |
-                (double) viewEntity.rotationYaw != this.lastCameraYaw;
+                        (double) viewEntity.rotationYaw != this.lastCameraYaw;
 
         if (dirty) {
             this.chunkRenderManager.markDirty();
@@ -237,7 +240,8 @@ public class SodiumWorldRenderer implements ChunkStatusListener {
         profiler.endSection();
 
         // TODO distance checking option
-        Entity.setRenderDistanceWeight(MathHelper.clamp((double) this.client.gameSettings.renderDistanceChunks / 8.0D, 1.0D, 2.5D) * 2000);
+        Entity.setRenderDistanceWeight(
+                MathHelper.clamp((double) this.client.gameSettings.renderDistanceChunks / 8.0D, 1.0D, 2.5D) * 2000);
     }
 
     /**
@@ -246,11 +250,11 @@ public class SodiumWorldRenderer implements ChunkStatusListener {
     public void drawChunkLayer(BlockRenderLayer renderLayer, double x, double y, double z) {
         BlockRenderPass pass = this.renderPassManager.getRenderPassForLayer(renderLayer);
         // TODO startDrawing/endDrawing are handled by 1.12 already
-        //pass.startDrawing();
+        // pass.startDrawing();
 
         this.chunkRenderManager.renderLayer(pass, x, y, z);
 
-        //pass.endDrawing();
+        // pass.endDrawing();
 
         GlStateManager.resetColor();
     }
@@ -295,7 +299,8 @@ public class SodiumWorldRenderer implements ChunkStatusListener {
         this.chunkRenderBackend = createChunkRenderBackend(device, opts, vertexFormat);
         this.chunkRenderBackend.createShaders(device);
 
-        this.chunkRenderManager = new ChunkRenderManager<>(this, this.chunkRenderBackend, this.renderPassManager, this.world, this.renderDistance);
+        this.chunkRenderManager = new ChunkRenderManager<>(this, this.chunkRenderBackend, this.renderPassManager,
+                this.world, this.renderDistance);
         this.chunkRenderManager.restoreChunks(this.loadedChunkPositions);
     }
 
@@ -316,13 +321,13 @@ public class SodiumWorldRenderer implements ChunkStatusListener {
     }
 
     private void renderTE(TileEntity tileEntity, int pass, float partialTicks, int damageProgress) {
-        if((damageProgress < 0 && !tileEntity.shouldRenderInPass(pass)) || !checkBEVisibility(tileEntity))
+        if ((damageProgress < 0 && !tileEntity.shouldRenderInPass(pass)) || !checkBEVisibility(tileEntity))
             return;
 
         try {
             TileEntityRendererDispatcher.instance.render(tileEntity, partialTicks, damageProgress);
-        } catch(RuntimeException e) {
-            if(tileEntity.isInvalid()) {
+        } catch (RuntimeException e) {
+            if (tileEntity.isInvalid()) {
                 SodiumClientMod.logger().error("Suppressing crash from invalid tile entity", e);
             } else {
                 throw e;
@@ -331,7 +336,8 @@ public class SodiumWorldRenderer implements ChunkStatusListener {
     }
 
     private void preRenderDamagedBlocks() {
-        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.DST_COLOR, GlStateManager.DestFactor.SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.DST_COLOR, GlStateManager.DestFactor.SRC_COLOR,
+                GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.enableBlend();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
         GlStateManager.doPolygonOffset(-1.0F, -10.0F);
@@ -403,18 +409,20 @@ public class SodiumWorldRenderer implements ChunkStatusListener {
     }
 
     public void onChunkRenderUpdated(int x, int y, int z, ChunkRenderData meshBefore, ChunkRenderData meshAfter) {
-        ListUtil.updateList(this.globalBlockEntities, meshBefore.getGlobalBlockEntities(), meshAfter.getGlobalBlockEntities());
-        
+        ListUtil.updateList(this.globalBlockEntities, meshBefore.getGlobalBlockEntities(),
+                meshAfter.getGlobalBlockEntities());
+
         this.chunkRenderManager.onChunkRenderUpdates(x, y, z, meshAfter);
     }
 
     private static boolean isInfiniteExtentsBox(AxisAlignedBB box) {
-        return Double.isInfinite(box.minX) || Double.isInfinite(box.minY) || Double.isInfinite(box.minZ)
-            || Double.isInfinite(box.maxX) || Double.isInfinite(box.maxY) || Double.isInfinite(box.maxZ);
+        return Double.isInfinite(box.minX) || Double.isInfinite(box.minY) || Double.isInfinite(box.minZ) ||
+                Double.isInfinite(box.maxX) || Double.isInfinite(box.maxY) || Double.isInfinite(box.maxZ);
     }
 
     /**
      * Returns whether or not the entity intersects with any visible chunks in the graph.
+     * 
      * @return True if the entity is visible, otherwise false
      */
     public boolean isEntityVisible(Entity entity) {
@@ -469,20 +477,24 @@ public class SodiumWorldRenderer implements ChunkStatusListener {
 
     public String getChunksDebugString() {
         // C: visible/total
-        return String.format("C: %s/%s Q: %s+%si ", this.chunkRenderManager.getVisibleChunkCount(), this.chunkRenderManager.getTotalSections(), this.chunkRenderManager.getRebuildQueueSize(), this.chunkRenderManager.getImportantRebuildQueueSize());
+        return String.format("C: %s/%s Q: %s+%si ", this.chunkRenderManager.getVisibleChunkCount(),
+                this.chunkRenderManager.getTotalSections(), this.chunkRenderManager.getRebuildQueueSize(),
+                this.chunkRenderManager.getImportantRebuildQueueSize());
     }
 
     /**
      * Schedules chunk rebuilds for all chunks in the specified block region.
      */
-    public void scheduleRebuildForBlockArea(int minX, int minY, int minZ, int maxX, int maxY, int maxZ, boolean important) {
+    public void scheduleRebuildForBlockArea(int minX, int minY, int minZ, int maxX, int maxY, int maxZ,
+                                            boolean important) {
         this.scheduleRebuildForChunks(minX >> 4, minY >> 4, minZ >> 4, maxX >> 4, maxY >> 4, maxZ >> 4, important);
     }
 
     /**
      * Schedules chunk rebuilds for all chunks in the specified chunk region.
      */
-    public void scheduleRebuildForChunks(int minX, int minY, int minZ, int maxX, int maxY, int maxZ, boolean important) {
+    public void scheduleRebuildForChunks(int minX, int minY, int minZ, int maxX, int maxY, int maxZ,
+                                         boolean important) {
         for (int chunkX = minX; chunkX <= maxX; chunkX++) {
             for (int chunkY = minY; chunkY <= maxY; chunkY++) {
                 for (int chunkZ = minZ; chunkZ <= maxZ; chunkZ++) {

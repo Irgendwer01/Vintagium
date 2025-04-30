@@ -1,14 +1,16 @@
 package me.jellysquid.mods.sodium.client.model.light.cache;
 
+import net.minecraft.util.math.BlockPos;
+
 import it.unimi.dsi.fastutil.longs.Long2LongLinkedOpenHashMap;
 import me.jellysquid.mods.sodium.client.model.light.data.LightDataAccess;
 import me.jellysquid.mods.sodium.client.world.WorldSlice;
-import net.minecraft.util.math.BlockPos;
 
 /**
  * A light data cache which uses a hash table to store previously accessed values.
  */
 public class HashLightDataCache extends LightDataAccess {
+
     private final Long2LongLinkedOpenHashMap map = new Long2LongLinkedOpenHashMap(1024, 0.50f);
 
     public HashLightDataCache(WorldSlice world) {

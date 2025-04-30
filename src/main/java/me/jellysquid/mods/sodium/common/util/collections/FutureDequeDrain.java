@@ -7,6 +7,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 
 public class FutureDequeDrain<T> implements Iterator<T> {
+
     private final Deque<CompletableFuture<T>> deque;
     private T next = null;
 
@@ -37,7 +38,7 @@ public class FutureDequeDrain<T> implements Iterator<T> {
             }
         }
     }
-    
+
     @Override
     public T next() {
         if (!hasNext()) {

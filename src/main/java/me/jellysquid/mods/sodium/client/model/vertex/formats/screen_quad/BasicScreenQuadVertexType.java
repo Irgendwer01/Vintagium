@@ -1,15 +1,18 @@
 package me.jellysquid.mods.sodium.client.model.vertex.formats.screen_quad;
 
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.vertex.VertexFormat;
+
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferView;
 import me.jellysquid.mods.sodium.client.model.vertex.formats.screen_quad.writer.BasicScreenQuadVertexBufferWriterNio;
 import me.jellysquid.mods.sodium.client.model.vertex.formats.screen_quad.writer.BasicScreenQuadVertexBufferWriterUnsafe;
 import me.jellysquid.mods.sodium.client.model.vertex.formats.screen_quad.writer.BasicScreenQuadVertexWriterFallback;
 import me.jellysquid.mods.sodium.client.model.vertex.type.BlittableVertexType;
 import me.jellysquid.mods.sodium.client.model.vertex.type.VanillaVertexType;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.vertex.VertexFormat;
 
-public class BasicScreenQuadVertexType implements VanillaVertexType<BasicScreenQuadVertexSink>, BlittableVertexType<BasicScreenQuadVertexSink> {
+public class BasicScreenQuadVertexType implements VanillaVertexType<BasicScreenQuadVertexSink>,
+                                       BlittableVertexType<BasicScreenQuadVertexSink> {
+
     @Override
     public BasicScreenQuadVertexSink createFallbackWriter(BufferBuilder consumer) {
         return new BasicScreenQuadVertexWriterFallback(consumer);
@@ -17,7 +20,8 @@ public class BasicScreenQuadVertexType implements VanillaVertexType<BasicScreenQ
 
     @Override
     public BasicScreenQuadVertexSink createBufferWriter(VertexBufferView buffer, boolean direct) {
-        return direct ? new BasicScreenQuadVertexBufferWriterUnsafe(buffer) : new BasicScreenQuadVertexBufferWriterNio(buffer);
+        return direct ? new BasicScreenQuadVertexBufferWriterUnsafe(buffer) :
+                new BasicScreenQuadVertexBufferWriterNio(buffer);
     }
 
     @Override

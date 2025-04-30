@@ -1,14 +1,5 @@
 package me.jellysquid.mods.sodium.client.gui;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
-import me.jellysquid.mods.sodium.client.gui.options.FormattedTextProvider;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -16,7 +7,19 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
+
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+
+import me.jellysquid.mods.sodium.client.SodiumClientMod;
+import me.jellysquid.mods.sodium.client.gui.options.FormattedTextProvider;
+
 public class SodiumGameOptions {
+
     public final QualitySettings quality = new QualitySettings();
     public final AdvancedSettings advanced = new AdvancedSettings();
     public final PerformanceSettings performance = new PerformanceSettings();
@@ -25,6 +28,7 @@ public class SodiumGameOptions {
     private Path configPath;
 
     public static class AdvancedSettings {
+
         public boolean useVertexArrayObjects = true;
         public boolean useChunkMultidraw = true;
 
@@ -41,11 +45,13 @@ public class SodiumGameOptions {
     }
 
     public static class PerformanceSettings {
+
         public int chunkBuilderThreads = 0;
         public boolean alwaysDeferChunkUpdates = false;
     }
 
     public static class QualitySettings {
+
         public GraphicsQuality cloudQuality = GraphicsQuality.DEFAULT;
         public GraphicsQuality weatherQuality = GraphicsQuality.DEFAULT;
         public GraphicsQuality leavesQuality = GraphicsQuality.DEFAULT;
@@ -60,10 +66,12 @@ public class SodiumGameOptions {
     }
 
     public static class NotificationSettings {
+
         public boolean hideDonationButton = false;
     }
 
     public enum GraphicsQuality implements FormattedTextProvider {
+
         DEFAULT(new TextComponentTranslation("generator.default")),
         FANCY(new TextComponentTranslation("options.clouds.fancy")),
         FAST(new TextComponentTranslation("options.clouds.fast"));
@@ -85,6 +93,7 @@ public class SodiumGameOptions {
     }
 
     public enum LightingQuality implements FormattedTextProvider {
+
         OFF(new TextComponentTranslation("options.ao.off")),
         LOW(new TextComponentTranslation("options.ao.min")),
         HIGH(new TextComponentTranslation("options.ao.max"));
@@ -128,7 +137,7 @@ public class SodiumGameOptions {
         config.configPath = path;
 
         try {
-            if(resaveConfig)
+            if (resaveConfig)
                 config.writeChanges();
         } catch (IOException e) {
             throw new RuntimeException("Couldn't update config file", e);

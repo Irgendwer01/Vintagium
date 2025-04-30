@@ -1,8 +1,8 @@
 package me.jellysquid.mods.sodium.client.model.vertex.buffer;
 
-import me.jellysquid.mods.sodium.client.model.vertex.type.BufferVertexType;
-
 import java.nio.ByteBuffer;
+
+import me.jellysquid.mods.sodium.client.model.vertex.type.BufferVertexType;
 
 /**
  * A safe {@link VertexBufferWriter} implementation which uses Java's NIO library to write into memory buffers. All
@@ -10,6 +10,7 @@ import java.nio.ByteBuffer;
  * platforms.
  */
 public abstract class VertexBufferWriterNio extends VertexBufferWriter {
+
     protected ByteBuffer byteBuffer;
     protected int writeOffset;
 

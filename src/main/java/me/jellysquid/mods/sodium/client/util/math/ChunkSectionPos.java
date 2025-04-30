@@ -8,6 +8,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 
 public class ChunkSectionPos extends Vec3i {
+
     private ChunkSectionPos(int i, int j, int k) {
         super(i, j, k);
     }
@@ -17,7 +18,8 @@ public class ChunkSectionPos extends Vec3i {
     }
 
     public static ChunkSectionPos from(BlockPos pos) {
-        return new ChunkSectionPos(getSectionCoord(pos.getX()), getSectionCoord(pos.getY()), getSectionCoord(pos.getZ()));
+        return new ChunkSectionPos(getSectionCoord(pos.getX()), getSectionCoord(pos.getY()),
+                getSectionCoord(pos.getZ()));
     }
 
     public static ChunkSectionPos from(ChunkPos chunkPos, int y) {
@@ -25,7 +27,9 @@ public class ChunkSectionPos extends Vec3i {
     }
 
     public static ChunkSectionPos from(Entity entity) {
-        return new ChunkSectionPos(getSectionCoord(MathHelper.floor(entity.getPosition().getX())), getSectionCoord(MathHelper.floor(entity.getPosition().getY())), getSectionCoord(MathHelper.floor(entity.getPosition().getZ())));
+        return new ChunkSectionPos(getSectionCoord(MathHelper.floor(entity.getPosition().getX())),
+                getSectionCoord(MathHelper.floor(entity.getPosition().getY())),
+                getSectionCoord(MathHelper.floor(entity.getPosition().getZ())));
     }
 
     public static ChunkSectionPos from(long packed) {
@@ -113,7 +117,8 @@ public class ChunkSectionPos extends Vec3i {
     }
 
     public BlockPos unpackBlockPos(short packedLocalPos) {
-        return new BlockPos(this.unpackBlockX(packedLocalPos), this.unpackBlockY(packedLocalPos), this.unpackBlockZ(packedLocalPos));
+        return new BlockPos(this.unpackBlockX(packedLocalPos), this.unpackBlockY(packedLocalPos),
+                this.unpackBlockZ(packedLocalPos));
     }
 
     public int getSectionX() {
@@ -153,7 +158,8 @@ public class ChunkSectionPos extends Vec3i {
     }
 
     public BlockPos getMinPos() {
-        return new BlockPos(getBlockCoord(this.getSectionX()), getBlockCoord(this.getSectionY()), getBlockCoord(this.getSectionZ()));
+        return new BlockPos(getBlockCoord(this.getSectionX()), getBlockCoord(this.getSectionY()),
+                getBlockCoord(this.getSectionZ()));
     }
 
     public BlockPos getCenterPos() {
@@ -169,6 +175,7 @@ public class ChunkSectionPos extends Vec3i {
     }
 
     public Iterable<BlockPos> streamBlocks() {
-        return BlockPos.getAllInBox(this.getMinX(), this.getMinY(), this.getMinZ(), this.getMaxX(), this.getMaxY(), this.getMaxZ());
+        return BlockPos.getAllInBox(this.getMinX(), this.getMinY(), this.getMinZ(), this.getMaxX(), this.getMaxY(),
+                this.getMaxZ());
     }
 }

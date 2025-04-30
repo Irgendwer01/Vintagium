@@ -1,20 +1,23 @@
 package me.jellysquid.mods.sodium.client.render.vertex;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.concurrent.locks.StampedLock;
+
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.concurrent.locks.StampedLock;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
 
 /**
  * Inspired by modern Sodium's VertexFormatDescription.
  */
 public class VertexFormatDescription {
+
     public enum Element {
+
         POSITION(DefaultVertexFormats.POSITION_3F),
         COLOR(DefaultVertexFormats.COLOR_4UB),
         TEXTURE(DefaultVertexFormats.TEX_2F),
@@ -22,12 +25,13 @@ public class VertexFormatDescription {
 
         final VertexFormatElement underlyingElement;
         static final Map<VertexFormatElement, Element> VANILLA_TO_COMMON = new Object2ObjectOpenHashMap<>();
+
         Element(VertexFormatElement baseElement) {
             this.underlyingElement = baseElement;
         }
 
         static {
-            for(Element e : Element.values()) {
+            for (Element e : Element.values()) {
                 VANILLA_TO_COMMON.put(e.underlyingElement, e);
             }
         }
@@ -45,9 +49,9 @@ public class VertexFormatDescription {
         this.elementOffsets = new int[COMMON_ELEMENTS.length];
         Arrays.fill(this.elementOffsets, -1);
         this.format = format;
-        for(int i = 0; i < format.getElementCount(); i++) {
+        for (int i = 0; i < format.getElementCount(); i++) {
             Element commonElement = Element.VANILLA_TO_COMMON.get(format.getElement(i));
-            if(commonElement != null) {
+            if (commonElement != null) {
                 elementOffsets[commonElement.ordinal()] = format.getOffset(i) / 4;
             }
         }

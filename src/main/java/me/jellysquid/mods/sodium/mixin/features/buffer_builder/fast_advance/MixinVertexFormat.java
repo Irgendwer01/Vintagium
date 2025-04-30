@@ -1,8 +1,10 @@
 package me.jellysquid.mods.sodium.mixin.features.buffer_builder.fast_advance;
 
-import me.jellysquid.mods.sodium.client.buffer.ExtendedVertexFormat;
+import java.util.List;
+
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -10,13 +12,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
+import me.jellysquid.mods.sodium.client.buffer.ExtendedVertexFormat;
 
 /**
  * Thanks to Maximum for this optimization, taken from Fireblanket.
  */
 @Mixin(VertexFormat.class)
 public class MixinVertexFormat implements ExtendedVertexFormat {
+
     @Shadow
     @Final
     private List<VertexFormatElement> elements;

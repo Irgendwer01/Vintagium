@@ -8,6 +8,7 @@ import me.jellysquid.mods.sodium.client.render.chunk.format.ModelVertexUtil;
 import me.jellysquid.mods.sodium.client.util.CompatMemoryUtil;
 
 public class HFPModelVertexBufferWriterUnsafe extends VertexBufferWriterUnsafe implements ModelVertexSink {
+
     public HFPModelVertexBufferWriterUnsafe(VertexBufferView backingBuffer) {
         super(backingBuffer, DefaultModelVertexFormats.MODEL_VERTEX_HFP);
     }
@@ -21,8 +22,7 @@ public class HFPModelVertexBufferWriterUnsafe extends VertexBufferWriterUnsafe i
                 color,
                 ModelVertexUtil.denormalizeVertexTextureFloatAsShort(u),
                 ModelVertexUtil.denormalizeVertexTextureFloatAsShort(v),
-                ModelVertexUtil.encodeLightMapTexCoord(light)
-        );
+                ModelVertexUtil.encodeLightMapTexCoord(light));
     }
 
     private void writeQuadInternal(short x, short y, short z, int color, short u, short v, int light) {
@@ -38,5 +38,4 @@ public class HFPModelVertexBufferWriterUnsafe extends VertexBufferWriterUnsafe i
 
         this.advance();
     }
-
 }

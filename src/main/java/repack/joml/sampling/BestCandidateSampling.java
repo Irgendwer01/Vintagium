@@ -38,6 +38,7 @@ import repack.joml.Vector3f;
 public class BestCandidateSampling {
 
     private static final class IntHolder {
+
         int value;
     }
 
@@ -46,19 +47,24 @@ public class BestCandidateSampling {
      * <p>
      * References:
      * <ul>
-     * <li><a href="https://arxiv.org/ftp/cs/papers/0701/0701164.pdf">Indexing the Sphere with the Hierarchical Triangular Mesh</a>
-     * <li><a href="http://math.stackexchange.com/questions/1244512/point-in-a-spherical-triangle-test">Point in a spherical triangle test</a>
+     * <li><a href="https://arxiv.org/ftp/cs/papers/0701/0701164.pdf">Indexing the Sphere with the Hierarchical
+     * Triangular Mesh</a>
+     * <li><a href="http://math.stackexchange.com/questions/1244512/point-in-a-spherical-triangle-test">Point in a
+     * spherical triangle test</a>
      * </ul>
      *
      * @author Kai Burjack
      */
     public static class Sphere {
+
         /**
-         * Implementation of a Hierarchical Triangular Mesh structure to index the sample points on the unit sphere for accelerating 1-nearest neighbor searches.
+         * Implementation of a Hierarchical Triangular Mesh structure to index the sample points on the unit sphere for
+         * accelerating 1-nearest neighbor searches.
          *
          * @author Kai Burjack
          */
         private static final class Node {
+
             private static final int MAX_OBJECTS_PER_NODE = 32;
 
             private float v0x, v0y, v0z;
@@ -158,7 +164,8 @@ public class BestCandidateSampling {
                      *
                      * See: http://math.stackexchange.com/questions/1244512/point-in-a-spherical-triangle-test
                      */
-                    if (isPointOnSphericalTriangle(o.x, o.y, o.z, c.v0x, c.v0y, c.v0z, c.v1x, c.v1y, c.v1z, c.v2x, c.v2y, c.v2z, 1E-6f)) {
+                    if (isPointOnSphericalTriangle(o.x, o.y, o.z, c.v0x, c.v0y, c.v0z, c.v1x, c.v1y, c.v1z, c.v2x,
+                            c.v2y, c.v2z, 1E-6f)) {
                         c.insert(o);
                         return;
                     }
@@ -184,13 +191,16 @@ public class BestCandidateSampling {
             }
 
             /**
-             * This is essentially a ray cast from the origin of the sphere to the point to test and then checking whether that ray goes through the triangle.
+             * This is essentially a ray cast from the origin of the sphere to the point to test and then checking
+             * whether that ray goes through the triangle.
              * <p>
              * Reference: <a href="http://www.graphics.cornell.edu/pubs/1997/MT97.pdf">Fast,
              * Minimum Storage Ray/Triangle Intersection</a>
              */
-            private static boolean isPointOnSphericalTriangle(float x, float y, float z, float v0X, float v0Y, float v0Z, float v1X, float v1Y, float v1Z, float v2X, float v2Y,
-                    float v2Z, float epsilon) {
+            private static boolean isPointOnSphericalTriangle(float x, float y, float z, float v0X, float v0Y,
+                                                              float v0Z, float v1X, float v1Y, float v1Z, float v2X,
+                                                              float v2Y,
+                                                              float v2Z, float epsilon) {
                 float edge1X = v1X - v0X;
                 float edge1Y = v1Y - v0Y;
                 float edge1Z = v1Z - v0Z;
@@ -223,7 +233,8 @@ public class BestCandidateSampling {
             private int child(float x, float y, float z) {
                 for (int i = 0; i < children.length; i++) {
                     Node c = children[i];
-                    if (isPointOnSphericalTriangle(x, y, z, c.v0x, c.v0y, c.v0z, c.v1x, c.v1y, c.v1z, c.v2x, c.v2y, c.v2z, 1E-5f))
+                    if (isPointOnSphericalTriangle(x, y, z, c.v0x, c.v0y, c.v0z, c.v1x, c.v1y, c.v1z, c.v2x, c.v2y,
+                            c.v2z, 1E-5f))
                         return i;
                 }
                 // No child found. This can happen in 'nearest()' when querying possible nearby nodes
@@ -231,7 +242,8 @@ public class BestCandidateSampling {
             }
 
             /**
-             * Reference: <a href="https://en.wikipedia.org/wiki/Great-circle_distance#Vector_version">https://en.wikipedia.org/</a>
+             * Reference: <a href=
+             * "https://en.wikipedia.org/wiki/Great-circle_distance#Vector_version">https://en.wikipedia.org/</a>
              */
             private float greatCircleDist(float x1, float y1, float z1, float x2, float y2, float z2) {
                 float dot = x1 * x2 + y1 * y2 + z1 * z2;
@@ -239,32 +251,37 @@ public class BestCandidateSampling {
                  * Just use a linear function, because we (mostly) do less-than comparisons on the result.
                  * We just need a linear function which:
                  * f(-1) = PI
-                 * f(0)  = PI/2
-                 * f(1)  = 0
+                 * f(0) = PI/2
+                 * f(1) = 0
                  */
                 return (float) (-Math.PIHalf * dot + Math.PIHalf);
-                //return (float) Math.acos(dot);
+                // return (float) Math.acos(dot);
             }
 
             float nearest(float x, float y, float z) {
                 return nearest(x, y, z, Float.POSITIVE_INFINITY);
             }
+
             float nearest(float x, float y, float z, float n) {
                 float gcd = greatCircleDist(x, y, z, cx, cy, cz);
                 /*
-                 * If great-circle-distance between query point and centroid is larger than the current smallest distance 'n' plus the great circle diameter 'arc', we abort here,
-                 * because then it is not possible for any point in the triangle patch to be closer to the query point than 'n'.
+                 * If great-circle-distance between query point and centroid is larger than the current smallest
+                 * distance 'n' plus the great circle diameter 'arc', we abort here,
+                 * because then it is not possible for any point in the triangle patch to be closer to the query point
+                 * than 'n'.
                  */
                 /*
-                 * Yes, we are subtracting two great-circle distances from one another here, which we did not even compute correctly
-                 * using our overly linear arccos approximation. But the 1.7 factor above will take care that we still stay conservative
+                 * Yes, we are subtracting two great-circle distances from one another here, which we did not even
+                 * compute correctly
+                 * using our overly linear arccos approximation. But the 1.7 factor above will take care that we still
+                 * stay conservative
                  * enough here and not rejecting triangle patches which would contain samples nearer than 'n'.
                  */
                 if (gcd - arc > n)
                     return n;
                 float nr = n;
                 if (children != null) {
-                    int num = children.length, mod = num-1;
+                    int num = children.length, mod = num - 1;
                     for (int i = child(x, y, z), c = 0; c < num; i = (i + 1) & mod, c++) {
                         float n1 = children[i].nearest(x, y, z, nr);
                         nr = Math.min(n1, nr);
@@ -287,23 +304,26 @@ public class BestCandidateSampling {
         private long seed;
 
         /**
-         * Create a new instance of {@link Sphere} to configure and generate 'best candidate' sample positions on the unit sphere.
+         * Create a new instance of {@link Sphere} to configure and generate 'best candidate' sample positions on the
+         * unit sphere.
          */
         public Sphere() {}
 
         /**
-         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given <code>xyzs</code> float array.
+         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given
+         * <code>xyzs</code> float array.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param xyzs
-         *            will hold the x, y and z coordinates of all samples in the order <code>XYZXYZXYZ...</code>.
-         *            This array must have a length of at least <code>numSamples</code>
+         *             will hold the x, y and z coordinates of all samples in the order <code>XYZXYZXYZ...</code>.
+         *             This array must have a length of at least <code>numSamples</code>
          * @return this
          */
         public Sphere generate(final float[] xyzs) {
             final IntHolder i = new IntHolder();
             return generate(new Callback3d() {
+
                 public void onNewSample(float x, float y, float z) {
                     xyzs[3 * i.value + 0] = x;
                     xyzs[3 * i.value + 1] = y;
@@ -314,22 +334,25 @@ public class BestCandidateSampling {
         }
 
         /**
-         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given <code>xyzs</code> FloatBuffer.
+         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given
+         * <code>xyzs</code> FloatBuffer.
          * <p>
-         * The samples will be written starting at the current position of the FloatBuffer. The position of the FloatBuffer will not be modified.
+         * The samples will be written starting at the current position of the FloatBuffer. The position of the
+         * FloatBuffer will not be modified.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param xyzs
-         *            will hold the x, y and z coordinates of all samples in the order <code>XYZXYZXYZ...</code>.
-         *            This FloatBuffer must have at least <code>numSamples</code> remaining elements.
-         *            The position of the buffer will not be modified by this method
+         *             will hold the x, y and z coordinates of all samples in the order <code>XYZXYZXYZ...</code>.
+         *             This FloatBuffer must have at least <code>numSamples</code> remaining elements.
+         *             The position of the buffer will not be modified by this method
          * @return this
          */
         public Sphere generate(final FloatBuffer xyzs) {
             final IntHolder i = new IntHolder();
             final int pos = xyzs.position();
             return generate(new Callback3d() {
+
                 public void onNewSample(float x, float y, float z) {
                     xyzs.put(pos + 3 * i.value + 0, x);
                     xyzs.put(pos + 3 * i.value + 1, y);
@@ -343,7 +366,7 @@ public class BestCandidateSampling {
          * Set the seed to initialize the pseudo-random number generator with.
          *
          * @param seed
-         *          the seed value
+         *             the seed value
          * @return this
          */
         public Sphere seed(long seed) {
@@ -355,7 +378,7 @@ public class BestCandidateSampling {
          * Set the number of samples to generate.
          *
          * @param numSamples
-         *          the number of samples
+         *                   the number of samples
          * @return this
          */
         public Sphere numSamples(int numSamples) {
@@ -367,7 +390,7 @@ public class BestCandidateSampling {
          * Set the number of candidates to try for each generated sample.
          *
          * @param numCandidates
-         *          the number of candidates to try
+         *                      the number of candidates to try
          * @return this
          */
         public Sphere numCandidates(int numCandidates) {
@@ -381,7 +404,7 @@ public class BestCandidateSampling {
          * The default is <code>false</code>, which will generate samples on the whole unit sphere.
          *
          * @param onHemisphere
-         *          whether to generate samples on the hemisphere
+         *                     whether to generate samples on the hemisphere
          * @return this
          */
         public Sphere onHemisphere(boolean onHemisphere) {
@@ -395,7 +418,7 @@ public class BestCandidateSampling {
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param callback
-         *            will be called with the coordinates of each generated sample position
+         *                 will be called with the coordinates of each generated sample position
          * @return this
          */
         public Sphere generate(Callback3d callback) {
@@ -407,7 +430,8 @@ public class BestCandidateSampling {
                     /*
                      * Random point on sphere
                      *
-                     * Reference: <a href="http://mathworld.wolfram.com/SpherePointPicking.html">http://mathworld.wolfram.com/</a>
+                     * Reference: <a
+                     * href="http://mathworld.wolfram.com/SpherePointPicking.html">http://mathworld.wolfram.com/</a>
                      */
                     float x1, x2;
                     do {
@@ -442,6 +466,7 @@ public class BestCandidateSampling {
      * @author Kai Burjack
      */
     private static class QuadTree {
+
         private static final int MAX_OBJECTS_PER_NODE = 32;
 
         // Constants for the quadrants of the quadtree
@@ -503,8 +528,8 @@ public class BestCandidateSampling {
 
         float nearest(float x, float y, float lowerBound, float upperBound) {
             float ub = upperBound;
-            if (x < minX - upperBound || x > minX + hs * 2 + upperBound || y < minY - upperBound
-                    || y > minY + hs * 2 + upperBound)
+            if (x < minX - upperBound || x > minX + hs * 2 + upperBound || y < minY - upperBound ||
+                    y > minY + hs * 2 + upperBound)
                 return ub;
             if (children != null) {
                 for (int i = quadrant(x, y), c = 0; c < 4; i = (i + 1) & 3, c++) {
@@ -535,12 +560,14 @@ public class BestCandidateSampling {
      * @author Kai Burjack
      */
     public static class Disk {
+
         private int numSamples;
         private int numCandidates = 60; // <- use a reasonable default
         private long seed;
 
         /**
-         * Create a new instance of {@link Disk} to configure and generate 'best candidate' sample positions on the unit disk.
+         * Create a new instance of {@link Disk} to configure and generate 'best candidate' sample positions on the unit
+         * disk.
          */
         public Disk() {}
 
@@ -548,7 +575,7 @@ public class BestCandidateSampling {
          * Set the seed to initialize the pseudo-random number generator with.
          *
          * @param seed
-         *          the seed value
+         *             the seed value
          * @return this
          */
         public Disk seed(long seed) {
@@ -560,7 +587,7 @@ public class BestCandidateSampling {
          * Set the number of samples to generate.
          *
          * @param numSamples
-         *          the number of samples
+         *                   the number of samples
          * @return this
          */
         public Disk numSamples(int numSamples) {
@@ -572,7 +599,7 @@ public class BestCandidateSampling {
          * Set the number of candidates to try for each generated sample.
          *
          * @param numCandidates
-         *          the number of candidates to try
+         *                      the number of candidates to try
          * @return this
          */
         public Disk numCandidates(int numCandidates) {
@@ -581,7 +608,8 @@ public class BestCandidateSampling {
         }
 
         /**
-         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given <code>xys</code> float array.
+         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given
+         * <code>xys</code> float array.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
@@ -593,6 +621,7 @@ public class BestCandidateSampling {
         public Disk generate(final float[] xys) {
             final IntHolder i = new IntHolder();
             return generate(new Callback2d() {
+
                 public void onNewSample(float x, float y) {
                     xys[2 * i.value + 0] = x;
                     xys[2 * i.value + 1] = y;
@@ -602,14 +631,17 @@ public class BestCandidateSampling {
         }
 
         /**
-         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given <code>xys</code> FloatBuffer.
+         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given
+         * <code>xys</code> FloatBuffer.
          * <p>
-         * The samples will be written starting at the current position of the FloatBuffer. The position of the FloatBuffer will not be modified.
+         * The samples will be written starting at the current position of the FloatBuffer. The position of the
+         * FloatBuffer will not be modified.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param xys
-         *            will hold the x and y coordinates of all samples in the order <code>XYXYXY...</code>. This FloatBuffer must have at least <code>numSamples</code> remaining elements. The
+         *            will hold the x and y coordinates of all samples in the order <code>XYXYXY...</code>. This
+         *            FloatBuffer must have at least <code>numSamples</code> remaining elements. The
          *            position of the buffer will not be modified by this method
          * @return this
          */
@@ -617,6 +649,7 @@ public class BestCandidateSampling {
             final IntHolder i = new IntHolder();
             final int pos = xys.position();
             return generate(new Callback2d() {
+
                 public void onNewSample(float x, float y) {
                     xys.put(pos + 3 * i.value + 0, x);
                     xys.put(pos + 3 * i.value + 1, y);
@@ -626,12 +659,13 @@ public class BestCandidateSampling {
         }
 
         /**
-         * Generate 'best candidate' sample positions and call the given <code>callback</code> for each generated sample.
+         * Generate 'best candidate' sample positions and call the given <code>callback</code> for each generated
+         * sample.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param callback
-         *            will be called with the coordinates of each generated sample position
+         *                 will be called with the coordinates of each generated sample position
          * @return this
          */
         public Disk generate(Callback2d callback) {
@@ -665,12 +699,14 @@ public class BestCandidateSampling {
      * @author Kai Burjack
      */
     public static class Quad {
+
         private int numSamples;
         private int numCandidates = 60; // <- use a reasonable default
         private long seed;
 
         /**
-         * Create a new instance of {@link Quad} to configure and generate 'best candidate' sample positions on the unit quad.
+         * Create a new instance of {@link Quad} to configure and generate 'best candidate' sample positions on the unit
+         * quad.
          */
         public Quad() {}
 
@@ -678,7 +714,7 @@ public class BestCandidateSampling {
          * Set the seed to initialize the pseudo-random number generator with.
          *
          * @param seed
-         *          the seed value
+         *             the seed value
          * @return this
          */
         public Quad seed(long seed) {
@@ -690,7 +726,7 @@ public class BestCandidateSampling {
          * Set the number of samples to generate.
          *
          * @param numSamples
-         *          the number of samples
+         *                   the number of samples
          * @return this
          */
         public Quad numSamples(int numSamples) {
@@ -702,7 +738,7 @@ public class BestCandidateSampling {
          * Set the number of candidates to try for each generated sample.
          *
          * @param numCandidates
-         *          the number of candidates to try
+         *                      the number of candidates to try
          * @return this
          */
         public Quad numCandidates(int numCandidates) {
@@ -711,18 +747,20 @@ public class BestCandidateSampling {
         }
 
         /**
-         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given <code>xyzs</code> float array.
+         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given
+         * <code>xyzs</code> float array.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param xyzs
-         *            will hold the x, y and z coordinates of all samples in the order <code>XYZXYZXYZ...</code>.
-         *            This array must have a length of at least <code>numSamples</code>
+         *             will hold the x, y and z coordinates of all samples in the order <code>XYZXYZXYZ...</code>.
+         *             This array must have a length of at least <code>numSamples</code>
          * @return this
          */
         public Quad generate(final float[] xyzs) {
             final IntHolder i = new IntHolder();
             return generate(new Callback2d() {
+
                 public void onNewSample(float x, float y) {
                     xyzs[2 * i.value + 0] = x;
                     xyzs[2 * i.value + 1] = y;
@@ -732,14 +770,17 @@ public class BestCandidateSampling {
         }
 
         /**
-         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given <code>xys</code> FloatBuffer.
+         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given
+         * <code>xys</code> FloatBuffer.
          * <p>
-         * The samples will be written starting at the current position of the FloatBuffer. The position of the FloatBuffer will not be modified.
+         * The samples will be written starting at the current position of the FloatBuffer. The position of the
+         * FloatBuffer will not be modified.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param xys
-         *            will hold the x and y coordinates of all samples in the order <code>XYXYXY...</code>. This FloatBuffer must have at least <code>numSamples</code> remaining elements. The position of
+         *            will hold the x and y coordinates of all samples in the order <code>XYXYXY...</code>. This
+         *            FloatBuffer must have at least <code>numSamples</code> remaining elements. The position of
          *            the buffer will not be modified by this method
          * @return this
          */
@@ -747,6 +788,7 @@ public class BestCandidateSampling {
             final IntHolder i = new IntHolder();
             final int pos = xys.position();
             return generate(new Callback2d() {
+
                 public void onNewSample(float x, float y) {
                     xys.put(pos + 3 * i.value + 0, x);
                     xys.put(pos + 3 * i.value + 1, y);
@@ -756,12 +798,13 @@ public class BestCandidateSampling {
         }
 
         /**
-         * Generate 'best candidate' sample positions and call the given <code>callback</code> for each generated sample.
+         * Generate 'best candidate' sample positions and call the given <code>callback</code> for each generated
+         * sample.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param callback
-         *            will be called with the coordinates of each generated sample position
+         *                 will be called with the coordinates of each generated sample position
          * @return this
          */
         public Quad generate(Callback2d callback) {
@@ -792,6 +835,7 @@ public class BestCandidateSampling {
      * @author Kai Burjack
      */
     private static class Octree {
+
         private static final int MAX_OBJECTS_PER_NODE = 32;
 
         // Constants for the octants of the octree
@@ -871,7 +915,8 @@ public class BestCandidateSampling {
 
         float nearest(float x, float y, float z, float lowerBound, float upperBound) {
             float up = upperBound;
-            if (x < minX - upperBound || x > minX + hs * 2 + upperBound || y < minY - upperBound || y > minY + hs * 2 + upperBound ||
+            if (x < minX - upperBound || x > minX + hs * 2 + upperBound || y < minY - upperBound ||
+                    y > minY + hs * 2 + upperBound ||
                     z < minZ - upperBound || z > minZ + hs * 2 + upperBound)
                 return up;
             if (children != null) {
@@ -903,6 +948,7 @@ public class BestCandidateSampling {
      * @author Kai Burjack
      */
     public static class Cube {
+
         private int numSamples;
         private int numCandidates = 60; // <- use a reasonable default
         private long seed;
@@ -918,7 +964,7 @@ public class BestCandidateSampling {
          * Set the seed to initialize the pseudo-random number generator with.
          *
          * @param seed
-         *          the seed value
+         *             the seed value
          * @return this
          */
         public Cube seed(long seed) {
@@ -930,7 +976,7 @@ public class BestCandidateSampling {
          * Set the number of samples to generate.
          *
          * @param numSamples
-         *          the number of samples
+         *                   the number of samples
          * @return this
          */
         public Cube numSamples(int numSamples) {
@@ -942,7 +988,7 @@ public class BestCandidateSampling {
          * Set the number of candidates to try for each generated sample.
          *
          * @param numCandidates
-         *          the number of candidates to try
+         *                      the number of candidates to try
          * @return this
          */
         public Cube numCandidates(int numCandidates) {
@@ -951,18 +997,20 @@ public class BestCandidateSampling {
         }
 
         /**
-         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given <code>xyzs</code> float array.
+         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given
+         * <code>xyzs</code> float array.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param xyzs
-         *            will hold the x, y and z coordinates of all samples in the order <code>XYZXYZXYZ...</code>.
-         *            This array must have a length of at least <code>numSamples</code>
+         *             will hold the x, y and z coordinates of all samples in the order <code>XYZXYZXYZ...</code>.
+         *             This array must have a length of at least <code>numSamples</code>
          * @return this
          */
         public Cube generate(final float[] xyzs) {
             final IntHolder i = new IntHolder();
             return generate(new Callback3d() {
+
                 public void onNewSample(float x, float y, float z) {
                     xyzs[3 * i.value + 0] = x;
                     xyzs[3 * i.value + 1] = y;
@@ -973,22 +1021,25 @@ public class BestCandidateSampling {
         }
 
         /**
-         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given <code>xyzs</code> FloatBuffer.
+         * Generate 'best candidate' sample positions and store the coordinates of all generated samples into the given
+         * <code>xyzs</code> FloatBuffer.
          * <p>
-         * The samples will be written starting at the current position of the FloatBuffer. The position of the FloatBuffer will not be modified.
+         * The samples will be written starting at the current position of the FloatBuffer. The position of the
+         * FloatBuffer will not be modified.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param xyzs
-         *            will hold the x, y and z coordinates of all samples in the order <code>XYZXYZXYZ...</code>.
-         *            This FloatBuffer must have at least <code>numSamples</code> remaining elements.
-         *            The position of the buffer will not be modified by this method
+         *             will hold the x, y and z coordinates of all samples in the order <code>XYZXYZXYZ...</code>.
+         *             This FloatBuffer must have at least <code>numSamples</code> remaining elements.
+         *             The position of the buffer will not be modified by this method
          * @return this
          */
         public Cube generate(final FloatBuffer xyzs) {
             final IntHolder i = new IntHolder();
             final int pos = xyzs.position();
             return generate(new Callback3d() {
+
                 public void onNewSample(float x, float y, float z) {
                     xyzs.put(pos + 3 * i.value + 0, x);
                     xyzs.put(pos + 3 * i.value + 1, y);
@@ -999,12 +1050,13 @@ public class BestCandidateSampling {
         }
 
         /**
-         * Generate 'best candidate' sample positions and call the given <code>callback</code> for each generated sample.
+         * Generate 'best candidate' sample positions and call the given <code>callback</code> for each generated
+         * sample.
          * <p>
          * <em>This method performs heap allocations, so should be used sparingly.</em>
          *
          * @param callback
-         *            will be called with the coordinates of each generated sample position
+         *                 will be called with the coordinates of each generated sample position
          * @return this
          */
         public Cube generate(Callback3d callback) {
@@ -1030,5 +1082,4 @@ public class BestCandidateSampling {
             return this;
         }
     }
-
 }

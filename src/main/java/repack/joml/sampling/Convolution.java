@@ -39,13 +39,13 @@ public class Convolution {
      * the factors in row-major order in <code>dest</code>.
      *
      * @param rows
-     *          the number of rows (must be an odd number)
+     *              the number of rows (must be an odd number)
      * @param cols
-     *          the number of columns (must be an odd number)
+     *              the number of columns (must be an odd number)
      * @param sigma
-     *          the standard deviation of the filter kernel values
+     *              the standard deviation of the filter kernel values
      * @param dest
-     *          will hold the kernel factors in row-major order
+     *              will hold the kernel factors in row-major order
      */
     public static void gaussianKernel(int rows, int cols, float sigma, FloatBuffer dest) {
         if ((rows & 1) == 0) {
@@ -79,13 +79,13 @@ public class Convolution {
      * the factors in row-major order in <code>dest</code>.
      *
      * @param rows
-     *          the number of rows (must be an odd number)
+     *              the number of rows (must be an odd number)
      * @param cols
-     *          the number of columns (must be an odd number)
+     *              the number of columns (must be an odd number)
      * @param sigma
-     *          the standard deviation of the filter kernel values
+     *              the standard deviation of the filter kernel values
      * @param dest
-     *          will hold the kernel factors in row-major order
+     *              will hold the kernel factors in row-major order
      */
     public static void gaussianKernel(int rows, int cols, float sigma, float[] dest) {
         if ((rows & 1) == 0) {
@@ -112,5 +112,4 @@ public class Convolution {
             dest[i] = dest[i] / sum;
         }
     }
-
 }

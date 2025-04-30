@@ -1,19 +1,22 @@
 package me.jellysquid.mods.sodium.mixin.core.model;
 
-import it.unimi.dsi.fastutil.objects.Reference2ReferenceMap;
-import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
-import me.jellysquid.mods.sodium.client.world.biome.BlockColorsExtended;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import it.unimi.dsi.fastutil.objects.Reference2ReferenceMap;
+import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
+import me.jellysquid.mods.sodium.client.world.biome.BlockColorsExtended;
+
 @Mixin(BlockColors.class)
 public class MixinBlockColors implements BlockColorsExtended {
+
     private Reference2ReferenceMap<Block, IBlockColor> blocksToColor;
 
     private static final IBlockColor DEFAULT_PROVIDER = (state, view, pos, tint) -> -1;
@@ -31,7 +34,7 @@ public class MixinBlockColors implements BlockColorsExtended {
         // HashMap too
         synchronized (this.blocksToColor) {
             for (Block block : blocks) {
-                if(provider != null)
+                if (provider != null)
                     this.blocksToColor.put(block, provider);
             }
         }

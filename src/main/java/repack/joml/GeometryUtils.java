@@ -32,22 +32,24 @@ package repack.joml;
 public class GeometryUtils {
 
     /**
-     * Compute two arbitrary vectors perpendicular to the given normalized vector <code>(x, y, z)</code>, and store them in <code>dest1</code> and <code>dest2</code>,
+     * Compute two arbitrary vectors perpendicular to the given normalized vector <code>(x, y, z)</code>, and store them
+     * in <code>dest1</code> and <code>dest2</code>,
      * respectively.
      * <p>
-     * The computed vectors will themselves be perpendicular to each another and normalized. So the tree vectors <code>(x, y, z)</code>, <code>dest1</code> and
+     * The computed vectors will themselves be perpendicular to each another and normalized. So the tree vectors
+     * <code>(x, y, z)</code>, <code>dest1</code> and
      * <code>dest2</code> form an orthonormal basis.
      *
      * @param x
-     *            the x coordinate of the normalized input vector
+     *              the x coordinate of the normalized input vector
      * @param y
-     *            the y coordinate of the normalized input vector
+     *              the y coordinate of the normalized input vector
      * @param z
-     *            the z coordinate of the normalized input vector
+     *              the z coordinate of the normalized input vector
      * @param dest1
-     *            will hold the first perpendicular vector
+     *              will hold the first perpendicular vector
      * @param dest2
-     *            will hold the second perpendicular vector
+     *              will hold the second perpendicular vector
      */
     public static void perpendicular(float x, float y, float z, Vector3f dest1, Vector3f dest2) {
         float magX = z * z + y * y;
@@ -80,65 +82,70 @@ public class GeometryUtils {
     }
 
     /**
-     * Compute two arbitrary vectors perpendicular to the given normalized vector <code>v</code>, and store them in <code>dest1</code> and <code>dest2</code>,
+     * Compute two arbitrary vectors perpendicular to the given normalized vector <code>v</code>, and store them in
+     * <code>dest1</code> and <code>dest2</code>,
      * respectively.
      * <p>
-     * The computed vectors will themselves be perpendicular to each another and normalized. So the tree vectors <code>v</code>, <code>dest1</code> and
+     * The computed vectors will themselves be perpendicular to each another and normalized. So the tree vectors
+     * <code>v</code>, <code>dest1</code> and
      * <code>dest2</code> form an orthonormal basis.
      *
      * @param v
-     *            the {@link Vector3f#normalize() normalized} input vector
+     *              the {@link Vector3f#normalize() normalized} input vector
      * @param dest1
-     *            will hold the first perpendicular vector
+     *              will hold the first perpendicular vector
      * @param dest2
-     *            will hold the second perpendicular vector
+     *              will hold the second perpendicular vector
      */
     public static void perpendicular(Vector3fc v, Vector3f dest1, Vector3f dest2) {
         perpendicular(v.x(), v.y(), v.z(), dest1, dest2);
     }
 
     /**
-     * Calculate the normal of a surface defined by points <code>v1</code>, <code>v2</code> and <code>v3</code> and store it in <code>dest</code>.
+     * Calculate the normal of a surface defined by points <code>v1</code>, <code>v2</code> and <code>v3</code> and
+     * store it in <code>dest</code>.
      *
      * @param v0
-     *            the first position
+     *             the first position
      * @param v1
-     *            the second position
+     *             the second position
      * @param v2
-     *            the third position
+     *             the third position
      * @param dest
-     *            will hold the result
+     *             will hold the result
      */
     public static void normal(Vector3fc v0, Vector3fc v1, Vector3fc v2, Vector3f dest) {
         normal(v0.x(), v0.y(), v0.z(), v1.x(), v1.y(), v1.z(), v2.x(), v2.y(), v2.z(), dest);
     }
 
     /**
-     * Calculate the normal of a surface defined by points <code>(v1X, v1Y, v1Z)</code>, <code>(v2X, v2Y, v2Z)</code> and <code>(v3X, v3Y, v3Z)</code>
+     * Calculate the normal of a surface defined by points <code>(v1X, v1Y, v1Z)</code>, <code>(v2X, v2Y, v2Z)</code>
+     * and <code>(v3X, v3Y, v3Z)</code>
      * and store it in <code>dest</code>.
      *
      * @param v0X
-     *            the x coordinate of the first position
+     *             the x coordinate of the first position
      * @param v0Y
-     *            the y coordinate of the first position
+     *             the y coordinate of the first position
      * @param v0Z
-     *            the z coordinate of the first position
+     *             the z coordinate of the first position
      * @param v1X
-     *            the x coordinate of the second position
+     *             the x coordinate of the second position
      * @param v1Y
-     *            the y coordinate of the second position
+     *             the y coordinate of the second position
      * @param v1Z
-     *            the z coordinate of the second position
+     *             the z coordinate of the second position
      * @param v2X
-     *            the x coordinate of the third position
+     *             the x coordinate of the third position
      * @param v2Y
-     *            the y coordinate of the third position
+     *             the y coordinate of the third position
      * @param v2Z
-     *            the z coordinate of the third position
+     *             the z coordinate of the third position
      * @param dest
-     *            will hold the result
+     *             will hold the result
      */
-    public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y, float v1Z, float v2X, float v2Y, float v2Z, Vector3f dest) {
+    public static void normal(float v0X, float v0Y, float v0Z, float v1X, float v1Y, float v1Z, float v2X, float v2Y,
+                              float v2Z, Vector3f dest) {
         dest.x = ((v1Y - v0Y) * (v2Z - v0Z)) - ((v1Z - v0Z) * (v2Y - v0Y));
         dest.y = ((v1Z - v0Z) * (v2X - v0X)) - ((v1X - v0X) * (v2Z - v0Z));
         dest.z = ((v1X - v0X) * (v2Y - v0Y)) - ((v1Y - v0Y) * (v2X - v0X));
@@ -146,24 +153,26 @@ public class GeometryUtils {
     }
 
     /**
-     * Calculate the surface tangent for the three supplied vertices and UV coordinates and store the result in <code>dest</code>.
+     * Calculate the surface tangent for the three supplied vertices and UV coordinates and store the result in
+     * <code>dest</code>.
      *
      * @param v1
-     *            XYZ of first vertex
+     *             XYZ of first vertex
      * @param uv1
-     *            UV of first vertex
+     *             UV of first vertex
      * @param v2
-     *            XYZ of second vertex
+     *             XYZ of second vertex
      * @param uv2
-     *            UV of second vertex
+     *             UV of second vertex
      * @param v3
-     *            XYZ of third vertex
+     *             XYZ of third vertex
      * @param uv3
-     *            UV of third vertex
+     *             UV of third vertex
      * @param dest
-     *            the tangent will be stored here
+     *             the tangent will be stored here
      */
-    public static void tangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2fc uv2, Vector3fc v3, Vector2fc uv3, Vector3f dest) {
+    public static void tangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2fc uv2, Vector3fc v3, Vector2fc uv3,
+                               Vector3f dest) {
         float DeltaV1 = uv2.y() - uv1.y();
         float DeltaV2 = uv3.y() - uv1.y();
 
@@ -176,24 +185,26 @@ public class GeometryUtils {
     }
 
     /**
-     * Calculate the surface bitangent for the three supplied vertices and UV coordinates and store the result in <code>dest</code>.
+     * Calculate the surface bitangent for the three supplied vertices and UV coordinates and store the result in
+     * <code>dest</code>.
      *
      * @param v1
-     *            XYZ of first vertex
+     *             XYZ of first vertex
      * @param uv1
-     *            UV of first vertex
+     *             UV of first vertex
      * @param v2
-     *            XYZ of second vertex
+     *             XYZ of second vertex
      * @param uv2
-     *            UV of second vertex
+     *             UV of second vertex
      * @param v3
-     *            XYZ of third vertex
+     *             XYZ of third vertex
      * @param uv3
-     *            UV of third vertex
+     *             UV of third vertex
      * @param dest
-     *            the binormal will be stored here
+     *             the binormal will be stored here
      */
-    public static void bitangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2fc uv2, Vector3fc v3, Vector2fc uv3, Vector3f dest) {
+    public static void bitangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2fc uv2, Vector3fc v3, Vector2fc uv3,
+                                 Vector3f dest) {
         float DeltaU1 = uv2.x() - uv1.x();
         float DeltaU2 = uv3.x() - uv1.x();
 
@@ -206,26 +217,28 @@ public class GeometryUtils {
     }
 
     /**
-     * Calculate the surface tangent and bitangent for the three supplied vertices and UV coordinates and store the result in <code>dest</code>.
+     * Calculate the surface tangent and bitangent for the three supplied vertices and UV coordinates and store the
+     * result in <code>dest</code>.
      *
      * @param v1
-     *            XYZ of first vertex
+     *                      XYZ of first vertex
      * @param uv1
-     *            UV of first vertex
+     *                      UV of first vertex
      * @param v2
-     *            XYZ of second vertex
+     *                      XYZ of second vertex
      * @param uv2
-     *            UV of second vertex
+     *                      UV of second vertex
      * @param v3
-     *            XYZ of third vertex
+     *                      XYZ of third vertex
      * @param uv3
-     *            UV of third vertex
+     *                      UV of third vertex
      * @param destTangent
-     *            the tangent will be stored here
+     *                      the tangent will be stored here
      * @param destBitangent
-     *            the bitangent will be stored here
+     *                      the bitangent will be stored here
      */
-    public static void tangentBitangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2fc uv2, Vector3fc v3, Vector2fc uv3, Vector3f destTangent, Vector3f destBitangent) {
+    public static void tangentBitangent(Vector3fc v1, Vector2fc uv1, Vector3fc v2, Vector2fc uv2, Vector3fc v3,
+                                        Vector2fc uv3, Vector3f destTangent, Vector3f destBitangent) {
         float DeltaV1 = uv2.y() - uv1.y();
         float DeltaV2 = uv3.y() - uv1.y();
         float DeltaU1 = uv2.x() - uv1.x();
@@ -243,5 +256,4 @@ public class GeometryUtils {
         destBitangent.z = f * (-DeltaU2 * (v2.z() - v1.z()) + DeltaU1 * (v3.z() - v1.z()));
         destBitangent.normalize();
     }
-
 }

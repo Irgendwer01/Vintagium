@@ -1,13 +1,14 @@
 package me.jellysquid.mods.sodium.client.model.vertex.formats.glyph.writer;
 
+import java.nio.ByteBuffer;
+
 import me.jellysquid.mods.sodium.client.model.vertex.VanillaVertexTypes;
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferView;
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferWriterNio;
 import me.jellysquid.mods.sodium.client.model.vertex.formats.glyph.GlyphVertexSink;
 
-import java.nio.ByteBuffer;
-
 public class GlyphVertexBufferWriterNio extends VertexBufferWriterNio implements GlyphVertexSink {
+
     public GlyphVertexBufferWriterNio(VertexBufferView backingBuffer) {
         super(backingBuffer, VanillaVertexTypes.GLYPHS);
     }

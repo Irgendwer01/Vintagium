@@ -1,21 +1,21 @@
 package me.jellysquid.mods.sodium.client.world;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeColorHelper;
-
-import javax.annotation.Nullable;
 
 /**
  * Wrapper object used to defeat identity comparisons in mods. Since vanilla provides a unique object to them for each
  * subchunk, we do the same.
  */
 public class WorldSliceLocal implements SodiumBlockAccess {
+
     private final SodiumBlockAccess view;
 
     public WorldSliceLocal(SodiumBlockAccess view) {

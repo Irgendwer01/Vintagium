@@ -1,13 +1,14 @@
 package me.jellysquid.mods.sodium.client.util.math;
 
+import java.util.Deque;
+
 import com.google.common.collect.Queues;
+
 import repack.joml.Matrix3f;
 import repack.joml.Matrix4f;
 
-import java.util.Deque;
-
-
 public class MatrixStack {
+
     private final Deque<Entry> matrixStack;
 
     public MatrixStack() {
@@ -33,14 +34,16 @@ public class MatrixStack {
     public void pop() {
         this.matrixStack.removeLast();
     }
+
     public boolean clear() {
         return this.matrixStack.size() == 1;
     }
 
     public void translate(double d, double e, double f) {
         final Entry lv = this.matrixStack.getLast();
-        lv.model.translateCustom((float)d, (float)e, (float)f);
+        lv.model.translateCustom((float) d, (float) e, (float) f);
     }
+
     public void rotateX(float f) {
         final Entry lv = this.matrixStack.getLast();
         lv.model.rotateX(f);
@@ -59,7 +62,6 @@ public class MatrixStack {
         lv.normal.rotateZ(f);
     }
 
-
     public void scale(float f, float g, float h) {
         final Entry lv = this.matrixStack.getLast();
         lv.model.scale(f, g, h);
@@ -76,9 +78,7 @@ public class MatrixStack {
         float k = 1.0F / h;
         float l = invSqrt(i * j * k);
         lv.normal.scale(l * i, l * j, l * k);
-
     }
-
 
     private static float invSqrt(float x) {
         float xhalf = 0.5f * x;
@@ -90,6 +90,7 @@ public class MatrixStack {
     }
 
     public static final class Entry {
+
         private final Matrix4f model;
         private final Matrix3f normal;
 
@@ -106,5 +107,4 @@ public class MatrixStack {
             return normal;
         }
     }
-
 }

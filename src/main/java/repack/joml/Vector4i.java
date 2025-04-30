@@ -120,11 +120,11 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * given <code>v</code> and the given <code>w</code> and round using the given {@link RoundingMode}.
      *
      * @param v
-     *          the {@link Vector3fc} to copy the values from
+     *             the {@link Vector3fc} to copy the values from
      * @param w
-     *          the w component
+     *             the w component
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector4i(Vector3fc v, float w, int mode) {
         x = Math.roundUsing(v.x(), mode);
@@ -138,9 +138,9 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * the given vector.
      *
      * @param v
-     *          the {@link Vector4fc} to round and copy the values from
+     *             the {@link Vector4fc} to round and copy the values from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector4i(Vector4fc v, int mode) {
         x = Math.roundUsing(v.x(), mode);
@@ -154,9 +154,9 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * the given vector.
      *
      * @param v
-     *          the {@link Vector4dc} to round and copy the values from
+     *             the {@link Vector4dc} to round and copy the values from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector4i(Vector4dc v, int mode) {
         x = Math.roundUsing(v.x(), mode);
@@ -203,7 +203,7 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * four elements of the given array.
      *
      * @param xyzw
-     *          the array containing at least four elements
+     *             the array containing at least four elements
      */
     public Vector4i(int[] xyzw) {
         this.x = xyzw[0];
@@ -226,7 +226,7 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * @see #Vector4i(int, ByteBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
+     *               values will be read in <code>x, y, z, w</code> order
      */
     public Vector4i(ByteBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
@@ -240,9 +240,9 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
+     *               values will be read in <code>x, y, z, w</code> order
      */
     public Vector4i(int index, ByteBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
@@ -262,7 +262,7 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * @see #Vector4i(int, IntBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
+     *               values will be read in <code>x, y, z, w</code> order
      */
     public Vector4i(IntBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
@@ -276,9 +276,9 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * This method will not increment the position of the given IntBuffer.
      *
      * @param index
-     *          the absolute position into the IntBuffer
+     *               the absolute position into the IntBuffer
      * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
+     *               values will be read in <code>x, y, z, w</code> order
      */
     public Vector4i(int index, IntBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
@@ -340,9 +340,9 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * in double-precision, there is the possibility to lose precision.
      *
      * @param v
-     *          the vector to copy from
+     *             the vector to copy from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      * @return this
      */
     public Vector4i set(Vector4dc v, int mode) {
@@ -360,9 +360,9 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * in double-precision, there is the possibility to lose precision.
      *
      * @param v
-     *          the vector to copy from
+     *             the vector to copy from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      * @return this
      */
     public Vector4i set(Vector4fc v, int mode) {
@@ -452,7 +452,7 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * Set the four components of this vector to the first four elements of the given array.
      *
      * @param xyzw
-     *          the array containing at least four elements
+     *             the array containing at least four elements
      * @return this
      */
     public Vector4i set(int[] xyzw) {
@@ -476,7 +476,7 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * @see #set(int, ByteBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
+     *               values will be read in <code>x, y, z, w</code> order
      * @return this
      */
     public Vector4i set(ByteBuffer buffer) {
@@ -491,9 +491,9 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
+     *               values will be read in <code>x, y, z, w</code> order
      * @return this
      */
     public Vector4i set(int index, ByteBuffer buffer) {
@@ -514,7 +514,7 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * @see #set(int, IntBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
+     *               values will be read in <code>x, y, z, w</code> order
      * @return this
      */
     public Vector4i set(IntBuffer buffer) {
@@ -529,9 +529,9 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * This method will not increment the position of the given IntBuffer.
      *
      * @param index
-     *          the absolute position into the IntBuffer
+     *               the absolute position into the IntBuffer
      * @param buffer
-     *          values will be read in <code>x, y, z, w</code> order
+     *               values will be read in <code>x, y, z, w</code> order
      * @return this
      */
     public Vector4i set(int index, IntBuffer buffer) {
@@ -545,10 +545,11 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *              the off-heap memory address to read the vector values from
+     *                the off-heap memory address to read the vector values from
      * @return this
      */
     public Vector4i setFromAddress(long address) {
@@ -560,16 +561,16 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
 
     public int get(int component) throws IllegalArgumentException {
         switch (component) {
-        case 0:
-            return x;
-        case 1:
-            return y;
-        case 2:
-            return z;
-        case 3:
-            return w;
-        default:
-            throw new IllegalArgumentException();
+            case 0:
+                return x;
+            case 1:
+                return y;
+            case 2:
+                return z;
+            case 3:
+                return w;
+            default:
+                throw new IllegalArgumentException();
         }
     }
 
@@ -607,9 +608,9 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * Set the value of the specified component of this vector.
      *
      * @param component
-     *          the component whose value to set, within <code>[0..3]</code>
+     *                  the component whose value to set, within <code>[0..3]</code>
      * @param value
-     *          the value to set
+     *                  the value to set
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..3]</code>
      */
@@ -815,7 +816,7 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * value.
      *
      * @param scalar
-     *          the scalar to multiply by
+     *               the scalar to multiply by
      * @return this
      */
     public Vector4i mul(int scalar) {
@@ -838,7 +839,7 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * Divide all components of this {@link Vector3i} by the given scalar value.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @return this
      */
     public Vector4i div(float scalar) {
@@ -863,7 +864,7 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * Divide all components of this {@link Vector4i} by the given scalar value.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @return this
      */
     public Vector4i div(int scalar) {
@@ -935,7 +936,7 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
     }
 
     public long gridDistance(Vector4ic v) {
-        return Math.abs(v.x() - x()) + Math.abs(v.y() - y())  + Math.abs(v.z() - z())  + Math.abs(v.w() - w());
+        return Math.abs(v.x() - x()) + Math.abs(v.y() - y()) + Math.abs(v.z() - z()) + Math.abs(v.w() - w());
     }
 
     public long gridDistance(int x, int y, int z, int w) {
@@ -962,21 +963,21 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * Return the distance between <code>(x1, y1, z1, w1)</code> and <code>(x2, y2, z2, w2)</code>.
      *
      * @param x1
-     *          the x component of the first vector
+     *           the x component of the first vector
      * @param y1
-     *          the y component of the first vector
+     *           the y component of the first vector
      * @param z1
-     *          the z component of the first vector
+     *           the z component of the first vector
      * @param w1
-     *          the w component of the first vector
+     *           the w component of the first vector
      * @param x2
-     *          the x component of the second vector
+     *           the x component of the second vector
      * @param y2
-     *          the y component of the second vector
+     *           the y component of the second vector
      * @param z2
-     *          the z component of the second vector
+     *           the z component of the second vector
      * @param w2
-     *          the 2 component of the second vector
+     *           the 2 component of the second vector
      * @return the euclidean distance
      */
     public static double distance(int x1, int y1, int z1, int w1, int x2, int y2, int z2, int w2) {
@@ -991,21 +992,21 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
      * Return the squared distance between <code>(x1, y1, z1, w1)</code> and <code>(x2, y2, z2, w2)</code>.
      *
      * @param x1
-     *          the x component of the first vector
+     *           the x component of the first vector
      * @param y1
-     *          the y component of the first vector
+     *           the y component of the first vector
      * @param z1
-     *          the z component of the first vector
+     *           the z component of the first vector
      * @param w1
-     *          the w component of the first vector
+     *           the w component of the first vector
      * @param x2
-     *          the x component of the second vector
+     *           the x component of the second vector
      * @param y2
-     *          the y component of the second vector
+     *           the y component of the second vector
      * @param z2
-     *          the z component of the second vector
+     *           the z component of the second vector
      * @param w2
-     *          the w component of the second vector
+     *           the w component of the second vector
      * @return the euclidean distance squared
      */
     public static long distanceSquared(int x1, int y1, int z1, int w1, int x2, int y2, int z2, int w2) {
@@ -1057,7 +1058,8 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
     /**
      * Return a string representation of this vector.
      * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
+     * This method creates a new {@link DecimalFormat} on every invocation with the format string
+     * "<code>0.000E0;-</code>".
      *
      * @return the string representation
      */
@@ -1066,14 +1068,16 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
     }
 
     /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
+     * Return a string representation of this vector by formatting the vector components with the given
+     * {@link NumberFormat}.
      *
      * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
+     *                  the {@link NumberFormat} used to format the vector components with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {
-        return "(" + formatter.format(x) + " " + formatter.format(y) + " " + formatter.format(z) + " " + formatter.format(w) + ")";
+        return "(" + formatter.format(x) + " " + formatter.format(y) + " " + formatter.format(z) + " " +
+                formatter.format(w) + ")";
     }
 
     public void writeExternal(ObjectOutput out) throws IOException {
@@ -1208,5 +1212,4 @@ public class Vector4i implements Externalizable, Cloneable, Vector4ic {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-
 }

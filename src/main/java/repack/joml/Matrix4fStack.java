@@ -30,8 +30,10 @@ import java.io.ObjectOutput;
 /**
  * A stack of many {@link Matrix4f} instances. This resembles the matrix stack known from legacy OpenGL.
  * <p>
- * This {@link Matrix4fStack} class inherits from {@link Matrix4f}, so the current/top matrix is always the {@link Matrix4fStack}/{@link Matrix4f} itself. This
- * affects all operations in {@link Matrix4f} that take another {@link Matrix4f} as parameter. If a {@link Matrix4fStack} is used as argument to those methods,
+ * This {@link Matrix4fStack} class inherits from {@link Matrix4f}, so the current/top matrix is always the
+ * {@link Matrix4fStack}/{@link Matrix4f} itself. This
+ * affects all operations in {@link Matrix4f} that take another {@link Matrix4f} as parameter. If a
+ * {@link Matrix4fStack} is used as argument to those methods,
  * the effective argument will always be the <i>current</i> matrix of the matrix stack.
  *
  * @author Kai Burjack
@@ -41,7 +43,8 @@ public class Matrix4fStack extends Matrix4f {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The matrix stack as a non-growable array. The size of the stack must be specified in the {@link #Matrix4fStack(int) constructor}.
+     * The matrix stack as a non-growable array. The size of the stack must be specified in the
+     * {@link #Matrix4fStack(int) constructor}.
      */
     private Matrix4f[] mats;
 
@@ -56,8 +59,9 @@ public class Matrix4fStack extends Matrix4f {
      * Initially the stack pointer is at zero and the current matrix is set to identity.
      *
      * @param stackSize
-     *            the size of the stack. This must be at least 1, in which case the {@link Matrix4fStack} simply only consists of <code>this</code>
-     *            {@link Matrix4f}
+     *                  the size of the stack. This must be at least 1, in which case the {@link Matrix4fStack} simply
+     *                  only consists of <code>this</code>
+     *                  {@link Matrix4f}
      */
     public Matrix4fStack(int stackSize) {
         if (stackSize < 1) {
@@ -134,7 +138,8 @@ public class Matrix4fStack extends Matrix4f {
      *
      * - Matrix4f.equals(Matrix4fStack) is true iff all the 16 matrix elements are equal
      * - Matrix4fStack.equals(Matrix4f) is true iff all the 16 matrix elements are equal
-     * - Matrix4fStack.equals(Matrix4fStack) is true iff all 16 matrix elements are equal AND the matrix arrays as well as the stack pointer are equal
+     * - Matrix4fStack.equals(Matrix4fStack) is true iff all 16 matrix elements are equal AND the matrix arrays as well
+     * as the stack pointer are equal
      * - everything else is inequal
      */
     public boolean equals(Object obj) {
@@ -181,5 +186,4 @@ public class Matrix4fStack extends Matrix4f {
         cloned.mats = clonedMats;
         return cloned;
     }
-
 }

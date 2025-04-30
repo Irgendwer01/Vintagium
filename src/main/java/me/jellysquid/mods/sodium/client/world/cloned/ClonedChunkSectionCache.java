@@ -1,12 +1,14 @@
 package me.jellysquid.mods.sodium.client.world.cloned;
 
-import it.unimi.dsi.fastutil.longs.Long2ReferenceLinkedOpenHashMap;
-import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
-import net.minecraft.world.World;
-
 import java.util.concurrent.TimeUnit;
 
+import net.minecraft.world.World;
+
+import it.unimi.dsi.fastutil.longs.Long2ReferenceLinkedOpenHashMap;
+import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
+
 public class ClonedChunkSectionCache {
+
     private static final int MAX_CACHE_SIZE = 512; /* number of entries */
     private static final long MAX_CACHE_DURATION = TimeUnit.SECONDS.toNanos(5); /* number of nanoseconds */
 
@@ -58,9 +60,7 @@ public class ClonedChunkSectionCache {
         this.byPosition.remove(ChunkSectionPos.asLong(x, y, z));
     }
 
-    public void release(ClonedChunkSection section) {
-
-    }
+    public void release(ClonedChunkSection section) {}
 
     private ClonedChunkSection allocate() {
         return new ClonedChunkSection(this, this.world);

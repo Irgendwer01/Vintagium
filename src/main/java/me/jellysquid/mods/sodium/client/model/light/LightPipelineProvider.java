@@ -1,12 +1,13 @@
 package me.jellysquid.mods.sodium.client.model.light;
 
+import java.util.EnumMap;
+
 import me.jellysquid.mods.sodium.client.model.light.data.LightDataAccess;
 import me.jellysquid.mods.sodium.client.model.light.flat.FlatLightPipeline;
 import me.jellysquid.mods.sodium.client.model.light.smooth.SmoothLightPipeline;
 
-import java.util.EnumMap;
-
 public class LightPipelineProvider {
+
     private final EnumMap<LightMode, LightPipeline> lighters = new EnumMap<>(LightMode.class);
 
     public LightPipelineProvider(LightDataAccess cache) {

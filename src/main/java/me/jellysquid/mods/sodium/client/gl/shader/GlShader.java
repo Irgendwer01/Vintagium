@@ -1,21 +1,24 @@
 package me.jellysquid.mods.sodium.client.gl.shader;
 
-import me.jellysquid.mods.sodium.client.gl.GlObject;
-import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+
 import net.minecraft.util.ResourceLocation;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.StringReader;
+import me.jellysquid.mods.sodium.client.gl.GlObject;
+import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
 
 /**
  * A compiled OpenGL shader object.
  */
 public class GlShader extends GlObject {
+
     private static final Logger LOGGER = LogManager.getLogger(GlShader.class);
 
     private final ResourceLocation name;

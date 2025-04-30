@@ -1,11 +1,8 @@
 package me.jellysquid.mods.sodium.client.world;
 
-import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
-import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
-import me.jellysquid.mods.sodium.client.world.biome.BiomeColorCache;
-import me.jellysquid.mods.sodium.client.world.cloned.ChunkRenderContext;
-import me.jellysquid.mods.sodium.client.world.cloned.ClonedChunkSection;
-import me.jellysquid.mods.sodium.client.world.cloned.ClonedChunkSectionCache;
+import java.util.Arrays;
+import java.util.Map;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -14,7 +11,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
@@ -24,8 +20,12 @@ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraftforge.client.model.pipeline.LightUtil;
 
-import java.util.Arrays;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
+import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
+import me.jellysquid.mods.sodium.client.world.biome.BiomeColorCache;
+import me.jellysquid.mods.sodium.client.world.cloned.ChunkRenderContext;
+import me.jellysquid.mods.sodium.client.world.cloned.ClonedChunkSection;
+import me.jellysquid.mods.sodium.client.world.cloned.ClonedChunkSectionCache;
 
 /**
  * Takes a slice of world state (block states, biome and light data arrays) and copies the data for use in off-thread
@@ -38,6 +38,7 @@ import java.util.Map;
  * Object pooling should be used to avoid huge allocations as this class contains many large arrays.
  */
 public class WorldSlice implements SodiumBlockAccess {
+
     // The number of blocks on each axis in a section.
     private static final int SECTION_BLOCK_LENGTH = 16;
 
@@ -68,7 +69,6 @@ public class WorldSlice implements SodiumBlockAccess {
     private WorldType worldType;
     private final int defaultSkyLightValue;
 
-
     // Local Section->BlockState table.
     private final IBlockState[][] blockStatesArrays;
 
@@ -98,7 +98,8 @@ public class WorldSlice implements SodiumBlockAccess {
     // The volume that this slice contains
     private StructureBoundingBox volume;
 
-    public static ChunkRenderContext prepare(World world, ChunkSectionPos origin, ClonedChunkSectionCache sectionCache) {
+    public static ChunkRenderContext prepare(World world, ChunkSectionPos origin,
+                                             ClonedChunkSectionCache sectionCache) {
         Chunk chunk = world.getChunk(origin.getX(), origin.getZ());
         ExtendedBlockStorage section = chunk.getBlockStorageArray()[origin.getY()];
 
@@ -130,8 +131,8 @@ public class WorldSlice implements SodiumBlockAccess {
         for (int chunkX = minChunkX; chunkX <= maxChunkX; chunkX++) {
             for (int chunkZ = minChunkZ; chunkZ <= maxChunkZ; chunkZ++) {
                 for (int chunkY = minChunkY; chunkY <= maxChunkY; chunkY++) {
-                    sections[getLocalSectionIndex(chunkX - minChunkX, chunkY - minChunkY, chunkZ - minChunkZ)] =
-                            sectionCache.acquire(chunkX, chunkY, chunkZ);
+                    sections[getLocalSectionIndex(chunkX - minChunkX, chunkY - minChunkY,
+                            chunkZ - minChunkZ)] = sectionCache.acquire(chunkX, chunkY, chunkZ);
                 }
             }
         }
@@ -190,14 +191,15 @@ public class WorldSlice implements SodiumBlockAccess {
     }
 
     private void unpackBlockData(IBlockState[] states, ClonedChunkSection section, StructureBoundingBox box) {
-        if (this.origin.equals(section.getPosition()))  {
+        if (this.origin.equals(section.getPosition())) {
             this.unpackBlockDataZ(states, section);
         } else {
             this.unpackBlockDataR(states, section, box);
         }
     }
 
-    private static void copyBlocks(IBlockState[] blocks, ClonedChunkSection section, int minBlockY, int maxBlockY, int minBlockZ, int maxBlockZ, int minBlockX, int maxBlockX) {
+    private static void copyBlocks(IBlockState[] blocks, ClonedChunkSection section, int minBlockY, int maxBlockY,
+                                   int minBlockZ, int maxBlockZ, int minBlockX, int maxBlockX) {
         for (int y = minBlockY; y <= maxBlockY; y++) {
             for (int z = minBlockZ; z <= maxBlockZ; z++) {
                 for (int x = minBlockX; x <= maxBlockX; x++) {
@@ -269,14 +271,14 @@ public class WorldSlice implements SodiumBlockAccess {
         int relY = y - this.baseY;
         int relZ = z - this.baseZ;
 
-        return this.blockStatesArrays[getLocalSectionIndex(relX >> 4, relY >> 4, relZ >> 4)]
-                [getLocalBlockIndex(relX & 15, relY & 15, relZ & 15)];
+        return this.blockStatesArrays[getLocalSectionIndex(relX >> 4, relY >> 4, relZ >> 4)][getLocalBlockIndex(
+                relX & 15, relY & 15, relZ & 15)];
     }
 
     public IBlockState getBlockStateRelative(int x, int y, int z) {
         // NOTE: Not bounds checked. We assume ChunkRenderRebuildTask is the only function using this
-        return this.blockStatesArrays[getLocalSectionIndex(x >> 4, y >> 4, z >> 4)]
-                [getLocalBlockIndex(x & 15, y & 15, z & 15)];
+        return this.blockStatesArrays[getLocalSectionIndex(x >> 4, y >> 4, z >> 4)][getLocalBlockIndex(x & 15, y & 15,
+                z & 15)];
     }
 
     @Override
@@ -306,8 +308,7 @@ public class WorldSlice implements SodiumBlockAccess {
         int i = this.getLightFromNeighborsFor(EnumSkyBlock.SKY, pos);
         int j = this.getLightFromNeighborsFor(EnumSkyBlock.BLOCK, pos);
 
-        if (j < ambientLight)
-        {
+        if (j < ambientLight) {
             j = ambientLight;
         }
 
@@ -321,7 +322,7 @@ public class WorldSlice implements SodiumBlockAccess {
     }
 
     private int getLightFromNeighborsFor(EnumSkyBlock type, BlockPos pos) {
-        if(!this.world.provider.hasSkyLight() && type == EnumSkyBlock.SKY) {
+        if (!this.world.provider.hasSkyLight() && type == EnumSkyBlock.SKY) {
             return this.defaultSkyLightValue;
         }
 
@@ -331,7 +332,7 @@ public class WorldSlice implements SodiumBlockAccess {
 
         IBlockState state = this.getBlockStateRelative(relX, relY, relZ);
 
-        if(!state.useNeighborBrightness()) {
+        if (!state.useNeighborBrightness()) {
             return getLightFor(type, relX, relY, relZ);
         } else {
             int west = getLightFor(type, relX - 1, relY, relZ);
@@ -341,23 +342,23 @@ public class WorldSlice implements SodiumBlockAccess {
             int north = getLightFor(type, relX, relY, relZ + 1);
             int south = getLightFor(type, relX, relY, relZ - 1);
 
-            if(east > west) {
+            if (east > west) {
                 west = east;
             }
 
-            if(up > west) {
+            if (up > west) {
                 west = up;
             }
 
-            if(down > west) {
+            if (down > west) {
                 west = down;
             }
 
-            if(north > west) {
+            if (north > west) {
                 west = north;
             }
 
-            if(south > west) {
+            if (south > west) {
                 west = south;
             }
 
@@ -381,7 +382,7 @@ public class WorldSlice implements SodiumBlockAccess {
 
     @Override
     public int getBlockTint(BlockPos pos, BiomeColorHelper.ColorResolver resolver) {
-        if(!blockBoxContains(this.volume, pos.getX(), pos.getY(), pos.getZ())) {
+        if (!blockBoxContains(this.volume, pos.getX(), pos.getY(), pos.getZ())) {
             return resolver.getColorAtPos(Biomes.PLAINS, pos);
         }
 

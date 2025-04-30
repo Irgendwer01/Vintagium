@@ -29,15 +29,16 @@ package repack.joml.sampling;
  * @author Kai Burjack
  */
 public interface Callback3d {
+
     /**
      * Will be called whenever a new sample with the given coordinates <code>(x, y, z)</code> is generated.
      *
      * @param x
-     *            the x coordinate of the new sample point
+     *          the x coordinate of the new sample point
      * @param y
-     *            the y coordinate of the new sample point
+     *          the y coordinate of the new sample point
      * @param z
-     *            the z coordinate of the new sample point
+     *          the z coordinate of the new sample point
      */
     void onNewSample(float x, float y, float z);
 }

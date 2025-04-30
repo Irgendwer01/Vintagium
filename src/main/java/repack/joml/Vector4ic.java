@@ -66,7 +66,7 @@ public interface Vector4ic {
      * @see #get(int, IntBuffer)
      *
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z, w</code> order
+     *               will receive the values of this vector in <code>x, y, z, w</code> order
      * @return the passed in buffer
      */
     IntBuffer get(IntBuffer buffer);
@@ -78,9 +78,9 @@ public interface Vector4ic {
      * This method will not increment the position of the given IntBuffer.
      *
      * @param index
-     *          the absolute position into the IntBuffer
+     *               the absolute position into the IntBuffer
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z, w</code> order
+     *               will receive the values of this vector in <code>x, y, z, w</code> order
      * @return the passed in buffer
      */
     IntBuffer get(int index, IntBuffer buffer);
@@ -98,7 +98,7 @@ public interface Vector4ic {
      * @see #get(int, ByteBuffer)
      *
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z, w</code> order
+     *               will receive the values of this vector in <code>x, y, z, w</code> order
      * @return the passed in buffer
      */
     ByteBuffer get(ByteBuffer buffer);
@@ -110,9 +110,9 @@ public interface Vector4ic {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z, w</code> order
+     *               will receive the values of this vector in <code>x, y, z, w</code> order
      * @return the passed in buffer
      */
     ByteBuffer get(int index, ByteBuffer buffer);
@@ -122,10 +122,11 @@ public interface Vector4ic {
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *            the off-heap address where to store this vector
+     *                the off-heap address where to store this vector
      * @return this
      */
     Vector4ic getToAddress(long address);
@@ -135,9 +136,9 @@ public interface Vector4ic {
      * <code>dest</code>.
      *
      * @param v
-     *          the vector to subtract from <code>this</code>
+     *             the vector to subtract from <code>this</code>
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i sub(Vector4ic v, Vector4i dest);
@@ -147,15 +148,15 @@ public interface Vector4ic {
      * <code>dest</code>.
      *
      * @param x
-     *          the x component to subtract
+     *             the x component to subtract
      * @param y
-     *          the y component to subtract
+     *             the y component to subtract
      * @param z
-     *          the z component to subtract
+     *             the z component to subtract
      * @param w
-     *          the w component to subtract
+     *             the w component to subtract
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i sub(int x, int y, int z, int w, Vector4i dest);
@@ -165,9 +166,9 @@ public interface Vector4ic {
      * <code>dest</code>.
      *
      * @param v
-     *          the vector to add
+     *             the vector to add
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i add(Vector4ic v, Vector4i dest);
@@ -177,15 +178,15 @@ public interface Vector4ic {
      * result in <code>dest</code>.
      *
      * @param x
-     *          the x component to add
+     *             the x component to add
      * @param y
-     *          the y component to add
+     *             the y component to add
      * @param z
-     *          the z component to add
+     *             the z component to add
      * @param w
-     *          the w component to add
+     *             the w component to add
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i add(int x, int y, int z, int w, Vector4i dest);
@@ -195,9 +196,9 @@ public interface Vector4ic {
      * result in <code>dest</code>.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i mul(Vector4ic v, Vector4i dest);
@@ -207,9 +208,9 @@ public interface Vector4ic {
      * result in <code>dest</code>.
      *
      * @param v
-     *          the vector to divide by
+     *             the vector to divide by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i div(Vector4ic v, Vector4i dest);
@@ -219,9 +220,9 @@ public interface Vector4ic {
      * value and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to multiply by
+     *               the scalar to multiply by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector4i mul(int scalar, Vector4i dest);
@@ -231,9 +232,9 @@ public interface Vector4ic {
      * and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector4i div(float scalar, Vector4i dest);
@@ -243,9 +244,9 @@ public interface Vector4ic {
      * and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector4i div(int scalar, Vector4i dest);
@@ -352,7 +353,7 @@ public interface Vector4ic {
      * Negate this vector and store the result in <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i negate(Vector4i dest);
@@ -361,9 +362,9 @@ public interface Vector4ic {
      * Set the components of <code>dest</code> to be the component-wise minimum of this and the other vector.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i min(Vector4ic v, Vector4i dest);
@@ -372,9 +373,9 @@ public interface Vector4ic {
      * Set the components of <code>dest</code> to be the component-wise maximum of this and the other vector.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i max(Vector4ic v, Vector4i dest);
@@ -383,7 +384,7 @@ public interface Vector4ic {
      * Get the value of the specified component of this vector.
      *
      * @param component
-     *          the component, within <code>[0..3]</code>
+     *                  the component, within <code>[0..3]</code>
      * @return the value
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..3]</code>
      */
@@ -408,7 +409,7 @@ public interface Vector4ic {
      * and store the result into <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i absolute(Vector4i dest);
@@ -428,5 +429,4 @@ public interface Vector4ic {
      * @return <code>true</code> if all the vector components are equal
      */
     boolean equals(int x, int y, int z, int w);
-
 }

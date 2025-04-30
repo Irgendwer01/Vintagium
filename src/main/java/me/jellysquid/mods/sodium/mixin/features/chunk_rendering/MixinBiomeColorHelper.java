@@ -1,27 +1,28 @@
 package me.jellysquid.mods.sodium.mixin.features.chunk_rendering;
 
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
-import me.jellysquid.mods.sodium.client.world.SodiumBlockAccess;
-import me.jellysquid.mods.sodium.client.world.WorldSlice;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColorHelper;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
+import me.jellysquid.mods.sodium.client.SodiumClientMod;
+import me.jellysquid.mods.sodium.client.world.SodiumBlockAccess;
+
 @Mixin(value = BiomeColorHelper.class, priority = 1200)
 public class MixinBiomeColorHelper {
+
     /**
      * @author embeddedt
      * @reason reduce allocation rate, use Sodium's biome cache, use configurable biome blending
      */
     @Overwrite
-    private static int getColorAtPos(IBlockAccess blockAccess, BlockPos pos, BiomeColorHelper.ColorResolver colorResolver)
-    {
+    private static int getColorAtPos(IBlockAccess blockAccess, BlockPos pos,
+                                     BiomeColorHelper.ColorResolver colorResolver) {
         if (blockAccess instanceof SodiumBlockAccess) {
             // Use Sodium's more efficient biome cache
-            return ((SodiumBlockAccess)blockAccess).getBlockTint(pos, colorResolver);
+            return ((SodiumBlockAccess) blockAccess).getBlockTint(pos, colorResolver);
         }
         int radius = SodiumClientMod.options().quality.biomeBlendRadius;
         if (radius == 0) {
@@ -35,8 +36,8 @@ public class MixinBiomeColorHelper {
 
             BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
-            for(int z = -radius; z <= radius; z++) {
-                for(int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                for (int x = -radius; x <= radius; x++) {
                     mutablePos.setPos(pos.getX() + x, pos.getY(), pos.getZ() + z);
                     int l = colorResolver.getColorAtPos(blockAccess.getBiome(mutablePos), mutablePos);
                     i += (l & 16711680) >> 16;
@@ -47,6 +48,5 @@ public class MixinBiomeColorHelper {
 
             return (i / blockCount & 255) << 16 | (j / blockCount & 255) << 8 | k / blockCount & 255;
         }
-
     }
 }

@@ -1,13 +1,14 @@
 package me.jellysquid.mods.sodium.client.gl.buffer;
 
-import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexFormat;
-
 import java.nio.ByteBuffer;
+
+import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexFormat;
 
 /**
  * Helper type for tagging the vertex format alongside the raw buffer data.
  */
 public class VertexData {
+
     public final GlVertexFormat<?> format;
     public final ByteBuffer buffer;
 

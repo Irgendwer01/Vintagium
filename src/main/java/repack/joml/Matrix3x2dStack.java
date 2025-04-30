@@ -42,7 +42,8 @@ public class Matrix3x2dStack extends Matrix3x2d implements Cloneable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The matrix stack as a non-growable array. The size of the stack must be specified in the {@link #Matrix3x2dStack(int) constructor}.
+     * The matrix stack as a non-growable array. The size of the stack must be specified in the
+     * {@link #Matrix3x2dStack(int) constructor}.
      */
     private Matrix3x2d[] mats;
 
@@ -57,8 +58,9 @@ public class Matrix3x2dStack extends Matrix3x2d implements Cloneable {
      * Initially the stack pointer is at zero and the current matrix is set to identity.
      *
      * @param stackSize
-     *            the size of the stack. This must be at least 1, in which case the {@link Matrix3x2dStack} simply only consists of <code>this</code>
-     *            {@link Matrix3x2d}
+     *                  the size of the stack. This must be at least 1, in which case the {@link Matrix3x2dStack} simply
+     *                  only consists of <code>this</code>
+     *                  {@link Matrix3x2d}
      */
     public Matrix3x2dStack(int stackSize) {
         if (stackSize < 1) {
@@ -135,7 +137,8 @@ public class Matrix3x2dStack extends Matrix3x2d implements Cloneable {
      *
      * - Matrix3x2d.equals(Matrix3x2dStack) is true iff all the 6 matrix elements are equal
      * - Matrix3x2dStack.equals(Matrix3x2d) is true iff all the 6 matrix elements are equal
-     * - Matrix3x2dStack.equals(Matrix3x2dStack) is true iff all 6 matrix elements are equal AND the matrix arrays as well as the stack pointer are equal
+     * - Matrix3x2dStack.equals(Matrix3x2dStack) is true iff all 6 matrix elements are equal AND the matrix arrays as
+     * well as the stack pointer are equal
      * - everything else is inequal
      */
     public boolean equals(Object obj) {
@@ -182,5 +185,4 @@ public class Matrix3x2dStack extends Matrix3x2d implements Cloneable {
         cloned.mats = clonedMats;
         return cloned;
     }
-
 }

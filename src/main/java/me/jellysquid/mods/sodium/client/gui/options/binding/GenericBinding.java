@@ -4,6 +4,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public class GenericBinding<S, T> implements OptionBinding<S, T> {
+
     private final BiConsumer<S, T> setter;
     private final Function<S, T> getter;
 

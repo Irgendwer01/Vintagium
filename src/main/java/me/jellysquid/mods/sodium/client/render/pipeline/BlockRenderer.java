@@ -1,5 +1,19 @@
 package me.jellysquid.mods.sodium.client.render.pipeline;
 
+import java.util.List;
+import java.util.Random;
+
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IBlockAccess;
+
 import me.jellysquid.mods.sodium.client.model.light.LightMode;
 import me.jellysquid.mods.sodium.client.model.light.LightPipeline;
 import me.jellysquid.mods.sodium.client.model.light.LightPipelineProvider;
@@ -15,21 +29,9 @@ import me.jellysquid.mods.sodium.client.util.color.ColorABGR;
 import me.jellysquid.mods.sodium.client.util.rand.XoRoShiRoRandom;
 import me.jellysquid.mods.sodium.client.world.biome.BlockColorsExtended;
 import me.jellysquid.mods.sodium.common.util.DirectionUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.IBlockAccess;
-
-import java.util.List;
-import java.util.Random;
 
 public class BlockRenderer {
+
     private final Random random = new XoRoShiRoRandom();
 
     private final BlockColorsExtended blockColors;
@@ -50,7 +52,8 @@ public class BlockRenderer {
         this.useAmbientOcclusion = Minecraft.isAmbientOcclusionEnabled();
     }
 
-    public boolean renderModel(IBlockAccess world, IBlockState state, BlockPos pos, IBakedModel model, ChunkModelBuffers buffers, boolean cull, long seed) {
+    public boolean renderModel(IBlockAccess world, IBlockState state, BlockPos pos, IBakedModel model,
+                               ChunkModelBuffers buffers, boolean cull, long seed) {
         LightMode mode = this.getLightingMode(state, model, world, pos);
         LightPipeline lighter = this.lighters.getLighter(mode);
         Vec3d offset = state.getOffset(world, pos);
@@ -58,7 +61,7 @@ public class BlockRenderer {
         boolean rendered = false;
 
         // Use Sodium's default render path
-        
+
         for (EnumFacing dir : DirectionUtil.ALL_DIRECTIONS) {
             this.random.setSeed(seed);
 
@@ -88,9 +91,11 @@ public class BlockRenderer {
         return rendered;
     }
 
-    private void renderQuadList(IBlockAccess world, IBlockState state, BlockPos pos, LightPipeline lighter, Vec3d offset,
+    private void renderQuadList(IBlockAccess world, IBlockState state, BlockPos pos, LightPipeline lighter,
+                                Vec3d offset,
                                 ChunkModelBuffers buffers, List<BakedQuad> quads, EnumFacing cullFace) {
-    	ModelQuadFacing facing = cullFace == null ? ModelQuadFacing.UNASSIGNED : ModelQuadFacing.fromDirection(cullFace);
+        ModelQuadFacing facing = cullFace == null ? ModelQuadFacing.UNASSIGNED :
+                ModelQuadFacing.fromDirection(cullFace);
         IBlockColor colorizer = null;
 
         ModelVertexSink sink = buffers.getSink(facing);
@@ -124,7 +129,8 @@ public class BlockRenderer {
     }
 
     private void renderQuad(IBlockAccess world, IBlockState state, BlockPos pos, ModelVertexSink sink, Vec3d offset,
-                            IBlockColor colorProvider, BakedQuad bakedQuad, QuadLightData light, ChunkRenderData.Builder renderData) {
+                            IBlockColor colorProvider, BakedQuad bakedQuad, QuadLightData light,
+                            ChunkRenderData.Builder renderData) {
         ModelQuadView src = (ModelQuadView) bakedQuad;
 
         ModelQuadOrientation order = ModelQuadOrientation.orient(light.br);

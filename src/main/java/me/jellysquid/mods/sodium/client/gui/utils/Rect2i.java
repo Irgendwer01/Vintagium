@@ -1,6 +1,7 @@
 package me.jellysquid.mods.sodium.client.gui.utils;
 
 public class Rect2i {
+
     private final int x;
     private final int y;
     private final int width;

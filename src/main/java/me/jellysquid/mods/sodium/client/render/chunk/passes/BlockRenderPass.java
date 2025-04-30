@@ -4,6 +4,7 @@ import net.minecraft.util.BlockRenderLayer;
 
 // TODO: Move away from using an enum, make this extensible
 public enum BlockRenderPass {
+
     SOLID(BlockRenderLayer.SOLID, false),
     CUTOUT(BlockRenderLayer.CUTOUT, false),
     CUTOUT_MIPPED(BlockRenderLayer.CUTOUT_MIPPED, false),

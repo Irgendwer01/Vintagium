@@ -1,20 +1,22 @@
 package me.jellysquid.mods.sodium.client.model.light.flat;
 
+import java.util.Arrays;
+
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+
 import me.jellysquid.mods.sodium.client.model.light.LightPipeline;
 import me.jellysquid.mods.sodium.client.model.light.data.LightDataAccess;
 import me.jellysquid.mods.sodium.client.model.light.data.QuadLightData;
 import me.jellysquid.mods.sodium.client.model.quad.ModelQuadView;
 import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFlags;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-
-import java.util.Arrays;
 
 /**
  * A light pipeline which implements "classic-style" lighting through simply using the light value of the adjacent
  * block to a face.
  */
 public class FlatLightPipeline implements LightPipeline {
+
     /**
      * The cache which light data will be accessed from.
      */
@@ -25,7 +27,8 @@ public class FlatLightPipeline implements LightPipeline {
     }
 
     @Override
-    public void calculate(ModelQuadView quad, BlockPos pos, QuadLightData out, EnumFacing cullFace, EnumFacing face, boolean shade) {
+    public void calculate(ModelQuadView quad, BlockPos pos, QuadLightData out, EnumFacing cullFace, EnumFacing face,
+                          boolean shade) {
         int lightmap;
 
         // To match vanilla behavior, use the cull face if it exists/is available
@@ -34,8 +37,10 @@ public class FlatLightPipeline implements LightPipeline {
         } else {
             int flags = quad.getFlags();
             // If the face is aligned, use the light data above it
-            // To match vanilla behavior, also treat the face as aligned if it is parallel and the block state is a full cube
-            if ((flags & ModelQuadFlags.IS_ALIGNED) != 0 || ((flags & ModelQuadFlags.IS_PARALLEL) != 0 && LightDataAccess.unpackFC(this.lightCache.get(pos)))) {
+            // To match vanilla behavior, also treat the face as aligned if it is parallel and the block state is a full
+            // cube
+            if ((flags & ModelQuadFlags.IS_ALIGNED) != 0 ||
+                    ((flags & ModelQuadFlags.IS_PARALLEL) != 0 && LightDataAccess.unpackFC(this.lightCache.get(pos)))) {
                 lightmap = getOffsetLightmap(pos, face);
             } else {
                 lightmap = LightDataAccess.unpackLM(this.lightCache.get(pos));

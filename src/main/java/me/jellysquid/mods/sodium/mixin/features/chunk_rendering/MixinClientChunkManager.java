@@ -1,14 +1,9 @@
 package me.jellysquid.mods.sodium.mixin.features.chunk_rendering;
 
-import it.unimi.dsi.fastutil.longs.LongIterator;
-import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
-import me.jellysquid.mods.sodium.client.util.ExtChunkProviderClient;
-import me.jellysquid.mods.sodium.client.util.math.MathChunkPos;
-import me.jellysquid.mods.sodium.client.world.ChunkStatusListener;
-import me.jellysquid.mods.sodium.client.world.ChunkStatusListenerManager;
 import net.minecraft.client.multiplayer.ChunkProviderClient;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.chunk.Chunk;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,8 +11,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import it.unimi.dsi.fastutil.longs.LongIterator;
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
+import me.jellysquid.mods.sodium.client.util.ExtChunkProviderClient;
+import me.jellysquid.mods.sodium.client.util.math.MathChunkPos;
+import me.jellysquid.mods.sodium.client.world.ChunkStatusListener;
+import me.jellysquid.mods.sodium.client.world.ChunkStatusListenerManager;
+
 @Mixin(ChunkProviderClient.class)
 public abstract class MixinClientChunkManager implements ChunkStatusListenerManager, ExtChunkProviderClient {
+
     @Shadow
     public abstract Chunk provideChunk(int x, int z);
 
@@ -34,7 +37,8 @@ public abstract class MixinClientChunkManager implements ChunkStatusListenerMana
         }
     }
 
-    @Inject(method = "unloadChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/chunk/Chunk;onUnload()V", shift = At.Shift.AFTER))
+    @Inject(method = "unloadChunk",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/chunk/Chunk;onUnload()V", shift = At.Shift.AFTER))
     private void afterUnloadChunk(int x, int z, CallbackInfo ci) {
         if (this.listener != null) {
             this.listener.onChunkRemoved(x, z);
@@ -68,18 +72,21 @@ public abstract class MixinClientChunkManager implements ChunkStatusListenerMana
         this.needsTrackingUpdate = false;
     }
 
-    /*@Inject(method = "setChunkMapCenter(II)V", at = @At("RETURN"))
-    private void afterChunkMapCenterChanged(int x, int z, CallbackInfo ci) {
-        this.needsTrackingUpdate = true;
-    }
-
-    @Inject(method = "updateLoadDistance",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/world/ClientChunkManager$ClientChunkMap;set(ILnet/minecraft/world/chunk/WorldChunk;)V",
-                    shift = At.Shift.AFTER))
-    private void afterLoadDistanceChanged(int loadDistance, CallbackInfo ci) {
-        this.needsTrackingUpdate = true;
-    }*/
+    /*
+     * @Inject(method = "setChunkMapCenter(II)V", at = @At("RETURN"))
+     * private void afterChunkMapCenterChanged(int x, int z, CallbackInfo ci) {
+     * this.needsTrackingUpdate = true;
+     * }
+     * 
+     * @Inject(method = "updateLoadDistance",
+     * at = @At(value = "INVOKE",
+     * target =
+     * "Lnet/minecraft/client/world/ClientChunkManager$ClientChunkMap;set(ILnet/minecraft/world/chunk/WorldChunk;)V",
+     * shift = At.Shift.AFTER))
+     * private void afterLoadDistanceChanged(int loadDistance, CallbackInfo ci) {
+     * this.needsTrackingUpdate = true;
+     * }
+     */
     @Override
     public void setNeedsTrackingUpdate(boolean needsTrackingUpdate) {
         this.needsTrackingUpdate = needsTrackingUpdate;

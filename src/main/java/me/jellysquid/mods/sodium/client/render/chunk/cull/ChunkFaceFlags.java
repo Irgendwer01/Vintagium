@@ -3,6 +3,7 @@ package me.jellysquid.mods.sodium.client.render.chunk.cull;
 import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFacing;
 
 public class ChunkFaceFlags {
+
     public static final int UP = of(ModelQuadFacing.UP);
     public static final int DOWN = of(ModelQuadFacing.DOWN);
     public static final int WEST = of(ModelQuadFacing.WEST);

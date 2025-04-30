@@ -1,6 +1,7 @@
 package me.jellysquid.mods.sodium.client.gl.arena;
 
 public class GlBufferSegment {
+
     private final GlBufferArena arena;
     private final int start;
     private final int len;

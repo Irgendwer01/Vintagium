@@ -23,12 +23,12 @@
  */
 package repack.joml;
 
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.nio.ByteBuffer;
+import java.nio.DoubleBuffer;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
@@ -36,8 +36,8 @@ import java.text.NumberFormat;
  * Contains the definition of a 2x2 matrix of doubles, and associated functions to transform
  * it. The matrix is column-major to match OpenGL's interpretation, and it looks like this:
  * <p>
- *      m00  m10<br>
- *      m01  m11<br>
+ * m00 m10<br>
+ * m01 m11<br>
  *
  * @author Joseph Burton
  */
@@ -60,7 +60,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Create a new {@link Matrix2d} and make it a copy of the given matrix.
      *
      * @param mat
-     *          the {@link Matrix2dc} to copy the values from
+     *            the {@link Matrix2dc} to copy the values from
      */
     public Matrix2d(Matrix2dc mat) {
         if (mat instanceof Matrix2d) {
@@ -74,7 +74,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Create a new {@link Matrix2d} and initialize it with the values from the given matrix.
      *
      * @param mat
-     *          the matrix to initialize this matrix with
+     *            the matrix to initialize this matrix with
      */
     public Matrix2d(Matrix2fc mat) {
         m00 = mat.m00();
@@ -87,7 +87,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Create a new {@link Matrix2d} and make it a copy of the upper left 2x2 of the given {@link Matrix3dc}.
      *
      * @param mat
-     *          the {@link Matrix3dc} to copy the values from
+     *            the {@link Matrix3dc} to copy the values from
      */
     public Matrix2d(Matrix3dc mat) {
         if (mat instanceof Matrix3d) {
@@ -101,7 +101,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Create a new {@link Matrix2d} and make it a copy of the upper left 2x2 of the given {@link Matrix3fc}.
      *
      * @param mat
-     *          the {@link Matrix3fc} to copy the values from
+     *            the {@link Matrix3fc} to copy the values from
      */
     public Matrix2d(Matrix3fc mat) {
         m00 = mat.m00();
@@ -115,13 +115,13 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * so the first two parameters specify the two elements of the first column.
      *
      * @param m00
-     *          the value of m00
+     *            the value of m00
      * @param m01
-     *          the value of m01
+     *            the value of m01
      * @param m10
-     *          the value of m10
+     *            the value of m10
      * @param m11
-     *          the value of m11
+     *            the value of m11
      */
     public Matrix2d(double m00, double m01,
                     double m10, double m11) {
@@ -140,7 +140,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * The buffer's position will not be changed by this method.
      *
      * @param buffer
-     *          the {@link DoubleBuffer} to read the matrix values from
+     *               the {@link DoubleBuffer} to read the matrix values from
      */
     public Matrix2d(DoubleBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
@@ -150,9 +150,9 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Create a new {@link Matrix2d} and initialize its two columns using the supplied vectors.
      *
      * @param col0
-     *          the first column
+     *             the first column
      * @param col1
-     *          the second column
+     *             the second column
      */
     public Matrix2d(Vector2dc col0, Vector2dc col1) {
         m00 = col0.x();
@@ -164,12 +164,15 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
     public double m00() {
         return m00;
     }
+
     public double m01() {
         return m01;
     }
+
     public double m10() {
         return m10;
     }
+
     public double m11() {
         return m11;
     }
@@ -178,40 +181,43 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Set the value of the matrix element at column 0 and row 0.
      *
      * @param m00
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix2d m00(double m00) {
         this.m00 = m00;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 0 and row 1.
      *
      * @param m01
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix2d m01(double m01) {
         this.m01 = m01;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 0.
      *
      * @param m10
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix2d m10(double m10) {
         this.m10 = m10;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 1.
      *
      * @param m11
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix2d m11(double m11) {
@@ -223,40 +229,43 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Set the value of the matrix element at column 0 and row 0.
      *
      * @param m00
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix2d _m00(double m00) {
         this.m00 = m00;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 0 and row 1.
      *
      * @param m01
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix2d _m01(double m01) {
         this.m01 = m01;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 0.
      *
      * @param m10
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix2d _m10(double m10) {
         this.m10 = m10;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 1.
      *
      * @param m11
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix2d _m11(double m11) {
@@ -279,6 +288,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
         }
         return this;
     }
+
     private void setMatrix2dc(Matrix2dc mat) {
         m00 = mat.m00();
         m01 = mat.m01();
@@ -316,6 +326,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
         }
         return this;
     }
+
     private void setMatrix3x2dc(Matrix3x2dc mat) {
         m00 = mat.m00();
         m01 = mat.m01();
@@ -353,6 +364,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
         }
         return this;
     }
+
     private void setMatrix3dc(Matrix3dc mat) {
         m00 = mat.m00();
         m01 = mat.m01();
@@ -384,7 +396,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * transformation of the right matrix will be applied first!
      *
      * @param right
-     *          the right operand of the matrix multiplication
+     *              the right operand of the matrix multiplication
      * @return this
      */
     public Matrix2d mul(Matrix2dc right) {
@@ -412,7 +424,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * transformation of the right matrix will be applied first!
      *
      * @param right
-     *          the right operand of the matrix multiplication
+     *              the right operand of the matrix multiplication
      * @return this
      */
     public Matrix2d mul(Matrix2fc right) {
@@ -440,7 +452,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * transformation of <code>this</code> matrix will be applied first!
      *
      * @param left
-     *          the left operand of the matrix multiplication
+     *             the left operand of the matrix multiplication
      * @return this
      */
     public Matrix2d mulLocal(Matrix2dc left) {
@@ -466,13 +478,13 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * m01, m11<br>
      *
      * @param m00
-     *          the new value of m00
+     *            the new value of m00
      * @param m01
-     *          the new value of m01
+     *            the new value of m01
      * @param m10
-     *          the new value of m10
+     *            the new value of m10
      * @param m11
-     *          the new value of m11
+     *            the new value of m11
      * @return this
      */
     public Matrix2d set(double m00, double m01,
@@ -505,9 +517,9 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Set the two columns of this matrix to the supplied vectors, respectively.
      *
      * @param col0
-     *          the first column
+     *             the first column
      * @param col1
-     *          the second column
+     *             the second column
      * @return this
      */
     public Matrix2d set(Vector2dc col0, Vector2dc col1) {
@@ -562,7 +574,8 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
     /**
      * Return a string representation of this matrix.
      * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
+     * This method creates a new {@link DecimalFormat} on every invocation with the format string
+     * "<code>0.000E0;-</code>".
      *
      * @return the string representation
      */
@@ -587,15 +600,16 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
     }
 
     /**
-     * Return a string representation of this matrix by formatting the matrix elements with the given {@link NumberFormat}.
+     * Return a string representation of this matrix by formatting the matrix elements with the given
+     * {@link NumberFormat}.
      *
      * @param formatter
-     *          the {@link NumberFormat} used to format the matrix values with
+     *                  the {@link NumberFormat} used to format the matrix values with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {
-        return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + "\n"
-             + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + "\n";
+        return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + "\n" +
+                Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + "\n";
     }
 
     /**
@@ -608,7 +622,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @see #set(Matrix2dc)
      *
      * @param dest
-     *          the destination matrix
+     *             the destination matrix
      * @return the passed in destination
      */
     public Matrix2d get(Matrix2d dest) {
@@ -626,7 +640,6 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
     public double getRotation() {
         return (double) Math.atan2(m01, m11);
     }
-
 
     public DoubleBuffer get(DoubleBuffer buffer) {
         return get(buffer.position(), buffer);
@@ -681,7 +694,8 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
     }
 
     /**
-     * Set the values of this matrix by reading 4 double values from the given {@link DoubleBuffer} in column-major order,
+     * Set the values of this matrix by reading 4 double values from the given {@link DoubleBuffer} in column-major
+     * order,
      * starting at its current position.
      * <p>
      * The DoubleBuffer is expected to contain the values in column-major order.
@@ -689,7 +703,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * The position of the DoubleBuffer will not be changed by this method.
      *
      * @param buffer
-     *              the DoubleBuffer to read the matrix values from in column-major order
+     *               the DoubleBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix2d set(DoubleBuffer buffer) {
@@ -706,7 +720,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * The position of the ByteBuffer will not be changed by this method.
      *
      * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
+     *               the ByteBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix2d set(ByteBuffer buffer) {
@@ -715,7 +729,8 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
     }
 
     /**
-     * Set the values of this matrix by reading 4 double values from the given {@link DoubleBuffer} in column-major order,
+     * Set the values of this matrix by reading 4 double values from the given {@link DoubleBuffer} in column-major
+     * order,
      * starting at the specified absolute buffer position/index.
      * <p>
      * The DoubleBuffer is expected to contain the values in column-major order.
@@ -723,9 +738,9 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * The position of the DoubleBuffer will not be changed by this method.
      *
      * @param index
-     *              the absolute position into the DoubleBuffer
+     *               the absolute position into the DoubleBuffer
      * @param buffer
-     *              the DoubleBuffer to read the matrix values from in column-major order
+     *               the DoubleBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix2d set(int index, DoubleBuffer buffer) {
@@ -742,25 +757,27 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * The position of the ByteBuffer will not be changed by this method.
      *
      * @param index
-     *              the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
+     *               the ByteBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix2d set(int index, ByteBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
         return this;
     }
+
     /**
      * Set the values of this matrix by reading 4 double values from off-heap memory in column-major order,
      * starting at the given address.
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *              the off-heap memory address to read the matrix values from in column-major order
+     *                the off-heap memory address to read the matrix values from in column-major order
      * @return this
      */
     public Matrix2d setFromAddress(long address) {
@@ -807,7 +824,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * scaling will be applied first!
      *
      * @param xy
-     *            the factors of the x and y component, respectively
+     *           the factors of the x and y component, respectively
      * @return this
      */
     public Matrix2d scale(Vector2dc xy) {
@@ -835,9 +852,9 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * , the scaling will be applied first!
      *
      * @param x
-     *            the factor of the x component
+     *          the factor of the x component
      * @param y
-     *            the factor of the y component
+     *          the factor of the y component
      * @return this
      */
     public Matrix2d scale(double x, double y) {
@@ -859,7 +876,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @see #scale(double, double)
      *
      * @param xy
-     *            the factor for all components
+     *           the factor for all components
      * @return this
      */
     public Matrix2d scale(double xy) {
@@ -884,9 +901,9 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * scaling will be applied last!
      *
      * @param x
-     *            the factor of the x component
+     *          the factor of the x component
      * @param y
-     *            the factor of the y component
+     *          the factor of the y component
      * @return this
      */
     public Matrix2d scaleLocal(double x, double y) {
@@ -905,7 +922,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @see #scale(double)
      *
      * @param factor
-     *             the scale factor in x and y
+     *               the scale factor in x and y
      * @return this
      */
     public Matrix2d scaling(double factor) {
@@ -919,9 +936,9 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Set this matrix to be a simple scale matrix.
      *
      * @param x
-     *             the scale in x
+     *          the scale in x
      * @param y
-     *             the scale in y
+     *          the scale in y
      * @return this
      */
     public Matrix2d scaling(double x, double y) {
@@ -932,7 +949,8 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
     }
 
     /**
-     * Set this matrix to be a simple scale matrix which scales the base axes by <code>xy.x</code> and <code>xy.y</code> respectively.
+     * Set this matrix to be a simple scale matrix which scales the base axes by <code>xy.x</code> and <code>xy.y</code>
+     * respectively.
      * <p>
      * The resulting matrix can be multiplied against another transformation
      * matrix to obtain an additional scaling.
@@ -943,7 +961,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @see #scale(Vector2dc)
      *
      * @param xy
-     *             the scale in x and y respectively
+     *           the scale in x and y respectively
      * @return this
      */
     public Matrix2d scaling(Vector2dc xy) {
@@ -964,7 +982,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @see #rotate(double)
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @return this
      */
     public Matrix2d rotation(double angle) {
@@ -1034,7 +1052,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Reference: <a href="https://en.wikipedia.org/wiki/Rotation_matrix#In_two_dimensions">http://en.wikipedia.org</a>
      *
      * @param angle
-     *            the angle in radians
+     *              the angle in radians
      * @return this
      */
     public Matrix2d rotate(double angle) {
@@ -1075,7 +1093,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * @see #rotation(double)
      *
      * @param angle
-     *            the angle in radians to rotate about the X axis
+     *              the angle in radians to rotate about the X axis
      * @return this
      */
     public Matrix2d rotateLocal(double angle) {
@@ -1118,9 +1136,9 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Set the row at the given <code>row</code> index, starting with <code>0</code>.
      *
      * @param row
-     *          the row index in <code>[0..1]</code>
+     *            the row index in <code>[0..1]</code>
      * @param src
-     *          the row components to set
+     *            the row components to set
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
@@ -1132,11 +1150,11 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Set the row at the given <code>row</code> index, starting with <code>0</code>.
      *
      * @param row
-     *          the row index in <code>[0..1]</code>
+     *            the row index in <code>[0..1]</code>
      * @param x
-     *          the first element in the row
+     *            the first element in the row
      * @param y
-     *          the second element in the row
+     *            the second element in the row
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..1]</code>
      */
@@ -1176,9 +1194,9 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Set the column at the given <code>column</code> index, starting with <code>0</code>.
      *
      * @param column
-     *          the column index in <code>[0..1]</code>
+     *               the column index in <code>[0..1]</code>
      * @param src
-     *          the column components to set
+     *               the column components to set
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
@@ -1190,11 +1208,11 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Set the column at the given <code>column</code> index, starting with <code>0</code>.
      *
      * @param column
-     *          the column index in <code>[0..1]</code>
+     *               the column index in <code>[0..1]</code>
      * @param x
-     *          the first element in the column
+     *               the first element in the column
      * @param y
-     *          the second element in the column
+     *               the second element in the column
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..1]</code>
      */
@@ -1246,11 +1264,11 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Set the matrix element at the given column and row to the specified value.
      *
      * @param column
-     *          the colum index in <code>[0..1]</code>
+     *               the colum index in <code>[0..1]</code>
      * @param row
-     *          the row index in <code>[0..1]</code>
+     *               the row index in <code>[0..1]</code>
      * @param value
-     *          the value
+     *               the value
      * @return this
      */
     public Matrix2d set(int column, int row, double value) {
@@ -1434,7 +1452,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Exchange the values of <code>this</code> matrix with the given <code>other</code> matrix.
      *
      * @param other
-     *          the other matrix to exchange the values with
+     *              the other matrix to exchange the values with
      * @return this
      */
     public Matrix2d swap(Matrix2d other) {
@@ -1446,7 +1464,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Component-wise add <code>this</code> and <code>other</code>.
      *
      * @param other
-     *          the other addend
+     *              the other addend
      * @return this
      */
     public Matrix2d add(Matrix2dc other) {
@@ -1465,7 +1483,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Component-wise subtract <code>subtrahend</code> from <code>this</code>.
      *
      * @param subtrahend
-     *          the subtrahend
+     *                   the subtrahend
      * @return this
      */
     public Matrix2d sub(Matrix2dc subtrahend) {
@@ -1484,7 +1502,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Component-wise multiply <code>this</code> by <code>other</code>.
      *
      * @param other
-     *          the other matrix
+     *              the other matrix
      * @return this
      */
     public Matrix2d mulComponentWise(Matrix2dc other) {
@@ -1503,13 +1521,14 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
      * Linearly interpolate <code>this</code> and <code>other</code> using the given interpolation factor <code>t</code>
      * and store the result in <code>this</code>.
      * <p>
-     * If <code>t</code> is <code>0.0</code> then the result is <code>this</code>. If the interpolation factor is <code>1.0</code>
+     * If <code>t</code> is <code>0.0</code> then the result is <code>this</code>. If the interpolation factor is
+     * <code>1.0</code>
      * then the result is <code>other</code>.
      *
      * @param other
-     *          the other matrix
+     *              the other matrix
      * @param t
-     *          the interpolation factor between 0.0 and 1.0
+     *              the interpolation factor between 0.0 and 1.0
      * @return this
      */
     public Matrix2d lerp(Matrix2dc other, double t) {
@@ -1526,11 +1545,10 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc {
 
     public boolean isFinite() {
         return Math.isFinite(m00) && Math.isFinite(m01) &&
-               Math.isFinite(m10) && Math.isFinite(m11);
+                Math.isFinite(m10) && Math.isFinite(m11);
     }
 
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-
 }

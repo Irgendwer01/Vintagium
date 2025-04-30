@@ -1,13 +1,14 @@
 package me.jellysquid.mods.sodium.client.model.light.smooth;
 
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+
 import me.jellysquid.mods.sodium.client.model.light.LightPipeline;
 import me.jellysquid.mods.sodium.client.model.light.data.LightDataAccess;
 import me.jellysquid.mods.sodium.client.model.light.data.QuadLightData;
 import me.jellysquid.mods.sodium.client.model.quad.ModelQuadView;
 import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFlags;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 
 /**
  * A light pipeline which produces smooth interpolated lighting and ambient occlusion for model quads. This
@@ -18,24 +19,26 @@ import net.minecraft.util.math.MathHelper;
  * - Corner blocks are now selected from the correct set of neighbors above block faces (fixes MC-148689 and MC-12558)
  * - Shading issues caused by anisotropy are fixed by re-orientating quads to a consistent ordering (fixes MC-136302)
  * - Inset block faces are correctly shaded by their neighbors, fixing a number of problems with non-full blocks such as
- *   grass paths (fixes MC-11783 and MC-108621)
+ * grass paths (fixes MC-11783 and MC-108621)
  * - Synchronization issues between the main render thread's light engine and chunk build worker threads are corrected
- *   by copying light data alongside block states, fixing a number of inconsistencies in baked chunks (no open issue)
+ * by copying light data alongside block states, fixing a number of inconsistencies in baked chunks (no open issue)
  *
  * This implementation also includes a significant number of optimizations:
  *
  * - Computed light data for a given block face is cached and re-used again when multiple quads exist for a given
- *   facing, making complex block models less expensive to render
+ * facing, making complex block models less expensive to render
  * - The light data cache encodes as much information as possible into integer words to improve cache locality and
- *   to eliminate the multiple array lookups that would otherwise be needed, significantly speeding up this section
+ * to eliminate the multiple array lookups that would otherwise be needed, significantly speeding up this section
  * - Block faces aligned to the block grid use a fast-path for mapping corner light values to vertices without expensive
- *   interpolation or blending, speeding up most block renders
- * - Some critical code paths have been re-written to hit the JVM's happy path, allowing it to perform auto-vectorization
- *   of the blend functions
+ * interpolation or blending, speeding up most block renders
+ * - Some critical code paths have been re-written to hit the JVM's happy path, allowing it to perform
+ * auto-vectorization
+ * of the blend functions
  * - Information about a given model quad is cached to enable the light pipeline to make certain assumptions and skip
- *   unnecessary computation
+ * unnecessary computation
  */
 public class SmoothLightPipeline implements LightPipeline {
+
     /**
      * The cache which light data will be accessed from.
      */
@@ -65,7 +68,8 @@ public class SmoothLightPipeline implements LightPipeline {
     }
 
     @Override
-    public void calculate(ModelQuadView quad, BlockPos pos, QuadLightData out, EnumFacing cullFace, EnumFacing face, boolean shade) {
+    public void calculate(ModelQuadView quad, BlockPos pos, QuadLightData out, EnumFacing cullFace, EnumFacing face,
+                          boolean shade) {
         this.updateCachedData(pos.toLong());
 
         int flags = quad.getFlags();
@@ -75,8 +79,10 @@ public class SmoothLightPipeline implements LightPipeline {
         // If the model quad is aligned to the block's face and covers it entirely, we can take a fast path and directly
         // map the corner values onto this quad's vertices. This covers most situations during rendering and provides
         // a modest speed-up.
-        // To match vanilla behavior, also treat the face as aligned if it is parallel and the block state is a full cube
-        if ((flags & ModelQuadFlags.IS_ALIGNED) != 0 || ((flags & ModelQuadFlags.IS_PARALLEL) != 0 && LightDataAccess.unpackFC(this.lightCache.get(pos)))) {
+        // To match vanilla behavior, also treat the face as aligned if it is parallel and the block state is a full
+        // cube
+        if ((flags & ModelQuadFlags.IS_ALIGNED) != 0 ||
+                ((flags & ModelQuadFlags.IS_PARALLEL) != 0 && LightDataAccess.unpackFC(this.lightCache.get(pos)))) {
             if ((flags & ModelQuadFlags.IS_PARTIAL) == 0) {
                 this.applyAlignedFullFace(neighborInfo, pos, face, out);
             } else {
@@ -106,7 +112,8 @@ public class SmoothLightPipeline implements LightPipeline {
      * Calculates the light data for a grid-aligned quad that does not cover the entire block volume's face.
      * Flags: IS_ALIGNED, IS_PARTIAL
      */
-    private void applyAlignedPartialFace(AoNeighborInfo neighborInfo, ModelQuadView quad, BlockPos pos, EnumFacing dir, QuadLightData out) {
+    private void applyAlignedPartialFace(AoNeighborInfo neighborInfo, ModelQuadView quad, BlockPos pos, EnumFacing dir,
+                                         QuadLightData out) {
         for (int i = 0; i < 4; i++) {
             // Clamp the vertex positions to the block's boundaries to prevent weird errors in lighting
             float cx = clamp(quad.getX(i));
@@ -126,7 +133,8 @@ public class SmoothLightPipeline implements LightPipeline {
      * meaning the check for 0 will always return false.
      * Flags: !IS_ALIGNED, IS_PARALLEL
      */
-    private void applyParallelFace(AoNeighborInfo neighborInfo, ModelQuadView quad, BlockPos pos, EnumFacing dir, QuadLightData out) {
+    private void applyParallelFace(AoNeighborInfo neighborInfo, ModelQuadView quad, BlockPos pos, EnumFacing dir,
+                                   QuadLightData out) {
         for (int i = 0; i < 4; i++) {
             // Clamp the vertex positions to the block's boundaries to prevent weird errors in lighting
             float cx = clamp(quad.getX(i));
@@ -153,7 +161,8 @@ public class SmoothLightPipeline implements LightPipeline {
     /**
      * Flags: !IS_ALIGNED, !IS_PARALLEL
      */
-    private void applyNonParallelFace(AoNeighborInfo neighborInfo, ModelQuadView quad, BlockPos pos, EnumFacing dir, QuadLightData out) {
+    private void applyNonParallelFace(AoNeighborInfo neighborInfo, ModelQuadView quad, BlockPos pos, EnumFacing dir,
+                                      QuadLightData out) {
         for (int i = 0; i < 4; i++) {
             // Clamp the vertex positions to the block's boundaries to prevent weird errors in lighting
             float cx = clamp(quad.getX(i));
@@ -165,7 +174,8 @@ public class SmoothLightPipeline implements LightPipeline {
 
             float depth = neighborInfo.getDepth(cx, cy, cz);
 
-            // If the quad is approximately grid-aligned (not inset), avoid unnecessary computation by treating it is as aligned
+            // If the quad is approximately grid-aligned (not inset), avoid unnecessary computation by treating it is as
+            // aligned
             if (MathHelper.epsilonEquals(depth, 0.0F)) {
                 this.applyAlignedPartialFaceVertex(pos, dir, weights, i, out, true);
             } else if (MathHelper.epsilonEquals(depth, 1.0F)) {
@@ -178,7 +188,8 @@ public class SmoothLightPipeline implements LightPipeline {
         }
     }
 
-    private void applyAlignedPartialFaceVertex(BlockPos pos, EnumFacing dir, float[] w, int i, QuadLightData out, boolean offset) {
+    private void applyAlignedPartialFaceVertex(BlockPos pos, EnumFacing dir, float[] w, int i, QuadLightData out,
+                                               boolean offset) {
         AoFaceData faceData = this.getCachedFaceData(pos, dir, offset);
 
         if (!faceData.hasUnpackedLightData()) {
@@ -193,7 +204,8 @@ public class SmoothLightPipeline implements LightPipeline {
         out.lm[i] = getLightMapCoord(sl, bl);
     }
 
-    private void applyInsetPartialFaceVertex(BlockPos pos, EnumFacing dir, float n1d, float n2d, float[] w, int i, QuadLightData out) {
+    private void applyInsetPartialFaceVertex(BlockPos pos, EnumFacing dir, float n1d, float n2d, float[] w, int i,
+                                             QuadLightData out) {
         AoFaceData n1 = this.getCachedFaceData(pos, dir, false);
 
         if (!n1.hasUnpackedLightData()) {
@@ -266,5 +278,4 @@ public class SmoothLightPipeline implements LightPipeline {
     private static int getLightMapCoord(float sl, float bl) {
         return (((int) sl & 0xFF) << 16) | ((int) bl & 0xFF);
     }
-
 }

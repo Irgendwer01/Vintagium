@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Option {
+
     private final String name;
 
     private Set<String> modDefined = null;

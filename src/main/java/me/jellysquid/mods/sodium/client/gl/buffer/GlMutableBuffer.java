@@ -7,6 +7,7 @@ import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
  * without needing to re-create the buffer itself.
  */
 public class GlMutableBuffer extends GlBuffer {
+
     private long size = 0L;
 
     public GlMutableBuffer(RenderDevice owner, GlBufferUsage usage) {

@@ -1,15 +1,18 @@
 package me.jellysquid.mods.sodium.client.gl.state;
 
-import me.jellysquid.mods.sodium.client.gl.array.GlVertexArray;
-import me.jellysquid.mods.sodium.client.gl.buffer.GlBuffer;
-import me.jellysquid.mods.sodium.client.gl.buffer.GlBufferTarget;
+import java.util.Arrays;
+
 import net.minecraft.client.renderer.GlStateManager;
+
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL30;
 
-import java.util.Arrays;
+import me.jellysquid.mods.sodium.client.gl.array.GlVertexArray;
+import me.jellysquid.mods.sodium.client.gl.buffer.GlBuffer;
+import me.jellysquid.mods.sodium.client.gl.buffer.GlBufferTarget;
 
 public class GlStateTracker {
+
     private static final int UNASSIGNED_HANDLE = -1;
 
     private final int[] bufferState = new int[GlBufferTarget.COUNT];
@@ -25,10 +28,10 @@ public class GlStateTracker {
     public boolean makeBufferActive(GlBufferTarget target, GlBuffer buffer) {
         return this.makeBufferActive(target, buffer == null ? GlBuffer.NULL_BUFFER_ID : buffer.handle());
     }
-    
+
     private boolean makeBufferActive(GlBufferTarget target, int buffer) {
         int prevBuffer = this.bufferState[target.ordinal()];
-        
+
         if (prevBuffer == UNASSIGNED_HANDLE) {
             this.bufferRestoreState[target.ordinal()] = GlStateManager.glGetInteger(target.getBindingParameter());
         }
@@ -58,7 +61,7 @@ public class GlStateTracker {
         for (int i = 0; i < GlBufferTarget.COUNT; i++) {
             if (this.bufferState[i] != this.bufferRestoreState[i] &&
                     this.bufferRestoreState[i] != UNASSIGNED_HANDLE) {
-            	GL15.glBindBuffer(GlBufferTarget.VALUES[i].getTargetParameter(), this.bufferRestoreState[i]);
+                GL15.glBindBuffer(GlBufferTarget.VALUES[i].getTargetParameter(), this.bufferRestoreState[i]);
             }
         }
 

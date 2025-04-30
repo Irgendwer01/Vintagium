@@ -1,5 +1,10 @@
 package me.jellysquid.mods.sodium.client.gl.device;
 
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+
+import org.lwjgl.opengl.*;
+
 import me.jellysquid.mods.sodium.client.gl.array.GlVertexArray;
 import me.jellysquid.mods.sodium.client.gl.buffer.GlBuffer;
 import me.jellysquid.mods.sodium.client.gl.buffer.GlBufferTarget;
@@ -8,12 +13,9 @@ import me.jellysquid.mods.sodium.client.gl.buffer.GlMutableBuffer;
 import me.jellysquid.mods.sodium.client.gl.func.GlFunctions;
 import me.jellysquid.mods.sodium.client.gl.state.GlStateTracker;
 import me.jellysquid.mods.sodium.client.gl.tessellation.*;
-import org.lwjgl.opengl.*;
-
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 
 public class GLRenderDevice implements RenderDevice {
+
     private final GlStateTracker stateTracker = new GlStateTracker();
     private final CommandList commandList = new ImmediateCommandList(this.stateTracker);
     private final DrawCommandList drawCommandList = new ImmediateDrawCommandList();
@@ -55,6 +57,7 @@ public class GLRenderDevice implements RenderDevice {
     }
 
     private class ImmediateCommandList implements CommandList {
+
         private final GlStateTracker stateTracker;
 
         private ImmediateCommandList(GlStateTracker stateTracker) {
@@ -72,21 +75,25 @@ public class GLRenderDevice implements RenderDevice {
         public void uploadData(GlMutableBuffer glBuffer, ByteBuffer byteBuffer) {
             this.bindBuffer(GlBufferTarget.ARRAY_BUFFER, glBuffer);
 
-            GL15.glBufferData(GlBufferTarget.ARRAY_BUFFER.getTargetParameter(), byteBuffer, glBuffer.getUsageHint().getId());
+            GL15.glBufferData(GlBufferTarget.ARRAY_BUFFER.getTargetParameter(), byteBuffer,
+                    glBuffer.getUsageHint().getId());
 
             glBuffer.setSize(byteBuffer.limit());
         }
 
         @Override
-        public void copyBufferSubData(GlBuffer src, GlMutableBuffer dst, long readOffset, long writeOffset, long bytes) {
+        public void copyBufferSubData(GlBuffer src, GlMutableBuffer dst, long readOffset, long writeOffset,
+                                      long bytes) {
             if (writeOffset + bytes > dst.getSize()) {
-                throw new IllegalArgumentException("Not enough space in destination buffer (writeOffset + bytes > bufferSize)");
+                throw new IllegalArgumentException(
+                        "Not enough space in destination buffer (writeOffset + bytes > bufferSize)");
             }
 
             this.bindBuffer(GlBufferTarget.COPY_READ_BUFFER, src);
             this.bindBuffer(GlBufferTarget.COPY_WRITE_BUFFER, dst);
 
-            GlFunctions.BUFFER_COPY.glCopyBufferSubData(GL31.GL_COPY_READ_BUFFER, GL31.GL_COPY_WRITE_BUFFER, readOffset, writeOffset, bytes);
+            GlFunctions.BUFFER_COPY.glCopyBufferSubData(GL31.GL_COPY_READ_BUFFER, GL31.GL_COPY_WRITE_BUFFER, readOffset,
+                    writeOffset, bytes);
         }
 
         @Override
@@ -170,7 +177,8 @@ public class GLRenderDevice implements RenderDevice {
         @Override
         public GlTessellation createTessellation(GlPrimitiveType primitiveType, TessellationBinding[] bindings) {
             if (GlVertexArrayTessellation.isSupported()) {
-                GlVertexArrayTessellation tessellation = new GlVertexArrayTessellation(new GlVertexArray(GLRenderDevice.this), primitiveType, bindings);
+                GlVertexArrayTessellation tessellation = new GlVertexArrayTessellation(
+                        new GlVertexArray(GLRenderDevice.this), primitiveType, bindings);
                 tessellation.init(this);
 
                 return tessellation;
@@ -181,9 +189,8 @@ public class GLRenderDevice implements RenderDevice {
     }
 
     private class ImmediateDrawCommandList implements DrawCommandList {
-        public ImmediateDrawCommandList() {
 
-        }
+        public ImmediateDrawCommandList() {}
 
         @Override
         public void multiDrawArrays(IntBuffer first, IntBuffer count) {

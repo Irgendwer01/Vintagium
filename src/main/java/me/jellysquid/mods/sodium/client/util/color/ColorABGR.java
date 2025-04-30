@@ -4,13 +4,15 @@ package me.jellysquid.mods.sodium.client.util.color;
  * Provides some utilities for packing and unpacking color components from packed integer colors in ABGR format, which
  * is used by OpenGL for color vectors.
  *
- * | 32        | 24        | 16        | 8          |
- * | 0110 1100 | 0110 1100 | 0110 1100 | 0110 1100  |
- * | Alpha     | Blue      | Green     | Red        |
+ * | 32 | 24 | 16 | 8 |
+ * | 0110 1100 | 0110 1100 | 0110 1100 | 0110 1100 |
+ * | Alpha | Blue | Green | Red |
  */
 public class ColorABGR implements ColorU8 {
+
     /**
      * Packs the specified color components into ABGR format.
+     * 
      * @param r The red component of the color
      * @param g The green component of the color
      * @param b The blue component of the color
@@ -24,15 +26,17 @@ public class ColorABGR implements ColorU8 {
      * @see ColorABGR#pack(int, int, int, int)
      */
     public static int pack(float r, float g, float b, float a) {
-        return pack((int) (r * COMPONENT_RANGE), (int) (g * COMPONENT_RANGE), (int) (b * COMPONENT_RANGE), (int) (a * COMPONENT_RANGE));
+        return pack((int) (r * COMPONENT_RANGE), (int) (g * COMPONENT_RANGE), (int) (b * COMPONENT_RANGE),
+                (int) (a * COMPONENT_RANGE));
     }
 
     /**
      * Multiplies the RGB components of the packed ABGR color using the given scale factors.
+     * 
      * @param color The ABGR packed color to be multiplied
-     * @param rw The red component scale factor
-     * @param gw The green component scale factor
-     * @param bw The blue component scale factor
+     * @param rw    The red component scale factor
+     * @param gw    The green component scale factor
+     * @param bw    The blue component scale factor
      */
     public static int mul(int color, float rw, float gw, float bw) {
         float r = unpackRed(color) * rw;

@@ -1,7 +1,7 @@
 package me.jellysquid.mods.sodium.client.gui.widgets;
 
-import me.jellysquid.mods.sodium.client.gui.utils.Drawable;
-import me.jellysquid.mods.sodium.client.gui.utils.Element;
+import java.util.function.Consumer;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.FontRenderer;
@@ -11,11 +11,14 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
+
 import org.lwjgl.opengl.GL11;
 
-import java.util.function.Consumer;
+import me.jellysquid.mods.sodium.client.gui.utils.Drawable;
+import me.jellysquid.mods.sodium.client.gui.utils.Element;
 
 public abstract class AbstractWidget implements Drawable, Element {
+
     protected final FontRenderer font;
 
     protected AbstractWidget() {
@@ -52,7 +55,8 @@ public abstract class AbstractWidget implements Drawable, Element {
         GlStateManager.disableBlend();
     }
 
-    protected static void addQuad(BufferBuilder consumer, double x1, double y1, double x2, double y2, float a, float r, float g, float b) {
+    protected static void addQuad(BufferBuilder consumer, double x1, double y1, double x2, double y2, float a, float r,
+                                  float g, float b) {
         consumer.pos(x2, y1, 0.0D).color(r, g, b, a).endVertex();
         consumer.pos(x1, y1, 0.0D).color(r, g, b, a).endVertex();
         consumer.pos(x1, y2, 0.0D).color(r, g, b, a).endVertex();
@@ -60,7 +64,8 @@ public abstract class AbstractWidget implements Drawable, Element {
     }
 
     protected void playClickSound() {
-        Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+        Minecraft.getMinecraft().getSoundHandler()
+                .playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
     }
 
     protected int getStringWidth(String text) {

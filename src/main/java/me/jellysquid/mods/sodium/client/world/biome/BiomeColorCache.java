@@ -1,17 +1,17 @@
 package me.jellysquid.mods.sodium.client.world.biome;
 
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
-import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
-import me.jellysquid.mods.sodium.client.util.color.ColorARGB;
-import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
-import me.jellysquid.mods.sodium.client.world.WorldSlice;
-import net.minecraft.client.Minecraft;
+import java.util.Arrays;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.BiomeColorHelper;
 
-import java.util.Arrays;
+import me.jellysquid.mods.sodium.client.SodiumClientMod;
+import me.jellysquid.mods.sodium.client.util.color.ColorARGB;
+import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
+import me.jellysquid.mods.sodium.client.world.WorldSlice;
 
 public class BiomeColorCache {
+
     private static final int BLENDED_COLORS_DIM = 16 + 2 * 2;
 
     private final BiomeColorHelper.ColorResolver resolver;

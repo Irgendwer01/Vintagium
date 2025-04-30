@@ -1,11 +1,13 @@
 package me.jellysquid.mods.sodium.client.model.vertex.buffer;
 
-import me.jellysquid.mods.sodium.client.gl.attribute.BufferVertexFormat;
-import net.minecraft.client.renderer.GLAllocation;
-
 import java.nio.ByteBuffer;
 
+import net.minecraft.client.renderer.GLAllocation;
+
+import me.jellysquid.mods.sodium.client.gl.attribute.BufferVertexFormat;
+
 public class VertexBufferBuilder implements VertexBufferView {
+
     private final BufferVertexFormat vertexFormat;
 
     private ByteBuffer buffer;
@@ -58,7 +60,8 @@ public class VertexBufferBuilder implements VertexBufferView {
     @Override
     public void flush(int vertexCount, BufferVertexFormat format) {
         if (this.vertexFormat != format) {
-            throw new IllegalStateException("Mis-matched vertex format (expected: [" + format + "], currently using: [" + this.vertexFormat + "])");
+            throw new IllegalStateException("Mis-matched vertex format (expected: [" + format +
+                    "], currently using: [" + this.vertexFormat + "])");
         }
 
         this.writerOffset += vertexCount * format.getStride();

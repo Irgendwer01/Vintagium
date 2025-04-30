@@ -1,20 +1,5 @@
 package me.jellysquid.mods.sodium.client.render.chunk.tasks;
 
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
-import me.jellysquid.mods.sodium.client.render.chunk.ChunkGraphicsState;
-import me.jellysquid.mods.sodium.client.render.chunk.ChunkRenderContainer;
-import me.jellysquid.mods.sodium.client.render.chunk.compile.ChunkBuildBuffers;
-import me.jellysquid.mods.sodium.client.render.chunk.compile.ChunkBuildResult;
-import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkMeshData;
-import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkRenderBounds;
-import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkRenderData;
-import me.jellysquid.mods.sodium.client.render.chunk.passes.BlockRenderPass;
-import me.jellysquid.mods.sodium.client.render.pipeline.context.ChunkRenderCacheLocal;
-import me.jellysquid.mods.sodium.client.util.MathUtil;
-import me.jellysquid.mods.sodium.client.util.task.CancellationSource;
-import me.jellysquid.mods.sodium.client.world.WorldSlice;
-import me.jellysquid.mods.sodium.client.world.cloned.ChunkRenderContext;
-import me.jellysquid.mods.sodium.common.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -33,9 +18,25 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.IFluidBlock;
+
 import org.embeddedt.embeddium.api.ChunkDataBuiltEvent;
 import org.embeddedt.embeddium.compat.ccl.CCLCompat;
+
+import me.jellysquid.mods.sodium.client.SodiumClientMod;
+import me.jellysquid.mods.sodium.client.render.chunk.ChunkGraphicsState;
+import me.jellysquid.mods.sodium.client.render.chunk.ChunkRenderContainer;
+import me.jellysquid.mods.sodium.client.render.chunk.compile.ChunkBuildBuffers;
+import me.jellysquid.mods.sodium.client.render.chunk.compile.ChunkBuildResult;
+import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkMeshData;
+import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkRenderBounds;
+import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkRenderData;
+import me.jellysquid.mods.sodium.client.render.chunk.passes.BlockRenderPass;
+import me.jellysquid.mods.sodium.client.render.pipeline.context.ChunkRenderCacheLocal;
+import me.jellysquid.mods.sodium.client.util.MathUtil;
+import me.jellysquid.mods.sodium.client.util.task.CancellationSource;
+import me.jellysquid.mods.sodium.client.world.WorldSlice;
+import me.jellysquid.mods.sodium.client.world.cloned.ChunkRenderContext;
+import me.jellysquid.mods.sodium.common.util.WorldUtil;
 
 /**
  * Rebuilds all the meshes of a chunk for each given render pass with non-occluded blocks. The result is then uploaded
@@ -45,9 +46,10 @@ import org.embeddedt.embeddium.compat.ccl.CCLCompat;
  * array allocations, they are pooled to ensure that the garbage collector doesn't become overloaded.
  */
 public class ChunkRenderRebuildTask<T extends ChunkGraphicsState> extends ChunkRenderBuildTask<T> {
+
     private static final BlockRenderLayer[] LAYERS = BlockRenderLayer.values();
     private final ChunkRenderContainer<T> render;
-        
+
     private final BlockPos offset;
 
     private final ChunkRenderContext context;
@@ -70,7 +72,8 @@ public class ChunkRenderRebuildTask<T extends ChunkGraphicsState> extends ChunkR
     }
 
     @Override
-    public ChunkBuildResult<T> performBuild(ChunkRenderCacheLocal cache, ChunkBuildBuffers buffers, CancellationSource cancellationSource) {
+    public ChunkBuildResult<T> performBuild(ChunkRenderCacheLocal cache, ChunkBuildBuffers buffers,
+                                            CancellationSource cancellationSource) {
         // COMPATIBLITY NOTE: Oculus relies on the LVT of this method being unchanged, at least in 16.5
         ChunkRenderData.Builder renderData = new ChunkRenderData.Builder();
         VisGraph occluder = new VisGraph();
@@ -109,15 +112,16 @@ public class ChunkRenderRebuildTask<T extends ChunkGraphicsState> extends ChunkR
                         EnumBlockRenderType renderType = blockState.getRenderType();
 
                         pos.setPos(baseX + relX, baseY + relY, baseZ + relZ);
-                        buffers.setRenderOffset(pos.getX() - renderOffset.getX(), pos.getY() - renderOffset.getY(), pos.getZ() - renderOffset.getZ());
+                        buffers.setRenderOffset(pos.getX() - renderOffset.getX(), pos.getY() - renderOffset.getY(),
+                                pos.getZ() - renderOffset.getZ());
 
-                        if(renderType != EnumBlockRenderType.INVISIBLE) {
+                        if (renderType != EnumBlockRenderType.INVISIBLE) {
                             if (slice.getWorldType() != WorldType.DEBUG_ALL_BLOCK_STATES) {
                                 blockState = blockState.getActualState(slice, pos);
                             }
 
-                            for(BlockRenderLayer layer : LAYERS) {
-                                if(!block.canRenderInLayer(blockState, layer)) {
+                            for (BlockRenderLayer layer : LAYERS) {
+                                if (!block.canRenderInLayer(blockState, layer)) {
                                     continue;
                                 }
 
@@ -125,21 +129,27 @@ public class ChunkRenderRebuildTask<T extends ChunkGraphicsState> extends ChunkR
 
                                 if (CCLCompat.canHandle(renderType)) {
                                     CCLCompat.renderBlock(slice, pos, blockState, buffers.get(layer));
-                                } else if (renderType == EnumBlockRenderType.MODEL && WorldUtil.toFluidBlock(block) == null) {
-                                    IBakedModel model = cache.getBlockModels()
-                                            .getModelForState(blockState);
+                                } else if (renderType == EnumBlockRenderType.MODEL &&
+                                        WorldUtil.toFluidBlock(block) == null) {
+                                            IBakedModel model = cache.getBlockModels()
+                                                    .getModelForState(blockState);
 
-                                    final long seed = MathUtil.hashPos(pos);
+                                            final long seed = MathUtil.hashPos(pos);
 
-                                    if (cache.getBlockRenderer().renderModel(cache.getLocalSlice(), blockState.getBlock().getExtendedState(blockState, cache.getLocalSlice(), pos), pos, model, buffers.get(layer), true, seed)) {
-                                        bounds.addBlock(relX, relY, relZ);
+                                            if (cache.getBlockRenderer().renderModel(cache.getLocalSlice(),
+                                                    blockState.getBlock().getExtendedState(blockState,
+                                                            cache.getLocalSlice(), pos),
+                                                    pos, model, buffers.get(layer), true, seed)) {
+                                                bounds.addBlock(relX, relY, relZ);
+                                            }
+
+                                        } else
+                                    if (WorldUtil.toFluidBlock(block) != null) {
+                                        if (cache.getFluidRenderer().render(cache.getLocalSlice(), blockState, pos,
+                                                buffers.get(layer))) {
+                                            bounds.addBlock(relX, relY, relZ);
+                                        }
                                     }
-
-                                } else if (WorldUtil.toFluidBlock(block) != null) {
-                                    if (cache.getFluidRenderer().render(cache.getLocalSlice(), blockState, pos, buffers.get(layer))) {
-                                        bounds.addBlock(relX, relY, relZ);
-                                    }
-                                }
                             }
                         }
 
@@ -147,7 +157,8 @@ public class ChunkRenderRebuildTask<T extends ChunkGraphicsState> extends ChunkR
                             TileEntity entity = slice.getTileEntity(pos);
 
                             if (entity != null) {
-                                TileEntitySpecialRenderer<TileEntity> renderer = TileEntityRendererDispatcher.instance.getRenderer(entity);
+                                TileEntitySpecialRenderer<TileEntity> renderer = TileEntityRendererDispatcher.instance
+                                        .getRenderer(entity);
 
                                 if (renderer != null) {
                                     renderData.addBlockEntity(entity, !renderer.isGlobalRenderer(entity));
@@ -168,19 +179,20 @@ public class ChunkRenderRebuildTask<T extends ChunkGraphicsState> extends ChunkR
             throw fillCrashInfo(ex.getCrashReport(), slice, pos);
         } catch (Throwable ex) {
             // Create a new crash report for other exceptions (e.g. thrown in getQuads)
-            throw fillCrashInfo(CrashReport.makeCrashReport(ex, "Encountered exception while building chunk meshes"), slice, pos);
+            throw fillCrashInfo(CrashReport.makeCrashReport(ex, "Encountered exception while building chunk meshes"),
+                    slice, pos);
         }
 
-        
         ForgeHooksClient.setRenderLayer(null);
 
         render.setRebuildForTranslucents(false);
         for (BlockRenderPass pass : BlockRenderPass.VALUES) {
-            ChunkMeshData mesh = buffers.createMesh(pass, (float)camera.x - offset.getX(), (float)camera.y - offset.getY(), (float)camera.z - offset.getZ(), this.translucencySorting);
+            ChunkMeshData mesh = buffers.createMesh(pass, (float) camera.x - offset.getX(),
+                    (float) camera.y - offset.getY(), (float) camera.z - offset.getZ(), this.translucencySorting);
 
             if (mesh != null) {
                 renderData.setMesh(pass, mesh);
-                if(this.translucencySorting && pass.isTranslucent())
+                if (this.translucencySorting && pass.isTranslucent())
                     render.setRebuildForTranslucents(true);
             }
         }

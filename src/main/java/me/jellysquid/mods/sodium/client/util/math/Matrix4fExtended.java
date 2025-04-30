@@ -6,7 +6,7 @@ public interface Matrix4fExtended {
      *
      * @param quaternion The quaternion to rotate this matrix by
      */
-    //void rotate(Quaternion quaternion);
+    // void rotate(Quaternion quaternion);
 
     /**
      * Applies the specified translation to this matrix in-place.
@@ -20,6 +20,7 @@ public interface Matrix4fExtended {
     /**
      * Applies this matrix transformation to the given input vector, returning the x-component. Avoids the lack of
      * struct types in Java and allows for allocation-free return.
+     * 
      * @param x The x-component of the vector
      * @param y The y-component of the vector
      * @param z The z-component of the vector
@@ -30,6 +31,7 @@ public interface Matrix4fExtended {
     /**
      * Applies this matrix transformation to the given input vector, returning the y-component. Avoids the lack of
      * struct types in Java and allows for allocation-free return.
+     * 
      * @param x The x-component of the vector
      * @param y The y-component of the vector
      * @param z The z-component of the vector
@@ -40,6 +42,7 @@ public interface Matrix4fExtended {
     /**
      * Applies this matrix transformation to the given input vector, returning the z-component. Avoids the lack of
      * struct types in Java and allows for allocation-free return.
+     * 
      * @param x The x-component of the vector
      * @param y The y-component of the vector
      * @param z The z-component of the vector

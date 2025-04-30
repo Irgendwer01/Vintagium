@@ -35,11 +35,13 @@ public class QuaternionfInterpolator {
     /**
      * Performs singular value decomposition on {@link Matrix3f}.
      * <p>
-     * This code was adapted from <a href="http://www.public.iastate.edu/~dicook/JSS/paper/code/svd.c">http://www.public.iastate.edu/</a>.
+     * This code was adapted from
+     * <a href="http://www.public.iastate.edu/~dicook/JSS/paper/code/svd.c">http://www.public.iastate.edu/</a>.
      *
      * @author Kai Burjack
      */
     private static class SvdDecomposition3f {
+
         private final float rv1[];
         private final float w[];
         private final float v[];
@@ -293,19 +295,22 @@ public class QuaternionfInterpolator {
     private final Matrix3f v = new Matrix3f();
 
     /**
-     * Compute the weighted average of all of the quaternions given in <code>qs</code> using the specified interpolation factors <code>weights</code>, and store the result in <code>dest</code>.
+     * Compute the weighted average of all of the quaternions given in <code>qs</code> using the specified interpolation
+     * factors <code>weights</code>, and store the result in <code>dest</code>.
      *
      * @param qs
-     *            the quaternions to interpolate over
+     *                         the quaternions to interpolate over
      * @param weights
-     *            the weights of each individual quaternion in <code>qs</code>
+     *                         the weights of each individual quaternion in <code>qs</code>
      * @param maxSvdIterations
-     *            the maximum number of iterations in the Singular Value Decomposition step used by this method
+     *                         the maximum number of iterations in the Singular Value Decomposition step used by this
+     *                         method
      * @param dest
-     *            will hold the result
+     *                         will hold the result
      * @return dest
      */
-    public Quaternionf computeWeightedAverage(Quaternionfc[] qs, float[] weights, int maxSvdIterations, Quaternionf dest) {
+    public Quaternionf computeWeightedAverage(Quaternionfc[] qs, float[] weights, int maxSvdIterations,
+                                              Quaternionf dest) {
         float m00 = 0.0f, m01 = 0.0f, m02 = 0.0f;
         float m10 = 0.0f, m11 = 0.0f, m12 = 0.0f;
         float m20 = 0.0f, m21 = 0.0f, m22 = 0.0f;
@@ -350,5 +355,4 @@ public class QuaternionfInterpolator {
         // Build quaternion from it
         return dest.setFromNormalized(u).normalize();
     }
-
 }

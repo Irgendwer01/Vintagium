@@ -4,6 +4,7 @@ import me.jellysquid.mods.sodium.client.model.vertex.VertexSink;
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferView;
 
 public interface BlittableVertexType<T extends VertexSink> extends BufferVertexType<T> {
+
     /**
      * Creates a {@link VertexSink} which writes into a {@link VertexBufferView}. This allows for specialization
      * when the memory storage is known.

@@ -1,19 +1,24 @@
 package me.jellysquid.mods.sodium.client;
 
-import com.google.common.collect.ImmutableList;
-import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-import zone.rong.mixinbooter.IEarlyMixinLoader;
-
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Nullable;
+
+import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+
+import com.google.common.collect.ImmutableList;
+
+import me.jellysquid.mods.sodium.Tags;
+import zone.rong.mixinbooter.IEarlyMixinLoader;
 
 @IFMLLoadingPlugin.Name("Sodium")
 @IFMLLoadingPlugin.MCVersion("1.12.2")
 public class SodiumMixinTweaker implements IFMLLoadingPlugin, IEarlyMixinLoader {
+
     @Override
     public List<String> getMixinConfigs() {
-        return ImmutableList.of(SodiumClientMod.MODID + ".mixins.json");
+        return ImmutableList.of(Tags.MODID + ".mixins.json");
     }
 
     @Override
@@ -33,9 +38,7 @@ public class SodiumMixinTweaker implements IFMLLoadingPlugin, IEarlyMixinLoader 
     }
 
     @Override
-    public void injectData(Map<String, Object> data) {
-
-    }
+    public void injectData(Map<String, Object> data) {}
 
     @Override
     public String getAccessTransformerClass() {

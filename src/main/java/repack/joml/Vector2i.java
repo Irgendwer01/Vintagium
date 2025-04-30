@@ -55,8 +55,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
     /**
      * Create a new {@link Vector2i} and initialize its components to zero.
      */
-    public Vector2i() {
-    }
+    public Vector2i() {}
 
     /**
      * Create a new {@link Vector2i} and initialize both of its components with
@@ -86,12 +85,13 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
     /**
      * Create a new {@link Vector2i} and initialize its component values and
      * round using the given {@link RoundingMode}.
+     * 
      * @param x
-     *          the x component
+     *             the x component
      * @param y
-     *          the y component
+     *             the y component
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector2i(float x, float y, int mode) {
         this.x = Math.roundUsing(x, mode);
@@ -101,12 +101,13 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
     /**
      * Create a new {@link Vector2i} and initialize its component values and
      * round using the given {@link RoundingMode}.
+     * 
      * @param x
-     *          the x component
+     *             the x component
      * @param y
-     *          the y component
+     *             the y component
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector2i(double x, double y, int mode) {
         this.x = Math.roundUsing(x, mode);
@@ -130,9 +131,9 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * the given vector.
      *
      * @param v
-     *          the {@link Vector2fc} to round and copy the values from
+     *             the {@link Vector2fc} to round and copy the values from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector2i(Vector2fc v, int mode) {
         x = Math.roundUsing(v.x(), mode);
@@ -144,9 +145,9 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * the given vector.
      *
      * @param v
-     *          the {@link Vector2dc} to round and copy the values from
+     *             the {@link Vector2dc} to round and copy the values from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      */
     public Vector2i(Vector2dc v, int mode) {
         x = Math.roundUsing(v.x(), mode);
@@ -158,7 +159,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * two elements of the given array.
      *
      * @param xy
-     *          the array containing at least three elements
+     *           the array containing at least three elements
      */
     public Vector2i(int[] xy) {
         this.x = xy[0];
@@ -179,7 +180,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * @see #Vector2i(int, ByteBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      */
     public Vector2i(ByteBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
@@ -193,9 +194,9 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      */
     public Vector2i(int index, ByteBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
@@ -215,7 +216,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * @see #Vector2i(int, IntBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      */
     public Vector2i(IntBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
@@ -229,9 +230,9 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * This method will not increment the position of the given IntBuffer.
      *
      * @param index
-     *          the absolute position into the IntBuffer
+     *               the absolute position into the IntBuffer
      * @param buffer
-     *          values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      */
     public Vector2i(int index, IntBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
@@ -309,9 +310,9 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * in double-precision, there is the possibility to lose precision.
      *
      * @param v
-     *          the vector to copy from
+     *             the vector to copy from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      * @return this
      */
     public Vector2i set(Vector2dc v, int mode) {
@@ -327,9 +328,9 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * in double-precision, there is the possibility to lose precision.
      *
      * @param v
-     *          the vector to copy from
+     *             the vector to copy from
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      * @return this
      */
     public Vector2i set(Vector2fc v, int mode) {
@@ -342,7 +343,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * Set the two components of this vector to the first two elements of the given array.
      *
      * @param xy
-     *          the array containing at least two elements
+     *           the array containing at least two elements
      * @return this
      */
     public Vector2i set(int[] xy) {
@@ -364,7 +365,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * @see #set(int, ByteBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      * @return this
      */
     public Vector2i set(ByteBuffer buffer) {
@@ -379,9 +380,9 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      * @return this
      */
     public Vector2i set(int index, ByteBuffer buffer) {
@@ -402,7 +403,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * @see #set(int, IntBuffer)
      *
      * @param buffer
-     *          values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      * @return this
      */
     public Vector2i set(IntBuffer buffer) {
@@ -417,9 +418,9 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * This method will not increment the position of the given IntBuffer.
      *
      * @param index
-     *          the absolute position into the IntBuffer
+     *               the absolute position into the IntBuffer
      * @param buffer
-     *          values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      * @return this
      */
     public Vector2i set(int index, IntBuffer buffer) {
@@ -433,10 +434,11 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *              the off-heap memory address to read the vector values from
+     *                the off-heap memory address to read the vector values from
      * @return this
      */
     public Vector2i setFromAddress(long address) {
@@ -448,12 +450,12 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
 
     public int get(int component) throws IllegalArgumentException {
         switch (component) {
-        case 0:
-            return x;
-        case 1:
-            return y;
-        default:
-            throw new IllegalArgumentException();
+            case 0:
+                return x;
+            case 1:
+                return y;
+            default:
+                throw new IllegalArgumentException();
         }
     }
 
@@ -461,9 +463,9 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * Set the value of the specified component of this vector.
      *
      * @param component
-     *          the component whose value to set, within <code>[0..1]</code>
+     *                  the component whose value to set, within <code>[0..1]</code>
      * @param value
-     *          the value to set
+     *                  the value to set
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..1]</code>
      */
@@ -617,13 +619,13 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * Return the distance between <code>(x1, y1)</code> and <code>(x2, y2)</code>.
      *
      * @param x1
-     *          the x component of the first vector
+     *           the x component of the first vector
      * @param y1
-     *          the y component of the first vector
+     *           the y component of the first vector
      * @param x2
-     *          the x component of the second vector
+     *           the x component of the second vector
      * @param y2
-     *          the y component of the second vector
+     *           the y component of the second vector
      * @return the euclidean distance
      */
     public static double distance(int x1, int y1, int x2, int y2) {
@@ -636,13 +638,13 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * Return the squared distance between <code>(x1, y1)</code> and <code>(x2, y2)</code>.
      *
      * @param x1
-     *          the x component of the first vector
+     *           the x component of the first vector
      * @param y1
-     *          the y component of the first vector
+     *           the y component of the first vector
      * @param x2
-     *          the x component of the second vector
+     *           the x component of the second vector
      * @param y2
-     *          the y component of the second vector
+     *           the y component of the second vector
      * @return the euclidean distance squared
      */
     public static long distanceSquared(int x1, int y1, int x2, int y2) {
@@ -696,7 +698,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * value.
      *
      * @param scalar
-     *          the scalar to multiply this vector by
+     *               the scalar to multiply this vector by
      * @return this
      */
     public Vector2i mul(int scalar) {
@@ -755,7 +757,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * Divide all components of this {@link Vector2i} by the given scalar value.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @return a vector holding the result
      */
     public Vector2i div(float scalar) {
@@ -776,7 +778,7 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
      * Divide all components of this {@link Vector2i} by the given scalar value.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @return a vector holding the result
      */
     public Vector2i div(int scalar) {
@@ -939,7 +941,8 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
     /**
      * Return a string representation of this vector.
      * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
+     * This method creates a new {@link DecimalFormat} on every invocation with the format string
+     * "<code>0.000E0;-</code>".
      *
      * @return the string representation
      */
@@ -948,10 +951,11 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
     }
 
     /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
+     * Return a string representation of this vector by formatting the vector components with the given
+     * {@link NumberFormat}.
      *
      * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
+     *                  the {@link NumberFormat} used to format the vector components with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {
@@ -961,5 +965,4 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-
 }

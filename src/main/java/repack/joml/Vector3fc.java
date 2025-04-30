@@ -62,7 +62,7 @@ public interface Vector3fc {
      * @see #get(int, FloatBuffer)
      *
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z</code> order
+     *               will receive the values of this vector in <code>x, y, z</code> order
      * @return the passed in buffer
      * @see #get(int, FloatBuffer)
      */
@@ -75,9 +75,9 @@ public interface Vector3fc {
      * This method will not increment the position of the given FloatBuffer.
      *
      * @param index
-     *          the absolute position into the FloatBuffer
+     *               the absolute position into the FloatBuffer
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z</code> order
+     *               will receive the values of this vector in <code>x, y, z</code> order
      * @return the passed in buffer
      */
     FloatBuffer get(int index, FloatBuffer buffer);
@@ -95,7 +95,7 @@ public interface Vector3fc {
      * @see #get(int, ByteBuffer)
      *
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z</code> order
+     *               will receive the values of this vector in <code>x, y, z</code> order
      * @return the passed in buffer
      * @see #get(int, ByteBuffer)
      */
@@ -108,9 +108,9 @@ public interface Vector3fc {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z</code> order
+     *               will receive the values of this vector in <code>x, y, z</code> order
      * @return the passed in buffer
      */
     ByteBuffer get(int index, ByteBuffer buffer);
@@ -120,10 +120,11 @@ public interface Vector3fc {
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *            the off-heap address where to store this vector
+     *                the off-heap address where to store this vector
      * @return this
      */
     Vector3fc getToAddress(long address);
@@ -132,9 +133,9 @@ public interface Vector3fc {
      * Subtract the supplied vector from this one and store the result in <code>dest</code>.
      *
      * @param v
-     *          the vector to subtract
+     *             the vector to subtract
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f sub(Vector3fc v, Vector3f dest);
@@ -143,13 +144,13 @@ public interface Vector3fc {
      * Decrement the components of this vector by the given values and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component to subtract
+     *             the x component to subtract
      * @param y
-     *          the y component to subtract
+     *             the y component to subtract
      * @param z
-     *          the z component to subtract
+     *             the z component to subtract
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f sub(float x, float y, float z, Vector3f dest);
@@ -158,9 +159,9 @@ public interface Vector3fc {
      * Add the supplied vector to this one and store the result in <code>dest</code>.
      *
      * @param v
-     *          the vector to add
+     *             the vector to add
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f add(Vector3fc v, Vector3f dest);
@@ -169,13 +170,13 @@ public interface Vector3fc {
      * Increment the components of this vector by the given values and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component to add
+     *             the x component to add
      * @param y
-     *          the y component to add
+     *             the y component to add
      * @param z
-     *          the z component to add
+     *             the z component to add
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f add(float x, float y, float z, Vector3f dest);
@@ -185,11 +186,11 @@ public interface Vector3fc {
      * and store the result in <code>dest</code>.
      *
      * @param a
-     *          the first multiplicand
+     *             the first multiplicand
      * @param b
-     *          the second multiplicand
+     *             the second multiplicand
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f fma(Vector3fc a, Vector3fc b, Vector3f dest);
@@ -199,11 +200,11 @@ public interface Vector3fc {
      * and store the result in <code>dest</code>.
      *
      * @param a
-     *          the first multiplicand
+     *             the first multiplicand
      * @param b
-     *          the second multiplicand
+     *             the second multiplicand
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f fma(float a, Vector3fc b, Vector3f dest);
@@ -213,11 +214,11 @@ public interface Vector3fc {
      * and store the result in <code>dest</code>.
      *
      * @param a
-     *          the multiplicand
+     *             the multiplicand
      * @param b
-     *          the addend
+     *             the addend
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulAdd(Vector3fc a, Vector3fc b, Vector3f dest);
@@ -227,11 +228,11 @@ public interface Vector3fc {
      * and store the result in <code>dest</code>.
      *
      * @param a
-     *          the multiplicand
+     *             the multiplicand
      * @param b
-     *          the addend
+     *             the addend
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulAdd(float a, Vector3fc b, Vector3f dest);
@@ -240,9 +241,9 @@ public interface Vector3fc {
      * Multiply this Vector3f component-wise by another Vector3f and store the result in <code>dest</code>.
      *
      * @param v
-     *          the vector to multiply by
+     *             the vector to multiply by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mul(Vector3fc v, Vector3f dest);
@@ -251,9 +252,9 @@ public interface Vector3fc {
      * Divide this Vector3f component-wise by another Vector3f and store the result in <code>dest</code>.
      *
      * @param v
-     *          the vector to divide by
+     *             the vector to divide by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f div(Vector3fc v, Vector3f dest);
@@ -265,9 +266,9 @@ public interface Vector3fc {
      * This method uses <code>w=1.0</code> as the fourth vector component.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulProject(Matrix4fc mat, Vector3f dest);
@@ -279,11 +280,11 @@ public interface Vector3fc {
      * This method uses the given <code>w</code> as the fourth vector component.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param w
-     *          the w component to use
+     *             the w component to use
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulProject(Matrix4fc mat, float w, Vector3f dest);
@@ -292,9 +293,9 @@ public interface Vector3fc {
      * Multiply the given matrix with this Vector3f and store the result in <code>dest</code>.
      *
      * @param mat
-     *          the matrix
+     *             the matrix
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mul(Matrix3fc mat, Vector3f dest);
@@ -303,9 +304,9 @@ public interface Vector3fc {
      * Multiply the given matrix with this Vector3f and store the result in <code>dest</code>.
      *
      * @param mat
-     *          the matrix
+     *             the matrix
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mul(Matrix3dc mat, Vector3f dest);
@@ -315,9 +316,9 @@ public interface Vector3fc {
      * third row in the matrix of <code>(0, 0, 1)</code> and store the result in <code>dest</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mul(Matrix3x2fc mat, Vector3f dest);
@@ -326,9 +327,9 @@ public interface Vector3fc {
      * Multiply the transpose of the given matrix with this Vector3f and store the result in <code>dest</code>.
      *
      * @param mat
-     *          the matrix
+     *             the matrix
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulTranspose(Matrix3fc mat, Vector3f dest);
@@ -340,9 +341,9 @@ public interface Vector3fc {
      * This method assumes the <code>w</code> component of <code>this</code> to be <code>1.0</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulPosition(Matrix4fc mat, Vector3f dest);
@@ -354,9 +355,9 @@ public interface Vector3fc {
      * This method assumes the <code>w</code> component of <code>this</code> to be <code>1.0</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulPosition(Matrix4x3fc mat, Vector3f dest);
@@ -368,9 +369,9 @@ public interface Vector3fc {
      * This method assumes the <code>w</code> component of <code>this</code> to be <code>1.0</code>.
      *
      * @param mat
-     *          the matrix whose transpose to multiply this vector by
+     *             the matrix whose transpose to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulTransposePosition(Matrix4fc mat, Vector3f dest);
@@ -382,9 +383,9 @@ public interface Vector3fc {
      * This method assumes the <code>w</code> component of <code>this</code> to be <code>1.0</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param dest
-     *          will hold the <code>(x, y, z)</code> components of the resulting vector
+     *             will hold the <code>(x, y, z)</code> components of the resulting vector
      * @return the <i>w</i> component of the resulting 4D vector after multiplication
      */
     float mulPositionW(Matrix4fc mat, Vector3f dest);
@@ -396,9 +397,9 @@ public interface Vector3fc {
      * This method assumes the <code>w</code> component of <code>this</code> to be <code>0.0</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulDirection(Matrix4dc mat, Vector3f dest);
@@ -410,9 +411,9 @@ public interface Vector3fc {
      * This method assumes the <code>w</code> component of <code>this</code> to be <code>0.0</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulDirection(Matrix4fc mat, Vector3f dest);
@@ -424,9 +425,9 @@ public interface Vector3fc {
      * This method assumes the <code>w</code> component of <code>this</code> to be <code>0.0</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulDirection(Matrix4x3fc mat, Vector3f dest);
@@ -438,9 +439,9 @@ public interface Vector3fc {
      * This method assumes the <code>w</code> component of <code>this</code> to be <code>0.0</code>.
      *
      * @param mat
-     *          the matrix whose transpose to multiply this vector by
+     *             the matrix whose transpose to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulTransposeDirection(Matrix4fc mat, Vector3f dest);
@@ -450,9 +451,9 @@ public interface Vector3fc {
      * value and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to multiply this vector by
+     *               the scalar to multiply this vector by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector3f mul(float scalar, Vector3f dest);
@@ -461,13 +462,13 @@ public interface Vector3fc {
      * Multiply the components of this Vector3f by the given scalar values and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component to multiply this vector by
+     *             the x component to multiply this vector by
      * @param y
-     *          the y component to multiply this vector by
+     *             the y component to multiply this vector by
      * @param z
-     *          the z component to multiply this vector by
+     *             the z component to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mul(float x, float y, float z, Vector3f dest);
@@ -477,9 +478,9 @@ public interface Vector3fc {
      * value and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector3f div(float scalar, Vector3f dest);
@@ -488,13 +489,13 @@ public interface Vector3fc {
      * Divide the components of this Vector3f by the given scalar values and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component to divide this vector by
+     *             the x component to divide this vector by
      * @param y
-     *          the y component to divide this vector by
+     *             the y component to divide this vector by
      * @param z
-     *          the z component to divide this vector by
+     *             the z component to divide this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f div(float x, float y, float z, Vector3f dest);
@@ -505,9 +506,9 @@ public interface Vector3fc {
      * @see Quaternionfc#transform(Vector3f)
      *
      * @param quat
-     *          the quaternion to rotate this vector
+     *             the quaternion to rotate this vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f rotate(Quaternionfc quat, Vector3f dest);
@@ -521,15 +522,16 @@ public interface Vector3fc {
      * @see Quaternionf#rotationTo(Vector3fc, Vector3fc)
      *
      * @param toDir
-     *          the destination direction
+     *              the destination direction
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Quaternionf rotationTo(Vector3fc toDir, Quaternionf dest);
 
     /**
-     * Compute the quaternion representing a rotation of <code>this</code> vector to point along <code>(toDirX, toDirY, toDirZ)</code>
+     * Compute the quaternion representing a rotation of <code>this</code> vector to point along
+     * <code>(toDirX, toDirY, toDirZ)</code>
      * and store the result in <code>dest</code>.
      * <p>
      * Because there can be multiple possible rotations, this method chooses the one with the shortest arc.
@@ -537,13 +539,13 @@ public interface Vector3fc {
      * @see Quaternionf#rotationTo(float, float, float, float, float, float)
      *
      * @param toDirX
-     *          the x coordinate of the destination direction
+     *               the x coordinate of the destination direction
      * @param toDirY
-     *          the y coordinate of the destination direction
+     *               the y coordinate of the destination direction
      * @param toDirZ
-     *          the z coordinate of the destination direction
+     *               the z coordinate of the destination direction
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Quaternionf rotationTo(float toDirX, float toDirY, float toDirZ, Quaternionf dest);
@@ -553,15 +555,15 @@ public interface Vector3fc {
      * into <code>dest</code>.
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param aX
-     *          the x component of the rotation axis
+     *              the x component of the rotation axis
      * @param aY
-     *          the y component of the rotation axis
+     *              the y component of the rotation axis
      * @param aZ
-     *          the z component of the rotation axis
+     *              the z component of the rotation axis
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector3f rotateAxis(float angle, float aX, float aY, float aZ, Vector3f dest);
@@ -571,9 +573,9 @@ public interface Vector3fc {
      * into <code>dest</code>.
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector3f rotateX(float angle, Vector3f dest);
@@ -583,9 +585,9 @@ public interface Vector3fc {
      * into <code>dest</code>.
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector3f rotateY(float angle, Vector3f dest);
@@ -595,9 +597,9 @@ public interface Vector3fc {
      * into <code>dest</code>.
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector3f rotateZ(float angle, Vector3f dest);
@@ -620,7 +622,7 @@ public interface Vector3fc {
      * Normalize this vector and store the result in <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f normalize(Vector3f dest);
@@ -629,9 +631,9 @@ public interface Vector3fc {
      * Scale this vector to have the given length and store the result in <code>dest</code>.
      *
      * @param length
-     *          the desired length
+     *               the desired length
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector3f normalize(float length, Vector3f dest);
@@ -640,9 +642,9 @@ public interface Vector3fc {
      * Compute the cross product of this vector and <code>v</code> and store the result in <code>dest</code>.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f cross(Vector3fc v, Vector3f dest);
@@ -651,13 +653,13 @@ public interface Vector3fc {
      * Compute the cross product of this vector and <code>(x, y, z)</code> and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component of the other vector
+     *             the x component of the other vector
      * @param y
-     *          the y component of the other vector
+     *             the y component of the other vector
      * @param z
-     *          the z component of the other vector
+     *             the z component of the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f cross(float x, float y, float z, Vector3f dest);
@@ -729,7 +731,8 @@ public interface Vector3fc {
     float dot(float x, float y, float z);
 
     /**
-     * Return the cosine of the angle between this vector and the supplied vector. Use this instead of Math.cos(this.angle(v)).
+     * Return the cosine of the angle between this vector and the supplied vector. Use this instead of
+     * Math.cos(this.angle(v)).
      *
      * @see #angle(Vector3fc)
      *
@@ -769,17 +772,17 @@ public interface Vector3fc {
      * respect to the plane with the given normal vector <code>(nx, ny, nz)</code>.
      *
      * @param x
-     *          the x coordinate of the other vector
+     *           the x coordinate of the other vector
      * @param y
-     *          the y coordinate of the other vector
+     *           the y coordinate of the other vector
      * @param z
-     *          the z coordinate of the other vector
+     *           the z coordinate of the other vector
      * @param nx
-     *          the x coordinate of the plane's normal vector
+     *           the x coordinate of the plane's normal vector
      * @param ny
-     *          the y coordinate of the plane's normal vector
+     *           the y coordinate of the plane's normal vector
      * @param nz
-     *          the z coordinate of the plane's normal vector
+     *           the z coordinate of the plane's normal vector
      * @return the angle, in radians
      */
     float angleSigned(float x, float y, float z, float nx, float ny, float nz);
@@ -788,9 +791,9 @@ public interface Vector3fc {
      * Set the components of <code>dest</code> to be the component-wise minimum of this and the other vector.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f min(Vector3fc v, Vector3f dest);
@@ -799,9 +802,9 @@ public interface Vector3fc {
      * Set the components of <code>dest</code> to be the component-wise maximum of this and the other vector.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f max(Vector3fc v, Vector3f dest);
@@ -810,16 +813,17 @@ public interface Vector3fc {
      * Negate this vector and store the result in <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f negate(Vector3f dest);
 
     /**
-     * Compute the absolute values of the individual components of <code>this</code> and store the result in <code>dest</code>.
+     * Compute the absolute values of the individual components of <code>this</code> and store the result in
+     * <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f absolute(Vector3f dest);
@@ -828,9 +832,9 @@ public interface Vector3fc {
      * Reflect this vector about the given <code>normal</code> vector and store the result in <code>dest</code>.
      *
      * @param normal
-     *          the vector to reflect about
+     *               the vector to reflect about
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector3f reflect(Vector3fc normal, Vector3f dest);
@@ -839,13 +843,13 @@ public interface Vector3fc {
      * Reflect this vector about the given normal vector and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component of the normal
+     *             the x component of the normal
      * @param y
-     *          the y component of the normal
+     *             the y component of the normal
      * @param z
-     *          the z component of the normal
+     *             the z component of the normal
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f reflect(float x, float y, float z, Vector3f dest);
@@ -854,9 +858,9 @@ public interface Vector3fc {
      * Compute the half vector between this and the other vector and store the result in <code>dest</code>.
      *
      * @param other
-     *          the other vector
+     *              the other vector
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector3f half(Vector3fc other, Vector3f dest);
@@ -866,13 +870,13 @@ public interface Vector3fc {
      * and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component of the other vector
+     *             the x component of the other vector
      * @param y
-     *          the y component of the other vector
+     *             the y component of the other vector
      * @param z
-     *          the z component of the other vector
+     *             the z component of the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f half(float x, float y, float z, Vector3f dest);
@@ -883,11 +887,11 @@ public interface Vector3fc {
      * store the result in <code>dest</code>.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param t
-     *          the interpolation factor, within <code>[0..1]</code>
+     *             the interpolation factor, within <code>[0..1]</code>
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f smoothStep(Vector3fc v, float t, Vector3f dest);
@@ -899,15 +903,15 @@ public interface Vector3fc {
      * <code>dest</code>.
      *
      * @param t0
-     *          the tangent of <code>this</code> vector
+     *             the tangent of <code>this</code> vector
      * @param v1
-     *          the other vector
+     *             the other vector
      * @param t1
-     *          the tangent of the other vector
+     *             the tangent of the other vector
      * @param t
-     *          the interpolation factor, within <code>[0..1]</code>
+     *             the interpolation factor, within <code>[0..1]</code>
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f hermite(Vector3fc t0, Vector3fc v1, Vector3fc t1, float t, Vector3f dest);
@@ -916,15 +920,16 @@ public interface Vector3fc {
      * Linearly interpolate <code>this</code> and <code>other</code> using the given interpolation factor <code>t</code>
      * and store the result in <code>dest</code>.
      * <p>
-     * If <code>t</code> is <code>0.0</code> then the result is <code>this</code>. If the interpolation factor is <code>1.0</code>
+     * If <code>t</code> is <code>0.0</code> then the result is <code>this</code>. If the interpolation factor is
+     * <code>1.0</code>
      * then the result is <code>other</code>.
      *
      * @param other
-     *          the other vector
+     *              the other vector
      * @param t
-     *          the interpolation factor between 0.0 and 1.0
+     *              the interpolation factor between 0.0 and 1.0
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector3f lerp(Vector3fc other, float t, Vector3f dest);
@@ -933,7 +938,7 @@ public interface Vector3fc {
      * Get the value of the specified component of this vector.
      *
      * @param component
-     *          the component, within <code>[0..2]</code>
+     *                  the component, within <code>[0..2]</code>
      * @return the value
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..2]</code>
      */
@@ -944,9 +949,9 @@ public interface Vector3fc {
      * using the given {@link RoundingMode}.
      *
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3i get(int mode, Vector3i dest);
@@ -955,7 +960,7 @@ public interface Vector3fc {
      * Set the components of the given vector <code>dest</code> to those of <code>this</code> vector.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f get(Vector3f dest);
@@ -964,7 +969,7 @@ public interface Vector3fc {
      * Set the components of the given vector <code>dest</code> to those of <code>this</code> vector.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3d get(Vector3d dest);
@@ -984,29 +989,31 @@ public interface Vector3fc {
     int minComponent();
 
     /**
-     * Transform <code>this</code> vector so that it is orthogonal to the given vector <code>v</code>, normalize the result and store it into <code>dest</code>.
+     * Transform <code>this</code> vector so that it is orthogonal to the given vector <code>v</code>, normalize the
+     * result and store it into <code>dest</code>.
      * <p>
      * Reference: <a href="https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process">Gram–Schmidt process</a>
      *
      * @param v
-     *          the reference vector which the result should be orthogonal to
+     *             the reference vector which the result should be orthogonal to
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f orthogonalize(Vector3fc v, Vector3f dest);
 
     /**
-     * Transform <code>this</code> vector so that it is orthogonal to the given unit vector <code>v</code>, normalize the result and store it into <code>dest</code>.
+     * Transform <code>this</code> vector so that it is orthogonal to the given unit vector <code>v</code>, normalize
+     * the result and store it into <code>dest</code>.
      * <p>
      * The vector <code>v</code> is assumed to be a {@link #normalize(Vector3f) unit} vector.
      * <p>
      * Reference: <a href="https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process">Gram–Schmidt process</a>
      *
      * @param v
-     *          the reference unit vector which the result should be orthogonal to
+     *             the reference unit vector which the result should be orthogonal to
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f orthogonalizeUnit(Vector3fc v, Vector3f dest);
@@ -1018,7 +1025,7 @@ public interface Vector3fc {
      * <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f floor(Vector3f dest);
@@ -1030,7 +1037,7 @@ public interface Vector3fc {
      * <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f ceil(Vector3f dest);
@@ -1041,7 +1048,7 @@ public interface Vector3fc {
      * the result in <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f round(Vector3f dest);
@@ -1057,17 +1064,19 @@ public interface Vector3fc {
     boolean isFinite();
 
     /**
-     * Compare the vector components of <code>this</code> vector with the given vector using the given <code>delta</code>
+     * Compare the vector components of <code>this</code> vector with the given vector using the given
+     * <code>delta</code>
      * and return whether all of them are equal within a maximum difference of <code>delta</code>.
      * <p>
-     * Please note that this method is not used by any data structure such as {@link ArrayList} {@link HashSet} or {@link HashMap}
+     * Please note that this method is not used by any data structure such as {@link ArrayList} {@link HashSet} or
+     * {@link HashMap}
      * and their operations, such as {@link ArrayList#contains(Object)} or {@link HashSet#remove(Object)}, since those
      * data structures only use the {@link Object#equals(Object)} and {@link Object#hashCode()} methods.
      *
      * @param v
-     *          the other vector
+     *              the other vector
      * @param delta
-     *          the allowed maximum difference
+     *              the allowed maximum difference
      * @return <code>true</code> whether all of the vector components are equal; <code>false</code> otherwise
      */
     boolean equals(Vector3fc v, float delta);
@@ -1085,5 +1094,4 @@ public interface Vector3fc {
      * @return <code>true</code> if all the vector components are equal
      */
     boolean equals(float x, float y, float z);
-
 }

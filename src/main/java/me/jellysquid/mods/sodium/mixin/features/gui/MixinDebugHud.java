@@ -1,6 +1,7 @@
 package me.jellysquid.mods.sodium.mixin.features.gui;
 
-import com.google.common.base.Strings;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiOverlayDebug;
@@ -9,6 +10,7 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+
 import org.apache.commons.lang3.Validate;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
@@ -19,10 +21,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
+import com.google.common.base.Strings;
 
 @Mixin(GuiOverlayDebug.class)
 public abstract class MixinDebugHud {
+
     @Shadow
     @Final
     private Minecraft mc;
@@ -33,7 +36,8 @@ public abstract class MixinDebugHud {
 
     private List<String> capturedList = null;
 
-    @Redirect(method = { "renderDebugInfoLeft", "renderDebugInfoRight" }, at = @At(value = "INVOKE", target = "Ljava/util/List;size()I"))
+    @Redirect(method = { "renderDebugInfoLeft", "renderDebugInfoRight" },
+              at = @At(value = "INVOKE", target = "Ljava/util/List;size()I"))
     private int preRenderText(List<String> list) {
         // Capture the list to be rendered later
         this.capturedList = list;

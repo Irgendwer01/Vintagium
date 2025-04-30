@@ -1,13 +1,14 @@
 package me.jellysquid.mods.sodium.client.render.chunk.lists;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-
 import java.util.Arrays;
+
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 /**
  * A simple extension over {@link ObjectArrayList} which provides iterator methods in either FIFO or LIFO ordering.
  */
 public class ChunkRenderList<T> {
+
     private T[] stateArray;
     private int[] cullArray;
     private int size, capacity;
@@ -65,6 +66,7 @@ public class ChunkRenderList<T> {
     public ChunkRenderListIterator<T> iterator(boolean backwards) {
         if (backwards) {
             return new ChunkRenderListIterator<T>() {
+
                 private int pos = ChunkRenderList.this.size - 1;
 
                 @Override
@@ -89,6 +91,7 @@ public class ChunkRenderList<T> {
             };
         } else {
             return new ChunkRenderListIterator<T>() {
+
                 private final int lim = ChunkRenderList.this.size;
 
                 private int pos = 0;

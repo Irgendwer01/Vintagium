@@ -1,5 +1,8 @@
 package me.jellysquid.mods.sodium.client.world;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -11,13 +14,12 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 public interface VanillaFluidBlock {
+
     IFluidBlock getFakeFluidBlock();
 
     class Implementation implements IFluidBlock {
+
         private final Block block;
         private Fluid sodium$forgeFluid;
 
@@ -28,8 +30,9 @@ public interface VanillaFluidBlock {
         @Override
         public Fluid getFluid() {
             Fluid fluid = sodium$forgeFluid;
-            if(fluid == null) {
-                sodium$forgeFluid = fluid = block.getDefaultState().getMaterial() == Material.WATER ? FluidRegistry.WATER : FluidRegistry.LAVA;
+            if (fluid == null) {
+                sodium$forgeFluid = fluid = block.getDefaultState().getMaterial() == Material.WATER ?
+                        FluidRegistry.WATER : FluidRegistry.LAVA;
             }
             return fluid;
         }
@@ -53,7 +56,8 @@ public interface VanillaFluidBlock {
         @Override
         public float getFilledPercentage(World world, BlockPos pos) {
             IBlockState blockState = world.getBlockState(pos);
-            return getFluid() == null ? 0 : 1 - BlockLiquid.getLiquidHeightPercent(blockState.getValue(BlockLiquid.LEVEL));
+            return getFluid() == null ? 0 :
+                    1 - BlockLiquid.getLiquidHeightPercent(blockState.getValue(BlockLiquid.LEVEL));
         }
     }
 }

@@ -46,8 +46,7 @@ public class FrustumRayBuilder {
      * <p>
      * Before obtaining ray directions, make sure to define the frustum using {@link #set(Matrix4fc)}.
      */
-    public FrustumRayBuilder() {
-    }
+    public FrustumRayBuilder() {}
 
     /**
      * Create a new {@link FrustumRayBuilder} from the given {@link Matrix4fc matrix} by extracing the matrix's frustum.
@@ -60,9 +59,11 @@ public class FrustumRayBuilder {
     }
 
     /**
-     * Update the stored frustum corner rays and origin of <code>this</code> {@link FrustumRayBuilder} with the given {@link Matrix4fc matrix}.
+     * Update the stored frustum corner rays and origin of <code>this</code> {@link FrustumRayBuilder} with the given
+     * {@link Matrix4fc matrix}.
      * <p>
-     * Reference: <a href="http://gamedevs.org/uploads/fast-extraction-viewing-frustum-planes-from-world-view-projection-matrix.pdf">
+     * Reference: <a href=
+     * "http://gamedevs.org/uploads/fast-extraction-viewing-frustum-planes-from-world-view-projection-matrix.pdf">
      * Fast Extraction of Viewing Frustum Planes from the World-View-Projection Matrix</a>
      * <p>
      * Reference: <a href="http://geomalgorithms.com/a05-_intersect-1.html">http://geomalgorithms.com</a>
@@ -108,7 +109,7 @@ public class FrustumRayBuilder {
      * Store the eye/origin of the perspective frustum in the given <code>origin</code>.
      *
      * @param origin
-     *          will hold the perspective origin
+     *               will hold the perspective origin
      * @return the <code>origin</code> vector
      */
     public Vector3fc origin(Vector3f origin) {
@@ -126,11 +127,11 @@ public class FrustumRayBuilder {
      * from the bottom-left to the top-right frustum corners.
      *
      * @param x
-     *          the interpolation factor along the left-to-right frustum planes, within <code>[0..1]</code>
+     *            the interpolation factor along the left-to-right frustum planes, within <code>[0..1]</code>
      * @param y
-     *          the interpolation factor along the bottom-to-top frustum planes, within <code>[0..1]</code>
+     *            the interpolation factor along the bottom-to-top frustum planes, within <code>[0..1]</code>
      * @param dir
-     *          will hold the normalized ray direction
+     *            will hold the normalized ray direction
      * @return the <code>dir</code> vector
      */
     public Vector3fc dir(float x, float y, Vector3f dir) {
@@ -150,5 +151,4 @@ public class FrustumRayBuilder {
         dir.z = dz * invLen;
         return dir;
     }
-
 }

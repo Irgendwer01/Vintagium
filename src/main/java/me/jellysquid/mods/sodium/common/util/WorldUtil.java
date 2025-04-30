@@ -1,6 +1,5 @@
 package me.jellysquid.mods.sodium.common.util;
 
-import me.jellysquid.mods.sodium.client.world.VanillaFluidBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -10,6 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.IFluidBlock;
+
+import me.jellysquid.mods.sodium.client.world.VanillaFluidBlock;
 import repack.joml.Vector3d;
 
 /**
@@ -47,14 +48,14 @@ public class WorldUtil {
 
         IBlockState state = world.getBlockState(pos);
         if (state.getValue(BlockLiquid.LEVEL) >= 8) {
-            if (thizz.isSideSolid(world, pos.north(), EnumFacing.NORTH)
-                    || thizz.isSideSolid(world, pos.south(), EnumFacing.SOUTH)
-                    || thizz.isSideSolid(world, pos.west(), EnumFacing.WEST)
-                    || thizz.isSideSolid(world, pos.east(), EnumFacing.EAST)
-                    || thizz.isSideSolid(world, pos.up().south(), EnumFacing.NORTH)
-                    || thizz.isSideSolid(world, pos.up().west(), EnumFacing.SOUTH)
-                    || thizz.isSideSolid(world, pos.up().west(), EnumFacing.WEST)
-                    || thizz.isSideSolid(world, pos.up().east(), EnumFacing.EAST)) {
+            if (thizz.isSideSolid(world, pos.north(), EnumFacing.NORTH) ||
+                    thizz.isSideSolid(world, pos.south(), EnumFacing.SOUTH) ||
+                    thizz.isSideSolid(world, pos.west(), EnumFacing.WEST) ||
+                    thizz.isSideSolid(world, pos.east(), EnumFacing.EAST) ||
+                    thizz.isSideSolid(world, pos.up().south(), EnumFacing.NORTH) ||
+                    thizz.isSideSolid(world, pos.up().west(), EnumFacing.SOUTH) ||
+                    thizz.isSideSolid(world, pos.up().west(), EnumFacing.WEST) ||
+                    thizz.isSideSolid(world, pos.up().east(), EnumFacing.EAST)) {
                 velocity = velocity.normalize().add(0.0D, -6.0D, 0.0D);
             }
         }
@@ -136,10 +137,10 @@ public class WorldUtil {
     }
 
     public static IFluidBlock toFluidBlock(Block block) {
-        if(block instanceof VanillaFluidBlock) {
+        if (block instanceof VanillaFluidBlock) {
             return ((VanillaFluidBlock) block).getFakeFluidBlock();
-        } else if(block instanceof IFluidBlock) {
-            return (IFluidBlock)block;
+        } else if (block instanceof IFluidBlock) {
+            return (IFluidBlock) block;
         } else {
             return null;
         }

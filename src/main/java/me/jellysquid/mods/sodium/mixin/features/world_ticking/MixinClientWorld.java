@@ -1,22 +1,25 @@
 package me.jellysquid.mods.sodium.mixin.features.world_ticking;
 
-import me.jellysquid.mods.sodium.client.util.rand.XoRoShiRoRandom;
+import java.util.Random;
+
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import java.util.Random;
+import me.jellysquid.mods.sodium.client.util.rand.XoRoShiRoRandom;
 
 @Mixin(WorldClient.class)
 public abstract class MixinClientWorld extends World {
 
-    protected MixinClientWorld(ISaveHandler saveHandler, WorldInfo worldInfo, WorldProvider worldProvider, Profiler profiler, boolean client) {
+    protected MixinClientWorld(ISaveHandler saveHandler, WorldInfo worldInfo, WorldProvider worldProvider,
+                               Profiler profiler, boolean client) {
         super(saveHandler, worldInfo, worldProvider, profiler, client);
     }
 
@@ -24,5 +27,4 @@ public abstract class MixinClientWorld extends World {
     private Random redirectRandomTickRandom() {
         return new XoRoShiRoRandom();
     }
-
 }

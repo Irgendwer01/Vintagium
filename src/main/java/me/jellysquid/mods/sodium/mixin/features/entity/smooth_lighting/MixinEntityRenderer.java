@@ -1,16 +1,18 @@
 package me.jellysquid.mods.sodium.mixin.features.entity.smooth_lighting;
 
-import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
-import me.jellysquid.mods.sodium.client.model.light.EntityLighter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
+import me.jellysquid.mods.sodium.client.model.light.EntityLighter;
 
 @Mixin(RenderManager.class)
 public abstract class MixinEntityRenderer<T extends Entity> {
@@ -23,9 +25,11 @@ public abstract class MixinEntityRenderer<T extends Entity> {
         this.tickDelta = tickDelta;
     }
 
-    @Redirect(method = "renderEntityStatic", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getBrightnessForRender()I"))
+    @Redirect(method = "renderEntityStatic",
+              at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getBrightnessForRender()I"))
     private int sodium$getBrightnessForRender(Entity self) {
-        if (Minecraft.getMinecraft().gameSettings.ambientOcclusion == SodiumGameOptions.LightingQuality.HIGH.ordinal()) {
+        if (Minecraft.getMinecraft().gameSettings.ambientOcclusion ==
+                SodiumGameOptions.LightingQuality.HIGH.ordinal()) {
             return EntityLighter.getBlendedLight(self, tickDelta);
         }
 

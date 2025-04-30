@@ -1,5 +1,16 @@
 package me.jellysquid.mods.sodium.client.render.chunk.backends.multidraw;
 
+import java.nio.ByteBuffer;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.Util;
+import net.minecraft.util.text.TextFormatting;
+
+import org.lwjgl.opengl.GL11;
+
 import it.unimi.dsi.fastutil.objects.ObjectArrayFIFOQueue;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.jellysquid.mods.sodium.client.gl.arena.GlBufferArena;
@@ -8,10 +19,10 @@ import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexAttribute;
 import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexAttributeBinding;
 import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexAttributeFormat;
 import me.jellysquid.mods.sodium.client.gl.buffer.*;
-import me.jellysquid.mods.sodium.client.gl.device.DrawCommandList;
-import me.jellysquid.mods.sodium.client.gl.func.GlFunctions;
 import me.jellysquid.mods.sodium.client.gl.device.CommandList;
+import me.jellysquid.mods.sodium.client.gl.device.DrawCommandList;
 import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
+import me.jellysquid.mods.sodium.client.gl.func.GlFunctions;
 import me.jellysquid.mods.sodium.client.gl.tessellation.GlPrimitiveType;
 import me.jellysquid.mods.sodium.client.gl.tessellation.GlTessellation;
 import me.jellysquid.mods.sodium.client.gl.tessellation.TessellationBinding;
@@ -30,15 +41,6 @@ import me.jellysquid.mods.sodium.client.render.chunk.region.ChunkRegion;
 import me.jellysquid.mods.sodium.client.render.chunk.region.ChunkRegionManager;
 import me.jellysquid.mods.sodium.client.render.chunk.shader.ChunkRenderShaderBackend;
 import me.jellysquid.mods.sodium.client.render.chunk.shader.ChunkShaderBindingPoints;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.Util;
-import net.minecraft.util.text.TextFormatting;
-import org.lwjgl.opengl.GL11;
-
-import java.nio.ByteBuffer;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Shader-based chunk renderer which makes use of a custom memory allocator on top of large buffer objects to allow
@@ -55,7 +57,8 @@ import java.util.regex.Pattern;
  * parameters.
  *
  * However, an unfortunate consequence is that if we run out of space in a buffer, we need to re-allocate the entire
- * storage, which can take a ton of time! With old OpenGL 2.1 code, the only way to do this would be to copy the buffer's
+ * storage, which can take a ton of time! With old OpenGL 2.1 code, the only way to do this would be to copy the
+ * buffer's
  * memory from the graphics card over the host bus into CPU memory, allocate a new buffer, and then copy it back over
  * the bus and into graphics card. For reasons that should be obvious, this is extremely inefficient and requires the
  * CPU and GPU to be synchronized.
@@ -78,6 +81,7 @@ import java.util.regex.Pattern;
  * reduced up to a factor of ~32x.
  */
 public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<MultidrawGraphicsState> {
+
     private final ChunkRegionManager<MultidrawGraphicsState> bufferManager;
 
     private final ObjectArrayList<ChunkRegion<MultidrawGraphicsState>> pendingBatches = new ObjectArrayList<>();
@@ -98,7 +102,8 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
         try (CommandList commands = device.createCommandList()) {
             this.uploadBuffer = commands.createMutableBuffer(GlBufferUsage.GL_STREAM_DRAW);
             this.uniformBuffer = commands.createMutableBuffer(GlBufferUsage.GL_STATIC_DRAW);
-            this.commandBuffer = isWindowsIntelDriver() ? null : commands.createMutableBuffer(GlBufferUsage.GL_STREAM_DRAW);
+            this.commandBuffer = isWindowsIntelDriver() ? null :
+                    commands.createMutableBuffer(GlBufferUsage.GL_STREAM_DRAW);
         }
 
         this.uniformBufferBuilder = ChunkDrawParamsVector.create(2048);
@@ -107,7 +112,7 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
 
     @Override
     public void upload(CommandList commandList, Iterator<ChunkBuildResult<MultidrawGraphicsState>> queue) {
-    	if(queue != null) {
+        if (queue != null) {
             this.setupUploadBatches(queue);
         }
 
@@ -142,10 +147,12 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
 
                         commandList.uploadData(this.uploadBuffer, upload.buffer);
 
-                        GlBufferSegment segment = arena.uploadBuffer(commandList, this.uploadBuffer, 0, upload.buffer.capacity());
+                        GlBufferSegment segment = arena.uploadBuffer(commandList, this.uploadBuffer, 0,
+                                upload.buffer.capacity());
 
-                        MultidrawGraphicsState graphicsState = new MultidrawGraphicsState(render, region, segment, meshData, this.vertexFormat);
-                        if(pass.isTranslucent()) {
+                        MultidrawGraphicsState graphicsState = new MultidrawGraphicsState(render, region, segment,
+                                meshData, this.vertexFormat);
+                        if (pass.isTranslucent()) {
                             upload.buffer.limit(upload.buffer.capacity());
                             upload.buffer.position(0);
 
@@ -161,7 +168,8 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
             }
 
             // Check if the tessellation needs to be updated
-            // This happens whenever the backing buffer object for the arena changes, or if it hasn't already been created
+            // This happens whenever the backing buffer object for the arena changes, or if it hasn't already been
+            // created
             if (region.getTessellation() == null || buffer != arena.getBuffer()) {
                 if (region.getTessellation() != null) {
                     commandList.deleteTessellation(region.getTessellation());
@@ -206,7 +214,8 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
     }
 
     @Override
-    public void render(CommandList commandList, ChunkRenderListIterator<MultidrawGraphicsState> renders, ChunkCameraContext camera) {
+    public void render(CommandList commandList, ChunkRenderListIterator<MultidrawGraphicsState> renders,
+                       ChunkCameraContext camera) {
         this.bufferManager.cleanup();
 
         this.setupDrawBatches(commandList, renders, camera);
@@ -231,16 +240,17 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
             ChunkDrawCallBatcher batch = region.getDrawBatcher();
 
             if (!batch.isEmpty()) {
-	            try (DrawCommandList drawCommandList = commandList.beginTessellating(region.getTessellation())) {
-                    if(pointerBuffer == null) {
+                try (DrawCommandList drawCommandList = commandList.beginTessellating(region.getTessellation())) {
+                    if (pointerBuffer == null) {
                         drawCommandList.multiDrawArraysIndirect(pointer, batch.getCount(), 0 /* tightly packed */);
                     } else {
-                        drawCommandList.multiDrawArraysIndirect(pointerBuffer, batch.getCount(), 0 /* tightly packed */);
+                        drawCommandList.multiDrawArraysIndirect(pointerBuffer, batch.getCount(),
+                                0 /* tightly packed */);
                     }
-	            }
+                }
             }
 
-            if(pointerBuffer == null) {
+            if (pointerBuffer == null) {
                 pointer += batch.getArrayLength();
             } else {
                 pointerBuffer.position(pointerBuffer.position() + batch.getArrayLength());
@@ -252,12 +262,13 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
         this.pendingBatches.clear();
     }
 
-    private static final Comparator<ChunkRegion<?>> REGION_REVERSER = Comparator.<ChunkRegion<?>>comparingDouble(r -> r.camDistance).reversed();
+    private static final Comparator<ChunkRegion<?>> REGION_REVERSER = Comparator
+            .<ChunkRegion<?>>comparingDouble(r -> r.camDistance).reversed();
 
     private void buildCommandBuffer() {
         this.commandClientBufferBuilder.begin();
 
-        if(this.reverseRegions) {
+        if (this.reverseRegions) {
             ChunkCameraContext camera = this.regionCamera;
             for (ChunkRegion<?> region : this.pendingBatches) {
                 float x = camera.getChunkModelOffset(region.getCenterBlockX(), camera.blockOriginX, camera.originX);
@@ -282,14 +293,15 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
     private void setupUploadBatches(Iterator<ChunkBuildResult<MultidrawGraphicsState>> renders) {
         while (renders.hasNext()) {
             ChunkBuildResult<MultidrawGraphicsState> result = renders.next();
-            
-            if(result == null) {
+
+            if (result == null) {
                 continue;
             }
-            
+
             ChunkRenderContainer<MultidrawGraphicsState> render = result.render;
 
-            ChunkRegion<MultidrawGraphicsState> region = this.bufferManager.getRegion(render.getChunkX(), render.getChunkY(), render.getChunkZ());
+            ChunkRegion<MultidrawGraphicsState> region = this.bufferManager.getRegion(render.getChunkX(),
+                    render.getChunkY(), render.getChunkZ());
 
             if (region == null) {
                 if (result.data.getMeshSize() <= 0) {
@@ -297,7 +309,8 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
                     continue;
                 }
 
-                region = this.bufferManager.getOrCreateRegion(render.getChunkX(), render.getChunkY(), render.getChunkZ());
+                region = this.bufferManager.getOrCreateRegion(render.getChunkX(), render.getChunkY(),
+                        render.getChunkZ());
             }
 
             ObjectArrayList<ChunkBuildResult<MultidrawGraphicsState>> uploadQueue = region.getUploadQueue();
@@ -310,7 +323,8 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
         }
     }
 
-    private void setupDrawBatches(CommandList commandList, ChunkRenderListIterator<MultidrawGraphicsState> it, ChunkCameraContext camera) {
+    private void setupDrawBatches(CommandList commandList, ChunkRenderListIterator<MultidrawGraphicsState> it,
+                                  ChunkCameraContext camera) {
         this.uniformBufferBuilder.reset();
         this.regionCamera = camera;
 
@@ -400,7 +414,8 @@ public class MultidrawChunkRenderBackend extends ChunkRenderShaderBackend<Multid
     }
 
     // https://www.intel.com/content/www/us/en/support/articles/000005654/graphics.html
-    private static final Pattern INTEL_BUILD_MATCHER = Pattern.compile("(\\d.\\d.\\d) - Build (\\d+).(\\d+).(\\d+).(\\d+)");
+    private static final Pattern INTEL_BUILD_MATCHER = Pattern
+            .compile("(\\d.\\d.\\d) - Build (\\d+).(\\d+).(\\d+).(\\d+)");
 
     private static final String INTEL_VENDOR_NAME = "Intel";
 

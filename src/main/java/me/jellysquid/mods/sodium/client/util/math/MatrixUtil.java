@@ -1,11 +1,13 @@
 package me.jellysquid.mods.sodium.client.util.math;
 
-import me.jellysquid.mods.sodium.client.util.Norm3b;
 import net.minecraft.util.EnumFacing;
+
+import me.jellysquid.mods.sodium.client.util.Norm3b;
 import repack.joml.Matrix3f;
 import repack.joml.Matrix4f;
 
 public class MatrixUtil {
+
     public static int computeNormal(Matrix3f normalMatrix, EnumFacing facing) {
         return ((Matrix3fExtended) normalMatrix).computeNormal(facing);
     }

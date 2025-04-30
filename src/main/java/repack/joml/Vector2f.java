@@ -55,14 +55,13 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
     /**
      * Create a new {@link Vector2f} and initialize its components to zero.
      */
-    public Vector2f() {
-    }
+    public Vector2f() {}
 
     /**
      * Create a new {@link Vector2f} and initialize both of its components with the given value.
      *
      * @param d
-     *        the value of both components
+     *          the value of both components
      */
     public Vector2f(float d) {
         this.x = d;
@@ -73,9 +72,9 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Create a new {@link Vector2f} and initialize its components to the given values.
      *
      * @param x
-     *        the x component
+     *          the x component
      * @param y
-     *        the y component
+     *          the y component
      */
     public Vector2f(float x, float y) {
         this.x = x;
@@ -86,7 +85,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Create a new {@link Vector2f} and initialize its components to the one of the given vector.
      *
      * @param v
-     *        the {@link Vector2fc} to copy the values from
+     *          the {@link Vector2fc} to copy the values from
      */
     public Vector2f(Vector2fc v) {
         x = v.x();
@@ -97,7 +96,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Create a new {@link Vector2f} and initialize its components to the one of the given vector.
      *
      * @param v
-     *        the {@link Vector2ic} to copy the values from
+     *          the {@link Vector2ic} to copy the values from
      */
     public Vector2f(Vector2ic v) {
         x = v.x();
@@ -109,7 +108,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * two elements of the given array.
      *
      * @param xy
-     *          the array containing at least two elements
+     *           the array containing at least two elements
      */
     public Vector2f(float[] xy) {
         this.x = xy[0];
@@ -127,7 +126,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * the absolute position as parameter.
      *
      * @param buffer
-     *        values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      * @see #Vector2f(int, ByteBuffer)
      */
     public Vector2f(ByteBuffer buffer) {
@@ -141,7 +140,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *        the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer values will be read in <code>x, y</code> order
      */
     public Vector2f(int index, ByteBuffer buffer) {
@@ -159,7 +158,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * the absolute position as parameter.
      *
      * @param buffer
-     *        values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      * @see #Vector2f(int, FloatBuffer)
      */
     public Vector2f(FloatBuffer buffer) {
@@ -173,9 +172,9 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * This method will not increment the position of the given FloatBuffer.
      *
      * @param index
-     *        the absolute position into the FloatBuffer
+     *               the absolute position into the FloatBuffer
      * @param buffer
-     *        values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      */
     public Vector2f(int index, FloatBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
@@ -193,7 +192,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Set the x and y components to the supplied value.
      *
      * @param d
-     *        the value of both components
+     *          the value of both components
      * @return this
      */
     public Vector2f set(float d) {
@@ -206,9 +205,9 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Set the x and y components to the supplied values.
      *
      * @param x
-     *        the x component
+     *          the x component
      * @param y
-     *        the y component
+     *          the y component
      * @return this
      */
     public Vector2f set(float x, float y) {
@@ -221,7 +220,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Set the x and y components to the supplied value.
      *
      * @param d
-     *        the value of both components
+     *          the value of both components
      * @return this
      */
     public Vector2f set(double d) {
@@ -234,9 +233,9 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Set the x and y components to the supplied values.
      *
      * @param x
-     *        the x component
+     *          the x component
      * @param y
-     *        the y component
+     *          the y component
      * @return this
      */
     public Vector2f set(double x, double y) {
@@ -249,7 +248,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Set this {@link Vector2f} to the values of v.
      *
      * @param v
-     *        the vector to copy from
+     *          the vector to copy from
      * @return this
      */
     public Vector2f set(Vector2fc v) {
@@ -262,7 +261,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Set this {@link Vector2f} to the values of v.
      *
      * @param v
-     *        the vector to copy from
+     *          the vector to copy from
      * @return this
      */
     public Vector2f set(Vector2ic v) {
@@ -278,7 +277,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * there is the possibility to lose precision.
      *
      * @param v
-     *        the vector to copy from
+     *          the vector to copy from
      * @return this
      */
     public Vector2f set(Vector2dc v) {
@@ -291,7 +290,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Set the two components of this vector to the first two elements of the given array.
      *
      * @param xy
-     *          the array containing at least two elements
+     *           the array containing at least two elements
      * @return this
      */
     public Vector2f set(float[] xy) {
@@ -311,7 +310,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * the absolute position as parameter.
      *
      * @param buffer
-     *        values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      * @return this
      * @see #set(int, ByteBuffer)
      */
@@ -327,9 +326,9 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *        the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *        values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      * @return this
      */
     public Vector2f set(int index, ByteBuffer buffer) {
@@ -348,7 +347,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * the absolute position as parameter.
      *
      * @param buffer
-     *        values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      * @return this
      * @see #set(int, FloatBuffer)
      */
@@ -364,9 +363,9 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * This method will not increment the position of the given FloatBuffer.
      *
      * @param index
-     *        the absolute position into the FloatBuffer
+     *               the absolute position into the FloatBuffer
      * @param buffer
-     *        values will be read in <code>x, y</code> order
+     *               values will be read in <code>x, y</code> order
      * @return this
      */
     public Vector2f set(int index, FloatBuffer buffer) {
@@ -380,10 +379,11 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *              the off-heap memory address to read the vector values from
+     *                the off-heap memory address to read the vector values from
      * @return this
      */
     public Vector2f setFromAddress(long address) {
@@ -395,12 +395,12 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
 
     public float get(int component) throws IllegalArgumentException {
         switch (component) {
-        case 0:
-            return x;
-        case 1:
-            return y;
-        default:
-            throw new IllegalArgumentException();
+            case 0:
+                return x;
+            case 1:
+                return y;
+            default:
+                throw new IllegalArgumentException();
         }
     }
 
@@ -426,9 +426,9 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Set the value of the specified component of this vector.
      *
      * @param component
-     *          the component whose value to set, within <code>[0..1]</code>
+     *                  the component whose value to set, within <code>[0..1]</code>
      * @param value
-     *          the value to set
+     *                  the value to set
      * @return this
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..1]</code>
      */
@@ -530,8 +530,8 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
     }
 
     public float angle(Vector2fc v) {
-        float dot = x*v.x() + y*v.y();
-        float det = x*v.y() - y*v.x();
+        float dot = x * v.x() + y * v.y();
+        float det = x * v.y() - y * v.x();
         return Math.atan2(det, dot);
     }
 
@@ -599,13 +599,13 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Return the distance between <code>(x1, y1)</code> and <code>(x2, y2)</code>.
      *
      * @param x1
-     *          the x component of the first vector
+     *           the x component of the first vector
      * @param y1
-     *          the y component of the first vector
+     *           the y component of the first vector
      * @param x2
-     *          the x component of the second vector
+     *           the x component of the second vector
      * @param y2
-     *          the y component of the second vector
+     *           the y component of the second vector
      * @return the euclidean distance
      */
     public static float distance(float x1, float y1, float x2, float y2) {
@@ -618,13 +618,13 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Return the squared distance between <code>(x1, y1)</code> and <code>(x2, y2)</code>.
      *
      * @param x1
-     *          the x component of the first vector
+     *           the x component of the first vector
      * @param y1
-     *          the y component of the first vector
+     *           the y component of the first vector
      * @param x2
-     *          the x component of the second vector
+     *           the x component of the second vector
      * @param y2
-     *          the y component of the second vector
+     *           the y component of the second vector
      * @return the euclidean distance squared
      */
     public static float distanceSquared(float x1, float y1, float x2, float y2) {
@@ -656,7 +656,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Scale this vector to have the given length.
      *
      * @param length
-     *          the desired length
+     *               the desired length
      * @return this
      */
     public Vector2f normalize(float length) {
@@ -677,7 +677,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Add <code>v</code> to this vector.
      *
      * @param v
-     *        the vector to add
+     *          the vector to add
      * @return this
      */
     public Vector2f add(Vector2fc v) {
@@ -728,7 +728,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
     }
 
     public void readExternal(ObjectInput in) throws IOException,
-            ClassNotFoundException {
+                                             ClassNotFoundException {
         x = in.readFloat();
         y = in.readFloat();
     }
@@ -754,7 +754,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Multiply the components of this vector by the given scalar.
      *
      * @param scalar
-     *        the value to multiply this vector's components by
+     *               the value to multiply this vector's components by
      * @return this
      */
     public Vector2f mul(float scalar) {
@@ -833,7 +833,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * value.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @return this
      */
     public Vector2f div(float scalar) {
@@ -875,7 +875,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Multiply the given matrix with this Vector2f and store the result in <code>this</code>.
      *
      * @param mat
-     *          the matrix
+     *            the matrix
      * @return this
      */
     public Vector2f mul(Matrix2fc mat) {
@@ -898,7 +898,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Multiply the given matrix with this Vector2f and store the result in <code>this</code>.
      *
      * @param mat
-     *          the matrix
+     *            the matrix
      * @return this
      */
     public Vector2f mul(Matrix2dc mat) {
@@ -921,7 +921,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Multiply the transpose of the given matrix with this Vector2f store the result in <code>this</code>.
      *
      * @param mat
-     *          the matrix
+     *            the matrix
      * @return this
      */
     public Vector2f mulTranspose(Matrix2fc mat) {
@@ -946,7 +946,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * This method assumes the <code>z</code> component of <code>this</code> to be <code>1.0</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *            the matrix to multiply this vector by
      * @return this
      */
     public Vector2f mulPosition(Matrix3x2fc mat) {
@@ -967,7 +967,7 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * This method assumes the <code>z</code> component of <code>this</code> to be <code>0.0</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *            the matrix to multiply this vector by
      * @return this
      */
     public Vector2f mulDirection(Matrix3x2fc mat) {
@@ -986,13 +986,14 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
      * Linearly interpolate <code>this</code> and <code>other</code> using the given interpolation factor <code>t</code>
      * and store the result in <code>this</code>.
      * <p>
-     * If <code>t</code> is <code>0.0</code> then the result is <code>this</code>. If the interpolation factor is <code>1.0</code>
+     * If <code>t</code> is <code>0.0</code> then the result is <code>this</code>. If the interpolation factor is
+     * <code>1.0</code>
      * then the result is <code>other</code>.
      *
      * @param other
-     *          the other vector
+     *              the other vector
      * @param t
-     *          the interpolation factor between 0.0 and 1.0
+     *              the interpolation factor between 0.0 and 1.0
      * @return this
      */
     public Vector2f lerp(Vector2fc other, float t) {
@@ -1055,7 +1056,8 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
     /**
      * Return a string representation of this vector.
      * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
+     * This method creates a new {@link DecimalFormat} on every invocation with the format string
+     * "<code>0.000E0;-</code>".
      *
      * @return the string representation
      */
@@ -1064,10 +1066,11 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
     }
 
     /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
+     * Return a string representation of this vector by formatting the vector components with the given
+     * {@link NumberFormat}.
      *
      * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
+     *                  the {@link NumberFormat} used to format the vector components with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {
@@ -1248,5 +1251,4 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-
 }

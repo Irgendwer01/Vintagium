@@ -1,8 +1,8 @@
 package me.jellysquid.mods.sodium.client.world.cloned;
 
-import it.unimi.dsi.fastutil.shorts.Short2ObjectMap;
-import it.unimi.dsi.fastutil.shorts.Short2ObjectOpenHashMap;
-import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -14,10 +14,12 @@ import net.minecraft.world.chunk.NibbleArray;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import it.unimi.dsi.fastutil.shorts.Short2ObjectMap;
+import it.unimi.dsi.fastutil.shorts.Short2ObjectOpenHashMap;
+import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
 
 public class ClonedChunkSection {
+
     private static final ExtendedBlockStorage EMPTY_SECTION = new ExtendedBlockStorage(0, false);
 
     private final AtomicInteger referenceCount = new AtomicInteger(0);
@@ -51,7 +53,7 @@ public class ClonedChunkSection {
 
         ExtendedBlockStorage section = getChunkSection(chunk, pos);
 
-        if (section == Chunk.NULL_BLOCK_STORAGE/*ChunkSection.isEmpty(section)*/) {
+        if (section == Chunk.NULL_BLOCK_STORAGE/* ChunkSection.isEmpty(section) */) {
             section = EMPTY_SECTION;
         }
 
@@ -60,7 +62,8 @@ public class ClonedChunkSection {
 
         this.biomeData = new Biome[chunk.getBiomeArray().length];
 
-        StructureBoundingBox box = new StructureBoundingBox(pos.getMinX(), pos.getMinY(), pos.getMinZ(), pos.getMaxX(), pos.getMaxY(), pos.getMaxZ());
+        StructureBoundingBox box = new StructureBoundingBox(pos.getMinX(), pos.getMinY(), pos.getMinZ(), pos.getMaxX(),
+                pos.getMaxY(), pos.getMaxZ());
 
         this.blockEntities.clear();
 
@@ -68,15 +71,16 @@ public class ClonedChunkSection {
             BlockPos entityPos = entry.getKey();
 
             if (box.isVecInside(entityPos)) {
-                //this.blockEntities.put(BlockPos.asLong(entityPos.getX() & 15, entityPos.getY() & 15, entityPos.getZ() & 15), entry.getValue());
-            	this.blockEntities.put(ChunkSectionPos.packLocal(entityPos), entry.getValue());
+                // this.blockEntities.put(BlockPos.asLong(entityPos.getX() & 15, entityPos.getY() & 15, entityPos.getZ()
+                // & 15), entry.getValue());
+                this.blockEntities.put(ChunkSectionPos.packLocal(entityPos), entry.getValue());
             }
         }
 
         BlockPos.MutableBlockPos biomePos = new BlockPos.MutableBlockPos();
         // Fill biome data
-        for(int z = pos.getMinZ(); z <= pos.getMaxZ(); z++) {
-            for(int x = pos.getMinX(); x <= pos.getMaxX(); x++) {
+        for (int z = pos.getMinZ(); z <= pos.getMaxZ(); z++) {
+            for (int x = pos.getMinX(); x <= pos.getMaxX(); x++) {
                 biomePos.setPos(x, 100, z);
                 this.biomeData[((z & 15) << 4) | (x & 15)] = world.getBiome(biomePos);
             }
@@ -141,7 +145,7 @@ public class ClonedChunkSection {
     public ClonedChunkSectionCache getBackingCache() {
         return this.backingCache;
     }
-    
+
     /**
      * @param x The local x-coordinate
      * @param y The local y-coordinate

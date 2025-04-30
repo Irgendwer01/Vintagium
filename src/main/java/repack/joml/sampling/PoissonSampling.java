@@ -31,7 +31,9 @@ import repack.joml.Vector2f;
 /**
  * Generates Poisson samples.
  * <p>
- * The algorithm implemented here is based on <a href= "http://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf">Fast Poisson Disk Sampling in Arbitrary
+ * The algorithm implemented here is based on
+ * <a href= "http://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf">Fast Poisson Disk Sampling in
+ * Arbitrary
  * Dimensions</a>.
  *
  * @author Kai Burjack
@@ -41,7 +43,9 @@ public class PoissonSampling {
     /**
      * Generates Poisson samples on a disk.
      * <p>
-     * The algorithm implemented here is based on <a href= "http://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf">Fast Poisson Disk Sampling in Arbitrary
+     * The algorithm implemented here is based on
+     * <a href= "http://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf">Fast Poisson Disk Sampling in
+     * Arbitrary
      * Dimensions</a>.
      *
      * @author Kai Burjack
@@ -59,21 +63,24 @@ public class PoissonSampling {
         private final ArrayList processList;
 
         /**
-         * Create a new instance of {@link Disk} which computes poisson-distributed samples on a disk with the given radius <code>diskRadius</code> and notifies the given
+         * Create a new instance of {@link Disk} which computes poisson-distributed samples on a disk with the given
+         * radius <code>diskRadius</code> and notifies the given
          * <code>callback</code> for each found sample point.
          * <p>
-         * The samples are distributed evenly on the disk with a minimum distance to one another of at least <code>minDist</code>.
+         * The samples are distributed evenly on the disk with a minimum distance to one another of at least
+         * <code>minDist</code>.
          *
          * @param seed
-         *            the seed to initialize the random number generator with
+         *                   the seed to initialize the random number generator with
          * @param diskRadius
-         *            the disk radius
+         *                   the disk radius
          * @param minDist
-         *            the minimum distance between any two generated samples
+         *                   the minimum distance between any two generated samples
          * @param k
-         *            determines how many samples are tested before rejection. Higher values produce better results. Typical values are 20 to 30
+         *                   determines how many samples are tested before rejection. Higher values produce better
+         *                   results. Typical values are 20 to 30
          * @param callback
-         *            will be notified about each sample point
+         *                   will be notified about each sample point
          */
         public Disk(long seed, float diskRadius, float minDist, int k, Callback2d callback) {
             this.diskRadius = diskRadius;
@@ -102,7 +109,8 @@ public class PoissonSampling {
                 int i = rnd.nextInt(processList.size());
                 Vector2f sample = (Vector2f) processList.get(i);
                 boolean found = false;
-                search: for (int s = 0; s < k; s++) {
+                search:
+                for (int s = 0; s < k; s++) {
                     float angle = rnd.nextFloat() * (float) Math.PI2;
                     float radius = minDist * (rnd.nextFloat() + 1.0f);
                     x = (float) (radius * Math.sin_roquen_9(angle + Math.PIHalf));
@@ -155,7 +163,5 @@ public class PoissonSampling {
             int col = (int) ((p.x + diskRadius) / cellSize);
             grid[row * numCells + col] = p;
         }
-
     }
-
 }

@@ -5,6 +5,7 @@ import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkRenderData;
 import me.jellysquid.mods.sodium.client.render.chunk.format.ModelVertexSink;
 
 public class BakedChunkModelBuffers implements ChunkModelBuffers {
+
     private final ModelVertexSink[] builders;
     private final ChunkRenderData.Builder renderData;
 

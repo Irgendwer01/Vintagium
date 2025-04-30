@@ -1,5 +1,20 @@
 package me.jellysquid.mods.sodium.client.render.chunk.compile;
 
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.util.ReportedException;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import it.unimi.dsi.fastutil.objects.Reference2ReferenceLinkedOpenHashMap;
 import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
@@ -18,21 +33,9 @@ import me.jellysquid.mods.sodium.client.world.WorldSlice;
 import me.jellysquid.mods.sodium.client.world.cloned.ChunkRenderContext;
 import me.jellysquid.mods.sodium.client.world.cloned.ClonedChunkSectionCache;
 import me.jellysquid.mods.sodium.common.util.collections.DequeDrain;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.util.ReportedException;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ChunkBuilder<T extends ChunkGraphicsState> {
+
     /**
      * The maximum number of jobs that can be queued for a given worker thread.
      */
@@ -129,8 +132,7 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
         for (Thread thread : this.threads) {
             try {
                 thread.join();
-            } catch (InterruptedException ignored) {
-            }
+            } catch (InterruptedException ignored) {}
         }
 
         this.threads.clear();
@@ -167,8 +169,9 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
 
             // Allow a result to replace the previous result in the map if one of the following conditions hold:
             // * There is no previous upload in the queue
-            // * The new upload replaces more render types than the old one (in practice, is a rebuild while the other is a sort)
-            if(oldResult == null || result.passesToUpload.length >= oldResult.passesToUpload.length) {
+            // * The new upload replaces more render types than the old one (in practice, is a rebuild while the other
+            // is a sort)
+            if (oldResult == null || result.passesToUpload.length >= oldResult.passesToUpload.length) {
                 map.put(section, result);
             }
         }
@@ -185,7 +188,8 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
             return false;
         }
 
-        this.backend.upload(RenderDevice.INSTANCE.createCommandList(), filterChunkBuilds(new DequeDrain<>(this.uploadQueue)));
+        this.backend.upload(RenderDevice.INSTANCE.createCommandList(),
+                filterChunkBuilds(new DequeDrain<>(this.uploadQueue)));
 
         return true;
     }
@@ -247,7 +251,8 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
      * Initializes this chunk builder for the given world. If the builder is already running (which can happen during
      * a world teleportation event), the worker threads will first be stopped and all pending tasks will be discarded
      * before being started again.
-     * @param world The world instance
+     * 
+     * @param world             The world instance
      * @param renderPassManager The render pass manager used for the world
      */
     public void init(WorldClient world, BlockRenderPassManager renderPassManager) {
@@ -295,6 +300,7 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
      * Creates a rebuild task and defers it to the work queue. When the task is completed, it will be moved onto the
      * completed uploads queued which will then be drained during the next available synchronization point with the
      * main thread.
+     * 
      * @param render The render to rebuild
      */
     public void deferRebuild(ChunkRenderContainer<T> render) {
@@ -305,16 +311,17 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
      * Creates a rebuild task and defers it to the work queue. When the task is completed, it will be moved onto the
      * completed uploads queued which will then be drained during the next available synchronization point with the
      * main thread.
+     * 
      * @param render The render to rebuild
      */
     public void deferSort(ChunkRenderContainer<T> render) {
         handleCompletion(this.scheduleSortTaskAsync(render));
     }
 
-
     /**
      * Enqueues the build task result to the pending result queue to be later processed during the next available
      * synchronization point on the main thread.
+     * 
      * @param result The build task's result
      */
     private void enqueueUpload(ChunkBuildResult<T> result) {
@@ -323,6 +330,7 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
 
     /**
      * Schedules the rebuild task asynchronously on the worker pool, returning a future wrapping the task.
+     * 
      * @param render The render to rebuild
      */
     public CompletableFuture<ChunkBuildResult<T>> scheduleRebuildTaskAsync(ChunkRenderContainer<T> render) {
@@ -331,6 +339,7 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
 
     /**
      * Schedules the rebuild task asynchronously on the worker pool, returning a future wrapping the task.
+     * 
      * @param render The render to rebuild
      */
     public CompletableFuture<ChunkBuildResult<T>> scheduleSortTaskAsync(ChunkRenderContainer<T> render) {
@@ -339,6 +348,7 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
 
     /**
      * Creates a task to rebuild the geometry of a {@link ChunkRenderContainer}.
+     * 
      * @param render The render to rebuild
      */
     private ChunkRenderBuildTask<T> createRebuildTask(ChunkRenderContainer<T> render) {
@@ -349,7 +359,8 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
         if (context == null) {
             return new ChunkRenderEmptyBuildTask<>(render);
         } else {
-            return new ChunkRenderRebuildTask<>(render, context, render.getRenderOrigin()).withCameraPosition(this.cameraPosition);
+            return new ChunkRenderRebuildTask<>(render, context, render.getRenderOrigin())
+                    .withCameraPosition(this.cameraPosition);
         }
     }
 
@@ -364,6 +375,7 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
     }
 
     private class WorkerRunnable implements Runnable {
+
         private final AtomicBoolean running = ChunkBuilder.this.running;
 
         // The re-useable build buffers used by this worker for building chunk meshes
@@ -425,8 +437,7 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
                 synchronized (ChunkBuilder.this.jobNotifier) {
                     try {
                         ChunkBuilder.this.jobNotifier.wait();
-                    } catch (InterruptedException ignored) {
-                    }
+                    } catch (InterruptedException ignored) {}
                 }
             }
 
@@ -435,6 +446,7 @@ public class ChunkBuilder<T extends ChunkGraphicsState> {
     }
 
     private static class WrappedTask<T extends ChunkGraphicsState> implements CancellationSource {
+
         private final ChunkRenderBuildTask<T> task;
         private final CompletableFuture<ChunkBuildResult<T>> future;
 

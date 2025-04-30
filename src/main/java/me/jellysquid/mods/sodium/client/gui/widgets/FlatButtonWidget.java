@@ -1,11 +1,13 @@
 package me.jellysquid.mods.sodium.client.gui.widgets;
 
-import me.jellysquid.mods.sodium.client.gui.utils.Drawable;
-import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 
+import me.jellysquid.mods.sodium.client.gui.utils.Drawable;
+import me.jellysquid.mods.sodium.client.util.Dim2i;
+
 public class FlatButtonWidget extends AbstractWidget implements Drawable {
+
     private final Dim2i dim;
     private final ITextComponent label;
     private final Runnable action;
@@ -37,11 +39,14 @@ public class FlatButtonWidget extends AbstractWidget implements Drawable {
 
         int strWidth = this.font.getStringWidth(this.label.getFormattedText());
 
-        this.drawRect(this.dim.getOriginX(), this.dim.getOriginY(), this.dim.getLimitX(), this.dim.getLimitY(), backgroundColor);
-        this.drawString(this.label.getFormattedText(), this.dim.getCenterX() - (strWidth / 2), this.dim.getCenterY() - 4, textColor);
+        this.drawRect(this.dim.getOriginX(), this.dim.getOriginY(), this.dim.getLimitX(), this.dim.getLimitY(),
+                backgroundColor);
+        this.drawString(this.label.getFormattedText(), this.dim.getCenterX() - (strWidth / 2),
+                this.dim.getCenterY() - 4, textColor);
 
         if (this.enabled && this.selected) {
-            this.drawRect(this.dim.getOriginX(), this.dim.getLimitY() - 1, this.dim.getLimitX(), this.dim.getLimitY(), 0xFF94E4D3);
+            this.drawRect(this.dim.getOriginX(), this.dim.getLimitY() - 1, this.dim.getLimitX(), this.dim.getLimitY(),
+                    0xFF94E4D3);
         }
     }
 

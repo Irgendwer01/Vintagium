@@ -1,10 +1,12 @@
 package me.jellysquid.mods.sodium.client.gui.options;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 
+import com.google.common.collect.ImmutableList;
+
 public class OptionPage {
+
     private final ITextComponent name;
     private final ImmutableList<OptionGroup> groups;
     private final ImmutableList<Option<?>> options;
@@ -41,5 +43,4 @@ public class OptionPage {
     public String getName() {
         return this.getNewName().getFormattedText();
     }
-
 }

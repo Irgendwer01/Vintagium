@@ -1,13 +1,15 @@
 package me.jellysquid.mods.sodium.client.model.light;
 
-import me.jellysquid.mods.sodium.client.util.MathUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 
+import me.jellysquid.mods.sodium.client.util.MathUtil;
+
 public class EntityLighter {
+
     private static final double MIN_BOX_SIZE = 0.001D;
 
     private static final double MAX_LIGHT_VAL = 15.0;

@@ -8,6 +8,7 @@ import me.jellysquid.mods.sodium.client.model.vertex.type.BufferVertexType;
  * Base implementation of a {@link VertexSink} which writes into a {@link VertexBufferView} directly.
  */
 public abstract class VertexBufferWriter implements VertexSink {
+
     protected final VertexBufferView backingBuffer;
 
     protected final BufferVertexFormat vertexFormat;

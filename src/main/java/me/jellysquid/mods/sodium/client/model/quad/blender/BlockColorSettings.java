@@ -5,6 +5,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public interface BlockColorSettings<T> {
+
     /**
      * Configures whether biome colors from a color provider will be interpolated for this block. You should only
      * enable this functionality if your color provider returns values based upon a pair of coordinates in the world,
@@ -17,7 +18,7 @@ public interface BlockColorSettings<T> {
     @SuppressWarnings("unchecked")
     static boolean isSmoothBlendingEnabled(IBlockAccess world, IBlockState state, BlockPos pos) {
         if (state.getBlock() instanceof BlockColorSettings) {
-        	BlockColorSettings<IBlockState> settings = (BlockColorSettings<IBlockState>) state.getBlock();
+            BlockColorSettings<IBlockState> settings = (BlockColorSettings<IBlockState>) state.getBlock();
             return settings.useSmoothColorBlending(world, state, pos);
         }
 

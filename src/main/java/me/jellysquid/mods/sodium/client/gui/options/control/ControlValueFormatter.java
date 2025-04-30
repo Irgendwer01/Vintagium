@@ -1,15 +1,17 @@
 package me.jellysquid.mods.sodium.client.gui.options.control;
 
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
 public interface ControlValueFormatter {
+
     static ControlValueFormatter guiScale() {
-        return (v) -> (v == 0) ? new TextComponentTranslation("options.guiScale.auto").getFormattedText() : new TextComponentTranslation(v + "x").getFormattedText();
+        return (v) -> (v == 0) ? new TextComponentTranslation("options.guiScale.auto").getFormattedText() :
+                new TextComponentTranslation(v + "x").getFormattedText();
     }
 
     static ControlValueFormatter fpsLimit() {
-        return (v) -> (v == 260) ? new TextComponentTranslation("options.framerateLimit.max").getFormattedText() : new TextComponentTranslation("options.framerate", v).getFormattedText();
+        return (v) -> (v == 260) ? new TextComponentTranslation("options.framerateLimit.max").getFormattedText() :
+                new TextComponentTranslation("options.framerate", v).getFormattedText();
     }
 
     static ControlValueFormatter brightness() {

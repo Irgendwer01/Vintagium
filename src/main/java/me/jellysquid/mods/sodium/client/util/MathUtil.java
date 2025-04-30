@@ -3,6 +3,7 @@ package me.jellysquid.mods.sodium.client.util;
 import net.minecraft.util.math.BlockPos;
 
 public class MathUtil {
+
     /**
      * @return True if the specified number is greater than zero and is a power of two, otherwise false
      */
@@ -12,7 +13,7 @@ public class MathUtil {
 
     /**
      * @return Hash of the position, replaces a similar method from modern. It's almost certainly not exactly
-     * equivalent, but I'll be very concerned if it matters
+     *         equivalent, but I'll be very concerned if it matters
      */
     public static long hashPos(BlockPos pos) {
         return cantor(pos.getX(), cantor(pos.getY(), pos.getZ()));

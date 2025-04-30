@@ -1,14 +1,15 @@
 package me.jellysquid.mods.sodium.client.render.chunk.format.hfp;
 
+import java.nio.ByteBuffer;
+
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferView;
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferWriterNio;
 import me.jellysquid.mods.sodium.client.render.chunk.format.DefaultModelVertexFormats;
 import me.jellysquid.mods.sodium.client.render.chunk.format.ModelVertexSink;
 import me.jellysquid.mods.sodium.client.render.chunk.format.ModelVertexUtil;
 
-import java.nio.ByteBuffer;
-
 public class HFPModelVertexBufferWriterNio extends VertexBufferWriterNio implements ModelVertexSink {
+
     public HFPModelVertexBufferWriterNio(VertexBufferView backingBuffer) {
         super(backingBuffer, DefaultModelVertexFormats.MODEL_VERTEX_HFP);
     }
@@ -22,8 +23,7 @@ public class HFPModelVertexBufferWriterNio extends VertexBufferWriterNio impleme
                 color,
                 ModelVertexUtil.denormalizeVertexTextureFloatAsShort(u),
                 ModelVertexUtil.denormalizeVertexTextureFloatAsShort(v),
-                ModelVertexUtil.encodeLightMapTexCoord(light)
-        );
+                ModelVertexUtil.encodeLightMapTexCoord(light));
     }
 
     private void writeQuadInternal(short x, short y, short z, int color, short u, short v, int light) {

@@ -7,6 +7,7 @@ import me.jellysquid.mods.sodium.client.model.vertex.formats.glyph.GlyphVertexSi
 import me.jellysquid.mods.sodium.client.util.CompatMemoryUtil;
 
 public class GlyphVertexBufferWriterUnsafe extends VertexBufferWriterUnsafe implements GlyphVertexSink {
+
     public GlyphVertexBufferWriterUnsafe(VertexBufferView backingBuffer) {
         super(backingBuffer, VanillaVertexTypes.GLYPHS);
     }
@@ -24,6 +25,5 @@ public class GlyphVertexBufferWriterUnsafe extends VertexBufferWriterUnsafe impl
         CompatMemoryUtil.memPutInt(i + 24, light);
 
         this.advance();
-
     }
 }

@@ -1,6 +1,7 @@
 package me.jellysquid.mods.sodium.client.render.chunk;
 
 public class ChunkCameraContext {
+
     public final int blockOriginX, blockOriginY, blockOriginZ;
     public final float originX, originY, originZ;
 

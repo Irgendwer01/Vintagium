@@ -1,10 +1,11 @@
 package me.jellysquid.mods.sodium.client.render.chunk.cull.graph;
 
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-
 import java.util.Arrays;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+
 public class ChunkGraphIterationQueue {
+
     private int[] positions;
     private ChunkGraphNode[] nodes;
 

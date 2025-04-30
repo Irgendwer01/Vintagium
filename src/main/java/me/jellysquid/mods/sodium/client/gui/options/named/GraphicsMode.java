@@ -1,6 +1,7 @@
 package me.jellysquid.mods.sodium.client.gui.options.named;
 
 public enum GraphicsMode implements NamedState {
+
     FANCY("options.graphics.fancy"),
     FAST("options.graphics.fast");
 
@@ -22,5 +23,4 @@ public enum GraphicsMode implements NamedState {
     public static GraphicsMode fromBoolean(boolean isFancy) {
         return isFancy ? FANCY : FAST;
     }
-
 }

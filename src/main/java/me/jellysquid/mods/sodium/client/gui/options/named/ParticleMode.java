@@ -1,6 +1,7 @@
 package me.jellysquid.mods.sodium.client.gui.options.named;
 
 public enum ParticleMode implements NamedState {
+
     ALL("options.particles.all"),
     DECREASED("options.particles.decreased"),
     MINIMAL("options.particles.minimal");

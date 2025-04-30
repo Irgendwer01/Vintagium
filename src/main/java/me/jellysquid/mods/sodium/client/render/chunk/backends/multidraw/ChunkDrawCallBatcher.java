@@ -1,17 +1,20 @@
 package me.jellysquid.mods.sodium.client.render.chunk.backends.multidraw;
 
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
-import me.jellysquid.mods.sodium.client.util.CompatMemoryUtil;
-import net.minecraft.util.math.MathHelper;
-import org.lwjgl.MemoryUtil;
-
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
+
+import net.minecraft.util.math.MathHelper;
+
+import org.lwjgl.MemoryUtil;
+
+import me.jellysquid.mods.sodium.client.SodiumClientMod;
+import me.jellysquid.mods.sodium.client.util.CompatMemoryUtil;
 
 /**
  * Provides a fixed-size buffer which can be used to batch chunk section draw calls.
  */
 public abstract class ChunkDrawCallBatcher extends StructBuffer {
+
     protected final int capacity;
 
     protected boolean isBuilding;
@@ -26,7 +29,8 @@ public abstract class ChunkDrawCallBatcher extends StructBuffer {
     }
 
     public static ChunkDrawCallBatcher create(int capacity) {
-        return SodiumClientMod.isDirectMemoryAccessEnabled() ? new UnsafeChunkDrawCallBatcher(capacity) : new NioChunkDrawCallBatcher(capacity);
+        return SodiumClientMod.isDirectMemoryAccessEnabled() ? new UnsafeChunkDrawCallBatcher(capacity) :
+                new NioChunkDrawCallBatcher(capacity);
     }
 
     public void begin() {
@@ -54,7 +58,7 @@ public abstract class ChunkDrawCallBatcher extends StructBuffer {
     public int getCount() {
         return this.count;
     }
-    
+
     public boolean isEmpty() {
         return this.count <= 0;
     }
@@ -83,9 +87,9 @@ public abstract class ChunkDrawCallBatcher extends StructBuffer {
                 throw new BufferUnderflowException();
             }
 
-            CompatMemoryUtil.memPutInt(this.writePointer     , count);         // Vertex Count
-            CompatMemoryUtil.memPutInt(this.writePointer +  4, instanceCount); // Instance Count
-            CompatMemoryUtil.memPutInt(this.writePointer +  8, first);         // Vertex Start
+            CompatMemoryUtil.memPutInt(this.writePointer, count);         // Vertex Count
+            CompatMemoryUtil.memPutInt(this.writePointer + 4, instanceCount); // Instance Count
+            CompatMemoryUtil.memPutInt(this.writePointer + 8, first);         // Vertex Start
             CompatMemoryUtil.memPutInt(this.writePointer + 12, baseInstance);  // Base Instance
 
             this.writePointer += this.stride;
@@ -93,6 +97,7 @@ public abstract class ChunkDrawCallBatcher extends StructBuffer {
     }
 
     public static class NioChunkDrawCallBatcher extends ChunkDrawCallBatcher {
+
         private int writeOffset;
 
         public NioChunkDrawCallBatcher(int capacity) {
@@ -109,9 +114,9 @@ public abstract class ChunkDrawCallBatcher extends StructBuffer {
         @Override
         public void addIndirectDrawCall(int first, int count, int baseInstance, int instanceCount) {
             ByteBuffer buf = this.buffer;
-            buf.putInt(this.writeOffset     , count);             // Vertex Count
-            buf.putInt(this.writeOffset +  4, instanceCount);     // Instance Count
-            buf.putInt(this.writeOffset +  8, first);             // Vertex Start
+            buf.putInt(this.writeOffset, count);             // Vertex Count
+            buf.putInt(this.writeOffset + 4, instanceCount);     // Instance Count
+            buf.putInt(this.writeOffset + 8, first);             // Vertex Start
             buf.putInt(this.writeOffset + 12, baseInstance);      // Base Instance
 
             this.writeOffset += this.stride;
@@ -122,5 +127,4 @@ public abstract class ChunkDrawCallBatcher extends StructBuffer {
     public int getArrayLength() {
         return this.arrayLength;
     }
-
 }

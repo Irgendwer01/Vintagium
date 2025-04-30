@@ -1,13 +1,14 @@
 package me.jellysquid.mods.sodium.client.render.chunk.format.sfp;
 
+import java.nio.ByteBuffer;
+
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferView;
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferWriterNio;
 import me.jellysquid.mods.sodium.client.render.chunk.format.DefaultModelVertexFormats;
 import me.jellysquid.mods.sodium.client.render.chunk.format.ModelVertexSink;
 
-import java.nio.ByteBuffer;
-
 public class SFPModelVertexBufferWriterNio extends VertexBufferWriterNio implements ModelVertexSink {
+
     public SFPModelVertexBufferWriterNio(VertexBufferView backingBuffer) {
         super(backingBuffer, DefaultModelVertexFormats.MODEL_VERTEX_SFP);
     }

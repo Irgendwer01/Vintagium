@@ -1,5 +1,9 @@
 package me.jellysquid.mods.sodium.client.render.pipeline.context;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockModelShapes;
+import net.minecraft.world.World;
+
 import me.jellysquid.mods.sodium.client.model.light.LightPipelineProvider;
 import me.jellysquid.mods.sodium.client.model.light.cache.ArrayLightDataCache;
 import me.jellysquid.mods.sodium.client.model.quad.blender.BiomeColorBlender;
@@ -9,11 +13,9 @@ import me.jellysquid.mods.sodium.client.render.pipeline.FluidRenderer;
 import me.jellysquid.mods.sodium.client.world.WorldSlice;
 import me.jellysquid.mods.sodium.client.world.WorldSliceLocal;
 import me.jellysquid.mods.sodium.client.world.cloned.ChunkRenderContext;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelShapes;
-import net.minecraft.world.World;
 
 public class ChunkRenderCacheLocal extends ChunkRenderCache {
+
     private final ArrayLightDataCache lightDataCache;
 
     private final BlockRenderer blockRenderer;

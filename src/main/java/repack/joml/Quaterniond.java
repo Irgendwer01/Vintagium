@@ -85,10 +85,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Create a new {@link Quaterniond} and initialize its components to the same values as the given {@link Quaterniondc}.
+     * Create a new {@link Quaterniond} and initialize its components to the same values as the given
+     * {@link Quaterniondc}.
      *
      * @param source
-     *          the {@link Quaterniondc} to take the component values from
+     *               the {@link Quaterniondc} to take the component values from
      */
     public Quaterniond(Quaterniondc source) {
         x = source.x();
@@ -98,10 +99,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Create a new {@link Quaterniond} and initialize its components to the same values as the given {@link Quaternionfc}.
+     * Create a new {@link Quaterniond} and initialize its components to the same values as the given
+     * {@link Quaternionfc}.
      *
      * @param source
-     *          the {@link Quaternionfc} to take the component values from
+     *               the {@link Quaternionfc} to take the component values from
      */
     public Quaterniond(Quaternionfc source) {
         x = source.x();
@@ -111,10 +113,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Create a new {@link Quaterniond} and initialize it to represent the same rotation as the given {@link AxisAngle4f}.
+     * Create a new {@link Quaterniond} and initialize it to represent the same rotation as the given
+     * {@link AxisAngle4f}.
      *
      * @param axisAngle
-     *          the axis-angle to initialize this quaternion with
+     *                  the axis-angle to initialize this quaternion with
      */
     public Quaterniond(AxisAngle4f axisAngle) {
         double s = Math.sin(axisAngle.angle * 0.5);
@@ -125,10 +128,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Create a new {@link Quaterniond} and initialize it to represent the same rotation as the given {@link AxisAngle4d}.
+     * Create a new {@link Quaterniond} and initialize it to represent the same rotation as the given
+     * {@link AxisAngle4d}.
      *
      * @param axisAngle
-     *          the axis-angle to initialize this quaternion with
+     *                  the axis-angle to initialize this quaternion with
      */
     public Quaterniond(AxisAngle4d axisAngle) {
         double s = Math.sin(axisAngle.angle * 0.5);
@@ -218,7 +222,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * Add <code>q2</code> to this quaternion.
      *
      * @param q2
-     *          the quaternion to add to this
+     *           the quaternion to add to this
      * @return this
      */
     public Quaterniond add(Quaterniondc q2) {
@@ -321,7 +325,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * @see #set(Quaterniondc)
      *
      * @param dest
-     *          the {@link Quaterniond} to set
+     *             the {@link Quaterniond} to set
      * @return the passed in destination
      */
     public Quaterniond get(Quaterniond dest) {
@@ -334,7 +338,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * @see #set(Quaterniondc)
      *
      * @param dest
-     *          the {@link Quaternionf} to set
+     *             the {@link Quaternionf} to set
      * @return the passed in destination
      */
     public Quaternionf get(Quaternionf dest) {
@@ -397,7 +401,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * {@link AxisAngle4f}.
      *
      * @param axisAngle
-     *            the {@link AxisAngle4f}
+     *                  the {@link AxisAngle4f}
      * @return this
      */
     public Quaterniond set(AxisAngle4f axisAngle) {
@@ -409,7 +413,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * {@link AxisAngle4d}.
      *
      * @param axisAngle
-     *            the {@link AxisAngle4d}
+     *                  the {@link AxisAngle4d}
      * @return this
      */
     public Quaterniond set(AxisAngle4d axisAngle) {
@@ -423,13 +427,13 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the given rotation axis <code>(x, y, z)</code> is already normalized
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param x
-     *          the x-component of the normalized rotation axis
+     *              the x-component of the normalized rotation axis
      * @param y
-     *          the y-component of the normalized rotation axis
+     *              the y-component of the normalized rotation axis
      * @param z
-     *          the z-component of the normalized rotation axis
+     *              the z-component of the normalized rotation axis
      * @return this
      */
     public Quaterniond setAngleAxis(double angle, double x, double y, double z) {
@@ -446,29 +450,37 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * angle (in radians).
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param axis
-     *          the rotation axis
+     *              the rotation axis
      * @return this
      */
     public Quaterniond setAngleAxis(double angle, Vector3dc axis) {
         return setAngleAxis(angle, axis.x(), axis.y(), axis.z());
     }
 
-    private void setFromUnnormalized(double m00, double m01, double m02, double m10, double m11, double m12, double m20, double m21, double m22) {
+    private void setFromUnnormalized(double m00, double m01, double m02, double m10, double m11, double m12, double m20,
+                                     double m21, double m22) {
         double nm00 = m00, nm01 = m01, nm02 = m02;
         double nm10 = m10, nm11 = m11, nm12 = m12;
         double nm20 = m20, nm21 = m21, nm22 = m22;
         double lenX = Math.invsqrt(m00 * m00 + m01 * m01 + m02 * m02);
         double lenY = Math.invsqrt(m10 * m10 + m11 * m11 + m12 * m12);
         double lenZ = Math.invsqrt(m20 * m20 + m21 * m21 + m22 * m22);
-        nm00 *= lenX; nm01 *= lenX; nm02 *= lenX;
-        nm10 *= lenY; nm11 *= lenY; nm12 *= lenY;
-        nm20 *= lenZ; nm21 *= lenZ; nm22 *= lenZ;
+        nm00 *= lenX;
+        nm01 *= lenX;
+        nm02 *= lenX;
+        nm10 *= lenY;
+        nm11 *= lenY;
+        nm12 *= lenY;
+        nm20 *= lenZ;
+        nm21 *= lenZ;
+        nm22 *= lenZ;
         setFromNormalized(nm00, nm01, nm02, nm10, nm11, nm12, nm20, nm21, nm22);
     }
 
-    private void setFromNormalized(double m00, double m01, double m02, double m10, double m11, double m12, double m20, double m21, double m22) {
+    private void setFromNormalized(double m00, double m01, double m02, double m10, double m11, double m12, double m20,
+                                   double m21, double m22) {
         double t;
         double tr = m00 + m11 + m22;
         if (tr >= 0.0) {
@@ -510,11 +522,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are no unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromUnnormalized(Matrix4fc mat) {
-        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -524,11 +537,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are no unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromUnnormalized(Matrix4x3fc mat) {
-        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -538,11 +552,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are no unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromUnnormalized(Matrix4x3dc mat) {
-        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -552,11 +567,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromNormalized(Matrix4fc mat) {
-        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -566,11 +582,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromNormalized(Matrix4x3fc mat) {
-        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -580,11 +597,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromNormalized(Matrix4x3dc mat) {
-        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -594,11 +612,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are no unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromUnnormalized(Matrix4dc mat) {
-        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -608,11 +627,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromNormalized(Matrix4dc mat) {
-        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -622,11 +642,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are no unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromUnnormalized(Matrix3fc mat) {
-        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -636,11 +657,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromNormalized(Matrix3fc mat) {
-        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -650,11 +672,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * This method assumes that the first three columns of the upper left 3x3 submatrix are no unit vectors.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromUnnormalized(Matrix3dc mat) {
-        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromUnnormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -662,11 +685,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * Set this quaternion to be a representation of the rotational component of the given matrix.
      *
      * @param mat
-     *          the matrix whose rotational component is used to set this quaternion
+     *            the matrix whose rotational component is used to set this quaternion
      * @return this
      */
     public Quaterniond setFromNormalized(Matrix3dc mat) {
-        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(), mat.m22());
+        setFromNormalized(mat.m00(), mat.m01(), mat.m02(), mat.m10(), mat.m11(), mat.m12(), mat.m20(), mat.m21(),
+                mat.m22());
         return this;
     }
 
@@ -675,9 +699,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * angle (in radians).
      *
      * @param axis
-     *          the rotation axis
+     *              the rotation axis
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @return this
      */
     public Quaterniond fromAxisAngleRad(Vector3dc axis, double angle) {
@@ -689,13 +713,13 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * angle (in radians).
      *
      * @param axisX
-     *          the x component of the rotation axis
+     *              the x component of the rotation axis
      * @param axisY
-     *          the y component of the rotation axis
+     *              the y component of the rotation axis
      * @param axisZ
-     *          the z component of the rotation axis
+     *              the z component of the rotation axis
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @return this
      */
     public Quaterniond fromAxisAngleRad(double axisX, double axisY, double axisZ, double angle) {
@@ -714,9 +738,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * angle (in degrees).
      *
      * @param axis
-     *          the rotation axis
+     *              the rotation axis
      * @param angle
-     *          the angle in degrees
+     *              the angle in degrees
      * @return this
      */
     public Quaterniond fromAxisAngleDeg(Vector3dc axis, double angle) {
@@ -728,13 +752,13 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * angle (in degrees).
      *
      * @param axisX
-     *          the x component of the rotation axis
+     *              the x component of the rotation axis
      * @param axisY
-     *          the y component of the rotation axis
+     *              the y component of the rotation axis
      * @param axisZ
-     *          the z component of the rotation axis
+     *              the z component of the rotation axis
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @return this
      */
     public Quaterniond fromAxisAngleDeg(double axisX, double axisY, double axisZ, double angle) {
@@ -776,13 +800,13 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * vector to be transformed by <code>Q</code> first, and then by <code>T</code>.
      *
      * @param qx
-     *          the x component of the quaternion to multiply <code>this</code> by
+     *           the x component of the quaternion to multiply <code>this</code> by
      * @param qy
-     *          the y component of the quaternion to multiply <code>this</code> by
+     *           the y component of the quaternion to multiply <code>this</code> by
      * @param qz
-     *          the z component of the quaternion to multiply <code>this</code> by
+     *           the z component of the quaternion to multiply <code>this</code> by
      * @param qw
-     *          the w component of the quaternion to multiply <code>this</code> by
+     *           the w component of the quaternion to multiply <code>this</code> by
      * @return this
      */
     public Quaterniond mul(double qx, double qy, double qz, double qw) {
@@ -791,22 +815,24 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
 
     public Quaterniond mul(double qx, double qy, double qz, double qw, Quaterniond dest) {
         return dest.set(Math.fma(w, qx, Math.fma(x, qw, Math.fma(y, qz, -z * qy))),
-                        Math.fma(w, qy, Math.fma(-x, qz, Math.fma(y, qw, z * qx))),
-                        Math.fma(w, qz, Math.fma(x, qy, Math.fma(-y, qx, z * qw))),
-                        Math.fma(w, qw, Math.fma(-x, qx, Math.fma(-y, qy, -z * qz))));
+                Math.fma(w, qy, Math.fma(-x, qz, Math.fma(y, qw, z * qx))),
+                Math.fma(w, qz, Math.fma(x, qy, Math.fma(-y, qx, z * qw))),
+                Math.fma(w, qw, Math.fma(-x, qx, Math.fma(-y, qy, -z * qz))));
     }
 
     /**
      * Pre-multiply this quaternion by <code>q</code>.
      * <p>
-     * If <code>T</code> is <code>this</code> and <code>Q</code> is the given quaternion, then the resulting quaternion <code>R</code> is:
+     * If <code>T</code> is <code>this</code> and <code>Q</code> is the given quaternion, then the resulting quaternion
+     * <code>R</code> is:
      * <p>
      * <code>R = Q * T</code>
      * <p>
-     * So, this method uses pre-multiplication, resulting in a vector to be transformed by <code>T</code> first, and then by <code>Q</code>.
+     * So, this method uses pre-multiplication, resulting in a vector to be transformed by <code>T</code> first, and
+     * then by <code>Q</code>.
      *
      * @param q
-     *            the quaternion to pre-multiply <code>this</code> by
+     *          the quaternion to pre-multiply <code>this</code> by
      * @return this
      */
     public Quaterniond premul(Quaterniondc q) {
@@ -820,20 +846,22 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     /**
      * Pre-multiply this quaternion by the quaternion represented via <code>(qx, qy, qz, qw)</code>.
      * <p>
-     * If <code>T</code> is <code>this</code> and <code>Q</code> is the given quaternion, then the resulting quaternion <code>R</code> is:
+     * If <code>T</code> is <code>this</code> and <code>Q</code> is the given quaternion, then the resulting quaternion
+     * <code>R</code> is:
      * <p>
      * <code>R = Q * T</code>
      * <p>
-     * So, this method uses pre-multiplication, resulting in a vector to be transformed by <code>T</code> first, and then by <code>Q</code>.
+     * So, this method uses pre-multiplication, resulting in a vector to be transformed by <code>T</code> first, and
+     * then by <code>Q</code>.
      *
      * @param qx
-     *          the x component of the quaternion to multiply <code>this</code> by
+     *           the x component of the quaternion to multiply <code>this</code> by
      * @param qy
-     *          the y component of the quaternion to multiply <code>this</code> by
+     *           the y component of the quaternion to multiply <code>this</code> by
      * @param qz
-     *          the z component of the quaternion to multiply <code>this</code> by
+     *           the z component of the quaternion to multiply <code>this</code> by
      * @param qw
-     *          the w component of the quaternion to multiply <code>this</code> by
+     *           the w component of the quaternion to multiply <code>this</code> by
      * @return this
      */
     public Quaterniond premul(double qx, double qy, double qz, double qw) {
@@ -842,24 +870,24 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
 
     public Quaterniond premul(double qx, double qy, double qz, double qw, Quaterniond dest) {
         return dest.set(Math.fma(qw, x, Math.fma(qx, w, Math.fma(qy, z, -qz * y))),
-                        Math.fma(qw, y, Math.fma(-qx, z, Math.fma(qy, w, qz * x))),
-                        Math.fma(qw, z, Math.fma(qx, y, Math.fma(-qy, x, qz * w))),
-                        Math.fma(qw, w, Math.fma(-qx, x, Math.fma(-qy, y, -qz * z))));
+                Math.fma(qw, y, Math.fma(-qx, z, Math.fma(qy, w, qz * x))),
+                Math.fma(qw, z, Math.fma(qx, y, Math.fma(-qy, x, qz * w))),
+                Math.fma(qw, w, Math.fma(-qx, x, Math.fma(-qy, y, -qz * z))));
     }
 
-    public Vector3d transform(Vector3d vec){
+    public Vector3d transform(Vector3d vec) {
         return transform(vec.x, vec.y, vec.z, vec);
     }
 
-    public Vector3d transformInverse(Vector3d vec){
+    public Vector3d transformInverse(Vector3d vec) {
         return transformInverse(vec.x, vec.y, vec.z, vec);
     }
 
-    public Vector3d transformUnit(Vector3d vec){
+    public Vector3d transformUnit(Vector3d vec) {
         return transformUnit(vec.x, vec.y, vec.z, vec);
     }
 
-    public Vector3d transformInverseUnit(Vector3d vec){
+    public Vector3d transformInverseUnit(Vector3d vec) {
         return transformInverseUnit(vec.x, vec.y, vec.z, vec);
     }
 
@@ -1031,11 +1059,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         return dest;
     }
 
-    public Vector4d transform(Vector4d vec){
+    public Vector4d transform(Vector4d vec) {
         return transform(vec, vec);
     }
 
-    public Vector4d transformInverse(Vector4d vec){
+    public Vector4d transformInverse(Vector4d vec) {
         return transformInverse(vec, vec);
     }
 
@@ -1052,8 +1080,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xy = this.x * this.y, xz = this.x * this.z, yz = this.y * this.z, xw = this.x * this.w;
         double zw = this.z * this.w, yw = this.y * this.w, k = 1 / (xx + yy + zz + ww);
         return dest.set(Math.fma((xx - yy - zz + ww) * k, x, Math.fma(2 * (xy - zw) * k, y, (2 * (xz + yw) * k) * z)),
-                        Math.fma(2 * (xy + zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz - xw) * k) * z)),
-                        Math.fma(2 * (xz - yw) * k, x, Math.fma(2 * (yz + xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
+                Math.fma(2 * (xy + zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz - xw) * k) * z)),
+                Math.fma(2 * (xz - yw) * k, x, Math.fma(2 * (yz + xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
     }
 
     public Vector3d transformInverse(double x, double y, double z, Vector3d dest) {
@@ -1063,8 +1091,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xy = qx * qy, xz = qx * qz, yz = qy * qz, xw = qx * qw;
         double zw = qz * qw, yw = qy * qw, k = 1 / (xx + yy + zz + ww);
         return dest.set(Math.fma((xx - yy - zz + ww) * k, x, Math.fma(2 * (xy + zw) * k, y, (2 * (xz - yw) * k) * z)),
-                        Math.fma(2 * (xy - zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz + xw) * k) * z)),
-                        Math.fma(2 * (xz + yw) * k, x, Math.fma(2 * (yz - xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
+                Math.fma(2 * (xy - zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz + xw) * k) * z)),
+                Math.fma(2 * (xz + yw) * k, x, Math.fma(2 * (yz - xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
     }
 
     public Vector4d transform(Vector4dc vec, Vector4d dest) {
@@ -1080,8 +1108,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xy = this.x * this.y, xz = this.x * this.z, yz = this.y * this.z, xw = this.x * this.w;
         double zw = this.z * this.w, yw = this.y * this.w, k = 1 / (xx + yy + zz + ww);
         return dest.set(Math.fma((xx - yy - zz + ww) * k, x, Math.fma(2 * (xy - zw) * k, y, (2 * (xz + yw) * k) * z)),
-                        Math.fma(2 * (xy + zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz - xw) * k) * z)),
-                        Math.fma(2 * (xz - yw) * k, x, Math.fma(2 * (yz + xw) * k, y, ((zz - xx - yy + ww) * k) * z)), dest.w);
+                Math.fma(2 * (xy + zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz - xw) * k) * z)),
+                Math.fma(2 * (xz - yw) * k, x, Math.fma(2 * (yz + xw) * k, y, ((zz - xx - yy + ww) * k) * z)), dest.w);
     }
 
     public Vector4d transformInverse(double x, double y, double z, Vector4d dest) {
@@ -1091,23 +1119,23 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xy = qx * qy, xz = qx * qz, yz = qy * qz, xw = qx * qw;
         double zw = qz * qw, yw = qy * qw, k = 1 / (xx + yy + zz + ww);
         return dest.set(Math.fma((xx - yy - zz + ww) * k, x, Math.fma(2 * (xy + zw) * k, y, (2 * (xz - yw) * k) * z)),
-                        Math.fma(2 * (xy - zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz + xw) * k) * z)),
-                        Math.fma(2 * (xz + yw) * k, x, Math.fma(2 * (yz - xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
+                Math.fma(2 * (xy - zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz + xw) * k) * z)),
+                Math.fma(2 * (xz + yw) * k, x, Math.fma(2 * (yz - xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
     }
 
-    public Vector3f transform(Vector3f vec){
+    public Vector3f transform(Vector3f vec) {
         return transform(vec.x, vec.y, vec.z, vec);
     }
 
-    public Vector3f transformInverse(Vector3f vec){
+    public Vector3f transformInverse(Vector3f vec) {
         return transformInverse(vec.x, vec.y, vec.z, vec);
     }
 
-    public Vector4d transformUnit(Vector4d vec){
+    public Vector4d transformUnit(Vector4d vec) {
         return transformUnit(vec, vec);
     }
 
-    public Vector4d transformInverseUnit(Vector4d vec){
+    public Vector4d transformInverseUnit(Vector4d vec) {
         return transformInverseUnit(vec, vec);
     }
 
@@ -1124,8 +1152,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xw = this.x * this.w, yy = this.y * this.y, yz = this.y * this.z;
         double yw = this.y * this.w, zz = this.z * this.z, zw = this.z * this.w;
         return dest.set(Math.fma(Math.fma(-2, yy + zz, 1), x, Math.fma(2 * (xy - zw), y, (2 * (xz + yw)) * z)),
-                        Math.fma(2 * (xy + zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz - xw)) * z)),
-                        Math.fma(2 * (xz - yw), x, Math.fma(2 * (yz + xw), y, Math.fma(-2, xx + yy, 1) * z)));
+                Math.fma(2 * (xy + zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz - xw)) * z)),
+                Math.fma(2 * (xz - yw), x, Math.fma(2 * (yz + xw), y, Math.fma(-2, xx + yy, 1) * z)));
     }
 
     public Vector3d transformInverseUnit(double x, double y, double z, Vector3d dest) {
@@ -1133,8 +1161,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xw = this.x * this.w, yy = this.y * this.y, yz = this.y * this.z;
         double yw = this.y * this.w, zz = this.z * this.z, zw = this.z * this.w;
         return dest.set(Math.fma(Math.fma(-2, yy + zz, 1), x, Math.fma(2 * (xy + zw), y, (2 * (xz - yw)) * z)),
-                        Math.fma(2 * (xy - zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz + xw)) * z)),
-                        Math.fma(2 * (xz + yw), x, Math.fma(2 * (yz - xw), y, Math.fma(-2, xx + yy, 1) * z)));
+                Math.fma(2 * (xy - zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz + xw)) * z)),
+                Math.fma(2 * (xz + yw), x, Math.fma(2 * (yz - xw), y, Math.fma(-2, xx + yy, 1) * z)));
     }
 
     public Vector4d transformUnit(Vector4dc vec, Vector4d dest) {
@@ -1150,9 +1178,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xw = this.x * this.w, yy = this.y * this.y, yz = this.y * this.z;
         double yw = this.y * this.w, zz = this.z * this.z, zw = this.z * this.w;
         return dest.set(Math.fma(Math.fma(-2, yy + zz, 1), x, Math.fma(2 * (xy - zw), y, (2 * (xz + yw)) * z)),
-                        Math.fma(2 * (xy + zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz - xw)) * z)),
-                        Math.fma(2 * (xz - yw), x, Math.fma(2 * (yz + xw), y, Math.fma(-2, xx + yy, 1) * z)),
-                        dest.w);
+                Math.fma(2 * (xy + zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz - xw)) * z)),
+                Math.fma(2 * (xz - yw), x, Math.fma(2 * (yz + xw), y, Math.fma(-2, xx + yy, 1) * z)),
+                dest.w);
     }
 
     public Vector4d transformInverseUnit(double x, double y, double z, Vector4d dest) {
@@ -1160,16 +1188,16 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xw = this.x * this.w, yy = this.y * this.y, yz = this.y * this.z;
         double yw = this.y * this.w, zz = this.z * this.z, zw = this.z * this.w;
         return dest.set(Math.fma(Math.fma(-2, yy + zz, 1), x, Math.fma(2 * (xy + zw), y, (2 * (xz - yw)) * z)),
-                        Math.fma(2 * (xy - zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz + xw)) * z)),
-                        Math.fma(2 * (xz + yw), x, Math.fma(2 * (yz - xw), y, Math.fma(-2, xx + yy, 1) * z)),
-                        dest.w);
+                Math.fma(2 * (xy - zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz + xw)) * z)),
+                Math.fma(2 * (xz + yw), x, Math.fma(2 * (yz - xw), y, Math.fma(-2, xx + yy, 1) * z)),
+                dest.w);
     }
 
-    public Vector3f transformUnit(Vector3f vec){
+    public Vector3f transformUnit(Vector3f vec) {
         return transformUnit(vec.x, vec.y, vec.z, vec);
     }
 
-    public Vector3f transformInverseUnit(Vector3f vec){
+    public Vector3f transformInverseUnit(Vector3f vec) {
         return transformInverseUnit(vec.x, vec.y, vec.z, vec);
     }
 
@@ -1341,11 +1369,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         return dest;
     }
 
-    public Vector4f transform(Vector4f vec){
+    public Vector4f transform(Vector4f vec) {
         return transform(vec, vec);
     }
 
-    public Vector4f transformInverse(Vector4f vec){
+    public Vector4f transformInverse(Vector4f vec) {
         return transformInverse(vec, vec);
     }
 
@@ -1362,8 +1390,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xy = this.x * this.y, xz = this.x * this.z, yz = this.y * this.z, xw = this.x * this.w;
         double zw = this.z * this.w, yw = this.y * this.w, k = 1 / (xx + yy + zz + ww);
         return dest.set(Math.fma((xx - yy - zz + ww) * k, x, Math.fma(2 * (xy - zw) * k, y, (2 * (xz + yw) * k) * z)),
-                        Math.fma(2 * (xy + zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz - xw) * k) * z)),
-                        Math.fma(2 * (xz - yw) * k, x, Math.fma(2 * (yz + xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
+                Math.fma(2 * (xy + zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz - xw) * k) * z)),
+                Math.fma(2 * (xz - yw) * k, x, Math.fma(2 * (yz + xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
     }
 
     public Vector3f transformInverse(double x, double y, double z, Vector3f dest) {
@@ -1373,8 +1401,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xy = qx * qy, xz = qx * qz, yz = qy * qz, xw = qx * qw;
         double zw = qz * qw, yw = qy * qw, k = 1 / (xx + yy + zz + ww);
         return dest.set(Math.fma((xx - yy - zz + ww) * k, x, Math.fma(2 * (xy + zw) * k, y, (2 * (xz - yw) * k) * z)),
-                        Math.fma(2 * (xy - zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz + xw) * k) * z)),
-                        Math.fma(2 * (xz + yw) * k, x, Math.fma(2 * (yz - xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
+                Math.fma(2 * (xy - zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz + xw) * k) * z)),
+                Math.fma(2 * (xz + yw) * k, x, Math.fma(2 * (yz - xw) * k, y, ((zz - xx - yy + ww) * k) * z)));
     }
 
     public Vector4f transform(Vector4fc vec, Vector4f dest) {
@@ -1389,9 +1417,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xx = this.x * this.x, yy = this.y * this.y, zz = this.z * this.z, ww = this.w * this.w;
         double xy = this.x * this.y, xz = this.x * this.z, yz = this.y * this.z, xw = this.x * this.w;
         double zw = this.z * this.w, yw = this.y * this.w, k = 1 / (xx + yy + zz + ww);
-        return dest.set((float) Math.fma((xx - yy - zz + ww) * k, x, Math.fma(2 * (xy - zw) * k, y, (2 * (xz + yw) * k) * z)),
-                        (float) Math.fma(2 * (xy + zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz - xw) * k) * z)),
-                        (float) Math.fma(2 * (xz - yw) * k, x, Math.fma(2 * (yz + xw) * k, y, ((zz - xx - yy + ww) * k) * z)), dest.w);
+        return dest.set(
+                (float) Math.fma((xx - yy - zz + ww) * k, x, Math.fma(2 * (xy - zw) * k, y, (2 * (xz + yw) * k) * z)),
+                (float) Math.fma(2 * (xy + zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz - xw) * k) * z)),
+                (float) Math.fma(2 * (xz - yw) * k, x, Math.fma(2 * (yz + xw) * k, y, ((zz - xx - yy + ww) * k) * z)),
+                dest.w);
     }
 
     public Vector4f transformInverse(double x, double y, double z, Vector4f dest) {
@@ -1401,15 +1431,15 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xy = qx * qy, xz = qx * qz, yz = qy * qz, xw = qx * qw;
         double zw = qz * qw, yw = qy * qw, k = 1 / (xx + yy + zz + ww);
         return dest.set(Math.fma((xx - yy - zz + ww) * k, x, Math.fma(2 * (xy + zw) * k, y, (2 * (xz - yw) * k) * z)),
-                        Math.fma(2 * (xy - zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz + xw) * k) * z)),
-                        Math.fma(2 * (xz + yw) * k, x, Math.fma(2 * (yz - xw) * k, y, ((zz - xx - yy + ww) * k) * z)), dest.w);
+                Math.fma(2 * (xy - zw) * k, x, Math.fma((yy - xx - zz + ww) * k, y, (2 * (yz + xw) * k) * z)),
+                Math.fma(2 * (xz + yw) * k, x, Math.fma(2 * (yz - xw) * k, y, ((zz - xx - yy + ww) * k) * z)), dest.w);
     }
 
-    public Vector4f transformUnit(Vector4f vec){
+    public Vector4f transformUnit(Vector4f vec) {
         return transformUnit(vec, vec);
     }
 
-    public Vector4f transformInverseUnit(Vector4f vec){
+    public Vector4f transformInverseUnit(Vector4f vec) {
         return transformInverseUnit(vec, vec);
     }
 
@@ -1426,8 +1456,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xw = this.x * this.w, yy = this.y * this.y, yz = this.y * this.z;
         double yw = this.y * this.w, zz = this.z * this.z, zw = this.z * this.w;
         return dest.set((float) Math.fma(Math.fma(-2, yy + zz, 1), x, Math.fma(2 * (xy - zw), y, (2 * (xz + yw)) * z)),
-                        (float) Math.fma(2 * (xy + zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz - xw)) * z)),
-                        (float) Math.fma(2 * (xz - yw), x, Math.fma(2 * (yz + xw), y, Math.fma(-2, xx + yy, 1) * z)));
+                (float) Math.fma(2 * (xy + zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz - xw)) * z)),
+                (float) Math.fma(2 * (xz - yw), x, Math.fma(2 * (yz + xw), y, Math.fma(-2, xx + yy, 1) * z)));
     }
 
     public Vector3f transformInverseUnit(double x, double y, double z, Vector3f dest) {
@@ -1435,8 +1465,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xw = this.x * this.w, yy = this.y * this.y, yz = this.y * this.z;
         double yw = this.y * this.w, zz = this.z * this.z, zw = this.z * this.w;
         return dest.set((float) Math.fma(Math.fma(-2, yy + zz, 1), x, Math.fma(2 * (xy + zw), y, (2 * (xz - yw)) * z)),
-                        (float) Math.fma(2 * (xy - zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz + xw)) * z)),
-                        (float) Math.fma(2 * (xz + yw), x, Math.fma(2 * (yz - xw), y, Math.fma(-2, xx + yy, 1) * z)));
+                (float) Math.fma(2 * (xy - zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz + xw)) * z)),
+                (float) Math.fma(2 * (xz + yw), x, Math.fma(2 * (yz - xw), y, Math.fma(-2, xx + yy, 1) * z)));
     }
 
     public Vector4f transformUnit(Vector4fc vec, Vector4f dest) {
@@ -1452,8 +1482,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xw = this.x * this.w, yy = this.y * this.y, yz = this.y * this.z;
         double yw = this.y * this.w, zz = this.z * this.z, zw = this.z * this.w;
         return dest.set((float) Math.fma(Math.fma(-2, yy + zz, 1), x, Math.fma(2 * (xy - zw), y, (2 * (xz + yw)) * z)),
-                        (float) Math.fma(2 * (xy + zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz - xw)) * z)),
-                        (float) Math.fma(2 * (xz - yw), x, Math.fma(2 * (yz + xw), y, Math.fma(-2, xx + yy, 1) * z)));
+                (float) Math.fma(2 * (xy + zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz - xw)) * z)),
+                (float) Math.fma(2 * (xz - yw), x, Math.fma(2 * (yz + xw), y, Math.fma(-2, xx + yy, 1) * z)));
     }
 
     public Vector4f transformInverseUnit(double x, double y, double z, Vector4f dest) {
@@ -1461,8 +1491,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double xw = this.x * this.w, yy = this.y * this.y, yz = this.y * this.z;
         double yw = this.y * this.w, zz = this.z * this.z, zw = this.z * this.w;
         return dest.set((float) Math.fma(Math.fma(-2, yy + zz, 1), x, Math.fma(2 * (xy + zw), y, (2 * (xz - yw)) * z)),
-                        (float) Math.fma(2 * (xy - zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz + xw)) * z)),
-                        (float) Math.fma(2 * (xz + yw), x, Math.fma(2 * (yz - xw), y, Math.fma(-2, xx + yy, 1) * z)));
+                (float) Math.fma(2 * (xy - zw), x, Math.fma(Math.fma(-2, xx + zz, 1), y, (2 * (yz + xw)) * z)),
+                (float) Math.fma(2 * (xz + yw), x, Math.fma(2 * (yz - xw), y, Math.fma(-2, xx + yy, 1) * z)));
     }
 
     public Quaterniond invert(Quaterniond dest) {
@@ -1494,9 +1524,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double z = -b.z() * invNorm;
         double w = b.w() * invNorm;
         return dest.set(Math.fma(this.w, x, Math.fma(this.x, w, Math.fma(this.y, z, -this.z * y))),
-                        Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
-                        Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
-                        Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
+                Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
+                Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
+                Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
     }
 
     /**
@@ -1556,14 +1586,16 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * <p>
      * This method is equivalent to calling: <code>rotationX(angleX).rotateY(angleY).rotateZ(angleZ)</code>
      * <p>
-     * Reference: <a href="http://gamedev.stackexchange.com/questions/13436/glm-euler-angles-to-quaternion#answer-13446">this stackexchange answer</a>
+     * Reference:
+     * <a href="http://gamedev.stackexchange.com/questions/13436/glm-euler-angles-to-quaternion#answer-13446">this
+     * stackexchange answer</a>
      *
      * @param angleX
-     *          the angle in radians to rotate about x
+     *               the angle in radians to rotate about x
      * @param angleY
-     *          the angle in radians to rotate about y
+     *               the angle in radians to rotate about y
      * @param angleZ
-     *          the angle in radians to rotate about z
+     *               the angle in radians to rotate about z
      * @return this
      */
     public Quaterniond rotationXYZ(double angleX, double angleY, double angleZ) {
@@ -1578,10 +1610,10 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double sysz = sy * sz;
         double sycz = sy * cz;
         double cysz = cy * sz;
-        w = cx*cycz - sx*sysz;
-        x = sx*cycz + cx*sysz;
-        y = cx*sycz - sx*cysz;
-        z = cx*cysz + sx*sycz;
+        w = cx * cycz - sx * sysz;
+        x = sx * cycz + cx * sysz;
+        y = cx * sycz - sx * cysz;
+        z = cx * cysz + sx * sycz;
 
         return this;
     }
@@ -1591,14 +1623,16 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * <p>
      * This method is equivalent to calling: <code>rotationZ(angleZ).rotateY(angleY).rotateX(angleX)</code>
      * <p>
-     * Reference: <a href="http://gamedev.stackexchange.com/questions/13436/glm-euler-angles-to-quaternion#answer-13446">this stackexchange answer</a>
+     * Reference:
+     * <a href="http://gamedev.stackexchange.com/questions/13436/glm-euler-angles-to-quaternion#answer-13446">this
+     * stackexchange answer</a>
      *
      * @param angleX
-     *          the angle in radians to rotate about x
+     *               the angle in radians to rotate about x
      * @param angleY
-     *          the angle in radians to rotate about y
+     *               the angle in radians to rotate about y
      * @param angleZ
-     *          the angle in radians to rotate about z
+     *               the angle in radians to rotate about z
      * @return this
      */
     public Quaterniond rotationZYX(double angleZ, double angleY, double angleX) {
@@ -1613,10 +1647,10 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double sysz = sy * sz;
         double sycz = sy * cz;
         double cysz = cy * sz;
-        w = cx*cycz + sx*sysz;
-        x = sx*cycz - cx*sysz;
-        y = cx*sycz + sx*cysz;
-        z = cx*cysz - sx*sycz;
+        w = cx * cycz + sx * sysz;
+        x = sx * cycz - cx * sysz;
+        y = cx * sycz + sx * cysz;
+        z = cx * cysz - sx * sycz;
 
         return this;
     }
@@ -1626,14 +1660,15 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * <p>
      * This method is equivalent to calling: <code>rotationY(angleY).rotateX(angleX).rotateZ(angleZ)</code>
      * <p>
-     * Reference: <a href="https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles">https://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles">https://en.wikipedia.org</a>
      *
      * @param angleY
-     *          the angle in radians to rotate about y
+     *               the angle in radians to rotate about y
      * @param angleX
-     *          the angle in radians to rotate about x
+     *               the angle in radians to rotate about x
      * @param angleZ
-     *          the angle in radians to rotate about z
+     *               the angle in radians to rotate about z
      * @return this
      */
     public Quaterniond rotationYXZ(double angleY, double angleX, double angleZ) {
@@ -1658,15 +1693,17 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
 
     /**
      * Interpolate between <code>this</code> {@link #normalize() unit} quaternion and the specified
-     * <code>target</code> {@link #normalize() unit} quaternion using spherical linear interpolation using the specified interpolation factor <code>alpha</code>.
+     * <code>target</code> {@link #normalize() unit} quaternion using spherical linear interpolation using the specified
+     * interpolation factor <code>alpha</code>.
      * <p>
-     * This method resorts to non-spherical linear interpolation when the absolute dot product between <code>this</code> and <code>target</code> is
+     * This method resorts to non-spherical linear interpolation when the absolute dot product between <code>this</code>
+     * and <code>target</code> is
      * below <code>1E-6</code>.
      *
      * @param target
-     *          the target of the interpolation, which should be reached with <code>alpha = 1.0</code>
+     *               the target of the interpolation, which should be reached with <code>alpha = 1.0</code>
      * @param alpha
-     *          the interpolation factor, within <code>[0..1]</code>
+     *               the interpolation factor, within <code>[0..1]</code>
      * @return this
      */
     public Quaterniond slerp(Quaterniondc target, double alpha) {
@@ -1696,21 +1733,25 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Interpolate between all of the quaternions given in <code>qs</code> via spherical linear interpolation using the specified interpolation factors <code>weights</code>,
+     * Interpolate between all of the quaternions given in <code>qs</code> via spherical linear interpolation using the
+     * specified interpolation factors <code>weights</code>,
      * and store the result in <code>dest</code>.
      * <p>
-     * This method will interpolate between each two successive quaternions via {@link #slerp(Quaterniondc, double)} using their relative interpolation weights.
+     * This method will interpolate between each two successive quaternions via {@link #slerp(Quaterniondc, double)}
+     * using their relative interpolation weights.
      * <p>
-     * This method resorts to non-spherical linear interpolation when the absolute dot product of any two interpolated quaternions is below <code>1E-6f</code>.
+     * This method resorts to non-spherical linear interpolation when the absolute dot product of any two interpolated
+     * quaternions is below <code>1E-6f</code>.
      * <p>
-     * Reference: <a href="http://gamedev.stackexchange.com/questions/62354/method-for-interpolation-between-3-quaternions#answer-62356">http://gamedev.stackexchange.com/</a>
+     * Reference: <a href=
+     * "http://gamedev.stackexchange.com/questions/62354/method-for-interpolation-between-3-quaternions#answer-62356">http://gamedev.stackexchange.com/</a>
      *
      * @param qs
-     *          the quaternions to interpolate over
+     *                the quaternions to interpolate over
      * @param weights
-     *          the weights of each individual quaternion in <code>qs</code>
+     *                the weights of each individual quaternion in <code>qs</code>
      * @param dest
-     *          will hold the result
+     *                will hold the result
      * @return dest
      */
     public static Quaterniondc slerp(Quaterniond[] qs, double[] weights, Quaterniond dest) {
@@ -1731,7 +1772,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * its length by the given <code>factor</code>.
      *
      * @param factor
-     *          the scaling factor
+     *               the scaling factor
      * @return this
      */
     public Quaterniond scale(double factor) {
@@ -1752,7 +1793,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * its length by the given <code>factor</code>.
      *
      * @param factor
-     *          the scaling factor
+     *               the scaling factor
      * @return this
      */
     public Quaterniond scaling(double factor) {
@@ -1765,24 +1806,29 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Integrate the rotation given by the angular velocity <code>(vx, vy, vz)</code> around the x, y and z axis, respectively,
-     * with respect to the given elapsed time delta <code>dt</code> and add the differentiate rotation to the rotation represented by this quaternion.
+     * Integrate the rotation given by the angular velocity <code>(vx, vy, vz)</code> around the x, y and z axis,
+     * respectively,
+     * with respect to the given elapsed time delta <code>dt</code> and add the differentiate rotation to the rotation
+     * represented by this quaternion.
      * <p>
-     * This method pre-multiplies the rotation given by <code>dt</code> and <code>(vx, vy, vz)</code> by <code>this</code>, so
-     * the angular velocities are always relative to the local coordinate system of the rotation represented by <code>this</code> quaternion.
+     * This method pre-multiplies the rotation given by <code>dt</code> and <code>(vx, vy, vz)</code> by
+     * <code>this</code>, so
+     * the angular velocities are always relative to the local coordinate system of the rotation represented by
+     * <code>this</code> quaternion.
      * <p>
      * This method is equivalent to calling: <code>rotateLocal(dt * vx, dt * vy, dt * vz)</code>
      * <p>
-     * Reference: <a href="http://physicsforgames.blogspot.de/2010/02/quaternions.html">http://physicsforgames.blogspot.de/</a>
+     * Reference:
+     * <a href="http://physicsforgames.blogspot.de/2010/02/quaternions.html">http://physicsforgames.blogspot.de/</a>
      *
      * @param dt
-     *          the delta time
+     *           the delta time
      * @param vx
-     *          the angular velocity around the x axis
+     *           the angular velocity around the x axis
      * @param vy
-     *          the angular velocity around the y axis
+     *           the angular velocity around the y axis
      * @param vz
-     *          the angular velocity around the z axis
+     *           the angular velocity around the z axis
      * @return this
      */
     public Quaterniond integrate(double dt, double vx, double vy, double vz) {
@@ -1810,9 +1856,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         dqZ = thetaZ * s;
         /* Pre-multiplication */
         return dest.set(Math.fma(dqW, x, Math.fma(dqX, w, Math.fma(dqY, z, -dqZ * y))),
-                        Math.fma(dqW, y, Math.fma(-dqX, z, Math.fma(dqY, w, dqZ * x))),
-                        Math.fma(dqW, z, Math.fma(dqX, y, Math.fma(-dqY, x, dqZ * w))),
-                        Math.fma(dqW, w, Math.fma(-dqX, x, Math.fma(-dqY, y, -dqZ * z))));
+                Math.fma(dqW, y, Math.fma(-dqX, z, Math.fma(dqY, w, dqZ * x))),
+                Math.fma(dqW, z, Math.fma(dqX, y, Math.fma(-dqY, x, dqZ * w))),
+                Math.fma(dqW, w, Math.fma(-dqX, x, Math.fma(-dqY, y, -dqZ * z))));
     }
 
     /**
@@ -1820,9 +1866,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * and store the result in <code>this</code>.
      *
      * @param q
-     *          the other quaternion
+     *               the other quaternion
      * @param factor
-     *          the interpolation factor. It is between 0.0 and 1.0
+     *               the interpolation factor. It is between 0.0 and 1.0
      * @return this
      */
     public Quaterniond nlerp(Quaterniondc q, double factor) {
@@ -1837,7 +1883,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         dest.y = Math.fma(scale0, y, scale1 * q.y());
         dest.z = Math.fma(scale0, z, scale1 * q.z());
         dest.w = Math.fma(scale0, w, scale1 * q.w());
-        double s = Math.invsqrt(Math.fma(dest.x, dest.x, Math.fma(dest.y, dest.y, Math.fma(dest.z, dest.z, dest.w * dest.w))));
+        double s = Math
+                .invsqrt(Math.fma(dest.x, dest.x, Math.fma(dest.y, dest.y, Math.fma(dest.z, dest.z, dest.w * dest.w))));
         dest.x *= s;
         dest.y *= s;
         dest.z *= s;
@@ -1846,20 +1893,22 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Interpolate between all of the quaternions given in <code>qs</code> via non-spherical linear interpolation using the
+     * Interpolate between all of the quaternions given in <code>qs</code> via non-spherical linear interpolation using
+     * the
      * specified interpolation factors <code>weights</code>, and store the result in <code>dest</code>.
      * <p>
      * This method will interpolate between each two successive quaternions via {@link #nlerp(Quaterniondc, double)}
      * using their relative interpolation weights.
      * <p>
-     * Reference: <a href="http://gamedev.stackexchange.com/questions/62354/method-for-interpolation-between-3-quaternions#answer-62356">http://gamedev.stackexchange.com/</a>
+     * Reference: <a href=
+     * "http://gamedev.stackexchange.com/questions/62354/method-for-interpolation-between-3-quaternions#answer-62356">http://gamedev.stackexchange.com/</a>
      *
      * @param qs
-     *          the quaternions to interpolate over
+     *                the quaternions to interpolate over
      * @param weights
-     *          the weights of each individual quaternion in <code>qs</code>
+     *                the weights of each individual quaternion in <code>qs</code>
      * @param dest
-     *          will hold the result
+     *                will hold the result
      * @return dest
      */
     public static Quaterniondc nlerp(Quaterniond[] qs, double[] weights, Quaterniond dest) {
@@ -1931,20 +1980,25 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * Compute linear (non-spherical) interpolations of <code>this</code> and the given quaternion <code>q</code>
      * iteratively and store the result in <code>this</code>.
      * <p>
-     * This method performs a series of small-step nlerp interpolations to avoid doing a costly spherical linear interpolation, like
+     * This method performs a series of small-step nlerp interpolations to avoid doing a costly spherical linear
+     * interpolation, like
      * {@link #slerp(Quaterniondc, double, Quaterniond) slerp},
-     * by subdividing the rotation arc between <code>this</code> and <code>q</code> via non-spherical linear interpolations as long as
-     * the absolute dot product of <code>this</code> and <code>q</code> is greater than the given <code>dotThreshold</code> parameter.
+     * by subdividing the rotation arc between <code>this</code> and <code>q</code> via non-spherical linear
+     * interpolations as long as
+     * the absolute dot product of <code>this</code> and <code>q</code> is greater than the given
+     * <code>dotThreshold</code> parameter.
      * <p>
-     * Thanks to <code>@theagentd</code> at <a href="http://www.java-gaming.org/">http://www.java-gaming.org/</a> for providing the code.
+     * Thanks to <code>@theagentd</code> at <a href="http://www.java-gaming.org/">http://www.java-gaming.org/</a> for
+     * providing the code.
      *
      * @param q
-     *          the other quaternion
+     *                     the other quaternion
      * @param alpha
-     *          the interpolation factor, between 0.0 and 1.0
+     *                     the interpolation factor, between 0.0 and 1.0
      * @param dotThreshold
-     *          the threshold for the dot product of <code>this</code> and <code>q</code> above which this method performs another iteration
-     *          of a small-step linear interpolation
+     *                     the threshold for the dot product of <code>this</code> and <code>q</code> above which this
+     *                     method performs another iteration
+     *                     of a small-step linear interpolation
      * @return this
      */
     public Quaterniond nlerpIterative(Quaterniondc q, double alpha, double dotThreshold) {
@@ -1952,26 +2006,31 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Interpolate between all of the quaternions given in <code>qs</code> via iterative non-spherical linear interpolation using the
+     * Interpolate between all of the quaternions given in <code>qs</code> via iterative non-spherical linear
+     * interpolation using the
      * specified interpolation factors <code>weights</code>, and store the result in <code>dest</code>.
      * <p>
-     * This method will interpolate between each two successive quaternions via {@link #nlerpIterative(Quaterniondc, double, double)}
+     * This method will interpolate between each two successive quaternions via
+     * {@link #nlerpIterative(Quaterniondc, double, double)}
      * using their relative interpolation weights.
      * <p>
-     * Reference: <a href="http://gamedev.stackexchange.com/questions/62354/method-for-interpolation-between-3-quaternions#answer-62356">http://gamedev.stackexchange.com/</a>
+     * Reference: <a href=
+     * "http://gamedev.stackexchange.com/questions/62354/method-for-interpolation-between-3-quaternions#answer-62356">http://gamedev.stackexchange.com/</a>
      *
      * @param qs
-     *          the quaternions to interpolate over
+     *                     the quaternions to interpolate over
      * @param weights
-     *          the weights of each individual quaternion in <code>qs</code>
+     *                     the weights of each individual quaternion in <code>qs</code>
      * @param dotThreshold
-     *          the threshold for the dot product of each two interpolated quaternions above which {@link #nlerpIterative(Quaterniondc, double, double)} performs another iteration
-     *          of a small-step linear interpolation
+     *                     the threshold for the dot product of each two interpolated quaternions above which
+     *                     {@link #nlerpIterative(Quaterniondc, double, double)} performs another iteration
+     *                     of a small-step linear interpolation
      * @param dest
-     *          will hold the result
+     *                     will hold the result
      * @return dest
      */
-    public static Quaterniond nlerpIterative(Quaterniondc[] qs, double[] weights, double dotThreshold, Quaterniond dest) {
+    public static Quaterniond nlerpIterative(Quaterniondc[] qs, double[] weights, double dotThreshold,
+                                             Quaterniond dest) {
         dest.set(qs[0]);
         double w = weights[0];
         for (int i = 1; i < qs.length; i++) {
@@ -1987,7 +2046,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     /**
      * Apply a rotation to this quaternion that maps the given direction to the positive Z axis.
      * <p>
-     * Because there are multiple possibilities for such a rotation, this method will choose the one that ensures the given up direction to remain
+     * Because there are multiple possibilities for such a rotation, this method will choose the one that ensures the
+     * given up direction to remain
      * parallel to the plane spanned by the <code>up</code> and <code>dir</code> vectors.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the
@@ -1995,15 +2055,16 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
      * rotation added by this method will be applied first!
      * <p>
-     * Reference: <a href="http://answers.unity3d.com/questions/467614/what-is-the-source-code-of-quaternionlookrotation.html">http://answers.unity3d.com</a>
+     * Reference: <a href=
+     * "http://answers.unity3d.com/questions/467614/what-is-the-source-code-of-quaternionlookrotation.html">http://answers.unity3d.com</a>
      *
      * @see #lookAlong(double, double, double, double, double, double, Quaterniond)
      *
      * @param dir
-     *              the direction to map to the positive Z axis
+     *            the direction to map to the positive Z axis
      * @param up
-     *              the vector which will be mapped to a vector parallel to the plane
-     *              spanned by the given <code>dir</code> and <code>up</code>
+     *            the vector which will be mapped to a vector parallel to the plane
+     *            spanned by the given <code>dir</code> and <code>up</code>
      * @return this
      */
     public Quaterniond lookAlong(Vector3dc dir, Vector3dc up) {
@@ -2017,7 +2078,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     /**
      * Apply a rotation to this quaternion that maps the given direction to the positive Z axis.
      * <p>
-     * Because there are multiple possibilities for such a rotation, this method will choose the one that ensures the given up direction to remain
+     * Because there are multiple possibilities for such a rotation, this method will choose the one that ensures the
+     * given up direction to remain
      * parallel to the plane spanned by the <code>up</code> and <code>dir</code> vectors.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the
@@ -2025,29 +2087,31 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
      * rotation added by this method will be applied first!
      * <p>
-     * Reference: <a href="http://answers.unity3d.com/questions/467614/what-is-the-source-code-of-quaternionlookrotation.html">http://answers.unity3d.com</a>
+     * Reference: <a href=
+     * "http://answers.unity3d.com/questions/467614/what-is-the-source-code-of-quaternionlookrotation.html">http://answers.unity3d.com</a>
      *
      * @see #lookAlong(double, double, double, double, double, double, Quaterniond)
      *
      * @param dirX
-     *              the x-coordinate of the direction to look along
+     *             the x-coordinate of the direction to look along
      * @param dirY
-     *              the y-coordinate of the direction to look along
+     *             the y-coordinate of the direction to look along
      * @param dirZ
-     *              the z-coordinate of the direction to look along
+     *             the z-coordinate of the direction to look along
      * @param upX
-     *              the x-coordinate of the up vector
+     *             the x-coordinate of the up vector
      * @param upY
-     *              the y-coordinate of the up vector
+     *             the y-coordinate of the up vector
      * @param upZ
-     *              the z-coordinate of the up vector
+     *             the z-coordinate of the up vector
      * @return this
      */
     public Quaterniond lookAlong(double dirX, double dirY, double dirZ, double upX, double upY, double upZ) {
         return lookAlong(dirX, dirY, dirZ, upX, upY, upZ, this);
     }
 
-    public Quaterniond lookAlong(double dirX, double dirY, double dirZ, double upX, double upY, double upZ, Quaterniond dest) {
+    public Quaterniond lookAlong(double dirX, double dirY, double dirZ, double upX, double upY, double upZ,
+                                 Quaterniond dest) {
         // Normalize direction
         double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
         double dirnX = -dirX * invDirLength;
@@ -2105,15 +2169,16 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         }
         /* Multiply */
         return dest.set(Math.fma(this.w, x, Math.fma(this.x, w, Math.fma(this.y, z, -this.z * y))),
-                        Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
-                        Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
-                        Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
+                Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
+                Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
+                Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
     }
 
     /**
      * Return a string representation of this quaternion.
      * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
+     * This method creates a new {@link DecimalFormat} on every invocation with the format string
+     * "<code>0.000E0;-</code>".
      *
      * @return the string representation
      */
@@ -2122,14 +2187,16 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Return a string representation of this quaternion by formatting the components with the given {@link NumberFormat}.
+     * Return a string representation of this quaternion by formatting the components with the given
+     * {@link NumberFormat}.
      *
      * @param formatter
-     *          the {@link NumberFormat} used to format the quaternion components with
+     *                  the {@link NumberFormat} used to format the quaternion components with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {
-        return "(" + Runtime.format(x, formatter) + " " + Runtime.format(y, formatter) + " " + Runtime.format(z, formatter) + " " + Runtime.format(w, formatter) + ")";
+        return "(" + Runtime.format(x, formatter) + " " + Runtime.format(y, formatter) + " " +
+                Runtime.format(z, formatter) + " " + Runtime.format(w, formatter) + ")";
     }
 
     public void writeExternal(ObjectOutput out) throws IOException {
@@ -2140,7 +2207,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     public void readExternal(ObjectInput in) throws IOException,
-            ClassNotFoundException {
+                                             ClassNotFoundException {
         x = in.readDouble();
         y = in.readDouble();
         z = in.readDouble();
@@ -2191,10 +2258,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * <p>
      * <code>T * D = Q</code>
      * <p>
-     * It is defined as: <code>D = T^-1 * Q</code>, where <code>T^-1</code> denotes the {@link #invert() inverse} of <code>T</code>.
+     * It is defined as: <code>D = T^-1 * Q</code>, where <code>T^-1</code> denotes the {@link #invert() inverse} of
+     * <code>T</code>.
      *
      * @param other
-     *          the other quaternion
+     *              the other quaternion
      * @return this
      */
     public Quaterniond difference(Quaterniondc other) {
@@ -2208,34 +2276,37 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double z = -this.z * invNorm;
         double w = this.w * invNorm;
         dest.set(Math.fma(w, other.x(), Math.fma(x, other.w(), Math.fma(y, other.z(), -z * other.y()))),
-                 Math.fma(w, other.y(), Math.fma(-x, other.z(), Math.fma(y, other.w(), z * other.x()))),
-                 Math.fma(w, other.z(), Math.fma(x, other.y(), Math.fma(-y, other.x(), z * other.w()))),
-                 Math.fma(w, other.w(), Math.fma(-x, other.x(), Math.fma(-y, other.y(), -z * other.z()))));
+                Math.fma(w, other.y(), Math.fma(-x, other.z(), Math.fma(y, other.w(), z * other.x()))),
+                Math.fma(w, other.z(), Math.fma(x, other.y(), Math.fma(-y, other.x(), z * other.w()))),
+                Math.fma(w, other.w(), Math.fma(-x, other.x(), Math.fma(-y, other.y(), -z * other.z()))));
         return dest;
     }
 
     /**
-     * Set <code>this</code> quaternion to a rotation that rotates the <code>fromDir</code> vector to point along <code>toDir</code>.
+     * Set <code>this</code> quaternion to a rotation that rotates the <code>fromDir</code> vector to point along
+     * <code>toDir</code>.
      * <p>
      * Since there can be multiple possible rotations, this method chooses the one with the shortest arc.
      * <p>
-     * Reference: <a href="http://stackoverflow.com/questions/1171849/finding-quaternion-representing-the-rotation-from-one-vector-to-another#answer-1171995">stackoverflow.com</a>
+     * Reference: <a href=
+     * "http://stackoverflow.com/questions/1171849/finding-quaternion-representing-the-rotation-from-one-vector-to-another#answer-1171995">stackoverflow.com</a>
      *
      * @param fromDirX
-     *              the x-coordinate of the direction to rotate into the destination direction
+     *                 the x-coordinate of the direction to rotate into the destination direction
      * @param fromDirY
-     *              the y-coordinate of the direction to rotate into the destination direction
+     *                 the y-coordinate of the direction to rotate into the destination direction
      * @param fromDirZ
-     *              the z-coordinate of the direction to rotate into the destination direction
+     *                 the z-coordinate of the direction to rotate into the destination direction
      * @param toDirX
-     *              the x-coordinate of the direction to rotate to
+     *                 the x-coordinate of the direction to rotate to
      * @param toDirY
-     *              the y-coordinate of the direction to rotate to
+     *                 the y-coordinate of the direction to rotate to
      * @param toDirZ
-     *              the z-coordinate of the direction to rotate to
+     *                 the z-coordinate of the direction to rotate to
      * @return this
      */
-    public Quaterniond rotationTo(double fromDirX, double fromDirY, double fromDirZ, double toDirX, double toDirY, double toDirZ) {
+    public Quaterniond rotationTo(double fromDirX, double fromDirY, double fromDirZ, double toDirX, double toDirY,
+                                  double toDirZ) {
         double fn = Math.invsqrt(Math.fma(fromDirX, fromDirX, Math.fma(fromDirY, fromDirY, fromDirZ * fromDirZ)));
         double tn = Math.invsqrt(Math.fma(toDirX, toDirX, Math.fma(toDirY, toDirY, toDirZ * toDirZ)));
         double fx = fromDirX * fn, fy = fromDirY * fn, fz = fromDirZ * fn;
@@ -2277,16 +2348,17 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Set <code>this</code> quaternion to a rotation that rotates the <code>fromDir</code> vector to point along <code>toDir</code>.
+     * Set <code>this</code> quaternion to a rotation that rotates the <code>fromDir</code> vector to point along
+     * <code>toDir</code>.
      * <p>
      * Because there can be multiple possible rotations, this method chooses the one with the shortest arc.
      *
      * @see #rotationTo(double, double, double, double, double, double)
      *
      * @param fromDir
-     *          the starting direction
+     *                the starting direction
      * @param toDir
-     *          the destination direction
+     *                the destination direction
      * @return this
      */
     public Quaterniond rotationTo(Vector3dc fromDir, Vector3dc toDir) {
@@ -2330,9 +2402,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         }
         /* Multiply */
         return dest.set(Math.fma(this.w, x, Math.fma(this.x, w, Math.fma(this.y, z, -this.z * y))),
-                        Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
-                        Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
-                        Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
+                Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
+                Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
+                Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
     }
 
     /**
@@ -2342,7 +2414,7 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * @see #rotationAxis(double, double, double, double)
      *
      * @param axisAngle
-     *            the {@link AxisAngle4f} giving the rotation angle in radians and the axis to rotate about
+     *                  the {@link AxisAngle4f} giving the rotation angle in radians and the axis to rotate about
      * @return this
      */
     public Quaterniond rotationAxis(AxisAngle4f axisAngle) {
@@ -2353,13 +2425,13 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * Set this quaternion to a rotation of the given angle in radians about the supplied axis.
      *
      * @param angle
-     *          the rotation angle in radians
+     *              the rotation angle in radians
      * @param axisX
-     *          the x-coordinate of the rotation axis
+     *              the x-coordinate of the rotation axis
      * @param axisY
-     *          the y-coordinate of the rotation axis
+     *              the y-coordinate of the rotation axis
      * @param axisZ
-     *          the z-coordinate of the rotation axis
+     *              the z-coordinate of the rotation axis
      * @return this
      */
     public Quaterniond rotationAxis(double angle, double axisX, double axisY, double axisZ) {
@@ -2367,9 +2439,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double sinAngle = Math.sin(hangle);
         double invVLength = Math.invsqrt(axisX * axisX + axisY * axisY + axisZ * axisZ);
         return set(axisX * invVLength * sinAngle,
-                   axisY * invVLength * sinAngle,
-                   axisZ * invVLength * sinAngle,
-                   Math.cosFromSin(sinAngle, hangle));
+                axisY * invVLength * sinAngle,
+                axisZ * invVLength * sinAngle,
+                Math.cosFromSin(sinAngle, hangle));
     }
 
     /**
@@ -2412,7 +2484,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Apply a rotation to <code>this</code> that rotates the <code>fromDir</code> vector to point along <code>toDir</code>.
+     * Apply a rotation to <code>this</code> that rotates the <code>fromDir</code> vector to point along
+     * <code>toDir</code>.
      * <p>
      * Since there can be multiple possible rotations, this method chooses the one with the shortest arc.
      * <p>
@@ -2424,20 +2497,21 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * @see #rotateTo(double, double, double, double, double, double, Quaterniond)
      *
      * @param fromDirX
-     *              the x-coordinate of the direction to rotate into the destination direction
+     *                 the x-coordinate of the direction to rotate into the destination direction
      * @param fromDirY
-     *              the y-coordinate of the direction to rotate into the destination direction
+     *                 the y-coordinate of the direction to rotate into the destination direction
      * @param fromDirZ
-     *              the z-coordinate of the direction to rotate into the destination direction
+     *                 the z-coordinate of the direction to rotate into the destination direction
      * @param toDirX
-     *              the x-coordinate of the direction to rotate to
+     *                 the x-coordinate of the direction to rotate to
      * @param toDirY
-     *              the y-coordinate of the direction to rotate to
+     *                 the y-coordinate of the direction to rotate to
      * @param toDirZ
-     *              the z-coordinate of the direction to rotate to
+     *                 the z-coordinate of the direction to rotate to
      * @return this
      */
-    public Quaterniond rotateTo(double fromDirX, double fromDirY, double fromDirZ, double toDirX, double toDirY, double toDirZ) {
+    public Quaterniond rotateTo(double fromDirX, double fromDirY, double fromDirZ, double toDirX, double toDirY,
+                                double toDirZ) {
         return rotateTo(fromDirX, fromDirY, fromDirZ, toDirX, toDirY, toDirZ, this);
     }
 
@@ -2446,7 +2520,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     /**
-     * Apply a rotation to <code>this</code> that rotates the <code>fromDir</code> vector to point along <code>toDir</code>.
+     * Apply a rotation to <code>this</code> that rotates the <code>fromDir</code> vector to point along
+     * <code>toDir</code>.
      * <p>
      * Because there can be multiple possible rotations, this method chooses the one with the shortest arc.
      * <p>
@@ -2458,9 +2533,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * @see #rotateTo(double, double, double, double, double, double, Quaterniond)
      *
      * @param fromDir
-     *          the starting direction
+     *                the starting direction
      * @param toDir
-     *          the destination direction
+     *                the destination direction
      * @return this
      */
     public Quaterniond rotateTo(Vector3dc fromDir, Vector3dc toDir) {
@@ -2487,9 +2562,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double sin = Math.sin(angle * 0.5);
         double cos = Math.cosFromSin(sin, angle * 0.5);
         return dest.set(w * sin + x * cos,
-                        y * cos + z * sin,
-                        z * cos - y * sin,
-                        w * cos - x * sin);
+                y * cos + z * sin,
+                z * cos - y * sin,
+                w * cos - x * sin);
     }
 
     /**
@@ -2512,9 +2587,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double sin = Math.sin(angle * 0.5);
         double cos = Math.cosFromSin(sin, angle * 0.5);
         return dest.set(x * cos - z * sin,
-                        w * sin + y * cos,
-                        x * sin + z * cos,
-                        w * cos - y * sin);
+                w * sin + y * cos,
+                x * sin + z * cos,
+                w * cos - y * sin);
     }
 
     /**
@@ -2537,9 +2612,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double sin = Math.sin(angle * 0.5);
         double cos = Math.cosFromSin(sin, angle * 0.5);
         return dest.set(x * cos + y * sin,
-                        y * cos - x * sin,
-                        w * sin + z * cos,
-                        w * cos - z * sin);
+                y * cos - x * sin,
+                w * sin + z * cos,
+                w * cos - z * sin);
     }
 
     /**
@@ -2563,9 +2638,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double s = Math.sin(hangle);
         double c = Math.cosFromSin(s, hangle);
         dest.set(c * x + s * w,
-                 c * y - s * z,
-                 c * z + s * y,
-                 c * w - s * x);
+                c * y - s * z,
+                c * z + s * y,
+                c * w - s * x);
         return dest;
     }
 
@@ -2590,9 +2665,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double s = Math.sin(hangle);
         double c = Math.cosFromSin(s, hangle);
         dest.set(c * x + s * z,
-                 c * y + s * w,
-                 c * z - s * x,
-                 c * w - s * y);
+                c * y + s * w,
+                c * z - s * x,
+                c * w - s * y);
         return dest;
     }
 
@@ -2617,9 +2692,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double s = Math.sin(hangle);
         double c = Math.cosFromSin(s, hangle);
         dest.set(c * x - s * y,
-                 c * y + s * x,
-                 c * z + s * w,
-                 c * w - s * z);
+                c * y + s * x,
+                c * z + s * w,
+                c * w - s * z);
         return dest;
     }
 
@@ -2635,11 +2710,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * rotation added by this method will be applied first!
      *
      * @param angleX
-     *              the angle in radians to rotate about the x axis
+     *               the angle in radians to rotate about the x axis
      * @param angleY
-     *              the angle in radians to rotate about the y axis
+     *               the angle in radians to rotate about the y axis
      * @param angleZ
-     *              the angle in radians to rotate about the z axis
+     *               the angle in radians to rotate about the z axis
      * @return this
      */
     public Quaterniond rotateXYZ(double angleX, double angleY, double angleZ) {
@@ -2647,26 +2722,26 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     public Quaterniond rotateXYZ(double angleX, double angleY, double angleZ, Quaterniond dest) {
-        double sx =  Math.sin(angleX * 0.5);
-        double cx =  Math.cosFromSin(sx, angleX * 0.5);
-        double sy =  Math.sin(angleY * 0.5);
-        double cy =  Math.cosFromSin(sy, angleY * 0.5);
-        double sz =  Math.sin(angleZ * 0.5);
-        double cz =  Math.cosFromSin(sz, angleZ * 0.5);
+        double sx = Math.sin(angleX * 0.5);
+        double cx = Math.cosFromSin(sx, angleX * 0.5);
+        double sy = Math.sin(angleY * 0.5);
+        double cy = Math.cosFromSin(sy, angleY * 0.5);
+        double sz = Math.sin(angleZ * 0.5);
+        double cz = Math.cosFromSin(sz, angleZ * 0.5);
 
         double cycz = cy * cz;
         double sysz = sy * sz;
         double sycz = sy * cz;
         double cysz = cy * sz;
-        double w = cx*cycz - sx*sysz;
-        double x = sx*cycz + cx*sysz;
-        double y = cx*sycz - sx*cysz;
-        double z = cx*cysz + sx*sycz;
+        double w = cx * cycz - sx * sysz;
+        double x = sx * cycz + cx * sysz;
+        double y = cx * sycz - sx * cysz;
+        double z = cx * cysz + sx * sycz;
         // right-multiply
         return dest.set(Math.fma(this.w, x, Math.fma(this.x, w, Math.fma(this.y, z, -this.z * y))),
-                        Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
-                        Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
-                        Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
+                Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
+                Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
+                Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
     }
 
     /**
@@ -2681,11 +2756,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * rotation added by this method will be applied first!
      *
      * @param angleZ
-     *              the angle in radians to rotate about the z axis
+     *               the angle in radians to rotate about the z axis
      * @param angleY
-     *              the angle in radians to rotate about the y axis
+     *               the angle in radians to rotate about the y axis
      * @param angleX
-     *              the angle in radians to rotate about the x axis
+     *               the angle in radians to rotate about the x axis
      * @return this
      */
     public Quaterniond rotateZYX(double angleZ, double angleY, double angleX) {
@@ -2693,26 +2768,26 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     public Quaterniond rotateZYX(double angleZ, double angleY, double angleX, Quaterniond dest) {
-        double sx =  Math.sin(angleX * 0.5);
-        double cx =  Math.cosFromSin(sx, angleX * 0.5);
-        double sy =  Math.sin(angleY * 0.5);
-        double cy =  Math.cosFromSin(sy, angleY * 0.5);
-        double sz =  Math.sin(angleZ * 0.5);
-        double cz =  Math.cosFromSin(sz, angleZ * 0.5);
+        double sx = Math.sin(angleX * 0.5);
+        double cx = Math.cosFromSin(sx, angleX * 0.5);
+        double sy = Math.sin(angleY * 0.5);
+        double cy = Math.cosFromSin(sy, angleY * 0.5);
+        double sz = Math.sin(angleZ * 0.5);
+        double cz = Math.cosFromSin(sz, angleZ * 0.5);
 
         double cycz = cy * cz;
         double sysz = sy * sz;
         double sycz = sy * cz;
         double cysz = cy * sz;
-        double w = cx*cycz + sx*sysz;
-        double x = sx*cycz - cx*sysz;
-        double y = cx*sycz + sx*cysz;
-        double z = cx*cysz - sx*sycz;
+        double w = cx * cycz + sx * sysz;
+        double x = sx * cycz - cx * sysz;
+        double y = cx * sycz + sx * cysz;
+        double z = cx * cysz - sx * sycz;
         // right-multiply
         return dest.set(Math.fma(this.w, x, Math.fma(this.x, w, Math.fma(this.y, z, -this.z * y))),
-                        Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
-                        Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
-                        Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
+                Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
+                Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
+                Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
     }
 
     /**
@@ -2727,11 +2802,11 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * rotation added by this method will be applied first!
      *
      * @param angleY
-     *              the angle in radians to rotate about the y axis
+     *               the angle in radians to rotate about the y axis
      * @param angleX
-     *              the angle in radians to rotate about the x axis
+     *               the angle in radians to rotate about the x axis
      * @param angleZ
-     *              the angle in radians to rotate about the z axis
+     *               the angle in radians to rotate about the z axis
      * @return this
      */
     public Quaterniond rotateYXZ(double angleY, double angleX, double angleZ) {
@@ -2739,12 +2814,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     }
 
     public Quaterniond rotateYXZ(double angleY, double angleX, double angleZ, Quaterniond dest) {
-        double sx =  Math.sin(angleX * 0.5);
-        double cx =  Math.cosFromSin(sx, angleX * 0.5);
-        double sy =  Math.sin(angleY * 0.5);
-        double cy =  Math.cosFromSin(sy, angleY * 0.5);
-        double sz =  Math.sin(angleZ * 0.5);
-        double cz =  Math.cosFromSin(sz, angleZ * 0.5);
+        double sx = Math.sin(angleX * 0.5);
+        double cx = Math.cosFromSin(sx, angleX * 0.5);
+        double sy = Math.sin(angleY * 0.5);
+        double cy = Math.cosFromSin(sy, angleY * 0.5);
+        double sz = Math.sin(angleZ * 0.5);
+        double cz = Math.cosFromSin(sz, angleZ * 0.5);
 
         double yx = cy * sx;
         double yy = sy * cx;
@@ -2756,9 +2831,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double w = yw * cz + yz * sz;
         // right-multiply
         return dest.set(Math.fma(this.w, x, Math.fma(this.x, w, Math.fma(this.y, z, -this.z * y))),
-                        Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
-                        Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
-                        Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
+                Math.fma(this.w, y, Math.fma(-this.x, z, Math.fma(this.y, w, this.z * x))),
+                Math.fma(this.w, z, Math.fma(this.x, y, Math.fma(-this.y, x, this.z * w))),
+                Math.fma(this.w, w, Math.fma(-this.x, x, Math.fma(-this.y, y, -this.z * z))));
     }
 
     public Vector3d getEulerAnglesXYZ(Vector3d eulerAngles) {
@@ -2784,9 +2859,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double rz = axisZ * invVLength * sinAngle;
         double rw = Math.cosFromSin(sinAngle, hangle);
         return dest.set(Math.fma(this.w, rx, Math.fma(this.x, rw, Math.fma(this.y, rz, -this.z * ry))),
-                        Math.fma(this.w, ry, Math.fma(-this.x, rz, Math.fma(this.y, rw, this.z * rx))),
-                        Math.fma(this.w, rz, Math.fma(this.x, ry, Math.fma(-this.y, rx, this.z * rw))),
-                        Math.fma(this.w, rw, Math.fma(-this.x, rx, Math.fma(-this.y, ry, -this.z * rz))));
+                Math.fma(this.w, ry, Math.fma(-this.x, rz, Math.fma(this.y, rw, this.z * rx))),
+                Math.fma(this.w, rz, Math.fma(this.x, ry, Math.fma(-this.y, rx, this.z * rw))),
+                Math.fma(this.w, rw, Math.fma(-this.x, rx, Math.fma(-this.y, ry, -this.z * rz))));
     }
 
     public Quaterniond rotateAxis(double angle, Vector3dc axis, Quaterniond dest) {
@@ -2842,12 +2917,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double nx = -x * invNorm;
         double ny = -y * invNorm;
         double nz = -z * invNorm;
-        double nw =  w * invNorm;
+        double nw = w * invNorm;
         double dy = ny + ny;
         double dz = nz + nz;
         dir.x = -ny * dy - nz * dz + 1.0;
-        dir.y =  nx * dy + nw * dz;
-        dir.z =  nx * dz - nw * dy;
+        dir.y = nx * dy + nw * dz;
+        dir.z = nx * dz - nw * dy;
         return dir;
     }
 
@@ -2855,8 +2930,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double dy = y + y;
         double dz = z + z;
         dir.x = -y * dy - z * dz + 1.0;
-        dir.y =  x * dy - w * dz;
-        dir.z =  x * dz + w * dy;
+        dir.y = x * dy - w * dz;
+        dir.z = x * dz + w * dy;
         return dir;
     }
 
@@ -2865,13 +2940,13 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double nx = -x * invNorm;
         double ny = -y * invNorm;
         double nz = -z * invNorm;
-        double nw =  w * invNorm;
+        double nw = w * invNorm;
         double dx = nx + nx;
         double dy = ny + ny;
         double dz = nz + nz;
-        dir.x =  nx * dy - nw * dz;
+        dir.x = nx * dy - nw * dz;
         dir.y = -nx * dx - nz * dz + 1.0;
-        dir.z =  ny * dz + nw * dx;
+        dir.z = ny * dz + nw * dx;
         return dir;
     }
 
@@ -2879,9 +2954,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double dx = x + x;
         double dy = y + y;
         double dz = z + z;
-        dir.x =  x * dy + w * dz;
+        dir.x = x * dy + w * dz;
         dir.y = -x * dx - z * dz + 1.0;
-        dir.z =  y * dz - w * dx;
+        dir.z = y * dz - w * dx;
         return dir;
     }
 
@@ -2890,12 +2965,12 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double nx = -x * invNorm;
         double ny = -y * invNorm;
         double nz = -z * invNorm;
-        double nw =  w * invNorm;
+        double nw = w * invNorm;
         double dx = nx + nx;
         double dy = ny + ny;
         double dz = nz + nz;
-        dir.x =  nx * dz + nw * dy;
-        dir.y =  ny * dz - nw * dx;
+        dir.x = nx * dz + nw * dy;
+        dir.y = ny * dz - nw * dx;
         dir.z = -nx * dx - ny * dy + 1.0;
         return dir;
     }
@@ -2904,8 +2979,8 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double dx = x + x;
         double dy = y + y;
         double dz = z + z;
-        dir.x =  x * dz - w * dy;
-        dir.y =  y * dz + w * dx;
+        dir.x = x * dz - w * dy;
+        dir.y = y * dz + w * dx;
         dir.z = -x * dx - y * dy + 1.0;
         return dir;
     }
@@ -2926,9 +3001,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
      * and store the result into <code>dest</code>.
      *
      * @param q
-     *          the {@link Quaterniondc} to conjugate <code>this</code> by
+     *             the {@link Quaterniondc} to conjugate <code>this</code> by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Quaterniond conjugateBy(Quaterniondc q, Quaterniond dest) {
@@ -2939,9 +3014,9 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
         double qpz = Math.fma(q.w(), z, Math.fma(q.x(), y, Math.fma(-q.y(), x, q.z() * w)));
         double qpw = Math.fma(q.w(), w, Math.fma(-q.x(), x, Math.fma(-q.y(), y, -q.z() * z)));
         return dest.set(Math.fma(qpw, qix, Math.fma(qpx, qiw, Math.fma(qpy, qiz, -qpz * qiy))),
-                        Math.fma(qpw, qiy, Math.fma(-qpx, qiz, Math.fma(qpy, qiw, qpz * qix))),
-                        Math.fma(qpw, qiz, Math.fma(qpx, qiy, Math.fma(-qpy, qix, qpz * qiw))),
-                        Math.fma(qpw, qiw, Math.fma(-qpx, qix, Math.fma(-qpy, qiy, -qpz * qiz))));
+                Math.fma(qpw, qiy, Math.fma(-qpx, qiz, Math.fma(qpy, qiw, qpz * qix))),
+                Math.fma(qpw, qiz, Math.fma(qpx, qiy, Math.fma(-qpy, qix, qpz * qiw))),
+                Math.fma(qpw, qiw, Math.fma(-qpx, qix, Math.fma(-qpy, qiy, -qpz * qiz))));
     }
 
     public boolean isFinite() {
@@ -2981,5 +3056,4 @@ public class Quaterniond implements Externalizable, Cloneable, Quaterniondc {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-
 }

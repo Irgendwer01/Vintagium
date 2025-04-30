@@ -1,12 +1,15 @@
 package me.jellysquid.mods.sodium.client.gui.options.control;
 
+import net.minecraft.util.math.MathHelper;
+
+import org.apache.commons.lang3.Validate;
+
 import me.jellysquid.mods.sodium.client.gui.options.Option;
 import me.jellysquid.mods.sodium.client.gui.utils.Rect2i;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
-import net.minecraft.util.math.MathHelper;
-import org.apache.commons.lang3.Validate;
 
 public class SliderControl implements Control<Integer> {
+
     private final Option<Integer> option;
 
     private final int min, max, interval;
@@ -42,6 +45,7 @@ public class SliderControl implements Control<Integer> {
     }
 
     private static class Button extends ControlElement<Integer> {
+
         private static final int THUMB_WIDTH = 2, TRACK_HEIGHT = 1;
 
         private final Rect2i sliderBounds;
@@ -53,7 +57,8 @@ public class SliderControl implements Control<Integer> {
 
         private double thumbPosition;
 
-        public Button(Option<Integer> option, Dim2i dim, int min, int max, int interval, ControlValueFormatter formatter) {
+        public Button(Option<Integer> option, Dim2i dim, int min, int max, int interval,
+                      ControlValueFormatter formatter) {
             super(option, dim);
 
             this.min = min;
@@ -96,7 +101,8 @@ public class SliderControl implements Control<Integer> {
 
             this.thumbPosition = this.getThumbPositionForValue(option.getValue());
 
-            double thumbOffset = MathHelper.clamp((double) (this.getIntValue() - this.min) / this.range * sliderWidth, 0, sliderWidth);
+            double thumbOffset = MathHelper.clamp((double) (this.getIntValue() - this.min) / this.range * sliderWidth,
+                    0, sliderWidth);
 
             double thumbX = sliderX + thumbOffset - THUMB_WIDTH;
             double trackY = sliderY + (sliderHeight / 2) - ((double) TRACK_HEIGHT / 2);
@@ -159,5 +165,4 @@ public class SliderControl implements Control<Integer> {
             return false;
         }
     }
-
 }

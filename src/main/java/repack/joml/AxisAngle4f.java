@@ -70,13 +70,14 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Create a new {@link AxisAngle4f} with the same values of <code>a</code>.
      *
      * @param a
-     *            the AngleAxis4f to copy the values from
+     *          the AngleAxis4f to copy the values from
      */
     public AxisAngle4f(AxisAngle4f a) {
         x = a.x;
         y = a.y;
         z = a.z;
-        angle = (float) ((a.angle < 0.0 ? Math.PI + Math.PI + a.angle % (Math.PI + Math.PI) : a.angle) % (Math.PI + Math.PI));
+        angle = (float) ((a.angle < 0.0 ? Math.PI + Math.PI + a.angle % (Math.PI + Math.PI) : a.angle) %
+                (Math.PI + Math.PI));
     }
 
     /**
@@ -87,7 +88,7 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * >http://www.euclideanspace.com</a>
      *
      * @param q
-     *            the quaternion from which to create the new AngleAxis4f
+     *          the quaternion from which to create the new AngleAxis4f
      */
     public AxisAngle4f(Quaternionfc q) {
         float acos = Math.safeAcos(q.w());
@@ -108,19 +109,20 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Create a new {@link AxisAngle4f} with the given values.
      *
      * @param angle
-     *            the angle in radians
+     *              the angle in radians
      * @param x
-     *            the x-coordinate of the rotation axis
+     *              the x-coordinate of the rotation axis
      * @param y
-     *            the y-coordinate of the rotation axis
+     *              the y-coordinate of the rotation axis
      * @param z
-     *            the z-coordinate of the rotation axis
+     *              the z-coordinate of the rotation axis
      */
     public AxisAngle4f(float angle, float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.angle = (float) ((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI));
+        this.angle = (float) ((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) %
+                (Math.PI + Math.PI));
     }
 
     /**
@@ -137,7 +139,7 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set this {@link AxisAngle4f} to the values of <code>a</code>.
      *
      * @param a
-     *            the AngleAxis4f to copy the values from
+     *          the AngleAxis4f to copy the values from
      * @return this
      */
     public AxisAngle4f set(AxisAngle4f a) {
@@ -153,7 +155,7 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set this {@link AxisAngle4f} to the values of <code>a</code>.
      *
      * @param a
-     *            the AngleAxis4d to copy the values from
+     *          the AngleAxis4d to copy the values from
      * @return this
      */
     public AxisAngle4f set(AxisAngle4d a) {
@@ -169,20 +171,21 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set this {@link AxisAngle4f} to the given values.
      *
      * @param angle
-     *            the angle in radians
+     *              the angle in radians
      * @param x
-     *            the x-coordinate of the rotation axis
+     *              the x-coordinate of the rotation axis
      * @param y
-     *            the y-coordinate of the rotation axis
+     *              the y-coordinate of the rotation axis
      * @param z
-     *            the z-coordinate of the rotation axis
+     *              the z-coordinate of the rotation axis
      * @return this
      */
     public AxisAngle4f set(float angle, float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.angle = (float) ((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI));
+        this.angle = (float) ((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) %
+                (Math.PI + Math.PI));
         return this;
     }
 
@@ -190,9 +193,9 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set this {@link AxisAngle4f} to the given values.
      *
      * @param angle
-     *            the angle in radians
+     *              the angle in radians
      * @param v
-     *            the rotation axis as a {@link Vector3f}
+     *              the rotation axis as a {@link Vector3f}
      * @return this
      */
     public AxisAngle4f set(float angle, Vector3fc v) {
@@ -204,7 +207,7 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * {@link Quaternionfc}.
      *
      * @param q
-     *            the quaternion to set this AngleAxis4f from
+     *          the quaternion to set this AngleAxis4f from
      * @return this
      */
     public AxisAngle4f set(Quaternionfc q) {
@@ -228,7 +231,7 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * {@link Quaterniondc}.
      *
      * @param q
-     *            the quaternion to set this AngleAxis4f from
+     *          the quaternion to set this AngleAxis4f from
      * @return this
      */
     public AxisAngle4f set(Quaterniondc q) {
@@ -251,10 +254,11 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set this {@link AxisAngle4f} to be equivalent to the rotation
      * of the given {@link Matrix3fc}.
      * <p>
-     * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/">http://www.euclideanspace.com</a>
+     * Reference: <a href=
+     * "http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/">http://www.euclideanspace.com</a>
      *
      * @param m
-     *            the Matrix3fc to set this AngleAxis4f from
+     *          the Matrix3fc to set this AngleAxis4f from
      * @return this
      */
     public AxisAngle4f set(Matrix3fc m) {
@@ -264,13 +268,19 @@ public class AxisAngle4f implements Externalizable, Cloneable {
         float lenX = Math.invsqrt(m.m00() * m.m00() + m.m01() * m.m01() + m.m02() * m.m02());
         float lenY = Math.invsqrt(m.m10() * m.m10() + m.m11() * m.m11() + m.m12() * m.m12());
         float lenZ = Math.invsqrt(m.m20() * m.m20() + m.m21() * m.m21() + m.m22() * m.m22());
-        nm00 *= lenX; nm01 *= lenX; nm02 *= lenX;
-        nm10 *= lenY; nm11 *= lenY; nm12 *= lenY;
-        nm20 *= lenZ; nm21 *= lenZ; nm22 *= lenZ;
+        nm00 *= lenX;
+        nm01 *= lenX;
+        nm02 *= lenX;
+        nm10 *= lenY;
+        nm11 *= lenY;
+        nm12 *= lenY;
+        nm20 *= lenZ;
+        nm21 *= lenZ;
+        nm22 *= lenZ;
         float epsilon = 1E-4f, epsilon2 = 1E-3f;
         if (Math.abs(nm10 - nm01) < epsilon && Math.abs(nm20 - nm02) < epsilon && Math.abs(nm21 - nm12) < epsilon) {
-            if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 && Math.abs(nm21 + nm12) < epsilon2
-                    && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2) {
+            if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 &&
+                    Math.abs(nm21 + nm12) < epsilon2 && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2) {
                 x = 0;
                 y = 0;
                 z = 1;
@@ -299,7 +309,8 @@ public class AxisAngle4f implements Externalizable, Cloneable {
             }
             return this;
         }
-        float s = Math.sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
+        float s = Math
+                .sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
         angle = Math.safeAcos((nm00 + nm11 + nm22 - 1) / 2);
         x = (nm12 - nm21) / s;
         y = (nm20 - nm02) / s;
@@ -311,10 +322,11 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set this {@link AxisAngle4f} to be equivalent to the rotation
      * of the given {@link Matrix3dc}.
      * <p>
-     * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/">http://www.euclideanspace.com</a>
+     * Reference: <a href=
+     * "http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/">http://www.euclideanspace.com</a>
      *
      * @param m
-     *            the Matrix3d to set this AngleAxis4f from
+     *          the Matrix3d to set this AngleAxis4f from
      * @return this
      */
     public AxisAngle4f set(Matrix3dc m) {
@@ -324,13 +336,19 @@ public class AxisAngle4f implements Externalizable, Cloneable {
         double lenX = Math.invsqrt(m.m00() * m.m00() + m.m01() * m.m01() + m.m02() * m.m02());
         double lenY = Math.invsqrt(m.m10() * m.m10() + m.m11() * m.m11() + m.m12() * m.m12());
         double lenZ = Math.invsqrt(m.m20() * m.m20() + m.m21() * m.m21() + m.m22() * m.m22());
-        nm00 *= lenX; nm01 *= lenX; nm02 *= lenX;
-        nm10 *= lenY; nm11 *= lenY; nm12 *= lenY;
-        nm20 *= lenZ; nm21 *= lenZ; nm22 *= lenZ;
+        nm00 *= lenX;
+        nm01 *= lenX;
+        nm02 *= lenX;
+        nm10 *= lenY;
+        nm11 *= lenY;
+        nm12 *= lenY;
+        nm20 *= lenZ;
+        nm21 *= lenZ;
+        nm22 *= lenZ;
         double epsilon = 1E-4, epsilon2 = 1E-3;
         if (Math.abs(nm10 - nm01) < epsilon && Math.abs(nm20 - nm02) < epsilon && Math.abs(nm21 - nm12) < epsilon) {
-            if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 && Math.abs(nm21 + nm12) < epsilon2
-                    && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2) {
+            if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 &&
+                    Math.abs(nm21 + nm12) < epsilon2 && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2) {
                 x = 0;
                 y = 0;
                 z = 1;
@@ -359,7 +377,8 @@ public class AxisAngle4f implements Externalizable, Cloneable {
             }
             return this;
         }
-        double s = Math.sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
+        double s = Math
+                .sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
         angle = (float) Math.safeAcos((nm00 + nm11 + nm22 - 1) / 2);
         x = (float) ((nm12 - nm21) / s);
         y = (float) ((nm20 - nm02) / s);
@@ -371,10 +390,11 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set this {@link AxisAngle4f} to be equivalent to the rotational component
      * of the given {@link Matrix4fc}.
      * <p>
-     * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/">http://www.euclideanspace.com</a>
+     * Reference: <a href=
+     * "http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/">http://www.euclideanspace.com</a>
      *
      * @param m
-     *            the Matrix4fc to set this AngleAxis4f from
+     *          the Matrix4fc to set this AngleAxis4f from
      * @return this
      */
     public AxisAngle4f set(Matrix4fc m) {
@@ -384,13 +404,19 @@ public class AxisAngle4f implements Externalizable, Cloneable {
         float lenX = Math.invsqrt(m.m00() * m.m00() + m.m01() * m.m01() + m.m02() * m.m02());
         float lenY = Math.invsqrt(m.m10() * m.m10() + m.m11() * m.m11() + m.m12() * m.m12());
         float lenZ = Math.invsqrt(m.m20() * m.m20() + m.m21() * m.m21() + m.m22() * m.m22());
-        nm00 *= lenX; nm01 *= lenX; nm02 *= lenX;
-        nm10 *= lenY; nm11 *= lenY; nm12 *= lenY;
-        nm20 *= lenZ; nm21 *= lenZ; nm22 *= lenZ;
+        nm00 *= lenX;
+        nm01 *= lenX;
+        nm02 *= lenX;
+        nm10 *= lenY;
+        nm11 *= lenY;
+        nm12 *= lenY;
+        nm20 *= lenZ;
+        nm21 *= lenZ;
+        nm22 *= lenZ;
         float epsilon = 1E-4f, epsilon2 = 1E-3f;
         if (Math.abs(nm10 - nm01) < epsilon && Math.abs(nm20 - nm02) < epsilon && Math.abs(nm21 - nm12) < epsilon) {
-            if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 && Math.abs(nm21 + nm12) < epsilon2
-                    && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2) {
+            if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 &&
+                    Math.abs(nm21 + nm12) < epsilon2 && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2) {
                 x = 0;
                 y = 0;
                 z = 1;
@@ -419,7 +445,8 @@ public class AxisAngle4f implements Externalizable, Cloneable {
             }
             return this;
         }
-        float s = Math.sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
+        float s = Math
+                .sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
         angle = Math.safeAcos((nm00 + nm11 + nm22 - 1) / 2);
         x = (nm12 - nm21) / s;
         y = (nm20 - nm02) / s;
@@ -431,10 +458,11 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set this {@link AxisAngle4f} to be equivalent to the rotational component
      * of the given {@link Matrix4x3fc}.
      * <p>
-     * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/">http://www.euclideanspace.com</a>
+     * Reference: <a href=
+     * "http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/">http://www.euclideanspace.com</a>
      *
      * @param m
-     *            the Matrix4x3fc to set this AngleAxis4f from
+     *          the Matrix4x3fc to set this AngleAxis4f from
      * @return this
      */
     public AxisAngle4f set(Matrix4x3fc m) {
@@ -444,13 +472,19 @@ public class AxisAngle4f implements Externalizable, Cloneable {
         float lenX = Math.invsqrt(m.m00() * m.m00() + m.m01() * m.m01() + m.m02() * m.m02());
         float lenY = Math.invsqrt(m.m10() * m.m10() + m.m11() * m.m11() + m.m12() * m.m12());
         float lenZ = Math.invsqrt(m.m20() * m.m20() + m.m21() * m.m21() + m.m22() * m.m22());
-        nm00 *= lenX; nm01 *= lenX; nm02 *= lenX;
-        nm10 *= lenY; nm11 *= lenY; nm12 *= lenY;
-        nm20 *= lenZ; nm21 *= lenZ; nm22 *= lenZ;
+        nm00 *= lenX;
+        nm01 *= lenX;
+        nm02 *= lenX;
+        nm10 *= lenY;
+        nm11 *= lenY;
+        nm12 *= lenY;
+        nm20 *= lenZ;
+        nm21 *= lenZ;
+        nm22 *= lenZ;
         float epsilon = 1E-4f, epsilon2 = 1E-3f;
         if (Math.abs(nm10 - nm01) < epsilon && Math.abs(nm20 - nm02) < epsilon && Math.abs(nm21 - nm12) < epsilon) {
-            if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 && Math.abs(nm21 + nm12) < epsilon2
-                    && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2) {
+            if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 &&
+                    Math.abs(nm21 + nm12) < epsilon2 && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2) {
                 x = 0;
                 y = 0;
                 z = 1;
@@ -479,7 +513,8 @@ public class AxisAngle4f implements Externalizable, Cloneable {
             }
             return this;
         }
-        float s = Math.sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
+        float s = Math
+                .sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
         angle = Math.safeAcos((nm00 + nm11 + nm22 - 1) / 2);
         x = (nm12 - nm21) / s;
         y = (nm20 - nm02) / s;
@@ -491,10 +526,11 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set this {@link AxisAngle4f} to be equivalent to the rotational component
      * of the given {@link Matrix4dc}.
      * <p>
-     * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/">http://www.euclideanspace.com</a>
+     * Reference: <a href=
+     * "http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/">http://www.euclideanspace.com</a>
      *
      * @param m
-     *            the Matrix4dc to set this AngleAxis4f from
+     *          the Matrix4dc to set this AngleAxis4f from
      * @return this
      */
     public AxisAngle4f set(Matrix4dc m) {
@@ -504,13 +540,19 @@ public class AxisAngle4f implements Externalizable, Cloneable {
         double lenX = Math.invsqrt(m.m00() * m.m00() + m.m01() * m.m01() + m.m02() * m.m02());
         double lenY = Math.invsqrt(m.m10() * m.m10() + m.m11() * m.m11() + m.m12() * m.m12());
         double lenZ = Math.invsqrt(m.m20() * m.m20() + m.m21() * m.m21() + m.m22() * m.m22());
-        nm00 *= lenX; nm01 *= lenX; nm02 *= lenX;
-        nm10 *= lenY; nm11 *= lenY; nm12 *= lenY;
-        nm20 *= lenZ; nm21 *= lenZ; nm22 *= lenZ;
+        nm00 *= lenX;
+        nm01 *= lenX;
+        nm02 *= lenX;
+        nm10 *= lenY;
+        nm11 *= lenY;
+        nm12 *= lenY;
+        nm20 *= lenZ;
+        nm21 *= lenZ;
+        nm22 *= lenZ;
         double epsilon = 1E-4, epsilon2 = 1E-3;
         if (Math.abs(nm10 - nm01) < epsilon && Math.abs(nm20 - nm02) < epsilon && Math.abs(nm21 - nm12) < epsilon) {
-            if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 && Math.abs(nm21 + nm12) < epsilon2
-                    && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2) {
+            if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 &&
+                    Math.abs(nm21 + nm12) < epsilon2 && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2) {
                 x = 0;
                 y = 0;
                 z = 1;
@@ -539,7 +581,8 @@ public class AxisAngle4f implements Externalizable, Cloneable {
             }
             return this;
         }
-        double s = Math.sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
+        double s = Math
+                .sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
         angle = (float) Math.safeAcos((nm00 + nm11 + nm22 - 1) / 2);
         x = (float) ((nm12 - nm21) / s);
         y = (float) ((nm20 - nm02) / s);
@@ -629,7 +672,7 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set the given {@link AxisAngle4d} to this {@link AxisAngle4f}.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public AxisAngle4d get(AxisAngle4d dest) {
@@ -640,7 +683,7 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * Set the given {@link AxisAngle4f} to this {@link AxisAngle4f}.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public AxisAngle4f get(AxisAngle4f dest) {
@@ -680,7 +723,7 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * This method also takes care of wrapping around.
      *
      * @param ang
-     *          the angle increase
+     *            the angle increase
      * @return this
      */
     public AxisAngle4f rotate(float ang) {
@@ -705,9 +748,9 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * and store the result in <code>dest</code>.
      *
      * @param v
-     *          the vector to transform
+     *             the vector to transform
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Vector3f transform(Vector3fc v, Vector3f dest) {
@@ -715,8 +758,8 @@ public class AxisAngle4f implements Externalizable, Cloneable {
         double cos = Math.cosFromSin(sin, angle);
         float dot = x * v.x() + y * v.y() + z * v.z();
         dest.set((float) (v.x() * cos + sin * (y * v.z() - z * v.y()) + (1.0 - cos) * dot * x),
-                 (float) (v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y),
-                 (float) (v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z));
+                (float) (v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y),
+                (float) (v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z));
         return dest;
     }
 
@@ -736,9 +779,9 @@ public class AxisAngle4f implements Externalizable, Cloneable {
      * and store the result in <code>dest</code>.
      *
      * @param v
-     *          the vector to transform
+     *             the vector to transform
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Vector4f transform(Vector4fc v, Vector4f dest) {
@@ -746,16 +789,17 @@ public class AxisAngle4f implements Externalizable, Cloneable {
         double cos = Math.cosFromSin(sin, angle);
         float dot = x * v.x() + y * v.y() + z * v.z();
         dest.set((float) (v.x() * cos + sin * (y * v.z() - z * v.y()) + (1.0 - cos) * dot * x),
-                 (float) (v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y),
-                 (float) (v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z),
-                 dest.w);
+                (float) (v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y),
+                (float) (v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z),
+                dest.w);
         return dest;
     }
 
     /**
      * Return a string representation of this {@link AxisAngle4f}.
      * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code> 0.000E0;-</code>".
+     * This method creates a new {@link DecimalFormat} on every invocation with the format string
+     * "<code> 0.000E0;-</code>".
      *
      * @return the string representation
      */
@@ -764,20 +808,23 @@ public class AxisAngle4f implements Externalizable, Cloneable {
     }
 
     /**
-     * Return a string representation of this {@link AxisAngle4f} by formatting the components with the given {@link NumberFormat}.
+     * Return a string representation of this {@link AxisAngle4f} by formatting the components with the given
+     * {@link NumberFormat}.
      *
      * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
+     *                  the {@link NumberFormat} used to format the vector components with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {
-        return "(" + Runtime.format(x, formatter) + " " + Runtime.format(y, formatter) + " " + Runtime.format(z, formatter) + " <| " + Runtime.format(angle, formatter) + ")";
+        return "(" + Runtime.format(x, formatter) + " " + Runtime.format(y, formatter) + " " +
+                Runtime.format(z, formatter) + " <| " + Runtime.format(angle, formatter) + ")";
     }
 
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        float nangle = (float) ((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI));
+        float nangle = (float) ((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) %
+                (Math.PI + Math.PI));
         result = prime * result + Float.floatToIntBits(nangle);
         result = prime * result + Float.floatToIntBits(x);
         result = prime * result + Float.floatToIntBits(y);
@@ -793,8 +840,10 @@ public class AxisAngle4f implements Externalizable, Cloneable {
         if (getClass() != obj.getClass())
             return false;
         AxisAngle4f other = (AxisAngle4f) obj;
-        float nangle = (float) ((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI));
-        float nangleOther = (float) ((other.angle < 0.0 ? Math.PI + Math.PI + other.angle % (Math.PI + Math.PI) : other.angle) % (Math.PI + Math.PI));
+        float nangle = (float) ((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) %
+                (Math.PI + Math.PI));
+        float nangleOther = (float) ((other.angle < 0.0 ? Math.PI + Math.PI + other.angle % (Math.PI + Math.PI) :
+                other.angle) % (Math.PI + Math.PI));
         if (Float.floatToIntBits(nangle) != Float.floatToIntBits(nangleOther))
             return false;
         if (Float.floatToIntBits(x) != Float.floatToIntBits(other.x))
@@ -809,5 +858,4 @@ public class AxisAngle4f implements Externalizable, Cloneable {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-
 }

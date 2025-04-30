@@ -1,6 +1,7 @@
 package me.jellysquid.mods.sodium.client.util;
 
 public class Dim2i {
+
     private final int x;
     private final int y;
     private final int width;

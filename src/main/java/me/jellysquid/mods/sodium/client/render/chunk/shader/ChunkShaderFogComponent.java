@@ -1,7 +1,8 @@
 package me.jellysquid.mods.sodium.client.render.chunk.shader;
 
-import me.jellysquid.mods.sodium.client.gl.compat.FogHelper;
 import org.lwjgl.opengl.GL20;
+
+import me.jellysquid.mods.sodium.client.gl.compat.FogHelper;
 
 /**
  * These shader implementations try to remain compatible with the deprecated fixed function pipeline by manually
@@ -14,20 +15,19 @@ import org.lwjgl.opengl.GL20;
  * not depend on any vendor-specific extensions and is written using very simple GLSL code.
  */
 public abstract class ChunkShaderFogComponent {
+
     public abstract void setup();
 
     public static class None extends ChunkShaderFogComponent {
-        public None(ChunkProgram program) {
 
-        }
+        public None(ChunkProgram program) {}
 
         @Override
-        public void setup() {
-
-        }
+        public void setup() {}
     }
 
     public static class Exp2 extends ChunkShaderFogComponent {
+
         private final int uFogColor;
         private final int uFogDensity;
 
@@ -45,6 +45,7 @@ public abstract class ChunkShaderFogComponent {
     }
 
     public static class Linear extends ChunkShaderFogComponent {
+
         private final int uFogColor;
         private final int uFogLength;
         private final int uFogEnd;
@@ -66,5 +67,4 @@ public abstract class ChunkShaderFogComponent {
             GL20.glUniform1f(this.uFogEnd, end);
         }
     }
-
 }

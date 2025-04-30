@@ -1,18 +1,21 @@
 package me.jellysquid.mods.sodium.client.gui.options.control;
 
+import java.util.Arrays;
+
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+
+import org.apache.commons.lang3.Validate;
+
 import me.jellysquid.mods.sodium.client.gui.options.FormattedTextProvider;
 import me.jellysquid.mods.sodium.client.gui.options.Option;
 import me.jellysquid.mods.sodium.client.gui.options.TextProvider;
 import me.jellysquid.mods.sodium.client.gui.options.named.NamedState;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
-import org.apache.commons.lang3.Validate;
-
-import java.util.Arrays;
 
 public class CyclingControl<T extends Enum<T>> implements Control<T> {
+
     private final Option<T> option;
     private final T[] allowedValues;
     private final ITextComponent[] names;
@@ -49,11 +52,12 @@ public class CyclingControl<T extends Enum<T>> implements Control<T> {
             T value = universe[i];
 
             if (value instanceof TextProvider) {
-                name = new TextComponentString(((TextProvider)value).getLocalizedName());
-            } else if(value instanceof FormattedTextProvider) {
-                name = ((FormattedTextProvider)value).getLocalizedName();
+                name = new TextComponentString(((TextProvider) value).getLocalizedName());
+            } else if (value instanceof FormattedTextProvider) {
+                name = ((FormattedTextProvider) value).getLocalizedName();
             } else {
-                name = value instanceof NamedState ? new TextComponentTranslation(((NamedState)value).getKey()) : new TextComponentString(value.name());
+                name = value instanceof NamedState ? new TextComponentTranslation(((NamedState) value).getKey()) :
+                        new TextComponentString(value.name());
             }
 
             this.names[i] = name;
@@ -76,6 +80,7 @@ public class CyclingControl<T extends Enum<T>> implements Control<T> {
     }
 
     private static class CyclingControlElement<T extends Enum<T>> extends ControlElement<T> {
+
         private final T[] allowedValues;
         private final ITextComponent[] names;
         private int currentIndex;
@@ -103,7 +108,8 @@ public class CyclingControl<T extends Enum<T>> implements Control<T> {
             ITextComponent name = this.names[value.ordinal()];
 
             int strWidth = this.getTextWidth(name);
-            this.drawString(name.getFormattedText(), this.dim.getLimitX() - strWidth - 6, this.dim.getCenterY() - 4, 0xFFFFFFFF);
+            this.drawString(name.getFormattedText(), this.dim.getLimitX() - strWidth - 6, this.dim.getCenterY() - 4,
+                    0xFFFFFFFF);
         }
 
         @Override

@@ -1,10 +1,11 @@
 package me.jellysquid.mods.sodium.client.model.vertex.transformers;
 
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+
 import me.jellysquid.mods.sodium.client.model.vertex.VertexSink;
 import me.jellysquid.mods.sodium.client.model.vertex.formats.glyph.GlyphVertexSink;
 import me.jellysquid.mods.sodium.client.model.vertex.formats.particle.ParticleVertexSink;
 import me.jellysquid.mods.sodium.client.model.vertex.formats.quad.QuadVertexSink;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 
 /**
  * Base implementation for a {@link VertexSink} which transforms texture coordinates relative to a sprite's bounds.
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
  * @param <T> The {@link VertexSink} interface this transformer wraps
  */
 public abstract class SpriteTexturedVertexTransformer<T extends VertexSink> extends AbstractVertexTransformer<T> {
+
     private final float uMin;
     private final float vMin;
 
@@ -37,12 +39,14 @@ public abstract class SpriteTexturedVertexTransformer<T extends VertexSink> exte
     }
 
     public static class Quad extends SpriteTexturedVertexTransformer<QuadVertexSink> implements QuadVertexSink {
+
         public Quad(QuadVertexSink delegate, TextureAtlasSprite sprite) {
             super(delegate, sprite);
         }
 
         @Override
-        public void writeQuad(float x, float y, float z, int color, float u, float v, int light, int overlay, int normal) {
+        public void writeQuad(float x, float y, float z, int color, float u, float v, int light, int overlay,
+                              int normal) {
             u = this.transformTextureU(u);
             v = this.transformTextureV(v);
 
@@ -50,7 +54,9 @@ public abstract class SpriteTexturedVertexTransformer<T extends VertexSink> exte
         }
     }
 
-    public static class Particle extends SpriteTexturedVertexTransformer<ParticleVertexSink> implements ParticleVertexSink {
+    public static class Particle extends SpriteTexturedVertexTransformer<ParticleVertexSink>
+                                 implements ParticleVertexSink {
+
         public Particle(ParticleVertexSink delegate, TextureAtlasSprite sprite) {
             super(delegate, sprite);
         }
@@ -65,6 +71,7 @@ public abstract class SpriteTexturedVertexTransformer<T extends VertexSink> exte
     }
 
     public static class Glyph extends SpriteTexturedVertexTransformer<GlyphVertexSink> implements GlyphVertexSink {
+
         public Glyph(GlyphVertexSink delegate, TextureAtlasSprite sprite) {
             super(delegate, sprite);
         }

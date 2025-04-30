@@ -1,16 +1,18 @@
 package me.jellysquid.mods.sodium.client.render.chunk.backends.multidraw;
 
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
-import me.jellysquid.mods.sodium.client.util.CompatMemoryUtil;
+import java.nio.ByteBuffer;
+
 import org.lwjgl.MemoryUtil;
 
-import java.nio.ByteBuffer;
+import me.jellysquid.mods.sodium.client.SodiumClientMod;
+import me.jellysquid.mods.sodium.client.util.CompatMemoryUtil;
 
 /**
  * Provides a resizeable vector backed by native memory that can be used to build an array of chunk draw call
  * parameters.
  */
 public abstract class ChunkDrawParamsVector extends StructBuffer {
+
     protected int capacity;
     protected int count;
 
@@ -21,7 +23,8 @@ public abstract class ChunkDrawParamsVector extends StructBuffer {
     }
 
     public static ChunkDrawParamsVector create(int capacity) {
-        return SodiumClientMod.isDirectMemoryAccessEnabled() ? new UnsafeChunkDrawCallVector(capacity) : new NioChunkDrawCallVector(capacity);
+        return SodiumClientMod.isDirectMemoryAccessEnabled() ? new UnsafeChunkDrawCallVector(capacity) :
+                new NioChunkDrawCallVector(capacity);
     }
 
     public abstract void pushChunkDrawParams(float x, float y, float z);
@@ -36,6 +39,7 @@ public abstract class ChunkDrawParamsVector extends StructBuffer {
     }
 
     public static class UnsafeChunkDrawCallVector extends ChunkDrawParamsVector {
+
         private long basePointer;
         private long writePointer;
 
@@ -51,7 +55,7 @@ public abstract class ChunkDrawParamsVector extends StructBuffer {
                 this.growBuffer();
             }
 
-            CompatMemoryUtil.memPutFloat(this.writePointer    , x);
+            CompatMemoryUtil.memPutFloat(this.writePointer, x);
             CompatMemoryUtil.memPutFloat(this.writePointer + 4, y);
             CompatMemoryUtil.memPutFloat(this.writePointer + 8, z);
 
@@ -77,6 +81,7 @@ public abstract class ChunkDrawParamsVector extends StructBuffer {
     }
 
     public static class NioChunkDrawCallVector extends ChunkDrawParamsVector {
+
         private int writeOffset;
 
         public NioChunkDrawCallVector(int capacity) {
@@ -90,7 +95,7 @@ public abstract class ChunkDrawParamsVector extends StructBuffer {
             }
 
             ByteBuffer buf = this.buffer;
-            buf.putFloat(this.writeOffset    , x);
+            buf.putFloat(this.writeOffset, x);
             buf.putFloat(this.writeOffset + 4, y);
             buf.putFloat(this.writeOffset + 8, z);
 

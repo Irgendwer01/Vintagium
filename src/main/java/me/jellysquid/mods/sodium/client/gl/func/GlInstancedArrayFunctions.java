@@ -5,19 +5,23 @@ import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GL33;
 
 public enum GlInstancedArrayFunctions {
+
     CORE {
+
         @Override
         public void glVertexAttribDivisor(int index, int divisor) {
             GL33.glVertexAttribDivisor(index, divisor);
         }
     },
     ARB {
+
         @Override
         public void glVertexAttribDivisor(int index, int divisor) {
             ARBInstancedArrays.glVertexAttribDivisorARB(index, divisor);
         }
     },
     UNSUPPORTED {
+
         @Override
         public void glVertexAttribDivisor(int index, int divisor) {
             throw new UnsupportedOperationException();

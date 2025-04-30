@@ -38,18 +38,20 @@ public class UniformSampling {
      * @author Kai Burjack
      */
     public static class Disk {
+
         private final Random rnd;
 
         /**
-         * Create a new instance of {@link Disk}, initialize the random number generator with the given <code>seed</code> and generate <code>numSamples</code> number of sample
+         * Create a new instance of {@link Disk}, initialize the random number generator with the given
+         * <code>seed</code> and generate <code>numSamples</code> number of sample
          * positions on the unit disk, and call the given <code>callback</code> for each sample generate.
          *
          * @param seed
-         *            the seed to initialize the random number generator with
+         *                   the seed to initialize the random number generator with
          * @param numSamples
-         *            the number of samples to generate
+         *                   the number of samples to generate
          * @param callback
-         *            will be called for each sample generated
+         *                   will be called for each sample generated
          */
         public Disk(long seed, int numSamples, Callback2d callback) {
             this.rnd = new Random(seed);
@@ -74,18 +76,20 @@ public class UniformSampling {
      * @author Kai Burjack
      */
     public static class Sphere {
+
         private final Random rnd;
 
         /**
-         * Create a new instance of {@link Sphere}, initialize the random number generator with the given <code>seed</code> and generate <code>numSamples</code> number of sample
+         * Create a new instance of {@link Sphere}, initialize the random number generator with the given
+         * <code>seed</code> and generate <code>numSamples</code> number of sample
          * positions on the unit sphere, and call the given <code>callback</code> for each sample generate.
          *
          * @param seed
-         *            the seed to initialize the random number generator with
+         *                   the seed to initialize the random number generator with
          * @param numSamples
-         *            the number of samples to generate
+         *                   the number of samples to generate
          * @param callback
-         *            will be called for each sample generated
+         *                   will be called for each sample generated
          */
         public Sphere(long seed, int numSamples, Callback3d callback) {
             this.rnd = new Random(seed);
@@ -93,14 +97,15 @@ public class UniformSampling {
         }
 
         /**
-         * Create <code>numSamples</code> number of samples which are uniformly distributed on a unit sphere, and call the given <code>callback</code> for each sample generated.
+         * Create <code>numSamples</code> number of samples which are uniformly distributed on a unit sphere, and call
+         * the given <code>callback</code> for each sample generated.
          * <p>
          * Reference: <a href="http://mathworld.wolfram.com/SpherePointPicking.html">http://mathworld.wolfram.com/</a>
          *
          * @param numSamples
-         *            the number of samples to generate
+         *                   the number of samples to generate
          * @param callback
-         *            will be called for each sample generated
+         *                   will be called for each sample generated
          */
         public void generate(int numSamples, Callback3d callback) {
             for (int i = 0; i < numSamples;) {
@@ -117,5 +122,4 @@ public class UniformSampling {
             }
         }
     }
-
 }

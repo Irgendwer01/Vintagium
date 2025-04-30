@@ -1,9 +1,11 @@
 package me.jellysquid.mods.sodium.client.world.cloned;
 
-import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
+import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
+
 public class ChunkRenderContext {
+
     private final ChunkSectionPos origin;
     private final ClonedChunkSection[] sections;
     private final StructureBoundingBox volume;

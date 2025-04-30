@@ -1,18 +1,18 @@
 package me.jellysquid.mods.sodium.client.gl.tessellation;
 
-import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexAttributeBinding;
-import me.jellysquid.mods.sodium.client.gl.device.CommandList;
 import org.lwjgl.opengl.GL20;
 
+import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexAttributeBinding;
+import me.jellysquid.mods.sodium.client.gl.device.CommandList;
+
 public class GlFallbackTessellation extends GlAbstractTessellation {
+
     public GlFallbackTessellation(GlPrimitiveType primitiveType, TessellationBinding[] bindings) {
         super(primitiveType, bindings);
     }
 
     @Override
-    public void delete(CommandList commandList) {
-
-    }
+    public void delete(CommandList commandList) {}
 
     @Override
     public void bind(CommandList commandList) {

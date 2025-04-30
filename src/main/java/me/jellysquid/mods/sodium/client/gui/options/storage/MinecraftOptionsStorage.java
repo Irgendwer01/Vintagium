@@ -1,10 +1,12 @@
 package me.jellysquid.mods.sodium.client.gui.options.storage;
 
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 
+import me.jellysquid.mods.sodium.client.SodiumClientMod;
+
 public class MinecraftOptionsStorage implements OptionStorage<GameSettings> {
+
     private final Minecraft client;
 
     public MinecraftOptionsStorage() {

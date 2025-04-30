@@ -1,7 +1,8 @@
 package me.jellysquid.mods.sodium.client.util;
 
-import me.jellysquid.mods.sodium.common.util.DirectionUtil;
 import net.minecraft.util.EnumFacing;
+
+import me.jellysquid.mods.sodium.common.util.DirectionUtil;
 
 /**
  * Provides some utilities and constants for interacting with vanilla's model quad vertex format.
@@ -9,15 +10,16 @@ import net.minecraft.util.EnumFacing;
  * This is the current vertex format used by Minecraft for chunk meshes and model quads. Internally, it uses integer
  * arrays for store baked quad data, and as such the following table provides both the byte and int indices.
  *
- * Byte Index    Integer Index             Name                 Format                 Fields
- * 0 ..11        0..2                      Position             3 floats               x, y, z
- * 12..15        3                         Color                4 unsigned bytes       a, r, g, b
- * 16..23        4..5                      Block Texture        2 floats               u, v
- * 24..27        6                         Light Texture        2 shorts               u, v
- * 28..30        7                         Normal               3 unsigned bytes       x, y, z
- * 31                                      Padding              1 byte
+ * Byte Index Integer Index Name Format Fields
+ * 0 ..11 0..2 Position 3 floats x, y, z
+ * 12..15 3 Color 4 unsigned bytes a, r, g, b
+ * 16..23 4..5 Block Texture 2 floats u, v
+ * 24..27 6 Light Texture 2 shorts u, v
+ * 28..30 7 Normal 3 unsigned bytes x, y, z
+ * 31 Padding 1 byte
  */
 public class ModelQuadUtil {
+
     // Integer indices for vertex attributes, useful for accessing baked quad data
     public static final int POSITION_INDEX = 0,
             COLOR_INDEX = 3,
@@ -45,7 +47,7 @@ public class ModelQuadUtil {
     }
 
     public static int getFacingNormal(EnumFacing facing, int bakedNormal) {
-        if(!hasNormal(bakedNormal))
+        if (!hasNormal(bakedNormal))
             return NORMALS[facing.ordinal()];
         return bakedNormal;
     }

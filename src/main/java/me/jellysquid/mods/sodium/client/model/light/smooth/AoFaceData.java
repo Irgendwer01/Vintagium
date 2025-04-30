@@ -1,12 +1,14 @@
 package me.jellysquid.mods.sodium.client.model.light.smooth;
 
-import me.jellysquid.mods.sodium.client.model.light.data.LightDataAccess;
+import static me.jellysquid.mods.sodium.client.model.light.cache.ArrayLightDataCache.*;
+
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
-import static me.jellysquid.mods.sodium.client.model.light.cache.ArrayLightDataCache.*;
+import me.jellysquid.mods.sodium.client.model.light.data.LightDataAccess;
 
 class AoFaceData {
+
     public final int[] lm = new int[4];
 
     public final float[] ao = new float[4];

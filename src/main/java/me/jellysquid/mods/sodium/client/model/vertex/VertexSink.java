@@ -7,6 +7,7 @@ package me.jellysquid.mods.sodium.client.model.vertex;
  * vertex data.
  */
 public interface VertexSink {
+
     /**
      * Ensures the backing storage to this sink has enough space for the given number of vertices to be written. This
      * should be called with the number of vertices you expect to write before you make calls to write vertices.

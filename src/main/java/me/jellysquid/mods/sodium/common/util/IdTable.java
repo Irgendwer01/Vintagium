@@ -1,10 +1,11 @@
 package me.jellysquid.mods.sodium.common.util;
 
-import it.unimi.dsi.fastutil.ints.IntArrayFIFOQueue;
-
 import java.util.Arrays;
 
+import it.unimi.dsi.fastutil.ints.IntArrayFIFOQueue;
+
 public class IdTable<T> {
+
     private final IntArrayFIFOQueue freeIds = new IntArrayFIFOQueue();
 
     private T[] elements;

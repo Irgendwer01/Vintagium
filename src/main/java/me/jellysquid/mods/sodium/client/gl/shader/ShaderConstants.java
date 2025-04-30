@@ -3,6 +3,7 @@ package me.jellysquid.mods.sodium.client.gl.shader;
 import java.util.*;
 
 public class ShaderConstants {
+
     private final List<String> defines;
 
     private ShaderConstants(List<String> defines) {
@@ -28,13 +29,12 @@ public class ShaderConstants {
     }
 
     public static class Builder {
+
         private static final String EMPTY_VALUE = "";
 
         private final HashMap<String, String> constants = new HashMap<>();
 
-        private Builder() {
-
-        }
+        private Builder() {}
 
         public void define(String name) {
             this.define(name, EMPTY_VALUE);

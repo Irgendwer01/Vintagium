@@ -4,6 +4,7 @@ import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexAttributeBinding;
 import me.jellysquid.mods.sodium.client.gl.buffer.GlBuffer;
 
 public class TessellationBinding {
+
     private final GlBuffer buffer;
     private final GlVertexAttributeBinding[] bindings;
     private final boolean instanced;

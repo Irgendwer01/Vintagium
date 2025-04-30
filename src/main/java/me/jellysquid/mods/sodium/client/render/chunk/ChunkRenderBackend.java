@@ -1,21 +1,23 @@
 package me.jellysquid.mods.sodium.client.render.chunk;
 
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
 import me.jellysquid.mods.sodium.client.gl.device.CommandList;
 import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
 import me.jellysquid.mods.sodium.client.model.vertex.type.ChunkVertexType;
 import me.jellysquid.mods.sodium.client.render.chunk.compile.ChunkBuildResult;
 import me.jellysquid.mods.sodium.client.render.chunk.lists.ChunkRenderListIterator;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * The chunk render backend takes care of managing the graphics resource state of chunk render containers. This includes
  * the handling of uploading their data to the graphics card and rendering responsibilities.
+ * 
  * @param <T> The type of graphics state to be used in chunk render containers
  */
 public interface ChunkRenderBackend<T extends ChunkGraphicsState> {
+
     /**
      * Drains the iterator of items and processes each build task's result serially. After this method returns, all
      * drained results should be processed.
@@ -24,9 +26,10 @@ public interface ChunkRenderBackend<T extends ChunkGraphicsState> {
 
     /**
      * Renders the given chunk render list to the active framebuffer.
+     * 
      * @param commandList The command list which OpenGL commands should be serialized to
-     * @param renders An iterator over the list of chunks to be rendered
-     * @param camera The camera context containing chunk offsets for the current render
+     * @param renders     An iterator over the list of chunks to be rendered
+     * @param camera      The camera context containing chunk offsets for the current render
      */
     void render(CommandList commandList, ChunkRenderListIterator<T> renders, ChunkCameraContext camera);
 

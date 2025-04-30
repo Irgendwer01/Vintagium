@@ -1,12 +1,14 @@
 package me.jellysquid.mods.sodium.client.gl.tessellation;
 
+import org.lwjgl.opengl.GL20;
+
 import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexAttributeBinding;
 import me.jellysquid.mods.sodium.client.gl.buffer.GlBufferTarget;
 import me.jellysquid.mods.sodium.client.gl.device.CommandList;
 import me.jellysquid.mods.sodium.client.gl.func.GlFunctions;
-import org.lwjgl.opengl.GL20;
 
 public abstract class GlAbstractTessellation implements GlTessellation {
+
     protected final GlPrimitiveType primitiveType;
     protected final TessellationBinding[] bindings;
 
@@ -22,10 +24,11 @@ public abstract class GlAbstractTessellation implements GlTessellation {
 
     protected void bindAttributes(CommandList commandList) {
         for (TessellationBinding binding : this.bindings) {
-            commandList.bindBuffer(GlBufferTarget.ARRAY_BUFFER,  binding.getBuffer());
+            commandList.bindBuffer(GlBufferTarget.ARRAY_BUFFER, binding.getBuffer());
 
             for (GlVertexAttributeBinding attrib : binding.getAttributeBindings()) {
-            	GL20.glVertexAttribPointer(attrib.getIndex(), attrib.getCount(), attrib.getFormat(), attrib.isNormalized(),
+                GL20.glVertexAttribPointer(attrib.getIndex(), attrib.getCount(), attrib.getFormat(),
+                        attrib.isNormalized(),
                         attrib.getStride(), attrib.getPointer());
                 GL20.glEnableVertexAttribArray(attrib.getIndex());
 

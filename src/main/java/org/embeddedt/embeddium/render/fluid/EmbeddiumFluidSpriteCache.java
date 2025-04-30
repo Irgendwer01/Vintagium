@@ -1,23 +1,25 @@
 package org.embeddedt.embeddium.render.fluid;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import me.jellysquid.mods.sodium.mixin.features.chunk_rendering.AccessorBlockFluidRenderer;
-import me.jellysquid.mods.sodium.mixin.features.chunk_rendering.AccessorBlockRenderDispatcher;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockFluidRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import me.jellysquid.mods.sodium.mixin.features.chunk_rendering.AccessorBlockFluidRenderer;
+import me.jellysquid.mods.sodium.mixin.features.chunk_rendering.AccessorBlockRenderDispatcher;
+
 public class EmbeddiumFluidSpriteCache {
+
     // Cache the sprites array to avoid reallocating it on every call
     private final TextureAtlasSprite[] sprites = new TextureAtlasSprite[3];
     private final Object2ObjectOpenHashMap<ResourceLocation, TextureAtlasSprite> spriteCache = new Object2ObjectOpenHashMap<>();
     private final TextureAtlasSprite[] waterOverride, lavaOverride;
 
     public EmbeddiumFluidSpriteCache() {
-        AccessorBlockFluidRenderer fluidRenderer = (AccessorBlockFluidRenderer)((AccessorBlockRenderDispatcher)Minecraft.getMinecraft().getBlockRendererDispatcher()).getFluidRenderer();
+        AccessorBlockFluidRenderer fluidRenderer = (AccessorBlockFluidRenderer) ((AccessorBlockRenderDispatcher) Minecraft
+                .getMinecraft().getBlockRendererDispatcher()).getFluidRenderer();
         waterOverride = new TextureAtlasSprite[3];
         TextureAtlasSprite[] water = fluidRenderer.getAtlasSpritesWater();
         waterOverride[0] = water[0];

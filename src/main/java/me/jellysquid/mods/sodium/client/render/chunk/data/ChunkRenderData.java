@@ -1,23 +1,25 @@
 package me.jellysquid.mods.sodium.client.render.chunk.data;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import me.jellysquid.mods.sodium.client.gl.util.BufferSlice;
-import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFacing;
-import me.jellysquid.mods.sodium.client.render.chunk.passes.BlockRenderPass;
+import java.util.*;
+import java.util.function.Predicate;
+
 import net.minecraft.client.renderer.chunk.SetVisibility;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
-import java.util.*;
-import java.util.function.Predicate;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import me.jellysquid.mods.sodium.client.gl.util.BufferSlice;
+import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFacing;
+import me.jellysquid.mods.sodium.client.render.chunk.passes.BlockRenderPass;
 
 /**
  * The render data for a chunk render container containing all the information about which meshes are attached, the
  * block entities contained by it, and any data used for occlusion testing.
  */
 public class ChunkRenderData {
+
     public static final ChunkRenderData ABSENT = new ChunkRenderData.Builder()
             .build();
     public static final ChunkRenderData EMPTY = createEmptyData();
@@ -120,6 +122,7 @@ public class ChunkRenderData {
     }
 
     public static class Builder {
+
         private final List<TileEntity> globalBlockEntities = new ArrayList<>();
         private final List<TileEntity> blockEntities = new ArrayList<>();
         private final Set<TextureAtlasSprite> animatedSprites = new ObjectOpenHashSet<>();
@@ -146,6 +149,7 @@ public class ChunkRenderData {
         /**
          * Adds a sprite to this data container for tracking. If the sprite is tickable, it will be ticked every frame
          * before rendering as necessary.
+         * 
          * @param sprite The sprite
          */
         public void addSprite(TextureAtlasSprite sprite) {
@@ -160,8 +164,9 @@ public class ChunkRenderData {
 
         /**
          * Adds a block entity to the data container.
+         * 
          * @param entity The block entity itself
-         * @param cull True if the block entity can be culled to this chunk render's volume, otherwise false
+         * @param cull   True if the block entity can be culled to this chunk render's volume, otherwise false
          */
         public void addBlockEntity(TileEntity entity, boolean cull) {
             (cull ? this.blockEntities : this.globalBlockEntities).add(entity);

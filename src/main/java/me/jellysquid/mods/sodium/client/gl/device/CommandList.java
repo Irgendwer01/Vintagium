@@ -1,14 +1,15 @@
 package me.jellysquid.mods.sodium.client.gl.device;
 
+import java.nio.ByteBuffer;
+
 import me.jellysquid.mods.sodium.client.gl.array.GlVertexArray;
 import me.jellysquid.mods.sodium.client.gl.buffer.*;
 import me.jellysquid.mods.sodium.client.gl.tessellation.GlPrimitiveType;
 import me.jellysquid.mods.sodium.client.gl.tessellation.GlTessellation;
 import me.jellysquid.mods.sodium.client.gl.tessellation.TessellationBinding;
 
-import java.nio.ByteBuffer;
-
 public interface CommandList extends AutoCloseable {
+
     GlVertexArray createVertexArray();
 
     GlMutableBuffer createMutableBuffer(GlBufferUsage usage);

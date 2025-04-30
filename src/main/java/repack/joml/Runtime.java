@@ -46,8 +46,7 @@ public final class Runtime {
         }
     }
 
-    private Runtime() {
-    }
+    private Runtime() {}
 
     private static boolean hasFloatToRawIntBits() {
         try {
@@ -81,9 +80,11 @@ public final class Runtime {
             return floatToIntBits1_3(flt);
         return floatToIntBits1_2(flt);
     }
+
     private static int floatToIntBits1_3(float flt) {
         return Float.floatToRawIntBits(flt);
     }
+
     private static int floatToIntBits1_2(float flt) {
         return Float.floatToIntBits(flt);
     }
@@ -93,9 +94,11 @@ public final class Runtime {
             return doubleToLongBits1_3(dbl);
         return doubleToLongBits1_2(dbl);
     }
+
     private static long doubleToLongBits1_3(double dbl) {
         return Double.doubleToRawLongBits(dbl);
     }
+
     private static long doubleToLongBits1_2(double dbl) {
         return Double.doubleToLongBits(dbl);
     }
@@ -144,5 +147,4 @@ public final class Runtime {
     public static boolean equals(double a, double b, double delta) {
         return Double.doubleToLongBits(a) == Double.doubleToLongBits(b) || Math.abs(a - b) <= delta;
     }
-
 }

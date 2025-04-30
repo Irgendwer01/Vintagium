@@ -1,20 +1,23 @@
 package me.jellysquid.mods.sodium.client.gui.options;
 
-import me.jellysquid.mods.sodium.client.gui.options.binding.GenericBinding;
-import me.jellysquid.mods.sodium.client.gui.options.binding.OptionBinding;
-import me.jellysquid.mods.sodium.client.gui.options.control.Control;
-import me.jellysquid.mods.sodium.client.gui.options.storage.OptionStorage;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import org.apache.commons.lang3.Validate;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+
+import org.apache.commons.lang3.Validate;
+
+import me.jellysquid.mods.sodium.client.gui.options.binding.GenericBinding;
+import me.jellysquid.mods.sodium.client.gui.options.binding.OptionBinding;
+import me.jellysquid.mods.sodium.client.gui.options.control.Control;
+import me.jellysquid.mods.sodium.client.gui.options.storage.OptionStorage;
+
 public class OptionImpl<S, T> implements Option<T> {
+
     private final OptionStorage<S> storage;
 
     private final OptionBinding<S, T> binding;
@@ -124,6 +127,7 @@ public class OptionImpl<S, T> implements Option<T> {
     }
 
     public static class Builder<S, T> {
+
         private final OptionStorage<S> storage;
         private ITextComponent name;
         private ITextComponent tooltip;
@@ -170,7 +174,6 @@ public class OptionImpl<S, T> implements Option<T> {
             return this;
         }
 
-
         public Builder<S, T> setBinding(OptionBinding<S, T> binding) {
             Validate.notNull(binding, "Argument must not be null");
 
@@ -211,7 +214,8 @@ public class OptionImpl<S, T> implements Option<T> {
             Validate.notNull(this.binding, "Option binding must be specified");
             Validate.notNull(this.control, "Control must be specified");
 
-            return new OptionImpl<>(this.storage, this.name, this.tooltip, this.binding, this.control, this.flags, this.impact, this.enabled);
+            return new OptionImpl<>(this.storage, this.name, this.tooltip, this.binding, this.control, this.flags,
+                    this.impact, this.enabled);
         }
     }
 }

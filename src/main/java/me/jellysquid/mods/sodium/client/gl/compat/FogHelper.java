@@ -3,25 +3,27 @@ package me.jellysquid.mods.sodium.client.gl.compat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
-
-import me.jellysquid.mods.sodium.client.render.chunk.shader.ChunkFogMode;
 import net.minecraft.util.math.MathHelper;
+
 import org.lwjgl.opengl.GL11;
 
+import me.jellysquid.mods.sodium.client.render.chunk.shader.ChunkFogMode;
+
 public class FogHelper {
+
     private static final float FAR_PLANE_THRESHOLD_EXP = (float) Math.log(1.0f / 0.0019f);
     private static final float FAR_PLANE_THRESHOLD_EXP2 = MathHelper.sqrt(FAR_PLANE_THRESHOLD_EXP);
 
     public static float getFogEnd() {
-    	return GlStateManager.fogState.end;
+        return GlStateManager.fogState.end;
     }
 
     public static float getFogStart() {
-    	return GlStateManager.fogState.start;
+        return GlStateManager.fogState.start;
     }
 
     public static float getFogDensity() {
-    	return GlStateManager.fogState.density;
+        return GlStateManager.fogState.density;
     }
 
     /**
@@ -29,9 +31,9 @@ public class FogHelper {
      */
     public static ChunkFogMode getFogMode() {
         int mode = GlStateManager.fogState.mode;
-        
-        if(mode == 0 || !GlStateManager.fogState.fog.currentState)
-        	return ChunkFogMode.NONE;
+
+        if (mode == 0 || !GlStateManager.fogState.fog.currentState)
+            return ChunkFogMode.NONE;
 
         switch (mode) {
             case GL11.GL_EXP2:
@@ -45,7 +47,7 @@ public class FogHelper {
     }
 
     public static float getFogCutoff() {
-    	int mode = GlStateManager.fogState.mode;
+        int mode = GlStateManager.fogState.mode;
 
         switch (mode) {
             case GL11.GL_LINEAR:
@@ -58,9 +60,10 @@ public class FogHelper {
                 return 0.0f;
         }
     }
-    
+
     public static float[] getFogColor() {
         EntityRenderer entityRenderer = Minecraft.getMinecraft().entityRenderer;
-    	return new float[]{entityRenderer.fogColorRed, entityRenderer.fogColorGreen, entityRenderer.fogColorBlue, 1.0F};
+        return new float[] { entityRenderer.fogColorRed, entityRenderer.fogColorGreen, entityRenderer.fogColorBlue,
+                1.0F };
     }
 }

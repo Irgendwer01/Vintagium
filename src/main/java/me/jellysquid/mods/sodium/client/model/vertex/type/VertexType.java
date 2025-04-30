@@ -1,7 +1,8 @@
 package me.jellysquid.mods.sodium.client.model.vertex.type;
 
-import me.jellysquid.mods.sodium.client.model.vertex.VertexSink;
 import net.minecraft.client.renderer.BufferBuilder;
+
+import me.jellysquid.mods.sodium.client.model.vertex.VertexSink;
 
 /**
  * Provides factories which create a {@link VertexSink} for the given vertex format.
@@ -9,10 +10,12 @@ import net.minecraft.client.renderer.BufferBuilder;
  * @param <T> The {@link VertexSink} type this factory produces
  */
 public interface VertexType<T extends VertexSink> {
+
     /**
      * Creates a {@link VertexSink} which can write into any {@link BufferBuilder}. This is generally used when
      * a special implementation of {@link BufferBuilder} is used that cannot be optimized for, or when
      * complex/unsupported transformations need to be performed using vanilla code paths.
+     * 
      * @param consumer The {@link BufferBuilder} to write into
      */
     T createFallbackWriter(BufferBuilder consumer);

@@ -1,14 +1,16 @@
 package me.jellysquid.mods.sodium.client.model.quad;
 
-import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFlags;
+import java.nio.ByteBuffer;
+
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 
-import java.nio.ByteBuffer;
+import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFlags;
 
 /**
  * Provides a read-only view of a model quad. For mutable access to a model quad, see {@link ModelQuadViewMutable}.
  */
 public interface ModelQuadView {
+
     /**
      * @return The x-position of the vertex at index {@param idx}
      */
@@ -56,7 +58,8 @@ public interface ModelQuadView {
 
     /**
      * Copies this quad's data into the specified buffer starting at the given position.
-     * @param buf The buffer to write this quad's data to
+     * 
+     * @param buf      The buffer to write this quad's data to
      * @param position The starting byte index to write to
      */
     default void copyInto(ByteBuffer buf, int position) {

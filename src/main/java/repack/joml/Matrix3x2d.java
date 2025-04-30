@@ -32,13 +32,12 @@ import java.nio.DoubleBuffer;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-
 /**
  * Contains the definition of a 3x2 matrix of doubles, and associated functions to transform
  * it. The matrix is column-major to match OpenGL's interpretation, and it looks like this:
  * <p>
- *      m00  m10  m20<br>
- *      m01  m11  m21<br>
+ * m00 m10 m20<br>
+ * m01 m11 m21<br>
  *
  * @author Kai Burjack
  */
@@ -63,7 +62,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * and the rest to identity.
      *
      * @param mat
-     *          the {@link Matrix2dc}
+     *            the {@link Matrix2dc}
      */
     public Matrix3x2d(Matrix2dc mat) {
         if (mat instanceof Matrix2d) {
@@ -78,7 +77,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * and the rest to identity.
      *
      * @param mat
-     *          the {@link Matrix2fc}
+     *            the {@link Matrix2fc}
      */
     public Matrix3x2d(Matrix2fc mat) {
         m00 = mat.m00();
@@ -91,7 +90,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * Create a new {@link Matrix3x2d} and make it a copy of the given matrix.
      *
      * @param mat
-     *          the {@link Matrix3x2dc} to copy the values from
+     *            the {@link Matrix3x2dc} to copy the values from
      */
     public Matrix3x2d(Matrix3x2dc mat) {
         if (mat instanceof Matrix3x2d) {
@@ -106,17 +105,17 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * so the first two parameters specify the two elements of the first column.
      *
      * @param m00
-     *          the value of m00
+     *            the value of m00
      * @param m01
-     *          the value of m01
+     *            the value of m01
      * @param m10
-     *          the value of m10
+     *            the value of m10
      * @param m11
-     *          the value of m11
+     *            the value of m11
      * @param m20
-     *          the value of m20
+     *            the value of m20
      * @param m21
-     *          the value of m21
+     *            the value of m21
      */
     public Matrix3x2d(double m00, double m01,
                       double m10, double m11,
@@ -138,7 +137,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * The buffer's position will not be changed by this method.
      *
      * @param buffer
-     *          the {@link DoubleBuffer} to read the matrix values from
+     *               the {@link DoubleBuffer} to read the matrix values from
      */
     public Matrix3x2d(DoubleBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
@@ -147,18 +146,23 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     public double m00() {
         return m00;
     }
+
     public double m01() {
         return m01;
     }
+
     public double m10() {
         return m10;
     }
+
     public double m11() {
         return m11;
     }
+
     public double m20() {
         return m20;
     }
+
     public double m21() {
         return m21;
     }
@@ -167,62 +171,67 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * Set the value of the matrix element at column 0 and row 0.
      *
      * @param m00
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3x2d _m00(double m00) {
         this.m00 = m00;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 0 and row 1.
      *
      * @param m01
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3x2d _m01(double m01) {
         this.m01 = m01;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 0.
      *
      * @param m10
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3x2d _m10(double m10) {
         this.m10 = m10;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 1.
      *
      * @param m11
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3x2d _m11(double m11) {
         this.m11 = m11;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 2 and row 0.
      *
      * @param m20
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3x2d _m20(double m20) {
         this.m20 = m20;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 2 and row 1.
      *
      * @param m21
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3x2d _m21(double m21) {
@@ -245,6 +254,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
         }
         return this;
     }
+
     private void setMatrix3x2dc(Matrix3x2dc mat) {
         m00 = mat.m00();
         m01 = mat.m01();
@@ -255,7 +265,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Set the left 2x2 submatrix of this {@link Matrix3x2d} to the given {@link Matrix2dc} and don't change the other elements.
+     * Set the left 2x2 submatrix of this {@link Matrix3x2d} to the given {@link Matrix2dc} and don't change the other
+     * elements.
      *
      * @param m
      *          the 2x2 matrix
@@ -269,6 +280,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
         }
         return this;
     }
+
     private void setMatrix2dc(Matrix2dc mat) {
         m00 = mat.m00();
         m01 = mat.m01();
@@ -277,7 +289,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Set the left 2x2 submatrix of this {@link Matrix3x2d} to the given {@link Matrix2fc} and don't change the other elements.
+     * Set the left 2x2 submatrix of this {@link Matrix3x2d} to the given {@link Matrix2fc} and don't change the other
+     * elements.
      *
      * @param m
      *          the 2x2 matrix
@@ -301,7 +314,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * transformation of the right matrix will be applied first!
      *
      * @param right
-     *          the right operand of the matrix multiplication
+     *              the right operand of the matrix multiplication
      * @return this
      */
     public Matrix3x2d mul(Matrix3x2dc right) {
@@ -318,9 +331,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * transformation of the right matrix will be applied first!
      *
      * @param right
-     *          the right operand of the matrix multiplication
+     *              the right operand of the matrix multiplication
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     public Matrix3x2d mul(Matrix3x2dc right, Matrix3x2d dest) {
@@ -348,11 +361,11 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * transformation of <code>this</code> matrix will be applied first!
      *
      * @param left
-     *          the left operand of the matrix multiplication
+     *             the left operand of the matrix multiplication
      * @return this
      */
     public Matrix3x2d mulLocal(Matrix3x2dc left) {
-       return mulLocal(left, this);
+        return mulLocal(left, this);
     }
 
     public Matrix3x2d mulLocal(Matrix3x2dc left, Matrix3x2d dest) {
@@ -378,17 +391,17 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * m01, m11, m21<br>
      *
      * @param m00
-     *          the new value of m00
+     *            the new value of m00
      * @param m01
-     *          the new value of m01
+     *            the new value of m01
      * @param m10
-     *          the new value of m10
+     *            the new value of m10
      * @param m11
-     *          the new value of m11
+     *            the new value of m11
      * @param m20
-     *          the new value of m20
+     *            the new value of m20
      * @param m21
-     *          the new value of m21
+     *            the new value of m21
      * @return this
      */
     public Matrix3x2d set(double m00, double m01,
@@ -449,10 +462,10 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     public Matrix3x2d invert(Matrix3x2d dest) {
         // client must make sure that matrix is invertible
         double s = 1.0 / (m00 * m11 - m01 * m10);
-        double nm00 =  m11 * s;
+        double nm00 = m11 * s;
         double nm01 = -m01 * s;
         double nm10 = -m10 * s;
-        double nm11 =  m00 * s;
+        double nm11 = m00 * s;
         double nm20 = (m10 * m21 - m20 * m11) * s;
         double nm21 = (m20 * m01 - m00 * m21) * s;
         dest.m00 = nm00;
@@ -503,7 +516,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #translate(Vector2dc)
      *
      * @param offset
-     *          the translation
+     *               the translation
      * @return this
      */
     public Matrix3x2d translation(Vector2dc offset) {
@@ -511,7 +524,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Set only the translation components of this matrix <code>(m20, m21)</code> to the given values <code>(x, y)</code>.
+     * Set only the translation components of this matrix <code>(m20, m21)</code> to the given values
+     * <code>(x, y)</code>.
      * <p>
      * To build a translation matrix instead, use {@link #translation(double, double)}.
      * To apply a translation to another matrix, use {@link #translate(double, double)}.
@@ -532,7 +546,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Set only the translation components of this matrix <code>(m20, m21)</code> to the given values <code>(offset.x, offset.y)</code>.
+     * Set only the translation components of this matrix <code>(m20, m21)</code> to the given values
+     * <code>(offset.x, offset.y)</code>.
      * <p>
      * To build a translation matrix instead, use {@link #translation(Vector2dc)}.
      * To apply a translation to another matrix, use {@link #translate(Vector2dc)}.
@@ -541,7 +556,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #translate(Vector2dc)
      *
      * @param offset
-     *          the new translation to set
+     *               the new translation to set
      * @return this
      */
     public Matrix3x2d setTranslation(Vector2dc offset) {
@@ -563,11 +578,11 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #translation(double, double)
      *
      * @param x
-     *          the offset to translate in x
+     *             the offset to translate in x
      * @param y
-     *          the offset to translate in y
+     *             the offset to translate in y
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3x2d translate(double x, double y, Matrix3x2d dest) {
@@ -620,9 +635,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #translation(Vector2dc)
      *
      * @param offset
-     *          the offset to translate
+     *               the offset to translate
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     public Matrix3x2d translate(Vector2dc offset, Matrix3x2d dest) {
@@ -643,7 +658,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #translation(Vector2dc)
      *
      * @param offset
-     *          the offset to translate
+     *               the offset to translate
      * @return this
      */
     public Matrix3x2d translate(Vector2dc offset) {
@@ -665,7 +680,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #translation(Vector2dc)
      *
      * @param offset
-     *          the number of units in x and y by which to translate
+     *               the number of units in x and y by which to translate
      * @return this
      */
     public Matrix3x2d translateLocal(Vector2dc offset) {
@@ -687,9 +702,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #translation(Vector2dc)
      *
      * @param offset
-     *          the number of units in x and y by which to translate
+     *               the number of units in x and y by which to translate
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     public Matrix3x2d translateLocal(Vector2dc offset, Matrix3x2d dest) {
@@ -711,11 +726,11 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #translation(double, double)
      *
      * @param x
-     *          the offset to translate in x
+     *             the offset to translate in x
      * @param y
-     *          the offset to translate in y
+     *             the offset to translate in y
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3x2d translateLocal(double x, double y, Matrix3x2d dest) {
@@ -755,7 +770,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     /**
      * Return a string representation of this matrix.
      * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
+     * This method creates a new {@link DecimalFormat} on every invocation with the format string
+     * "<code>0.000E0;-</code>".
      *
      * @return the string representation
      */
@@ -780,15 +796,17 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Return a string representation of this matrix by formatting the matrix elements with the given {@link NumberFormat}.
+     * Return a string representation of this matrix by formatting the matrix elements with the given
+     * {@link NumberFormat}.
      *
      * @param formatter
-     *          the {@link NumberFormat} used to format the matrix values with
+     *                  the {@link NumberFormat} used to format the matrix values with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {
-        return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + " " + Runtime.format(m20, formatter) + "\n"
-             + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n";
+        return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + " " +
+                Runtime.format(m20, formatter) + "\n" + Runtime.format(m01, formatter) + " " +
+                Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n";
     }
 
     /**
@@ -801,13 +819,12 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #set(Matrix3x2dc)
      *
      * @param dest
-     *          the destination matrix
+     *             the destination matrix
      * @return dest
      */
     public Matrix3x2d get(Matrix3x2d dest) {
         return dest.set(this);
     }
-
 
     /**
      * Store this matrix in column-major order into the supplied {@link DoubleBuffer} at the current
@@ -822,7 +839,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #get(int, DoubleBuffer)
      *
      * @param buffer
-     *            will receive the values of this matrix in column-major order at its current position
+     *               will receive the values of this matrix in column-major order at its current position
      * @return the passed in buffer
      */
     public DoubleBuffer get(DoubleBuffer buffer) {
@@ -836,9 +853,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * This method will not increment the position of the given DoubleBuffer.
      *
      * @param index
-     *            the absolute position into the DoubleBuffer
+     *               the absolute position into the DoubleBuffer
      * @param buffer
-     *            will receive the values of this matrix in column-major order
+     *               will receive the values of this matrix in column-major order
      * @return the passed in buffer
      */
     public DoubleBuffer get(int index, DoubleBuffer buffer) {
@@ -859,7 +876,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #get(int, ByteBuffer)
      *
      * @param buffer
-     *            will receive the values of this matrix in column-major order at its current position
+     *               will receive the values of this matrix in column-major order at its current position
      * @return the passed in buffer
      */
     public ByteBuffer get(ByteBuffer buffer) {
@@ -873,9 +890,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *            the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *            will receive the values of this matrix in column-major order
+     *               will receive the values of this matrix in column-major order
      * @return the passed in buffer
      */
     public ByteBuffer get(int index, ByteBuffer buffer) {
@@ -884,7 +901,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied {@link DoubleBuffer} at the current
+     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied {@link DoubleBuffer} at the
+     * current
      * buffer {@link DoubleBuffer#position() position}.
      * <p>
      * This method will not increment the position of the given DoubleBuffer.
@@ -896,7 +914,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #get3x3(int, DoubleBuffer)
      *
      * @param buffer
-     *            will receive the values of this matrix in column-major order at its current position
+     *               will receive the values of this matrix in column-major order at its current position
      * @return the passed in buffer
      */
     public DoubleBuffer get3x3(DoubleBuffer buffer) {
@@ -905,15 +923,16 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied {@link DoubleBuffer} starting at the specified
+     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied {@link DoubleBuffer}
+     * starting at the specified
      * absolute buffer position/index.
      * <p>
      * This method will not increment the position of the given DoubleBuffer.
      *
      * @param index
-     *            the absolute position into the DoubleBuffer
+     *               the absolute position into the DoubleBuffer
      * @param buffer
-     *            will receive the values of this matrix in column-major order
+     *               will receive the values of this matrix in column-major order
      * @return the passed in buffer
      */
     public DoubleBuffer get3x3(int index, DoubleBuffer buffer) {
@@ -922,7 +941,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied {@link ByteBuffer} at the current
+     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied {@link ByteBuffer} at the
+     * current
      * buffer {@link ByteBuffer#position() position}.
      * <p>
      * This method will not increment the position of the given ByteBuffer.
@@ -934,7 +954,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #get3x3(int, ByteBuffer)
      *
      * @param buffer
-     *            will receive the values of this matrix in column-major order at its current position
+     *               will receive the values of this matrix in column-major order at its current position
      * @return the passed in buffer
      */
     public ByteBuffer get3x3(ByteBuffer buffer) {
@@ -943,15 +963,16 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied {@link ByteBuffer} starting at the specified
+     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied {@link ByteBuffer} starting
+     * at the specified
      * absolute buffer position/index.
      * <p>
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *            the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *            will receive the values of this matrix in column-major order
+     *               will receive the values of this matrix in column-major order
      * @return the passed in buffer
      */
     public ByteBuffer get3x3(int index, ByteBuffer buffer) {
@@ -960,7 +981,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied {@link DoubleBuffer} at the current
+     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied {@link DoubleBuffer} at the
+     * current
      * buffer {@link DoubleBuffer#position() position}.
      * <p>
      * This method will not increment the position of the given DoubleBuffer.
@@ -972,7 +994,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #get4x4(int, DoubleBuffer)
      *
      * @param buffer
-     *            will receive the values of this matrix in column-major order at its current position
+     *               will receive the values of this matrix in column-major order at its current position
      * @return the passed in buffer
      */
     public DoubleBuffer get4x4(DoubleBuffer buffer) {
@@ -981,15 +1003,16 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied {@link DoubleBuffer} starting at the specified
+     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied {@link DoubleBuffer}
+     * starting at the specified
      * absolute buffer position/index.
      * <p>
      * This method will not increment the position of the given DoubleBuffer.
      *
      * @param index
-     *            the absolute position into the DoubleBuffer
+     *               the absolute position into the DoubleBuffer
      * @param buffer
-     *            will receive the values of this matrix in column-major order
+     *               will receive the values of this matrix in column-major order
      * @return the passed in buffer
      */
     public DoubleBuffer get4x4(int index, DoubleBuffer buffer) {
@@ -998,7 +1021,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied {@link ByteBuffer} at the current
+     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied {@link ByteBuffer} at the
+     * current
      * buffer {@link ByteBuffer#position() position}.
      * <p>
      * This method will not increment the position of the given ByteBuffer.
@@ -1010,7 +1034,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #get4x4(int, ByteBuffer)
      *
      * @param buffer
-     *            will receive the values of this matrix in column-major order at its current position
+     *               will receive the values of this matrix in column-major order at its current position
      * @return the passed in buffer
      */
     public ByteBuffer get4x4(ByteBuffer buffer) {
@@ -1019,15 +1043,16 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied {@link ByteBuffer} starting at the specified
+     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied {@link ByteBuffer} starting
+     * at the specified
      * absolute buffer position/index.
      * <p>
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *            the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *            will receive the values of this matrix in column-major order
+     *               will receive the values of this matrix in column-major order
      * @return the passed in buffer
      */
     public ByteBuffer get4x4(int index, ByteBuffer buffer) {
@@ -1046,9 +1071,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * Store this matrix into the supplied double array in column-major order at the given offset.
      *
      * @param arr
-     *          the array to write the matrix values into
+     *               the array to write the matrix values into
      * @param offset
-     *          the offset into the array
+     *               the offset into the array
      * @return the passed in array
      */
     public double[] get(double[] arr, int offset) {
@@ -1064,7 +1089,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #get(double[], int)
      *
      * @param arr
-     *          the array to write the matrix values into
+     *            the array to write the matrix values into
      * @return the passed in array
      */
     public double[] get(double[] arr) {
@@ -1072,12 +1097,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied float array at the given offset.
+     * Store this matrix as an equivalent 3x3 matrix in column-major order into the supplied float array at the given
+     * offset.
      *
      * @param arr
-     *          the array to write the matrix values into
+     *               the array to write the matrix values into
      * @param offset
-     *          the offset into the array
+     *               the offset into the array
      * @return the passed in array
      */
     public double[] get3x3(double[] arr, int offset) {
@@ -1093,7 +1119,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #get3x3(double[], int)
      *
      * @param arr
-     *          the array to write the matrix values into
+     *            the array to write the matrix values into
      * @return the passed in array
      */
     public double[] get3x3(double[] arr) {
@@ -1101,12 +1127,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied float array at the given offset.
+     * Store this matrix as an equivalent 4x4 matrix in column-major order into the supplied float array at the given
+     * offset.
      *
      * @param arr
-     *          the array to write the matrix values into
+     *               the array to write the matrix values into
      * @param offset
-     *          the offset into the array
+     *               the offset into the array
      * @return the passed in array
      */
     public double[] get4x4(double[] arr, int offset) {
@@ -1122,7 +1149,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #get4x4(double[], int)
      *
      * @param arr
-     *          the array to write the matrix values into
+     *            the array to write the matrix values into
      * @return the passed in array
      */
     public double[] get4x4(double[] arr) {
@@ -1130,7 +1157,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Set the values of this matrix by reading 6 double values from the given {@link DoubleBuffer} in column-major order,
+     * Set the values of this matrix by reading 6 double values from the given {@link DoubleBuffer} in column-major
+     * order,
      * starting at its current position.
      * <p>
      * The DoubleBuffer is expected to contain the values in column-major order.
@@ -1138,7 +1166,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * The position of the DoubleBuffer will not be changed by this method.
      *
      * @param buffer
-     *              the DoubleBuffer to read the matrix values from in column-major order
+     *               the DoubleBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3x2d set(DoubleBuffer buffer) {
@@ -1156,7 +1184,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * The position of the ByteBuffer will not be changed by this method.
      *
      * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
+     *               the ByteBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3x2d set(ByteBuffer buffer) {
@@ -1166,7 +1194,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Set the values of this matrix by reading 6 double values from the given {@link DoubleBuffer} in column-major order,
+     * Set the values of this matrix by reading 6 double values from the given {@link DoubleBuffer} in column-major
+     * order,
      * starting at the specified absolute buffer position/index.
      * <p>
      * The DoubleBuffer is expected to contain the values in column-major order.
@@ -1174,9 +1203,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * The position of the DoubleBuffer will not be changed by this method.
      *
      * @param index
-     *              the absolute position into the DoubleBuffer
+     *               the absolute position into the DoubleBuffer
      * @param buffer
-     *              the DoubleBuffer to read the matrix values from in column-major order
+     *               the DoubleBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3x2d set(int index, DoubleBuffer buffer) {
@@ -1193,25 +1222,27 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * The position of the ByteBuffer will not be changed by this method.
      *
      * @param index
-     *              the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
+     *               the ByteBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3x2d set(int index, ByteBuffer buffer) {
         MemUtil.INSTANCE.get(this, index, buffer);
         return this;
     }
+
     /**
      * Set the values of this matrix by reading 6 double values from off-heap memory in column-major order,
      * starting at the given address.
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *              the off-heap memory address to read the matrix values from in column-major order
+     *                the off-heap memory address to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3x2d setFromAddress(long address) {
@@ -1242,18 +1273,19 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Apply scaling to this matrix by scaling the unit axes by the given x and y and store the result in <code>dest</code>.
+     * Apply scaling to this matrix by scaling the unit axes by the given x and y and store the result in
+     * <code>dest</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>S</code> the scaling matrix,
      * then the new matrix will be <code>M * S</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * S * v</code>, the scaling will be applied first!
      *
      * @param x
-     *            the factor of the x component
+     *             the factor of the x component
      * @param y
-     *            the factor of the y component
+     *             the factor of the y component
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3x2d scale(double x, double y, Matrix3x2d dest) {
@@ -1274,9 +1306,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * vector <code>v</code> with the new matrix by using <code>M * S * v</code>, the scaling will be applied first!
      *
      * @param x
-     *            the factor of the x component
+     *          the factor of the x component
      * @param y
-     *            the factor of the y component
+     *          the factor of the y component
      * @return this
      */
     public Matrix3x2d scale(double x, double y) {
@@ -1291,7 +1323,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * vector <code>v</code> with the new matrix by using <code>M * S * v</code>, the scaling will be applied first!
      *
      * @param xy
-     *            the factors of the x and y component, respectively
+     *           the factors of the x and y component, respectively
      * @return this
      */
     public Matrix3x2d scale(Vector2dc xy) {
@@ -1307,9 +1339,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * vector <code>v</code> with the new matrix by using <code>M * S * v</code>, the scaling will be applied first!
      *
      * @param xy
-     *            the factors of the x and y component, respectively
+     *             the factors of the x and y component, respectively
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3x2d scale(Vector2dc xy, Matrix3x2d dest) {
@@ -1324,7 +1356,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * vector <code>v</code> with the new matrix by using <code>M * S * v</code>, the scaling will be applied first!
      *
      * @param xy
-     *            the factors of the x and y component, respectively
+     *           the factors of the x and y component, respectively
      * @return this
      */
     public Matrix3x2d scale(Vector2fc xy) {
@@ -1340,9 +1372,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * vector <code>v</code> with the new matrix by using <code>M * S * v</code>, the scaling will be applied first!
      *
      * @param xy
-     *            the factors of the x and y component, respectively
+     *             the factors of the x and y component, respectively
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3x2d scale(Vector2fc xy, Matrix3x2d dest) {
@@ -1360,9 +1392,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #scale(double, double, Matrix3x2d)
      *
      * @param xy
-     *            the factor for the two components
+     *             the factor for the two components
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3x2d scale(double xy, Matrix3x2d dest) {
@@ -1379,7 +1411,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #scale(double, double)
      *
      * @param xy
-     *            the factor for the two components
+     *           the factor for the two components
      * @return this
      */
     public Matrix3x2d scale(double xy) {
@@ -1405,9 +1437,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * scaling will be applied last!
      *
      * @param x
-     *            the factor of the x component
+     *          the factor of the x component
      * @param y
-     *            the factor of the y component
+     *          the factor of the y component
      * @return this
      */
     public Matrix3x2d scaleLocal(double x, double y) {
@@ -1427,7 +1459,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * scaling will be applied last!
      *
      * @param xy
-     *            the factor of the x and y component
+     *           the factor of the x and y component
      * @return this
      */
     public Matrix3x2d scaleLocal(double xy) {
@@ -1446,15 +1478,15 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * This method is equivalent to calling: <code>translate(ox, oy, dest).scale(sx, sy).translate(-ox, -oy)</code>
      *
      * @param sx
-     *            the scaling factor of the x component
+     *             the scaling factor of the x component
      * @param sy
-     *            the scaling factor of the y component
+     *             the scaling factor of the y component
      * @param ox
-     *            the x coordinate of the scaling origin
+     *             the x coordinate of the scaling origin
      * @param oy
-     *            the y coordinate of the scaling origin
+     *             the y coordinate of the scaling origin
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3x2d scaleAround(double sx, double sy, double ox, double oy, Matrix3x2d dest) {
@@ -1481,13 +1513,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * This method is equivalent to calling: <code>translate(ox, oy).scale(sx, sy).translate(-ox, -oy)</code>
      *
      * @param sx
-     *            the scaling factor of the x component
+     *           the scaling factor of the x component
      * @param sy
-     *            the scaling factor of the y component
+     *           the scaling factor of the y component
      * @param ox
-     *            the x coordinate of the scaling origin
+     *           the x coordinate of the scaling origin
      * @param oy
-     *            the y coordinate of the scaling origin
+     *           the y coordinate of the scaling origin
      * @return this
      */
     public Matrix3x2d scaleAround(double sx, double sy, double ox, double oy) {
@@ -1507,13 +1539,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * This method is equivalent to calling: <code>translate(ox, oy, dest).scale(factor).translate(-ox, -oy)</code>
      *
      * @param factor
-     *            the scaling factor for all three axes
+     *               the scaling factor for all three axes
      * @param ox
-     *            the x coordinate of the scaling origin
+     *               the x coordinate of the scaling origin
      * @param oy
-     *            the y coordinate of the scaling origin
+     *               the y coordinate of the scaling origin
      * @param dest
-     *            will hold the result
+     *               will hold the result
      * @return this
      */
     public Matrix3x2d scaleAround(double factor, double ox, double oy, Matrix3x2d dest) {
@@ -1532,11 +1564,11 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * This method is equivalent to calling: <code>translate(ox, oy).scale(factor).translate(-ox, -oy)</code>
      *
      * @param factor
-     *            the scaling factor for all axes
+     *               the scaling factor for all axes
      * @param ox
-     *            the x coordinate of the scaling origin
+     *               the x coordinate of the scaling origin
      * @param oy
-     *            the y coordinate of the scaling origin
+     *               the y coordinate of the scaling origin
      * @return this
      */
     public Matrix3x2d scaleAround(double factor, double ox, double oy) {
@@ -1566,20 +1598,21 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * vector <code>v</code> with the new matrix by using <code>S * M * v</code>, the
      * scaling will be applied last!
      * <p>
-     * This method is equivalent to calling: <code>new Matrix3x2d().translate(ox, oy).scale(sx, sy).translate(-ox, -oy).mul(this, this)</code>
+     * This method is equivalent to calling:
+     * <code>new Matrix3x2d().translate(ox, oy).scale(sx, sy).translate(-ox, -oy).mul(this, this)</code>
      *
      * @param sx
-     *            the scaling factor of the x component
+     *           the scaling factor of the x component
      * @param sy
-     *            the scaling factor of the y component
+     *           the scaling factor of the y component
      * @param sz
-     *            the scaling factor of the z component
+     *           the scaling factor of the z component
      * @param ox
-     *            the x coordinate of the scaling origin
+     *           the x coordinate of the scaling origin
      * @param oy
-     *            the y coordinate of the scaling origin
+     *           the y coordinate of the scaling origin
      * @param oz
-     *            the z coordinate of the scaling origin
+     *           the z coordinate of the scaling origin
      * @return this
      */
     public Matrix3x2d scaleAroundLocal(double sx, double sy, double sz, double ox, double oy, double oz) {
@@ -1595,14 +1628,15 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * vector <code>v</code> with the new matrix by using <code>S * M * v</code>, the
      * scaling will be applied last!
      * <p>
-     * This method is equivalent to calling: <code>new Matrix3x2d().translate(ox, oy).scale(factor).translate(-ox, -oy).mul(this, this)</code>
+     * This method is equivalent to calling:
+     * <code>new Matrix3x2d().translate(ox, oy).scale(factor).translate(-ox, -oy).mul(this, this)</code>
      *
      * @param factor
-     *            the scaling factor for all three axes
+     *               the scaling factor for all three axes
      * @param ox
-     *            the x coordinate of the scaling origin
+     *               the x coordinate of the scaling origin
      * @param oy
-     *            the y coordinate of the scaling origin
+     *               the y coordinate of the scaling origin
      * @return this
      */
     public Matrix3x2d scaleAroundLocal(double factor, double ox, double oy) {
@@ -1615,12 +1649,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * The resulting matrix can be multiplied against another transformation
      * matrix to obtain an additional scaling.
      * <p>
-     * In order to post-multiply a scaling transformation directly to a matrix, use {@link #scale(double) scale()} instead.
+     * In order to post-multiply a scaling transformation directly to a matrix, use {@link #scale(double) scale()}
+     * instead.
      *
      * @see #scale(double)
      *
      * @param factor
-     *             the scale factor in x and y
+     *               the scale factor in x and y
      * @return this
      */
     public Matrix3x2d scaling(double factor) {
@@ -1631,9 +1666,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * Set this matrix to be a simple scale matrix.
      *
      * @param x
-     *             the scale in x
+     *          the scale in x
      * @param y
-     *             the scale in y
+     *          the scale in y
      * @return this
      */
     public Matrix3x2d scaling(double x, double y) {
@@ -1658,7 +1693,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #rotate(double)
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @return this
      */
     public Matrix3x2d rotation(double angle) {
@@ -1674,7 +1709,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Transform/multiply the given vector by this matrix by assuming a third row in this matrix of <code>(0, 0, 1)</code>
+     * Transform/multiply the given vector by this matrix by assuming a third row in this matrix of
+     * <code>(0, 0, 1)</code>
      * and store the result in that vector.
      *
      * @see Vector3d#mul(Matrix3x2dc)
@@ -1688,15 +1724,16 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Transform/multiply the given vector by this matrix by assuming a third row in this matrix of <code>(0, 0, 1)</code>
+     * Transform/multiply the given vector by this matrix by assuming a third row in this matrix of
+     * <code>(0, 0, 1)</code>
      * and store the result in <code>dest</code>.
      *
      * @see Vector3d#mul(Matrix3x2dc, Vector3d)
      *
      * @param v
-     *          the vector to transform
+     *             the vector to transform
      * @param dest
-     *          will contain the result
+     *             will contain the result
      * @return dest
      */
     public Vector3d transform(Vector3dc v, Vector3d dest) {
@@ -1704,20 +1741,21 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Transform/multiply the given vector <code>(x, y, z)</code> by this matrix and store the result in <code>dest</code>.
+     * Transform/multiply the given vector <code>(x, y, z)</code> by this matrix and store the result in
+     * <code>dest</code>.
      *
      * @param x
-     *          the x component of the vector to transform
+     *             the x component of the vector to transform
      * @param y
-     *          the y component of the vector to transform
+     *             the y component of the vector to transform
      * @param z
-     *          the z component of the vector to transform
+     *             the z component of the vector to transform
      * @param dest
-     *          will contain the result
+     *             will contain the result
      * @return dest
      */
     public Vector3d transform(double x, double y, double z, Vector3d dest) {
-       return dest.set(m00 * x + m10 * y + m20 * z, m01 * x + m11 * y + m21 * z, z);
+        return dest.set(m00 * x + m10 * y + m20 * z, m01 * x + m11 * y + m21 * z, z);
     }
 
     /**
@@ -1738,7 +1776,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      */
     public Vector2d transformPosition(Vector2d v) {
         v.set(m00 * v.x + m10 * v.y + m20,
-              m01 * v.x + m11 * v.y + m21);
+                m01 * v.x + m11 * v.y + m21);
         return v;
     }
 
@@ -1755,14 +1793,14 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #transform(Vector3dc, Vector3d)
      *
      * @param v
-     *          the vector to transform
+     *             the vector to transform
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Vector2d transformPosition(Vector2dc v, Vector2d dest) {
         dest.set(m00 * v.x() + m10 * v.y() + m20,
-                 m01 * v.x() + m11 * v.y() + m21);
+                m01 * v.x() + m11 * v.y() + m21);
         return dest;
     }
 
@@ -1779,11 +1817,11 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #transform(Vector3dc, Vector3d)
      *
      * @param x
-     *          the x component of the vector to transform
+     *             the x component of the vector to transform
      * @param y
-     *          the y component of the vector to transform
+     *             the y component of the vector to transform
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Vector2d transformPosition(double x, double y, Vector2d dest) {
@@ -1808,7 +1846,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      */
     public Vector2d transformDirection(Vector2d v) {
         v.set(m00 * v.x + m10 * v.y,
-              m01 * v.x + m11 * v.y);
+                m01 * v.x + m11 * v.y);
         return v;
     }
 
@@ -1825,14 +1863,14 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #transformDirection(Vector2d)
      *
      * @param v
-     *          the vector to transform and to hold the final result
+     *             the vector to transform and to hold the final result
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Vector2d transformDirection(Vector2dc v, Vector2d dest) {
         dest.set(m00 * v.x() + m10 * v.y(),
-                 m01 * v.x() + m11 * v.y());
+                m01 * v.x() + m11 * v.y());
         return dest;
     }
 
@@ -1849,11 +1887,11 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #transformDirection(Vector2d)
      *
      * @param x
-     *          the x component of the vector to transform
+     *             the x component of the vector to transform
      * @param y
-     *          the y component of the vector to transform
+     *             the y component of the vector to transform
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Vector2d transformDirection(double x, double y, Vector2d dest) {
@@ -1895,16 +1933,17 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Apply a rotation transformation to this matrix by rotating the given amount of radians and store the result in <code>dest</code>.
+     * Apply a rotation transformation to this matrix by rotating the given amount of radians and store the result in
+     * <code>dest</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the rotation will be applied first!
      *
      * @param ang
-     *            the angle in radians
+     *             the angle in radians
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3x2d rotate(double ang, Matrix3x2d dest) {
@@ -1926,7 +1965,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Pre-multiply a rotation to this matrix by rotating the given amount of radians and store the result in <code>dest</code>.
+     * Pre-multiply a rotation to this matrix by rotating the given amount of radians and store the result in
+     * <code>dest</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
      * then the new matrix will be <code>R * M</code>. So when transforming a
@@ -1936,14 +1976,15 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * In order to set the matrix to a rotation matrix without pre-multiplying the rotation
      * transformation, use {@link #rotation(double) rotation()}.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotation(double)
      *
      * @param ang
-     *            the angle in radians to rotate
+     *             the angle in radians to rotate
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3x2d rotateLocal(double ang, Matrix3x2d dest) {
@@ -1975,7 +2016,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * In order to set the matrix to a rotation matrix without pre-multiplying the rotation
      * transformation, use {@link #rotation(double) rotation()}.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotation(double)
      *
@@ -2026,13 +2068,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #rotate(double, Matrix3x2d)
      *
      * @param ang
-     *            the angle in radians
+     *             the angle in radians
      * @param x
-     *            the x component of the rotation center
+     *             the x component of the rotation center
      * @param y
-     *            the y component of the rotation center
+     *             the y component of the rotation center
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3x2d rotateAbout(double ang, double x, double y, Matrix3x2d dest) {
@@ -2052,7 +2094,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Apply a rotation transformation to this matrix that rotates the given normalized <code>fromDir</code> direction vector
+     * Apply a rotation transformation to this matrix that rotates the given normalized <code>fromDir</code> direction
+     * vector
      * to point along the normalized <code>toDir</code>, and store the result in <code>dest</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
@@ -2060,11 +2103,11 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the rotation will be applied first!
      *
      * @param fromDir
-     *            the normalized direction which should be rotate to point along <code>toDir</code>
+     *                the normalized direction which should be rotate to point along <code>toDir</code>
      * @param toDir
-     *            the normalized destination direction
+     *                the normalized destination direction
      * @param dest
-     *            will hold the result
+     *                will hold the result
      * @return dest
      */
     public Matrix3x2d rotateTo(Vector2dc fromDir, Vector2dc toDir, Matrix3x2d dest) {
@@ -2086,7 +2129,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     }
 
     /**
-     * Apply a rotation transformation to this matrix that rotates the given normalized <code>fromDir</code> direction vector
+     * Apply a rotation transformation to this matrix that rotates the given normalized <code>fromDir</code> direction
+     * vector
      * to point along the normalized <code>toDir</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
@@ -2094,9 +2138,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the rotation will be applied first!
      *
      * @param fromDir
-     *            the normalized direction which should be rotate to point along <code>toDir</code>
+     *                the normalized direction which should be rotate to point along <code>toDir</code>
      * @param toDir
-     *            the normalized destination direction
+     *                the normalized destination direction
      * @return this
      */
     public Matrix3x2d rotateTo(Vector2dc fromDir, Vector2dc toDir) {
@@ -2105,7 +2149,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
 
     /**
      * Apply a "view" transformation to this matrix that maps the given <code>(left, bottom)</code> and
-     * <code>(right, top)</code> corners to <code>(-1, -1)</code> and <code>(1, 1)</code> respectively and store the result in <code>dest</code>.
+     * <code>(right, top)</code> corners to <code>(-1, -1)</code> and <code>(1, 1)</code> respectively and store the
+     * result in <code>dest</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>O</code> the orthographic projection matrix,
      * then the new matrix will be <code>M * O</code>. So when transforming a
@@ -2115,15 +2160,15 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #setView(double, double, double, double)
      *
      * @param left
-     *            the distance from the center to the left view edge
+     *               the distance from the center to the left view edge
      * @param right
-     *            the distance from the center to the right view edge
+     *               the distance from the center to the right view edge
      * @param bottom
-     *            the distance from the center to the bottom view edge
+     *               the distance from the center to the bottom view edge
      * @param top
-     *            the distance from the center to the top view edge
+     *               the distance from the center to the top view edge
      * @param dest
-     *            will hold the result
+     *               will hold the result
      * @return dest
      */
     public Matrix3x2d view(double left, double right, double bottom, double top, Matrix3x2d dest) {
@@ -2152,13 +2197,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #setView(double, double, double, double)
      *
      * @param left
-     *            the distance from the center to the left view edge
+     *               the distance from the center to the left view edge
      * @param right
-     *            the distance from the center to the right view edge
+     *               the distance from the center to the right view edge
      * @param bottom
-     *            the distance from the center to the bottom view edge
+     *               the distance from the center to the bottom view edge
      * @param top
-     *            the distance from the center to the top view edge
+     *               the distance from the center to the top view edge
      * @return this
      */
     public Matrix3x2d view(double left, double right, double bottom, double top) {
@@ -2172,13 +2217,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #view(double, double, double, double)
      *
      * @param left
-     *            the distance from the center to the left view edge
+     *               the distance from the center to the left view edge
      * @param right
-     *            the distance from the center to the right view edge
+     *               the distance from the center to the right view edge
      * @param bottom
-     *            the distance from the center to the bottom view edge
+     *               the distance from the center to the bottom view edge
      * @param top
-     *            the distance from the center to the top view edge
+     *               the distance from the center to the top view edge
      * @return this
      */
     public Matrix3x2d setView(double left, double right, double bottom, double top) {
@@ -2196,13 +2241,14 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * This can be used to get the position of the "camera" from a given <i>view</i> transformation matrix.
      * <p>
      * This method is equivalent to the following code:
+     * 
      * <pre>
      * Matrix3x2d inv = new Matrix3x2d(this).invert();
      * inv.transform(origin.set(0, 0));
      * </pre>
      *
      * @param origin
-     *          will hold the position transformed to the origin
+     *               will hold the position transformed to the origin
      * @return origin
      */
     public Vector2d origin(Vector2d origin) {
@@ -2217,25 +2263,25 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * This can be used to determine which region of the screen (i.e. the NDC space) is covered by the view.
      *
      * @param area
-     *          will hold the view area as <code>[minX, minY, maxX, maxY]</code>
+     *             will hold the view area as <code>[minX, minY, maxX, maxY]</code>
      * @return area
      */
     public double[] viewArea(double[] area) {
         double s = 1.0 / (m00 * m11 - m01 * m10);
-        double rm00 =  m11 * s;
+        double rm00 = m11 * s;
         double rm01 = -m01 * s;
         double rm10 = -m10 * s;
-        double rm11 =  m00 * s;
+        double rm11 = m00 * s;
         double rm20 = (m10 * m21 - m20 * m11) * s;
         double rm21 = (m20 * m01 - m00 * m21) * s;
         double nxnyX = -rm00 - rm10;
         double nxnyY = -rm01 - rm11;
-        double pxnyX =  rm00 - rm10;
-        double pxnyY =  rm01 - rm11;
+        double pxnyX = rm00 - rm10;
+        double pxnyY = rm01 - rm11;
         double nxpyX = -rm00 + rm10;
         double nxpyY = -rm01 + rm11;
-        double pxpyX =  rm00 + rm10;
-        double pxpyY =  rm01 + rm11;
+        double pxpyX = rm00 + rm10;
+        double pxpyY = rm01 + rm11;
         double minX = nxnyX;
         minX = minX < nxpyX ? minX : nxpyX;
         minX = minX < pxnyX ? minX : pxnyX;
@@ -2262,13 +2308,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
     public Vector2d positiveX(Vector2d dir) {
         double s = m00 * m11 - m01 * m10;
         s = 1.0 / s;
-        dir.x =  m11 * s;
+        dir.x = m11 * s;
         dir.y = -m01 * s;
         return dir.normalize(dir);
     }
 
     public Vector2d normalizedPositiveX(Vector2d dir) {
-        dir.x =  m11;
+        dir.x = m11;
         dir.y = -m01;
         return dir;
     }
@@ -2277,56 +2323,61 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
         double s = m00 * m11 - m01 * m10;
         s = 1.0 / s;
         dir.x = -m10 * s;
-        dir.y =  m00 * s;
+        dir.y = m00 * s;
         return dir.normalize(dir);
     }
 
     public Vector2d normalizedPositiveY(Vector2d dir) {
         dir.x = -m10;
-        dir.y =  m00;
+        dir.y = m00;
         return dir;
     }
 
     /**
-     * Unproject the given window coordinates <code>(winX, winY)</code> by <code>this</code> matrix using the specified viewport.
+     * Unproject the given window coordinates <code>(winX, winY)</code> by <code>this</code> matrix using the specified
+     * viewport.
      * <p>
-     * This method first converts the given window coordinates to normalized device coordinates in the range <code>[-1..1]</code>
+     * This method first converts the given window coordinates to normalized device coordinates in the range
+     * <code>[-1..1]</code>
      * and then transforms those NDC coordinates by the inverse of <code>this</code> matrix.
      * <p>
      * As a necessary computation step for unprojecting, this method computes the inverse of <code>this</code> matrix.
-     * In order to avoid computing the matrix inverse with every invocation, the inverse of <code>this</code> matrix can be built
-     * once outside using {@link #invert(Matrix3x2d)} and then the method {@link #unprojectInv(double, double, int[], Vector2d) unprojectInv()} can be invoked on it.
+     * In order to avoid computing the matrix inverse with every invocation, the inverse of <code>this</code> matrix can
+     * be built
+     * once outside using {@link #invert(Matrix3x2d)} and then the method
+     * {@link #unprojectInv(double, double, int[], Vector2d) unprojectInv()} can be invoked on it.
      *
      * @see #unprojectInv(double, double, int[], Vector2d)
      * @see #invert(Matrix3x2d)
      *
      * @param winX
-     *          the x-coordinate in window coordinates (pixels)
+     *                 the x-coordinate in window coordinates (pixels)
      * @param winY
-     *          the y-coordinate in window coordinates (pixels)
+     *                 the y-coordinate in window coordinates (pixels)
      * @param viewport
-     *          the viewport described by <code>[x, y, width, height]</code>
+     *                 the viewport described by <code>[x, y, width, height]</code>
      * @param dest
-     *          will hold the unprojected position
+     *                 will hold the unprojected position
      * @return dest
      */
     public Vector2d unproject(double winX, double winY, int[] viewport, Vector2d dest) {
         double s = 1.0 / (m00 * m11 - m01 * m10);
-        double im00 =  m11 * s;
+        double im00 = m11 * s;
         double im01 = -m01 * s;
         double im10 = -m10 * s;
-        double im11 =  m00 * s;
+        double im11 = m00 * s;
         double im20 = (m10 * m21 - m20 * m11) * s;
         double im21 = (m20 * m01 - m00 * m21) * s;
-        double ndcX = (winX-viewport[0])/viewport[2]*2.0-1.0;
-        double ndcY = (winY-viewport[1])/viewport[3]*2.0-1.0;
+        double ndcX = (winX - viewport[0]) / viewport[2] * 2.0 - 1.0;
+        double ndcY = (winY - viewport[1]) / viewport[3] * 2.0 - 1.0;
         dest.x = im00 * ndcX + im10 * ndcY + im20;
         dest.y = im01 * ndcX + im11 * ndcY + im21;
         return dest;
     }
 
     /**
-     * Unproject the given window coordinates <code>(winX, winY)</code> by <code>this</code> matrix using the specified viewport.
+     * Unproject the given window coordinates <code>(winX, winY)</code> by <code>this</code> matrix using the specified
+     * viewport.
      * <p>
      * This method differs from {@link #unproject(double, double, int[], Vector2d) unproject()}
      * in that it assumes that <code>this</code> is already the inverse matrix of the original projection matrix.
@@ -2335,18 +2386,18 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * @see #unproject(double, double, int[], Vector2d)
      *
      * @param winX
-     *          the x-coordinate in window coordinates (pixels)
+     *                 the x-coordinate in window coordinates (pixels)
      * @param winY
-     *          the y-coordinate in window coordinates (pixels)
+     *                 the y-coordinate in window coordinates (pixels)
      * @param viewport
-     *          the viewport described by <code>[x, y, width, height]</code>
+     *                 the viewport described by <code>[x, y, width, height]</code>
      * @param dest
-     *          will hold the unprojected position
+     *                 will hold the unprojected position
      * @return dest
      */
     public Vector2d unprojectInv(double winX, double winY, int[] viewport, Vector2d dest) {
-        double ndcX = (winX-viewport[0])/viewport[2]*2.0-1.0;
-        double ndcY = (winY-viewport[1])/viewport[3]*2.0-1.0;
+        double ndcX = (winX - viewport[0]) / viewport[2] * 2.0 - 1.0;
+        double ndcY = (winY - viewport[1]) / viewport[3] * 2.0 - 1.0;
         dest.x = m00 * ndcX + m10 * ndcY + m20;
         dest.y = m01 * ndcX + m11 * ndcY + m21;
         return dest;
@@ -2361,20 +2412,22 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
      * system before this transformation is applied, which transforms into the corner coordinates <code>[-1, +1]</code>.
      *
      * @param corner
-     *          will hold one corner of the span
+     *               will hold one corner of the span
      * @param xDir
-     *          will hold the direction and length of the span along the positive X axis
+     *               will hold the direction and length of the span along the positive X axis
      * @param yDir
-     *          will hold the direction and length of the span along the positive Y axis
+     *               will hold the direction and length of the span along the positive Y axis
      * @return this
      */
     public Matrix3x2d span(Vector2d corner, Vector2d xDir, Vector2d yDir) {
         double s = 1.0 / (m00 * m11 - m01 * m10);
-        double nm00 =  m11 * s, nm01 = -m01 * s, nm10 = -m10 * s, nm11 =  m00 * s;
+        double nm00 = m11 * s, nm01 = -m01 * s, nm10 = -m10 * s, nm11 = m00 * s;
         corner.x = -nm00 - nm10 + (m10 * m21 - m20 * m11) * s;
         corner.y = -nm01 - nm11 + (m20 * m01 - m00 * m21) * s;
-        xDir.x = 2.0 * nm00; xDir.y = 2.0 * nm01;
-        yDir.x = 2.0 * nm10; yDir.y = 2.0 * nm11;
+        xDir.x = 2.0 * nm00;
+        xDir.y = 2.0 * nm01;
+        yDir.x = 2.0 * nm10;
+        yDir.y = 2.0 * nm11;
         return this;
     }
 
@@ -2384,25 +2437,33 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
         double nyX = +m01, nyY = +m11, nyW = 1.0f + m21;
         double pyX = -m01, pyY = -m11, pyW = 1.0f - m21;
         return nxX * x + nxY * y + nxW >= 0 && pxX * x + pxY * y + pxW >= 0 &&
-               nyX * x + nyY * y + nyW >= 0 && pyX * x + pyY * y + pyW >= 0;
+                nyX * x + nyY * y + nyW >= 0 && pyX * x + pyY * y + pyW >= 0;
     }
 
     public boolean testCircle(double x, double y, double r) {
         double invl;
         double nxX = +m00, nxY = +m10, nxW = 1.0f + m20;
         invl = Math.invsqrt(nxX * nxX + nxY * nxY);
-        nxX *= invl; nxY *= invl; nxW *= invl;
+        nxX *= invl;
+        nxY *= invl;
+        nxW *= invl;
         double pxX = -m00, pxY = -m10, pxW = 1.0f - m20;
         invl = Math.invsqrt(pxX * pxX + pxY * pxY);
-        pxX *= invl; pxY *= invl; pxW *= invl;
+        pxX *= invl;
+        pxY *= invl;
+        pxW *= invl;
         double nyX = +m01, nyY = +m11, nyW = 1.0f + m21;
         invl = Math.invsqrt(nyX * nyX + nyY * nyY);
-        nyX *= invl; nyY *= invl; nyW *= invl;
+        nyX *= invl;
+        nyY *= invl;
+        nyW *= invl;
         double pyX = -m01, pyY = -m11, pyW = 1.0f - m21;
         invl = Math.invsqrt(pyX * pyX + pyY * pyY);
-        pyX *= invl; pyY *= invl; pyW *= invl;
+        pyX *= invl;
+        pyY *= invl;
+        pyW *= invl;
         return nxX * x + nxY * y + nxW >= -r && pxX * x + pxY * y + pxW >= -r &&
-               nyX * x + nyY * y + nyW >= -r && pyX * x + pyY * y + pyW >= -r;
+                nyX * x + nyY * y + nyW >= -r && pyX * x + pyY * y + pyW >= -r;
     }
 
     public boolean testAar(double minX, double minY, double maxX, double maxY) {
@@ -2412,12 +2473,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
         double pyX = -m01, pyY = -m11, pyW = 1.0f - m21;
         /*
          * This is an implementation of the "2.4 Basic intersection test" of the mentioned site.
-         * It does not distinguish between partially inside and fully inside, though, so the test with the 'p' vertex is omitted.
+         * It does not distinguish between partially inside and fully inside, though, so the test with the 'p' vertex is
+         * omitted.
          */
         return nxX * (nxX < 0 ? minX : maxX) + nxY * (nxY < 0 ? minY : maxY) >= -nxW &&
-               pxX * (pxX < 0 ? minX : maxX) + pxY * (pxY < 0 ? minY : maxY) >= -pxW &&
-               nyX * (nyX < 0 ? minX : maxX) + nyY * (nyY < 0 ? minY : maxY) >= -nyW &&
-               pyX * (pyX < 0 ? minX : maxX) + pyY * (pyY < 0 ? minY : maxY) >= -pyW;
+                pxX * (pxX < 0 ? minX : maxX) + pxY * (pxY < 0 ? minY : maxY) >= -pxW &&
+                nyX * (nyX < 0 ? minX : maxX) + nyY * (nyY < 0 ? minY : maxY) >= -nyW &&
+                pyX * (pyX < 0 ? minX : maxX) + pyY * (pyY < 0 ? minY : maxY) >= -pyW;
     }
 
     public int hashCode() {
@@ -2486,12 +2548,11 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable {
 
     public boolean isFinite() {
         return Math.isFinite(m00) && Math.isFinite(m01) &&
-               Math.isFinite(m10) && Math.isFinite(m11) &&
-               Math.isFinite(m20) && Math.isFinite(m21);
+                Math.isFinite(m10) && Math.isFinite(m11) &&
+                Math.isFinite(m20) && Math.isFinite(m21);
     }
 
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-
 }

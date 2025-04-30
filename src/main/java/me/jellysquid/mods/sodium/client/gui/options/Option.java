@@ -1,12 +1,14 @@
 package me.jellysquid.mods.sodium.client.gui.options;
 
-import me.jellysquid.mods.sodium.client.gui.options.control.Control;
-import me.jellysquid.mods.sodium.client.gui.options.storage.OptionStorage;
-import net.minecraft.util.text.ITextComponent;
-
 import java.util.Collection;
 
+import net.minecraft.util.text.ITextComponent;
+
+import me.jellysquid.mods.sodium.client.gui.options.control.Control;
+import me.jellysquid.mods.sodium.client.gui.options.storage.OptionStorage;
+
 public interface Option<T> {
+
     ITextComponent getNewName();
 
     String getName();

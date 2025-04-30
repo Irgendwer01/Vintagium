@@ -1,8 +1,10 @@
 package me.jellysquid.mods.sodium.client.render.chunk.format;
 
 public class ModelVertexUtil {
+
     /**
      * Converts a floating point vertex position in range 0..32 to a de-normalized unsigned short.
+     * 
      * @param value The float in range 0..32
      * @return The resulting de-normalized unsigned short
      */
@@ -15,6 +17,7 @@ public class ModelVertexUtil {
 
     /**
      * Converts a normalized floating point texture coordinate to a de-normalized unsigned short.
+     * 
      * @param value The normalized float
      * @return The resulting de-normalized unsigned short
      */

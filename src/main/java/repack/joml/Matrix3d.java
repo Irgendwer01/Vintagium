@@ -37,9 +37,9 @@ import java.text.NumberFormat;
  * Contains the definition of a 3x3 matrix of doubles, and associated functions to transform
  * it. The matrix is column-major to match OpenGL's interpretation, and it looks like this:
  * <p>
- *      m00  m10  m20<br>
- *      m01  m11  m21<br>
- *      m02  m12  m22<br>
+ * m00 m10 m20<br>
+ * m01 m11 m21<br>
+ * m02 m12 m22<br>
  *
  * @author Richard Greenlees
  * @author Kai Burjack
@@ -62,22 +62,24 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Create a new {@link Matrix3d} by setting its uppper left 2x2 submatrix to the values of the given {@link Matrix2dc}
+     * Create a new {@link Matrix3d} by setting its uppper left 2x2 submatrix to the values of the given
+     * {@link Matrix2dc}
      * and the rest to identity.
      *
      * @param mat
-     *          the {@link Matrix2dc}
+     *            the {@link Matrix2dc}
      */
     public Matrix3d(Matrix2dc mat) {
         set(mat);
     }
 
     /**
-     * Create a new {@link Matrix3d} by setting its uppper left 2x2 submatrix to the values of the given {@link Matrix2fc}
+     * Create a new {@link Matrix3d} by setting its uppper left 2x2 submatrix to the values of the given
+     * {@link Matrix2fc}
      * and the rest to identity.
      *
      * @param mat
-     *          the {@link Matrix2fc}
+     *            the {@link Matrix2fc}
      */
     public Matrix3d(Matrix2fc mat) {
         set(mat);
@@ -87,7 +89,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Create a new {@link Matrix3d} and initialize it with the values from the given matrix.
      *
      * @param mat
-     *          the matrix to initialize this matrix with
+     *            the matrix to initialize this matrix with
      */
     public Matrix3d(Matrix3dc mat) {
         set(mat);
@@ -97,7 +99,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Create a new {@link Matrix3d} and initialize it with the values from the given matrix.
      *
      * @param mat
-     *          the matrix to initialize this matrix with
+     *            the matrix to initialize this matrix with
      */
     public Matrix3d(Matrix3fc mat) {
         set(mat);
@@ -107,7 +109,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Create a new {@link Matrix3d} and make it a copy of the upper left 3x3 of the given {@link Matrix4fc}.
      *
      * @param mat
-     *          the {@link Matrix4fc} to copy the values from
+     *            the {@link Matrix4fc} to copy the values from
      */
     public Matrix3d(Matrix4fc mat) {
         set(mat);
@@ -117,7 +119,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Create a new {@link Matrix3d} and make it a copy of the upper left 3x3 of the given {@link Matrix4dc}.
      *
      * @param mat
-     *          the {@link Matrix4dc} to copy the values from
+     *            the {@link Matrix4dc} to copy the values from
      */
     public Matrix3d(Matrix4dc mat) {
         set(mat);
@@ -127,23 +129,23 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Create a new {@link Matrix3d} and initialize its elements with the given values.
      *
      * @param m00
-     *          the value of m00
+     *            the value of m00
      * @param m01
-     *          the value of m01
+     *            the value of m01
      * @param m02
-     *          the value of m02
+     *            the value of m02
      * @param m10
-     *          the value of m10
+     *            the value of m10
      * @param m11
-     *          the value of m11
+     *            the value of m11
      * @param m12
-     *          the value of m12
+     *            the value of m12
      * @param m20
-     *          the value of m20
+     *            the value of m20
      * @param m21
-     *          the value of m21
+     *            the value of m21
      * @param m22
-     *          the value of m22
+     *            the value of m22
      */
     public Matrix3d(double m00, double m01, double m02,
                     double m10, double m11, double m12,
@@ -168,7 +170,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * The buffer's position will not be changed by this method.
      *
      * @param buffer
-     *          the {@link DoubleBuffer} to read the matrix values from
+     *               the {@link DoubleBuffer} to read the matrix values from
      */
     public Matrix3d(DoubleBuffer buffer) {
         MemUtil.INSTANCE.get(this, buffer.position(), buffer);
@@ -178,11 +180,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Create a new {@link Matrix3d} and initialize its three columns using the supplied vectors.
      *
      * @param col0
-     *          the first column
+     *             the first column
      * @param col1
-     *          the second column
+     *             the second column
      * @param col2
-     *          the third column
+     *             the third column
      */
     public Matrix3d(Vector3dc col0, Vector3dc col1, Vector3dc col2) {
         set(col0, col1, col2);
@@ -191,27 +193,35 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public double m00() {
         return m00;
     }
+
     public double m01() {
         return m01;
     }
+
     public double m02() {
         return m02;
     }
+
     public double m10() {
         return m10;
     }
+
     public double m11() {
         return m11;
     }
+
     public double m12() {
         return m12;
     }
+
     public double m20() {
         return m20;
     }
+
     public double m21() {
         return m21;
     }
+
     public double m22() {
         return m22;
     }
@@ -220,95 +230,103 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the value of the matrix element at column 0 and row 0.
      *
      * @param m00
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix3d m00(double m00) {
         this.m00 = m00;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 0 and row 1.
      *
      * @param m01
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix3d m01(double m01) {
         this.m01 = m01;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 0 and row 2.
      *
      * @param m02
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix3d m02(double m02) {
         this.m02 = m02;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 0.
      *
      * @param m10
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix3d m10(double m10) {
         this.m10 = m10;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 1.
      *
      * @param m11
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix3d m11(double m11) {
         this.m11 = m11;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 2.
      *
      * @param m12
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix3d m12(double m12) {
         this.m12 = m12;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 2 and row 0.
      *
      * @param m20
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix3d m20(double m20) {
         this.m20 = m20;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 2 and row 1.
      *
      * @param m21
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix3d m21(double m21) {
         this.m21 = m21;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 2 and row 2.
      *
      * @param m22
-     *          the new value
+     *            the new value
      * @return this
      */
     public Matrix3d m22(double m22) {
@@ -320,95 +338,103 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the value of the matrix element at column 0 and row 0.
      *
      * @param m00
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3d _m00(double m00) {
         this.m00 = m00;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 0 and row 1.
      *
      * @param m01
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3d _m01(double m01) {
         this.m01 = m01;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 0 and row 2.
      *
      * @param m02
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3d _m02(double m02) {
         this.m02 = m02;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 0.
      *
      * @param m10
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3d _m10(double m10) {
         this.m10 = m10;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 1.
      *
      * @param m11
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3d _m11(double m11) {
         this.m11 = m11;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 1 and row 2.
      *
      * @param m12
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3d _m12(double m12) {
         this.m12 = m12;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 2 and row 0.
      *
      * @param m20
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3d _m20(double m20) {
         this.m20 = m20;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 2 and row 1.
      *
      * @param m21
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3d _m21(double m21) {
         this.m21 = m21;
         return this;
     }
+
     /**
      * Set the value of the matrix element at column 2 and row 2.
      *
      * @param m22
-     *          the new value
+     *            the new value
      * @return this
      */
     Matrix3d _m22(double m22) {
@@ -447,9 +473,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
         double nm10 = m.m01(), nm12 = m.m21();
         double nm20 = m.m02(), nm21 = m.m12();
         return this
-        ._m00(m.m00())._m01(m.m10())._m02(m.m20())
-        ._m10(nm10)._m11(m.m11())._m12(nm12)
-        ._m20(nm20)._m21(nm21)._m22(m.m22());
+                ._m00(m.m00())._m01(m.m10())._m02(m.m20())
+                ._m10(nm10)._m11(m.m11())._m12(nm12)
+                ._m20(nm20)._m21(nm21)._m22(m.m22());
     }
 
     /**
@@ -483,9 +509,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
         float nm10 = m.m01(), nm12 = m.m21();
         float nm20 = m.m02(), nm21 = m.m12();
         return this
-        ._m00(m.m00())._m01(m.m10())._m02(m.m20())
-        ._m10(nm10)._m11(m.m11())._m12(nm12)
-        ._m20(nm20)._m21(nm21)._m22(m.m22());
+                ._m00(m.m00())._m01(m.m10())._m02(m.m20())
+                ._m10(nm10)._m11(m.m11())._m12(nm12)
+                ._m20(nm20)._m21(nm21)._m22(m.m22());
     }
 
     /**
@@ -512,7 +538,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the elements of this matrix to the upper left 3x3 of the given {@link Matrix4fc}.
      *
      * @param mat
-     *          the {@link Matrix4fc} to copy the values from
+     *            the {@link Matrix4fc} to copy the values from
      * @return this
      */
     public Matrix3d set(Matrix4fc mat) {
@@ -532,7 +558,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the elements of this matrix to the upper left 3x3 of the given {@link Matrix4dc}.
      *
      * @param mat
-     *          the {@link Matrix4dc} to copy the values from
+     *            the {@link Matrix4dc} to copy the values from
      * @return this
      */
     public Matrix3d set(Matrix4dc mat) {
@@ -555,7 +581,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #Matrix3d(Matrix2fc)
      *
      * @param mat
-     *          the {@link Matrix2fc}
+     *            the {@link Matrix2fc}
      * @return this
      */
     public Matrix3d set(Matrix2fc mat) {
@@ -578,7 +604,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #Matrix3d(Matrix2dc)
      *
      * @param mat
-     *          the {@link Matrix2dc}
+     *            the {@link Matrix2dc}
      * @return this
      */
     public Matrix3d set(Matrix2dc mat) {
@@ -598,7 +624,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set this matrix to be equivalent to the rotation specified by the given {@link AxisAngle4f}.
      *
      * @param axisAngle
-     *          the {@link AxisAngle4f}
+     *                  the {@link AxisAngle4f}
      * @return this
      */
     public Matrix3d set(AxisAngle4f axisAngle) {
@@ -606,26 +632,26 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
         double y = axisAngle.y;
         double z = axisAngle.z;
         double angle = axisAngle.angle;
-        double invLength = Math.invsqrt(x*x + y*y + z*z);
+        double invLength = Math.invsqrt(x * x + y * y + z * z);
         x *= invLength;
         y *= invLength;
         z *= invLength;
         double s = Math.sin(angle);
         double c = Math.cosFromSin(s, angle);
         double omc = 1.0 - c;
-        m00 = c + x*x*omc;
-        m11 = c + y*y*omc;
-        m22 = c + z*z*omc;
-        double tmp1 = x*y*omc;
-        double tmp2 = z*s;
+        m00 = c + x * x * omc;
+        m11 = c + y * y * omc;
+        m22 = c + z * z * omc;
+        double tmp1 = x * y * omc;
+        double tmp2 = z * s;
         m10 = tmp1 - tmp2;
         m01 = tmp1 + tmp2;
-        tmp1 = x*z*omc;
-        tmp2 = y*s;
+        tmp1 = x * z * omc;
+        tmp2 = y * s;
         m20 = tmp1 + tmp2;
         m02 = tmp1 - tmp2;
-        tmp1 = y*z*omc;
-        tmp2 = x*s;
+        tmp1 = y * z * omc;
+        tmp2 = x * s;
         m21 = tmp1 - tmp2;
         m12 = tmp1 + tmp2;
         return this;
@@ -635,7 +661,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set this matrix to be equivalent to the rotation specified by the given {@link AxisAngle4d}.
      *
      * @param axisAngle
-     *          the {@link AxisAngle4d}
+     *                  the {@link AxisAngle4d}
      * @return this
      */
     public Matrix3d set(AxisAngle4d axisAngle) {
@@ -643,26 +669,26 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
         double y = axisAngle.y;
         double z = axisAngle.z;
         double angle = axisAngle.angle;
-        double invLength = Math.invsqrt(x*x + y*y + z*z);
+        double invLength = Math.invsqrt(x * x + y * y + z * z);
         x *= invLength;
         y *= invLength;
         z *= invLength;
         double s = Math.sin(angle);
         double c = Math.cosFromSin(s, angle);
         double omc = 1.0 - c;
-        m00 = c + x*x*omc;
-        m11 = c + y*y*omc;
-        m22 = c + z*z*omc;
-        double tmp1 = x*y*omc;
-        double tmp2 = z*s;
+        m00 = c + x * x * omc;
+        m11 = c + y * y * omc;
+        m22 = c + z * z * omc;
+        double tmp1 = x * y * omc;
+        double tmp2 = z * s;
         m10 = tmp1 - tmp2;
         m01 = tmp1 + tmp2;
-        tmp1 = x*z*omc;
-        tmp2 = y*s;
+        tmp1 = x * z * omc;
+        tmp2 = y * s;
         m20 = tmp1 + tmp2;
         m02 = tmp1 - tmp2;
-        tmp1 = y*z*omc;
-        tmp2 = x*s;
+        tmp1 = y * z * omc;
+        tmp2 = x * s;
         m21 = tmp1 - tmp2;
         m12 = tmp1 + tmp2;
         return this;
@@ -673,7 +699,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * <p>
      * This method is equivalent to calling: <code>rotation(q)</code>
      * <p>
-     * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/">http://www.euclideanspace.com/</a>
+     * Reference: <a href=
+     * "http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/">http://www.euclideanspace.com/</a>
      *
      * @see #rotation(Quaternionfc)
      *
@@ -690,7 +717,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * <p>
      * This method is equivalent to calling: <code>rotation(q)</code>
      * <p>
-     * Reference: <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/">http://www.euclideanspace.com/</a>
+     * Reference: <a href=
+     * "http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/">http://www.euclideanspace.com/</a>
      *
      * @see #rotation(Quaterniondc)
      *
@@ -712,7 +740,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * transformation of the right matrix will be applied first!
      *
      * @param right
-     *          the right operand
+     *              the right operand
      * @return this
      */
     public Matrix3d mul(Matrix3dc right) {
@@ -750,11 +778,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * transformation of <code>this</code> matrix will be applied first!
      *
      * @param left
-     *          the left operand of the matrix multiplication
+     *             the left operand of the matrix multiplication
      * @return this
      */
     public Matrix3d mulLocal(Matrix3dc left) {
-       return mulLocal(left, this);
+        return mulLocal(left, this);
     }
 
     public Matrix3d mulLocal(Matrix3dc left, Matrix3d dest) {
@@ -789,7 +817,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * transformation of the right matrix will be applied first!
      *
      * @param right
-     *          the right operand
+     *              the right operand
      * @return this
      */
     public Matrix3d mul(Matrix3fc right) {
@@ -826,23 +854,23 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * m02, m12, m22<br>
      *
      * @param m00
-     *          the new value of m00
+     *            the new value of m00
      * @param m01
-     *          the new value of m01
+     *            the new value of m01
      * @param m02
-     *          the new value of m02
+     *            the new value of m02
      * @param m10
-     *          the new value of m10
+     *            the new value of m10
      * @param m11
-     *          the new value of m11
+     *            the new value of m11
      * @param m12
-     *          the new value of m12
+     *            the new value of m12
      * @param m20
-     *          the new value of m20
+     *            the new value of m20
      * @param m21
-     *          the new value of m21
+     *            the new value of m21
      * @param m22
-     *          the new value of m22
+     *            the new value of m22
      * @return this
      */
     public Matrix3d set(double m00, double m01, double m02,
@@ -913,9 +941,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     public double determinant() {
-        return (m00 * m11 - m01 * m10) * m22
-             + (m02 * m10 - m00 * m12) * m21
-             + (m01 * m12 - m02 * m11) * m20;
+        return (m00 * m11 - m01 * m10) * m22 + (m02 * m10 - m00 * m12) * m21 + (m01 * m12 - m02 * m11) * m20;
     }
 
     /**
@@ -965,15 +991,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     public Matrix3d transpose(Matrix3d dest) {
         dest.set(m00, m10, m20,
-                 m01, m11, m21,
-                 m02, m12, m22);
+                m01, m11, m21,
+                m02, m12, m22);
         return dest;
     }
 
     /**
      * Return a string representation of this matrix.
      * <p>
-     * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
+     * This method creates a new {@link DecimalFormat} on every invocation with the format string
+     * "<code>0.000E0;-</code>".
      *
      * @return the string representation
      */
@@ -998,16 +1025,19 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Return a string representation of this matrix by formatting the matrix elements with the given {@link NumberFormat}.
+     * Return a string representation of this matrix by formatting the matrix elements with the given
+     * {@link NumberFormat}.
      *
      * @param formatter
-     *          the {@link NumberFormat} used to format the matrix values with
+     *                  the {@link NumberFormat} used to format the matrix values with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {
-        return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + " " + Runtime.format(m20, formatter) + "\n"
-             + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n"
-             + Runtime.format(m02, formatter) + " " + Runtime.format(m12, formatter) + " " + Runtime.format(m22, formatter) + "\n";
+        return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + " " +
+                Runtime.format(m20, formatter) + "\n" + Runtime.format(m01, formatter) + " " +
+                Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n" +
+                Runtime.format(m02, formatter) + " " + Runtime.format(m12, formatter) + " " +
+                Runtime.format(m22, formatter) + "\n";
     }
 
     /**
@@ -1020,7 +1050,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #set(Matrix3dc)
      *
      * @param dest
-     *          the destination matrix
+     *             the destination matrix
      * @return the passed in destination
      */
     public Matrix3d get(Matrix3d dest) {
@@ -1091,15 +1121,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     public double[] get(double[] arr, int offset) {
-        arr[offset+0] = m00;
-        arr[offset+1] = m01;
-        arr[offset+2] = m02;
-        arr[offset+3] = m10;
-        arr[offset+4] = m11;
-        arr[offset+5] = m12;
-        arr[offset+6] = m20;
-        arr[offset+7] = m21;
-        arr[offset+8] = m22;
+        arr[offset + 0] = m00;
+        arr[offset + 1] = m01;
+        arr[offset + 2] = m02;
+        arr[offset + 3] = m10;
+        arr[offset + 4] = m11;
+        arr[offset + 5] = m12;
+        arr[offset + 6] = m20;
+        arr[offset + 7] = m21;
+        arr[offset + 8] = m22;
         return arr;
     }
 
@@ -1108,15 +1138,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     public float[] get(float[] arr, int offset) {
-        arr[offset+0] = (float)m00;
-        arr[offset+1] = (float)m01;
-        arr[offset+2] = (float)m02;
-        arr[offset+3] = (float)m10;
-        arr[offset+4] = (float)m11;
-        arr[offset+5] = (float)m12;
-        arr[offset+6] = (float)m20;
-        arr[offset+7] = (float)m21;
-        arr[offset+8] = (float)m22;
+        arr[offset + 0] = (float) m00;
+        arr[offset + 1] = (float) m01;
+        arr[offset + 2] = (float) m02;
+        arr[offset + 3] = (float) m10;
+        arr[offset + 4] = (float) m11;
+        arr[offset + 5] = (float) m12;
+        arr[offset + 6] = (float) m20;
+        arr[offset + 7] = (float) m21;
+        arr[offset + 8] = (float) m22;
         return arr;
     }
 
@@ -1125,7 +1155,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Set the values of this matrix by reading 9 double values from the given {@link DoubleBuffer} in column-major order,
+     * Set the values of this matrix by reading 9 double values from the given {@link DoubleBuffer} in column-major
+     * order,
      * starting at its current position.
      * <p>
      * The DoubleBuffer is expected to contain the values in column-major order.
@@ -1133,7 +1164,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * The position of the DoubleBuffer will not be changed by this method.
      *
      * @param buffer
-     *              the DoubleBuffer to read the matrix values from in column-major order
+     *               the DoubleBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3d set(DoubleBuffer buffer) {
@@ -1150,7 +1181,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * The position of the FloatBuffer will not be changed by this method.
      *
      * @param buffer
-     *              the FloatBuffer to read the matrix values from in column-major order
+     *               the FloatBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3d set(FloatBuffer buffer) {
@@ -1167,7 +1198,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * The position of the ByteBuffer will not be changed by this method.
      *
      * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
+     *               the ByteBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3d set(ByteBuffer buffer) {
@@ -1184,7 +1215,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * The position of the ByteBuffer will not be changed by this method.
      *
      * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
+     *               the ByteBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3d setFloats(ByteBuffer buffer) {
@@ -1193,7 +1224,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Set the values of this matrix by reading 9 double values from the given {@link DoubleBuffer} in column-major order,
+     * Set the values of this matrix by reading 9 double values from the given {@link DoubleBuffer} in column-major
+     * order,
      * starting at the specified absolute buffer position/index.
      * <p>
      * The DoubleBuffer is expected to contain the values in column-major order.
@@ -1201,9 +1233,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * The position of the DoubleBuffer will not be changed by this method.
      *
      * @param index
-     *              the absolute position into the DoubleBuffer
+     *               the absolute position into the DoubleBuffer
      * @param buffer
-     *              the DoubleBuffer to read the matrix values from in column-major order
+     *               the DoubleBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3d set(int index, DoubleBuffer buffer) {
@@ -1220,9 +1252,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * The position of the FloatBuffer will not be changed by this method.
      *
      * @param index
-     *              the absolute position into the FloatBuffer
+     *               the absolute position into the FloatBuffer
      * @param buffer
-     *              the FloatBuffer to read the matrix values from in column-major order
+     *               the FloatBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3d set(int index, FloatBuffer buffer) {
@@ -1239,9 +1271,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * The position of the ByteBuffer will not be changed by this method.
      *
      * @param index
-     *              the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
+     *               the ByteBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3d set(int index, ByteBuffer buffer) {
@@ -1258,25 +1290,27 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * The position of the ByteBuffer will not be changed by this method.
      *
      * @param index
-     *              the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *              the ByteBuffer to read the matrix values from in column-major order
+     *               the ByteBuffer to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3d setFloats(int index, ByteBuffer buffer) {
         MemUtil.INSTANCE.getf(this, index, buffer);
         return this;
     }
+
     /**
      * Set the values of this matrix by reading 9 double values from off-heap memory in column-major order,
      * starting at the given address.
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *              the off-heap memory address to read the matrix values from in column-major order
+     *                the off-heap memory address to read the matrix values from in column-major order
      * @return this
      */
     public Matrix3d setFromAddress(long address) {
@@ -1290,11 +1324,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the three columns of this matrix to the supplied vectors, respectively.
      *
      * @param col0
-     *          the first column
+     *             the first column
      * @param col1
-     *          the second column
+     *             the second column
      * @param col2
-     *          the third column
+     *             the third column
      * @return this
      */
     public Matrix3d set(Vector3dc col0,
@@ -1360,7 +1394,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #scale(double)
      *
      * @param factor
-     *             the scale factor in x, y and z
+     *               the scale factor in x, y and z
      * @return this
      */
     public Matrix3d scaling(double factor) {
@@ -1380,11 +1414,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set this matrix to be a simple scale matrix.
      *
      * @param x
-     *             the scale in x
+     *          the scale in x
      * @param y
-     *             the scale in y
+     *          the scale in y
      * @param z
-     *             the scale in z
+     *          the scale in z
      * @return this
      */
     public Matrix3d scaling(double x, double y, double z) {
@@ -1401,7 +1435,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Set this matrix to be a simple scale matrix which scales the base axes by <code>xyz.x</code>, <code>xyz.y</code> and <code>xyz.z</code> respectively.
+     * Set this matrix to be a simple scale matrix which scales the base axes by <code>xyz.x</code>, <code>xyz.y</code>
+     * and <code>xyz.z</code> respectively.
      * <p>
      * The resulting matrix can be multiplied against another transformation
      * matrix to obtain an additional scaling.
@@ -1412,7 +1447,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #scale(Vector3dc)
      *
      * @param xyz
-     *             the scale in x, y and z respectively
+     *            the scale in x, y and z respectively
      * @return this
      */
     public Matrix3d scaling(Vector3dc xyz) {
@@ -1475,11 +1510,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * , the scaling will be applied first!
      *
      * @param x
-     *            the factor of the x component
+     *          the factor of the x component
      * @param y
-     *            the factor of the y component
+     *          the factor of the y component
      * @param z
-     *            the factor of the z component
+     *          the factor of the z component
      * @return this
      */
     public Matrix3d scale(double x, double y, double z) {
@@ -1540,11 +1575,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * scaling will be applied last!
      *
      * @param x
-     *            the factor of the x component
+     *          the factor of the x component
      * @param y
-     *            the factor of the y component
+     *          the factor of the y component
      * @param z
-     *            the factor of the z component
+     *          the factor of the z component
      * @return this
      */
     public Matrix3d scaleLocal(double x, double y, double z) {
@@ -1567,9 +1602,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotate(double, Vector3dc)
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param axis
-     *          the axis to rotate about (needs to be {@link Vector3d#normalize() normalized})
+     *              the axis to rotate about (needs to be {@link Vector3d#normalize() normalized})
      * @return this
      */
     public Matrix3d rotation(double angle, Vector3dc axis) {
@@ -1592,9 +1627,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotate(double, Vector3fc)
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param axis
-     *          the axis to rotate about (needs to be {@link Vector3f#normalize() normalized})
+     *              the axis to rotate about (needs to be {@link Vector3f#normalize() normalized})
      * @return this
      */
     public Matrix3d rotation(double angle, Vector3fc axis) {
@@ -1619,7 +1654,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotate(AxisAngle4f)
      *
      * @param axisAngle
-     *          the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
+     *                  the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
      * @return this
      */
     public Matrix3d rotation(AxisAngle4f axisAngle) {
@@ -1644,7 +1679,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotate(AxisAngle4d)
      *
      * @param axisAngle
-     *          the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
+     *                  the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
      * @return this
      */
     public Matrix3d rotation(AxisAngle4d axisAngle) {
@@ -1666,18 +1701,19 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to apply the rotation transformation to an existing transformation,
      * use {@link #rotate(double, double, double, double) rotate()} instead.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotate(double, double, double, double)
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param x
-     *          the x-component of the rotation axis
+     *              the x-component of the rotation axis
      * @param y
-     *          the y-component of the rotation axis
+     *              the y-component of the rotation axis
      * @param z
-     *          the z-component of the rotation axis
+     *              the z-component of the rotation axis
      * @return this
      */
     public Matrix3d rotation(double angle, double x, double y, double z) {
@@ -1786,7 +1822,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     /**
      * Set this matrix to a rotation of <code>angleX</code> radians about the X axis, followed by a rotation
-     * of <code>angleY</code> radians about the Y axis and followed by a rotation of <code>angleZ</code> radians about the Z axis.
+     * of <code>angleY</code> radians about the Y axis and followed by a rotation of <code>angleZ</code> radians about
+     * the Z axis.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -1795,11 +1832,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * This method is equivalent to calling: <code>rotationX(angleX).rotateY(angleY).rotateZ(angleZ)</code>
      *
      * @param angleX
-     *            the angle to rotate about X
+     *               the angle to rotate about X
      * @param angleY
-     *            the angle to rotate about Y
+     *               the angle to rotate about Y
      * @param angleZ
-     *            the angle to rotate about Z
+     *               the angle to rotate about Z
      * @return this
      */
     public Matrix3d rotationXYZ(double angleX, double angleY, double angleZ) {
@@ -1837,7 +1874,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     /**
      * Set this matrix to a rotation of <code>angleZ</code> radians about the Z axis, followed by a rotation
-     * of <code>angleY</code> radians about the Y axis and followed by a rotation of <code>angleX</code> radians about the X axis.
+     * of <code>angleY</code> radians about the Y axis and followed by a rotation of <code>angleX</code> radians about
+     * the X axis.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -1846,11 +1884,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * This method is equivalent to calling: <code>rotationZ(angleZ).rotateY(angleY).rotateX(angleX)</code>
      *
      * @param angleZ
-     *            the angle to rotate about Z
+     *               the angle to rotate about Z
      * @param angleY
-     *            the angle to rotate about Y
+     *               the angle to rotate about Y
      * @param angleX
-     *            the angle to rotate about X
+     *               the angle to rotate about X
      * @return this
      */
     public Matrix3d rotationZYX(double angleZ, double angleY, double angleX) {
@@ -1888,7 +1926,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     /**
      * Set this matrix to a rotation of <code>angleY</code> radians about the Y axis, followed by a rotation
-     * of <code>angleX</code> radians about the X axis and followed by a rotation of <code>angleZ</code> radians about the Z axis.
+     * of <code>angleX</code> radians about the X axis and followed by a rotation of <code>angleZ</code> radians about
+     * the Z axis.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -1897,11 +1936,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * This method is equivalent to calling: <code>rotationY(angleY).rotateX(angleX).rotateZ(angleZ)</code>
      *
      * @param angleY
-     *            the angle to rotate about Y
+     *               the angle to rotate about Y
      * @param angleX
-     *            the angle to rotate about X
+     *               the angle to rotate about X
      * @param angleZ
-     *            the angle to rotate about Z
+     *               the angle to rotate about Z
      * @return this
      */
     public Matrix3d rotationYXZ(double angleY, double angleX, double angleZ) {
@@ -1955,7 +1994,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotate(Quaterniondc)
      *
      * @param quat
-     *          the {@link Quaterniondc}
+     *             the {@link Quaterniondc}
      * @return this
      */
     public Matrix3d rotation(Quaterniondc quat) {
@@ -1999,7 +2038,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotate(Quaternionfc)
      *
      * @param quat
-     *          the {@link Quaternionfc}
+     *             the {@link Quaternionfc}
      * @return this
      */
     public Matrix3d rotation(Quaternionfc quat) {
@@ -2044,8 +2083,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     public Vector3d transform(double x, double y, double z, Vector3d dest) {
         return dest.set(Math.fma(m00, x, Math.fma(m10, y, m20 * z)),
-                        Math.fma(m01, x, Math.fma(m11, y, m21 * z)),
-                        Math.fma(m02, x, Math.fma(m12, y, m22 * z)));
+                Math.fma(m01, x, Math.fma(m11, y, m21 * z)),
+                Math.fma(m02, x, Math.fma(m12, y, m22 * z)));
     }
 
     public Vector3d transformTranspose(Vector3d v) {
@@ -2058,8 +2097,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     public Vector3d transformTranspose(double x, double y, double z, Vector3d dest) {
         return dest.set(Math.fma(m00, x, Math.fma(m01, y, m02 * z)),
-                        Math.fma(m10, x, Math.fma(m11, y, m12 * z)),
-                        Math.fma(m20, x, Math.fma(m21, y, m22 * z)));
+                Math.fma(m10, x, Math.fma(m11, y, m12 * z)),
+                Math.fma(m20, x, Math.fma(m21, y, m22 * z)));
     }
 
     public void writeExternal(ObjectOutput out) throws IOException {
@@ -2234,7 +2273,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Apply rotation of <code>angleX</code> radians about the X axis, followed by a rotation of <code>angleY</code> radians about the Y axis and
+     * Apply rotation of <code>angleX</code> radians about the X axis, followed by a rotation of <code>angleY</code>
+     * radians about the Y axis and
      * followed by a rotation of <code>angleZ</code> radians about the Z axis.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
@@ -2249,11 +2289,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * This method is equivalent to calling: <code>rotateX(angleX).rotateY(angleY).rotateZ(angleZ)</code>
      *
      * @param angleX
-     *            the angle to rotate about X
+     *               the angle to rotate about X
      * @param angleY
-     *            the angle to rotate about Y
+     *               the angle to rotate about Y
      * @param angleZ
-     *            the angle to rotate about Z
+     *               the angle to rotate about Z
      * @return this
      */
     public Matrix3d rotateXYZ(double angleX, double angleY, double angleZ) {
@@ -2296,7 +2336,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Apply rotation of <code>angleZ</code> radians about the Z axis, followed by a rotation of <code>angleY</code> radians about the Y axis and
+     * Apply rotation of <code>angleZ</code> radians about the Z axis, followed by a rotation of <code>angleY</code>
+     * radians about the Y axis and
      * followed by a rotation of <code>angleX</code> radians about the X axis.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
@@ -2311,11 +2352,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * This method is equivalent to calling: <code>rotateZ(angleZ).rotateY(angleY).rotateX(angleX)</code>
      *
      * @param angleZ
-     *            the angle to rotate about Z
+     *               the angle to rotate about Z
      * @param angleY
-     *            the angle to rotate about Y
+     *               the angle to rotate about Y
      * @param angleX
-     *            the angle to rotate about X
+     *               the angle to rotate about X
      * @return this
      */
     public Matrix3d rotateZYX(double angleZ, double angleY, double angleX) {
@@ -2358,7 +2399,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Apply rotation of <code>angles.y</code> radians about the Y axis, followed by a rotation of <code>angles.x</code> radians about the X axis and
+     * Apply rotation of <code>angles.y</code> radians about the Y axis, followed by a rotation of <code>angles.x</code>
+     * radians about the X axis and
      * followed by a rotation of <code>angles.z</code> radians about the Z axis.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
@@ -2373,7 +2415,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * This method is equivalent to calling: <code>rotateY(angles.y).rotateX(angles.x).rotateZ(angles.z)</code>
      *
      * @param angles
-     *            the Euler angles
+     *               the Euler angles
      * @return this
      */
     public Matrix3d rotateYXZ(Vector3d angles) {
@@ -2381,7 +2423,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Apply rotation of <code>angleY</code> radians about the Y axis, followed by a rotation of <code>angleX</code> radians about the X axis and
+     * Apply rotation of <code>angleY</code> radians about the Y axis, followed by a rotation of <code>angleX</code>
+     * radians about the X axis and
      * followed by a rotation of <code>angleZ</code> radians about the Z axis.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
@@ -2396,11 +2439,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * This method is equivalent to calling: <code>rotateY(angleY).rotateX(angleX).rotateZ(angleZ)</code>
      *
      * @param angleY
-     *            the angle to rotate about Y
+     *               the angle to rotate about Y
      * @param angleX
-     *            the angle to rotate about X
+     *               the angle to rotate about X
      * @param angleZ
-     *            the angle to rotate about Z
+     *               the angle to rotate about Z
      * @return this
      */
     public Matrix3d rotateYXZ(double angleY, double angleX, double angleZ) {
@@ -2457,7 +2500,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>
      * , the rotation will be applied first!
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @param ang
      *            the angle in radians
@@ -2532,20 +2576,21 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation matrix without pre-multiplying the rotation
      * transformation, use {@link #rotation(double, double, double, double) rotation()}.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotation(double, double, double, double)
      *
      * @param ang
-     *            the angle in radians
+     *             the angle in radians
      * @param x
-     *            the x component of the axis
+     *             the x component of the axis
      * @param y
-     *            the y component of the axis
+     *             the y component of the axis
      * @param z
-     *            the z component of the axis
+     *             the z component of the axis
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d rotateLocal(double ang, double x, double y, double z, Matrix3d dest) {
@@ -2603,7 +2648,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation matrix without pre-multiplying the rotation
      * transformation, use {@link #rotation(double, double, double, double) rotation()}.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotation(double, double, double, double)
      *
@@ -2637,14 +2683,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation matrix without pre-multiplying the rotation
      * transformation, use {@link #rotationX(double) rotationX()}.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotationX(double)
      *
      * @param ang
-     *            the angle in radians to rotate about the X axis
+     *             the angle in radians to rotate about the X axis
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d rotateLocalX(double ang, Matrix3d dest) {
@@ -2683,7 +2730,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation matrix without pre-multiplying the rotation
      * transformation, use {@link #rotationX(double) rotationX()}.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotationX(double)
      *
@@ -2711,24 +2759,25 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation matrix without pre-multiplying the rotation
      * transformation, use {@link #rotationY(double) rotationY()}.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotationY(double)
      *
      * @param ang
-     *            the angle in radians to rotate about the Y axis
+     *             the angle in radians to rotate about the Y axis
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d rotateLocalY(double ang, Matrix3d dest) {
         double sin = Math.sin(ang);
         double cos = Math.cosFromSin(sin, ang);
-        double nm00 =  cos * m00 + sin * m02;
+        double nm00 = cos * m00 + sin * m02;
         double nm02 = -sin * m00 + cos * m02;
-        double nm10 =  cos * m10 + sin * m12;
+        double nm10 = cos * m10 + sin * m12;
         double nm12 = -sin * m10 + cos * m12;
-        double nm20 =  cos * m20 + sin * m22;
+        double nm20 = cos * m20 + sin * m22;
         double nm22 = -sin * m20 + cos * m22;
         dest.m00 = nm00;
         dest.m01 = m01;
@@ -2757,7 +2806,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation matrix without pre-multiplying the rotation
      * transformation, use {@link #rotationY(double) rotationY()}.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotationY(double)
      *
@@ -2785,14 +2835,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation matrix without pre-multiplying the rotation
      * transformation, use {@link #rotationZ(double) rotationZ()}.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotationZ(double)
      *
      * @param ang
-     *            the angle in radians to rotate about the Z axis
+     *             the angle in radians to rotate about the Z axis
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d rotateLocalZ(double ang, Matrix3d dest) {
@@ -2831,7 +2882,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation matrix without pre-multiplying the rotation
      * transformation, use {@link #rotationZ(double) rotationY()}.
      * <p>
-     * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
+     * Reference: <a href=
+     * "http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      *
      * @see #rotationY(double)
      *
@@ -2844,14 +2896,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix and store
+     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this
+     * matrix and store
      * the result in <code>dest</code>.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given
+     * quaternion,
      * then the new matrix will be <code>Q * M</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>Q * M * v</code>,
      * the quaternion rotation will be applied last!
@@ -2864,9 +2918,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(Quaterniondc)
      *
      * @param quat
-     *          the {@link Quaterniondc}
+     *             the {@link Quaterniondc}
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d rotateLocal(Quaterniondc quat, Matrix3d dest) {
@@ -2906,13 +2960,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix.
+     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this
+     * matrix.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given
+     * quaternion,
      * then the new matrix will be <code>Q * M</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>Q * M * v</code>,
      * the quaternion rotation will be applied last!
@@ -2925,7 +2981,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(Quaterniondc)
      *
      * @param quat
-     *          the {@link Quaterniondc}
+     *             the {@link Quaterniondc}
      * @return this
      */
     public Matrix3d rotateLocal(Quaterniondc quat) {
@@ -2933,14 +2989,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix and store
+     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this
+     * matrix and store
      * the result in <code>dest</code>.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given
+     * quaternion,
      * then the new matrix will be <code>Q * M</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>Q * M * v</code>,
      * the quaternion rotation will be applied last!
@@ -2953,9 +3011,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(Quaternionfc)
      *
      * @param quat
-     *          the {@link Quaternionfc}
+     *             the {@link Quaternionfc}
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d rotateLocal(Quaternionfc quat, Matrix3d dest) {
@@ -2995,13 +3053,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix.
+     * Pre-multiply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this
+     * matrix.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given
+     * quaternion,
      * then the new matrix will be <code>Q * M</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>Q * M * v</code>,
      * the quaternion rotation will be applied last!
@@ -3014,7 +3074,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(Quaternionfc)
      *
      * @param quat
-     *          the {@link Quaternionfc}
+     *             the {@link Quaternionfc}
      * @return this
      */
     public Matrix3d rotateLocal(Quaternionfc quat) {
@@ -3028,7 +3088,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given
+     * quaternion,
      * then the new matrix will be <code>M * Q</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
      * the quaternion rotation will be applied first!
@@ -3041,7 +3102,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(Quaterniondc)
      *
      * @param quat
-     *          the {@link Quaterniondc}
+     *             the {@link Quaterniondc}
      * @return this
      */
     public Matrix3d rotate(Quaterniondc quat) {
@@ -3049,14 +3110,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix and store
+     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaterniondc} to this matrix and
+     * store
      * the result in <code>dest</code>.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given
+     * quaternion,
      * then the new matrix will be <code>M * Q</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
      * the quaternion rotation will be applied first!
@@ -3069,9 +3132,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(Quaterniondc)
      *
      * @param quat
-     *          the {@link Quaterniondc}
+     *             the {@link Quaterniondc}
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d rotate(Quaterniondc quat, Matrix3d dest) {
@@ -3114,7 +3177,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given
+     * quaternion,
      * then the new matrix will be <code>M * Q</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
      * the quaternion rotation will be applied first!
@@ -3127,7 +3191,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(Quaternionfc)
      *
      * @param quat
-     *          the {@link Quaternionfc}
+     *             the {@link Quaternionfc}
      * @return this
      */
     public Matrix3d rotate(Quaternionfc quat) {
@@ -3135,14 +3199,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix and store
+     * Apply the rotation - and possibly scaling - transformation of the given {@link Quaternionfc} to this matrix and
+     * store
      * the result in <code>dest</code>.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given
+     * quaternion,
      * then the new matrix will be <code>M * Q</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
      * the quaternion rotation will be applied first!
@@ -3155,9 +3221,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(Quaternionfc)
      *
      * @param quat
-     *          the {@link Quaternionfc}
+     *             the {@link Quaternionfc}
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d rotate(Quaternionfc quat, Matrix3d dest) {
@@ -3200,7 +3266,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given {@link AxisAngle4f},
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given
+     * {@link AxisAngle4f},
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
      * the {@link AxisAngle4f} rotation will be applied first!
@@ -3214,7 +3281,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(AxisAngle4f)
      *
      * @param axisAngle
-     *          the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
+     *                  the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
      * @return this
      */
     public Matrix3d rotate(AxisAngle4f axisAngle) {
@@ -3222,13 +3289,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Apply a rotation transformation, rotating about the given {@link AxisAngle4f} and store the result in <code>dest</code>.
+     * Apply a rotation transformation, rotating about the given {@link AxisAngle4f} and store the result in
+     * <code>dest</code>.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given {@link AxisAngle4f},
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given
+     * {@link AxisAngle4f},
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
      * the {@link AxisAngle4f} rotation will be applied first!
@@ -3242,9 +3311,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(AxisAngle4f)
      *
      * @param axisAngle
-     *          the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
+     *                  the {@link AxisAngle4f} (needs to be {@link AxisAngle4f#normalize() normalized})
      * @param dest
-     *          will hold the result
+     *                  will hold the result
      * @return dest
      */
     public Matrix3d rotate(AxisAngle4f axisAngle, Matrix3d dest) {
@@ -3258,7 +3327,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given {@link AxisAngle4d},
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given
+     * {@link AxisAngle4d},
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
      * the {@link AxisAngle4d} rotation will be applied first!
@@ -3272,7 +3342,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(AxisAngle4d)
      *
      * @param axisAngle
-     *          the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
+     *                  the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
      * @return this
      */
     public Matrix3d rotate(AxisAngle4d axisAngle) {
@@ -3280,13 +3350,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Apply a rotation transformation, rotating about the given {@link AxisAngle4d} and store the result in <code>dest</code>.
+     * Apply a rotation transformation, rotating about the given {@link AxisAngle4d} and store the result in
+     * <code>dest</code>.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate a vector
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given {@link AxisAngle4d},
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given
+     * {@link AxisAngle4d},
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
      * the {@link AxisAngle4d} rotation will be applied first!
@@ -3300,9 +3372,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(AxisAngle4d)
      *
      * @param axisAngle
-     *          the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
+     *                  the {@link AxisAngle4d} (needs to be {@link AxisAngle4d#normalize() normalized})
      * @param dest
-     *          will hold the result
+     *                  will hold the result
      * @return dest
      */
     public Matrix3d rotate(AxisAngle4d axisAngle, Matrix3d dest) {
@@ -3318,7 +3390,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given angle and axis,
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given
+     * angle and axis,
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
      * the axis-angle rotation will be applied first!
@@ -3332,9 +3405,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(double, Vector3dc)
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param axis
-     *          the rotation axis (needs to be {@link Vector3d#normalize() normalized})
+     *              the rotation axis (needs to be {@link Vector3d#normalize() normalized})
      * @return this
      */
     public Matrix3d rotate(double angle, Vector3dc axis) {
@@ -3342,7 +3415,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Apply a rotation transformation, rotating the given radians about the specified axis and store the result in <code>dest</code>.
+     * Apply a rotation transformation, rotating the given radians about the specified axis and store the result in
+     * <code>dest</code>.
      * <p>
      * The axis described by the <code>axis</code> vector needs to be a unit vector.
      * <p>
@@ -3350,7 +3424,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given axis and angle,
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given axis
+     * and angle,
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
      * the axis-angle rotation will be applied first!
@@ -3364,11 +3439,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(double, Vector3dc)
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param axis
-     *          the rotation axis (needs to be {@link Vector3d#normalize() normalized})
+     *              the rotation axis (needs to be {@link Vector3d#normalize() normalized})
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     public Matrix3d rotate(double angle, Vector3dc axis, Matrix3d dest) {
@@ -3384,7 +3459,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given angle and axis,
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given
+     * angle and axis,
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
      * the axis-angle rotation will be applied first!
@@ -3398,9 +3474,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(double, Vector3fc)
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param axis
-     *          the rotation axis (needs to be {@link Vector3f#normalize() normalized})
+     *              the rotation axis (needs to be {@link Vector3f#normalize() normalized})
      * @return this
      */
     public Matrix3d rotate(double angle, Vector3fc axis) {
@@ -3408,7 +3484,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     }
 
     /**
-     * Apply a rotation transformation, rotating the given radians about the specified axis and store the result in <code>dest</code>.
+     * Apply a rotation transformation, rotating the given radians about the specified axis and store the result in
+     * <code>dest</code>.
      * <p>
      * The axis described by the <code>axis</code> vector needs to be a unit vector.
      * <p>
@@ -3416,7 +3493,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
      * When used with a left-handed coordinate system, the rotation is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given axis and angle,
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given axis
+     * and angle,
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
      * the axis-angle rotation will be applied first!
@@ -3430,11 +3508,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotation(double, Vector3fc)
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param axis
-     *          the rotation axis (needs to be {@link Vector3f#normalize() normalized})
+     *              the rotation axis (needs to be {@link Vector3f#normalize() normalized})
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     public Matrix3d rotate(double angle, Vector3fc axis, Matrix3d dest) {
@@ -3443,14 +3521,14 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     public Vector3d getRow(int row, Vector3d dest) throws IndexOutOfBoundsException {
         switch (row) {
-        case 0:
-            return dest.set(m00, m10, m20);
-        case 1:
-            return dest.set(m01, m11, m21);
-        case 2:
-            return dest.set(m02, m12, m22);
-        default:
-            throw new IndexOutOfBoundsException();
+            case 0:
+                return dest.set(m00, m10, m20);
+            case 1:
+                return dest.set(m01, m11, m21);
+            case 2:
+                return dest.set(m02, m12, m22);
+            default:
+                throw new IndexOutOfBoundsException();
         }
     }
 
@@ -3458,9 +3536,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the row at the given <code>row</code> index, starting with <code>0</code>.
      *
      * @param row
-     *          the row index in <code>[0..2]</code>
+     *            the row index in <code>[0..2]</code>
      * @param src
-     *          the row components to set
+     *            the row components to set
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..2]</code>
      */
@@ -3472,49 +3550,49 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the row at the given <code>row</code> index, starting with <code>0</code>.
      *
      * @param row
-     *          the column index in <code>[0..2]</code>
+     *            the column index in <code>[0..2]</code>
      * @param x
-     *          the first element in the row
+     *            the first element in the row
      * @param y
-     *          the second element in the row
+     *            the second element in the row
      * @param z
-     *          the third element in the row
+     *            the third element in the row
      * @return this
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <code>[0..2]</code>
      */
     public Matrix3d setRow(int row, double x, double y, double z) throws IndexOutOfBoundsException {
         switch (row) {
-        case 0:
-            this.m00 = x;
-            this.m10 = y;
-            this.m20 = z;
-            break;
-        case 1:
-            this.m01 = x;
-            this.m11 = y;
-            this.m21 = z;
-            break;
-        case 2:
-            this.m02 = x;
-            this.m12 = y;
-            this.m22 = z;
-            break;
-        default:
-            throw new IndexOutOfBoundsException();
+            case 0:
+                this.m00 = x;
+                this.m10 = y;
+                this.m20 = z;
+                break;
+            case 1:
+                this.m01 = x;
+                this.m11 = y;
+                this.m21 = z;
+                break;
+            case 2:
+                this.m02 = x;
+                this.m12 = y;
+                this.m22 = z;
+                break;
+            default:
+                throw new IndexOutOfBoundsException();
         }
         return this;
     }
 
     public Vector3d getColumn(int column, Vector3d dest) throws IndexOutOfBoundsException {
         switch (column) {
-        case 0:
-            return dest.set(m00, m01, m02);
-        case 1:
-            return dest.set(m10, m11, m12);
-        case 2:
-            return dest.set(m20, m21, m22);
-        default:
-            throw new IndexOutOfBoundsException();
+            case 0:
+                return dest.set(m00, m01, m02);
+            case 1:
+                return dest.set(m10, m11, m12);
+            case 2:
+                return dest.set(m20, m21, m22);
+            default:
+                throw new IndexOutOfBoundsException();
         }
     }
 
@@ -3522,9 +3600,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the column at the given <code>column</code> index, starting with <code>0</code>.
      *
      * @param column
-     *          the column index in <code>[0..2]</code>
+     *               the column index in <code>[0..2]</code>
      * @param src
-     *          the column components to set
+     *               the column components to set
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..2]</code>
      */
@@ -3536,35 +3614,35 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the column at the given <code>column</code> index, starting with <code>0</code>.
      *
      * @param column
-     *          the column index in <code>[0..2]</code>
+     *               the column index in <code>[0..2]</code>
      * @param x
-     *          the first element in the column
+     *               the first element in the column
      * @param y
-     *          the second element in the column
+     *               the second element in the column
      * @param z
-     *          the third element in the column
+     *               the third element in the column
      * @return this
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <code>[0..2]</code>
      */
     public Matrix3d setColumn(int column, double x, double y, double z) throws IndexOutOfBoundsException {
         switch (column) {
-        case 0:
-            this.m00 = x;
-            this.m01 = y;
-            this.m02 = z;
-            break;
-        case 1:
-            this.m10 = x;
-            this.m11 = y;
-            this.m12 = z;
-            break;
-        case 2:
-            this.m20 = x;
-            this.m21 = y;
-            this.m22 = z;
-            break;
-        default:
-            throw new IndexOutOfBoundsException();
+            case 0:
+                this.m00 = x;
+                this.m01 = y;
+                this.m02 = z;
+                break;
+            case 1:
+                this.m10 = x;
+                this.m11 = y;
+                this.m12 = z;
+                break;
+            case 2:
+                this.m20 = x;
+                this.m21 = y;
+                this.m22 = z;
+                break;
+            default:
+                throw new IndexOutOfBoundsException();
         }
         return this;
     }
@@ -3577,11 +3655,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the matrix element at the given column and row to the specified value.
      *
      * @param column
-     *          the colum index in <code>[0..2]</code>
+     *               the colum index in <code>[0..2]</code>
      * @param row
-     *          the row index in <code>[0..2]</code>
+     *               the row index in <code>[0..2]</code>
      * @param value
-     *          the value
+     *               the value
      * @return this
      */
     public Matrix3d set(int column, int row, double value) {
@@ -3596,11 +3674,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set the matrix element at the given row and column to the specified value.
      *
      * @param row
-     *          the row index in <code>[0..2]</code>
+     *               the row index in <code>[0..2]</code>
      * @param column
-     *          the colum index in <code>[0..2]</code>
+     *               the colum index in <code>[0..2]</code>
      * @param value
-     *          the value
+     *               the value
      * @return this
      */
     public Matrix3d setRowColumn(int row, int column, double value) {
@@ -3754,11 +3832,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #setLookAlong(Vector3dc, Vector3dc)
      *
      * @param dir
-     *            the direction in space to look along
+     *             the direction in space to look along
      * @param up
-     *            the direction of 'up'
+     *             the direction of 'up'
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d lookAlong(Vector3dc dir, Vector3dc up, Matrix3d dest) {
@@ -3780,19 +3858,19 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #setLookAlong(double, double, double, double, double, double)
      *
      * @param dirX
-     *              the x-coordinate of the direction to look along
+     *             the x-coordinate of the direction to look along
      * @param dirY
-     *              the y-coordinate of the direction to look along
+     *             the y-coordinate of the direction to look along
      * @param dirZ
-     *              the z-coordinate of the direction to look along
+     *             the z-coordinate of the direction to look along
      * @param upX
-     *              the x-coordinate of the up vector
+     *             the x-coordinate of the up vector
      * @param upY
-     *              the y-coordinate of the up vector
+     *             the y-coordinate of the up vector
      * @param upZ
-     *              the z-coordinate of the up vector
+     *             the z-coordinate of the up vector
      * @param dest
-     *              will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d lookAlong(double dirX, double dirY, double dirZ,
@@ -3863,17 +3941,17 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #setLookAlong(double, double, double, double, double, double)
      *
      * @param dirX
-     *              the x-coordinate of the direction to look along
+     *             the x-coordinate of the direction to look along
      * @param dirY
-     *              the y-coordinate of the direction to look along
+     *             the y-coordinate of the direction to look along
      * @param dirZ
-     *              the z-coordinate of the direction to look along
+     *             the z-coordinate of the direction to look along
      * @param upX
-     *              the x-coordinate of the up vector
+     *             the x-coordinate of the up vector
      * @param upY
-     *              the y-coordinate of the up vector
+     *             the y-coordinate of the up vector
      * @param upZ
-     *              the z-coordinate of the up vector
+     *             the z-coordinate of the up vector
      * @return this
      */
     public Matrix3d lookAlong(double dirX, double dirY, double dirZ,
@@ -3912,17 +3990,17 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #lookAlong(double, double, double, double, double, double)
      *
      * @param dirX
-     *              the x-coordinate of the direction to look along
+     *             the x-coordinate of the direction to look along
      * @param dirY
-     *              the y-coordinate of the direction to look along
+     *             the y-coordinate of the direction to look along
      * @param dirZ
-     *              the z-coordinate of the direction to look along
+     *             the z-coordinate of the direction to look along
      * @param upX
-     *              the x-coordinate of the up vector
+     *             the x-coordinate of the up vector
      * @param upY
-     *              the y-coordinate of the up vector
+     *             the y-coordinate of the up vector
      * @param upZ
-     *              the z-coordinate of the up vector
+     *             the z-coordinate of the up vector
      * @return this
      */
     public Matrix3d setLookAlong(double dirX, double dirY, double dirZ,
@@ -4095,20 +4173,38 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Exchange the values of <code>this</code> matrix with the given <code>other</code> matrix.
      *
      * @param other
-     *          the other matrix to exchange the values with
+     *              the other matrix to exchange the values with
      * @return this
      */
     public Matrix3d swap(Matrix3d other) {
         double tmp;
-        tmp = m00; m00 = other.m00; other.m00 = tmp;
-        tmp = m01; m01 = other.m01; other.m01 = tmp;
-        tmp = m02; m02 = other.m02; other.m02 = tmp;
-        tmp = m10; m10 = other.m10; other.m10 = tmp;
-        tmp = m11; m11 = other.m11; other.m11 = tmp;
-        tmp = m12; m12 = other.m12; other.m12 = tmp;
-        tmp = m20; m20 = other.m20; other.m20 = tmp;
-        tmp = m21; m21 = other.m21; other.m21 = tmp;
-        tmp = m22; m22 = other.m22; other.m22 = tmp;
+        tmp = m00;
+        m00 = other.m00;
+        other.m00 = tmp;
+        tmp = m01;
+        m01 = other.m01;
+        other.m01 = tmp;
+        tmp = m02;
+        m02 = other.m02;
+        other.m02 = tmp;
+        tmp = m10;
+        m10 = other.m10;
+        other.m10 = tmp;
+        tmp = m11;
+        m11 = other.m11;
+        other.m11 = tmp;
+        tmp = m12;
+        m12 = other.m12;
+        other.m12 = tmp;
+        tmp = m20;
+        m20 = other.m20;
+        other.m20 = tmp;
+        tmp = m21;
+        m21 = other.m21;
+        other.m21 = tmp;
+        tmp = m22;
+        m22 = other.m22;
+        other.m22 = tmp;
         return this;
     }
 
@@ -4116,7 +4212,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Component-wise add <code>this</code> and <code>other</code>.
      *
      * @param other
-     *          the other addend
+     *              the other addend
      * @return this
      */
     public Matrix3d add(Matrix3dc other) {
@@ -4140,7 +4236,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Component-wise subtract <code>subtrahend</code> from <code>this</code>.
      *
      * @param subtrahend
-     *          the subtrahend
+     *                   the subtrahend
      * @return this
      */
     public Matrix3d sub(Matrix3dc subtrahend) {
@@ -4164,7 +4260,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Component-wise multiply <code>this</code> by <code>other</code>.
      *
      * @param other
-     *          the other matrix
+     *              the other matrix
      * @return this
      */
     public Matrix3d mulComponentWise(Matrix3dc other) {
@@ -4186,6 +4282,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     /**
      * Set this matrix to a skew-symmetric matrix using the following layout:
+     * 
      * <pre>
      *  0,  a, -b
      * -a,  0,  c
@@ -4217,13 +4314,14 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Linearly interpolate <code>this</code> and <code>other</code> using the given interpolation factor <code>t</code>
      * and store the result in <code>this</code>.
      * <p>
-     * If <code>t</code> is <code>0.0</code> then the result is <code>this</code>. If the interpolation factor is <code>1.0</code>
+     * If <code>t</code> is <code>0.0</code> then the result is <code>this</code>. If the interpolation factor is
+     * <code>1.0</code>
      * then the result is <code>other</code>.
      *
      * @param other
-     *          the other matrix
+     *              the other matrix
      * @param t
-     *          the interpolation factor between 0.0 and 1.0
+     *              the interpolation factor between 0.0 and 1.0
      * @return this
      */
     public Matrix3d lerp(Matrix3dc other, double t) {
@@ -4256,17 +4354,18 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation transformation without post-multiplying it,
      * use {@link #rotationTowards(Vector3dc, Vector3dc) rotationTowards()}.
      * <p>
-     * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(new Vector3d(dir).negate(), up).invert(), dest)</code>
+     * This method is equivalent to calling:
+     * <code>mul(new Matrix3d().lookAlong(new Vector3d(dir).negate(), up).invert(), dest)</code>
      *
      * @see #rotateTowards(double, double, double, double, double, double, Matrix3d)
      * @see #rotationTowards(Vector3dc, Vector3dc)
      *
      * @param direction
-     *              the direction to rotate towards
+     *                  the direction to rotate towards
      * @param up
-     *              the model's up vector
+     *                  the model's up vector
      * @param dest
-     *              will hold the result
+     *                  will hold the result
      * @return dest
      */
     public Matrix3d rotateTowards(Vector3dc direction, Vector3dc up, Matrix3d dest) {
@@ -4285,15 +4384,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation transformation without post-multiplying it,
      * use {@link #rotationTowards(Vector3dc, Vector3dc) rotationTowards()}.
      * <p>
-     * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(new Vector3d(dir).negate(), up).invert())</code>
+     * This method is equivalent to calling:
+     * <code>mul(new Matrix3d().lookAlong(new Vector3d(dir).negate(), up).invert())</code>
      *
      * @see #rotateTowards(double, double, double, double, double, double)
      * @see #rotationTowards(Vector3dc, Vector3dc)
      *
      * @param direction
-     *              the direction to orient towards
+     *                  the direction to orient towards
      * @param up
-     *              the up vector
+     *                  the up vector
      * @return this
      */
     public Matrix3d rotateTowards(Vector3dc direction, Vector3dc up) {
@@ -4312,23 +4412,24 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation transformation without post-multiplying it,
      * use {@link #rotationTowards(double, double, double, double, double, double) rotationTowards()}.
      * <p>
-     * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(-dirX, -dirY, -dirZ, upX, upY, upZ).invert())</code>
+     * This method is equivalent to calling:
+     * <code>mul(new Matrix3d().lookAlong(-dirX, -dirY, -dirZ, upX, upY, upZ).invert())</code>
      *
      * @see #rotateTowards(Vector3dc, Vector3dc)
      * @see #rotationTowards(double, double, double, double, double, double)
      *
      * @param dirX
-     *              the x-coordinate of the direction to rotate towards
+     *             the x-coordinate of the direction to rotate towards
      * @param dirY
-     *              the y-coordinate of the direction to rotate towards
+     *             the y-coordinate of the direction to rotate towards
      * @param dirZ
-     *              the z-coordinate of the direction to rotate towards
+     *             the z-coordinate of the direction to rotate towards
      * @param upX
-     *              the x-coordinate of the up vector
+     *             the x-coordinate of the up vector
      * @param upY
-     *              the y-coordinate of the up vector
+     *             the y-coordinate of the up vector
      * @param upZ
-     *              the z-coordinate of the up vector
+     *             the z-coordinate of the up vector
      * @return this
      */
     public Matrix3d rotateTowards(double dirX, double dirY, double dirZ, double upX, double upY, double upZ) {
@@ -4348,28 +4449,30 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * In order to set the matrix to a rotation transformation without post-multiplying it,
      * use {@link #rotationTowards(double, double, double, double, double, double) rotationTowards()}.
      * <p>
-     * This method is equivalent to calling: <code>mul(new Matrix3d().lookAlong(-dirX, -dirY, -dirZ, upX, upY, upZ).invert(), dest)</code>
+     * This method is equivalent to calling:
+     * <code>mul(new Matrix3d().lookAlong(-dirX, -dirY, -dirZ, upX, upY, upZ).invert(), dest)</code>
      *
      * @see #rotateTowards(Vector3dc, Vector3dc)
      * @see #rotationTowards(double, double, double, double, double, double)
      *
      * @param dirX
-     *              the x-coordinate of the direction to rotate towards
+     *             the x-coordinate of the direction to rotate towards
      * @param dirY
-     *              the y-coordinate of the direction to rotate towards
+     *             the y-coordinate of the direction to rotate towards
      * @param dirZ
-     *              the z-coordinate of the direction to rotate towards
+     *             the z-coordinate of the direction to rotate towards
      * @param upX
-     *              the x-coordinate of the up vector
+     *             the x-coordinate of the up vector
      * @param upY
-     *              the y-coordinate of the up vector
+     *             the y-coordinate of the up vector
      * @param upZ
-     *              the z-coordinate of the up vector
+     *             the z-coordinate of the up vector
      * @param dest
-     *              will hold the result
+     *             will hold the result
      * @return dest
      */
-    public Matrix3d rotateTowards(double dirX, double dirY, double dirZ, double upX, double upY, double upZ, Matrix3d dest) {
+    public Matrix3d rotateTowards(double dirX, double dirY, double dirZ, double upX, double upY, double upZ,
+                                  Matrix3d dest) {
         // Normalize direction
         double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
         double ndirX = dirX * invDirLength;
@@ -4429,9 +4532,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotateTowards(double, double, double, double, double, double)
      *
      * @param dir
-     *              the direction to orient the local -z axis towards
+     *            the direction to orient the local -z axis towards
      * @param up
-     *              the up vector
+     *            the up vector
      * @return this
      */
     public Matrix3d rotationTowards(Vector3dc dir, Vector3dc up) {
@@ -4451,17 +4554,17 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * @see #rotationTowards(double, double, double, double, double, double)
      *
      * @param dirX
-     *              the x-coordinate of the direction to rotate towards
+     *             the x-coordinate of the direction to rotate towards
      * @param dirY
-     *              the y-coordinate of the direction to rotate towards
+     *             the y-coordinate of the direction to rotate towards
      * @param dirZ
-     *              the z-coordinate of the direction to rotate towards
+     *             the z-coordinate of the direction to rotate towards
      * @param upX
-     *              the x-coordinate of the up vector
+     *             the x-coordinate of the up vector
      * @param upY
-     *              the y-coordinate of the up vector
+     *             the y-coordinate of the up vector
      * @param upZ
-     *              the z-coordinate of the up vector
+     *             the z-coordinate of the up vector
      * @return this
      */
     public Matrix3d rotationTowards(double dirX, double dirY, double dirZ, double upX, double upY, double upZ) {
@@ -4520,12 +4623,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * oblique transformation will be applied first!
      * <p>
      * The oblique transformation is defined as:
+     * 
      * <pre>
      * x' = x + a*z
      * y' = y + a*z
      * z' = z
      * </pre>
+     * 
      * or in matrix form:
+     * 
      * <pre>
      * 1 0 a
      * 0 1 b
@@ -4533,9 +4639,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * </pre>
      *
      * @param a
-     *            the value for the z factor that applies to x
+     *          the value for the z factor that applies to x
      * @param b
-     *            the value for the z factor that applies to y
+     *          the value for the z factor that applies to y
      * @return this
      */
     public Matrix3d obliqueZ(double a, double b) {
@@ -4555,12 +4661,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * oblique transformation will be applied first!
      * <p>
      * The oblique transformation is defined as:
+     * 
      * <pre>
      * x' = x + a*z
      * y' = y + a*z
      * z' = z
      * </pre>
+     * 
      * or in matrix form:
+     * 
      * <pre>
      * 1 0 a
      * 0 1 b
@@ -4568,11 +4677,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * </pre>
      *
      * @param a
-     *            the value for the z factor that applies to x
+     *             the value for the z factor that applies to x
      * @param b
-     *            the value for the z factor that applies to y
+     *             the value for the z factor that applies to y
      * @param dest
-     *            will hold the result
+     *             will hold the result
      * @return dest
      */
     public Matrix3d obliqueZ(double a, double b, Matrix3d dest) {
@@ -4606,15 +4715,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
         double nm11 = m01 * rm10 + m11 * rm11 + m21 * rm12;
         double nm12 = m02 * rm10 + m12 * rm11 + m22 * rm12;
         return dest
-        ._m20(m00 * rm20 + m10 * rm21 + m20 * rm22)
-        ._m21(m01 * rm20 + m11 * rm21 + m21 * rm22)
-        ._m22(m02 * rm20 + m12 * rm21 + m22 * rm22)
-        ._m00(nm00)
-        ._m01(nm01)
-        ._m02(nm02)
-        ._m10(nm10)
-        ._m11(nm11)
-        ._m12(nm12);
+                ._m20(m00 * rm20 + m10 * rm21 + m20 * rm22)
+                ._m21(m01 * rm20 + m11 * rm21 + m21 * rm22)
+                ._m22(m02 * rm20 + m12 * rm21 + m22 * rm22)
+                ._m00(nm00)
+                ._m01(nm01)
+                ._m02(nm02)
+                ._m10(nm10)
+                ._m11(nm11)
+                ._m12(nm12);
     }
 
     /**
@@ -4627,11 +4736,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * reflection will be applied first!
      *
      * @param nx
-     *          the x-coordinate of the plane normal
+     *           the x-coordinate of the plane normal
      * @param ny
-     *          the y-coordinate of the plane normal
+     *           the y-coordinate of the plane normal
      * @param nz
-     *          the z-coordinate of the plane normal
+     *           the z-coordinate of the plane normal
      * @return this
      */
     public Matrix3d reflect(double nx, double ny, double nz) {
@@ -4648,7 +4757,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * reflection will be applied first!
      *
      * @param normal
-     *          the plane normal
+     *               the plane normal
      * @return this
      */
     public Matrix3d reflect(Vector3dc normal) {
@@ -4659,8 +4768,10 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Apply a mirror/reflection transformation to this matrix that reflects about a plane
      * specified via the plane orientation.
      * <p>
-     * This method can be used to build a reflection transformation based on the orientation of a mirror object in the scene.
-     * It is assumed that the default mirror plane's normal is <code>(0, 0, 1)</code>. So, if the given {@link Quaterniondc} is
+     * This method can be used to build a reflection transformation based on the orientation of a mirror object in the
+     * scene.
+     * It is assumed that the default mirror plane's normal is <code>(0, 0, 1)</code>. So, if the given
+     * {@link Quaterniondc} is
      * the identity (does not apply any additional rotation), the reflection plane will be <code>z=0</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>R</code> the reflection matrix,
@@ -4669,7 +4780,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * reflection will be applied first!
      *
      * @param orientation
-     *          the plane orientation
+     *                    the plane orientation
      * @return this
      */
     public Matrix3d reflect(Quaterniondc orientation) {
@@ -4695,11 +4806,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * specified via the plane normal.
      *
      * @param nx
-     *          the x-coordinate of the plane normal
+     *           the x-coordinate of the plane normal
      * @param ny
-     *          the y-coordinate of the plane normal
+     *           the y-coordinate of the plane normal
      * @param nz
-     *          the z-coordinate of the plane normal
+     *           the z-coordinate of the plane normal
      * @return this
      */
     public Matrix3d reflection(double nx, double ny, double nz) {
@@ -4721,7 +4832,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * specified via the plane normal.
      *
      * @param normal
-     *          the plane normal
+     *               the plane normal
      * @return this
      */
     public Matrix3d reflection(Vector3dc normal) {
@@ -4732,12 +4843,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
      * Set this matrix to a mirror/reflection transformation that reflects through a plane
      * specified via the plane orientation.
      * <p>
-     * This method can be used to build a reflection transformation based on the orientation of a mirror object in the scene.
-     * It is assumed that the default mirror plane's normal is <code>(0, 0, 1)</code>. So, if the given {@link Quaterniondc} is
-     * the identity (does not apply any additional rotation), the reflection plane will be <code>z=0</code>, offset by the given <code>point</code>.
+     * This method can be used to build a reflection transformation based on the orientation of a mirror object in the
+     * scene.
+     * It is assumed that the default mirror plane's normal is <code>(0, 0, 1)</code>. So, if the given
+     * {@link Quaterniondc} is
+     * the identity (does not apply any additional rotation), the reflection plane will be <code>z=0</code>, offset by
+     * the given <code>point</code>.
      *
      * @param orientation
-     *          the plane orientation
+     *                    the plane orientation
      * @return this
      */
     public Matrix3d reflection(Quaterniondc orientation) {
@@ -4752,8 +4866,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     public boolean isFinite() {
         return Math.isFinite(m00) && Math.isFinite(m01) && Math.isFinite(m02) &&
-               Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) &&
-               Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22);
+                Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) &&
+                Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22);
     }
 
     public double quadraticFormProduct(double x, double y, double z) {
@@ -4773,6 +4887,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 1 0 0
      * 0 0 1
@@ -4784,12 +4899,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapXZY() {
         return mapXZY(this);
     }
+
     public Matrix3d mapXZY(Matrix3d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m00)._m01(m01)._m02(m02)._m10(m20)._m11(m21)._m12(m22)._m20(m10)._m21(m11)._m22(m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 1 0  0
      * 0 0 -1
@@ -4801,12 +4919,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapXZnY() {
         return mapXZnY(this);
     }
+
     public Matrix3d mapXZnY(Matrix3d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m00)._m01(m01)._m02(m02)._m10(m20)._m11(m21)._m12(m22)._m20(-m10)._m21(-m11)._m22(-m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 1  0  0
      * 0 -1  0
@@ -4818,11 +4939,14 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapXnYnZ() {
         return mapXnYnZ(this);
     }
+
     public Matrix3d mapXnYnZ(Matrix3d dest) {
         return dest._m00(m00)._m01(m01)._m02(m02)._m10(-m10)._m11(-m11)._m12(-m12)._m20(-m20)._m21(-m21)._m22(-m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 1  0 0
      * 0  0 1
@@ -4834,12 +4958,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapXnZY() {
         return mapXnZY(this);
     }
+
     public Matrix3d mapXnZY(Matrix3d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m00)._m01(m01)._m02(m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(m10)._m21(m11)._m22(m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 1  0  0
      * 0  0 -1
@@ -4851,12 +4978,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapXnZnY() {
         return mapXnZnY(this);
     }
+
     public Matrix3d mapXnZnY(Matrix3d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m00)._m01(m01)._m02(m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-m10)._m21(-m11)._m22(-m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 1 0
      * 1 0 0
@@ -4868,12 +4998,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapYXZ() {
         return mapYXZ(this);
     }
+
     public Matrix3d mapYXZ(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m10(m00)._m11(m01)._m12(m02)._m20(m20)._m21(m21)._m22(m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 1  0
      * 1 0  0
@@ -4885,12 +5018,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapYXnZ() {
         return mapYXnZ(this);
     }
+
     public Matrix3d mapYXnZ(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m10(m00)._m11(m01)._m12(m02)._m20(-m20)._m21(-m21)._m22(-m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 0 1
      * 1 0 0
@@ -4902,12 +5038,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapYZX() {
         return mapYZX(this);
     }
+
     public Matrix3d mapYZX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m10(m20)._m11(m21)._m12(m22)._m20(m00)._m21(m01)._m22(m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 0 -1
      * 1 0  0
@@ -4919,12 +5058,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapYZnX() {
         return mapYZnX(this);
     }
+
     public Matrix3d mapYZnX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m10(m20)._m11(m21)._m12(m22)._m20(-m00)._m21(-m01)._m22(-m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 -1 0
      * 1  0 0
@@ -4936,12 +5078,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapYnXZ() {
         return mapYnXZ(this);
     }
+
     public Matrix3d mapYnXZ(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m10(-m00)._m11(-m01)._m12(-m02)._m20(m20)._m21(m21)._m22(m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 -1  0
      * 1  0  0
@@ -4953,12 +5098,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapYnXnZ() {
         return mapYnXnZ(this);
     }
+
     public Matrix3d mapYnXnZ(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m10(-m00)._m11(-m01)._m12(-m02)._m20(-m20)._m21(-m21)._m22(-m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0  0 1
      * 1  0 0
@@ -4970,12 +5118,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapYnZX() {
         return mapYnZX(this);
     }
+
     public Matrix3d mapYnZX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(m00)._m21(m01)._m22(m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0  0 -1
      * 1  0  0
@@ -4987,12 +5138,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapYnZnX() {
         return mapYnZnX(this);
     }
+
     public Matrix3d mapYnZnX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m10)._m01(m11)._m02(m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-m00)._m21(-m01)._m22(-m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 1 0
      * 0 0 1
@@ -5004,13 +5158,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapZXY() {
         return mapZXY(this);
     }
+
     public Matrix3d mapZXY(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m20)._m01(m21)._m02(m22)._m10(m00)._m11(m01)._m12(m02)._m20(m10)._m21(m11)._m22(m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 1  0
      * 0 0 -1
@@ -5022,13 +5179,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapZXnY() {
         return mapZXnY(this);
     }
+
     public Matrix3d mapZXnY(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m20)._m01(m21)._m02(m22)._m10(m00)._m11(m01)._m12(m02)._m20(-m10)._m21(-m11)._m22(-m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 0 1
      * 0 1 0
@@ -5040,12 +5200,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapZYX() {
         return mapZYX(this);
     }
+
     public Matrix3d mapZYX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m20)._m01(m21)._m02(m22)._m10(m10)._m11(m11)._m12(m12)._m20(m00)._m21(m01)._m22(m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 0 -1
      * 0 1  0
@@ -5057,12 +5220,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapZYnX() {
         return mapZYnX(this);
     }
+
     public Matrix3d mapZYnX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m20)._m01(m21)._m02(m22)._m10(m10)._m11(m11)._m12(m12)._m20(-m00)._m21(-m01)._m22(-m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 -1 0
      * 0  0 1
@@ -5074,13 +5240,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapZnXY() {
         return mapZnXY(this);
     }
+
     public Matrix3d mapZnXY(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m20)._m01(m21)._m02(m22)._m10(-m00)._m11(-m01)._m12(-m02)._m20(m10)._m21(m11)._m22(m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0 -1  0
      * 0  0 -1
@@ -5092,13 +5261,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapZnXnY() {
         return mapZnXnY(this);
     }
+
     public Matrix3d mapZnXnY(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(m20)._m01(m21)._m02(m22)._m10(-m00)._m11(-m01)._m12(-m02)._m20(-m10)._m21(-m11)._m22(-m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0  0 1
      * 0 -1 0
@@ -5110,12 +5282,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapZnYX() {
         return mapZnYX(this);
     }
+
     public Matrix3d mapZnYX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m20)._m01(m21)._m02(m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(m00)._m21(m01)._m22(m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 0  0 -1
      * 0 -1  0
@@ -5127,12 +5302,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapZnYnX() {
         return mapZnYnX(this);
     }
+
     public Matrix3d mapZnYnX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(m20)._m01(m21)._m02(m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(-m00)._m21(-m01)._m22(-m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * -1 0  0
      *  0 1  0
@@ -5144,11 +5322,14 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnXYnZ() {
         return mapnXYnZ(this);
     }
+
     public Matrix3d mapnXYnZ(Matrix3d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(m10)._m11(m11)._m12(m12)._m20(-m20)._m21(-m21)._m22(-m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * -1 0 0
      *  0 0 1
@@ -5160,12 +5341,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnXZY() {
         return mapnXZY(this);
     }
+
     public Matrix3d mapnXZY(Matrix3d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(m20)._m11(m21)._m12(m22)._m20(m10)._m21(m11)._m22(m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * -1 0  0
      *  0 0 -1
@@ -5177,12 +5361,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnXZnY() {
         return mapnXZnY(this);
     }
+
     public Matrix3d mapnXZnY(Matrix3d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(m20)._m11(m21)._m12(m22)._m20(-m10)._m21(-m11)._m22(-m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * -1  0 0
      *  0 -1 0
@@ -5194,11 +5381,14 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnXnYZ() {
         return mapnXnYZ(this);
     }
+
     public Matrix3d mapnXnYZ(Matrix3d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(-m10)._m11(-m11)._m12(-m12)._m20(m20)._m21(m21)._m22(m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * -1  0  0
      *  0 -1  0
@@ -5210,11 +5400,14 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnXnYnZ() {
         return mapnXnYnZ(this);
     }
+
     public Matrix3d mapnXnYnZ(Matrix3d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(-m10)._m11(-m11)._m12(-m12)._m20(-m20)._m21(-m21)._m22(-m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * -1  0 0
      *  0  0 1
@@ -5226,12 +5419,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnXnZY() {
         return mapnXnZY(this);
     }
+
     public Matrix3d mapnXnZY(Matrix3d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(m10)._m21(m11)._m22(m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * -1  0  0
      *  0  0 -1
@@ -5243,12 +5439,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnXnZnY() {
         return mapnXnZnY(this);
     }
+
     public Matrix3d mapnXnZnY(Matrix3d dest) {
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-m10)._m21(-m11)._m22(-m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 1 0
      * -1 0 0
@@ -5260,12 +5459,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnYXZ() {
         return mapnYXZ(this);
     }
+
     public Matrix3d mapnYXZ(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(m00)._m11(m01)._m12(m02)._m20(m20)._m21(m21)._m22(m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 1  0
      * -1 0  0
@@ -5277,12 +5479,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnYXnZ() {
         return mapnYXnZ(this);
     }
+
     public Matrix3d mapnYXnZ(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(m00)._m11(m01)._m12(m02)._m20(-m20)._m21(-m21)._m22(-m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 0 1
      * -1 0 0
@@ -5294,12 +5499,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnYZX() {
         return mapnYZX(this);
     }
+
     public Matrix3d mapnYZX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(m20)._m11(m21)._m12(m22)._m20(m00)._m21(m01)._m22(m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 0 -1
      * -1 0  0
@@ -5311,12 +5519,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnYZnX() {
         return mapnYZnX(this);
     }
+
     public Matrix3d mapnYZnX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(m20)._m11(m21)._m12(m22)._m20(-m00)._m21(-m01)._m22(-m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 -1 0
      * -1  0 0
@@ -5328,12 +5539,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnYnXZ() {
         return mapnYnXZ(this);
     }
+
     public Matrix3d mapnYnXZ(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-m00)._m11(-m01)._m12(-m02)._m20(m20)._m21(m21)._m22(m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 -1  0
      * -1  0  0
@@ -5345,12 +5559,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnYnXnZ() {
         return mapnYnXnZ(this);
     }
+
     public Matrix3d mapnYnXnZ(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-m00)._m11(-m01)._m12(-m02)._m20(-m20)._m21(-m21)._m22(-m22);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0  0 1
      * -1  0 0
@@ -5362,12 +5579,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnYnZX() {
         return mapnYnZX(this);
     }
+
     public Matrix3d mapnYnZX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(m00)._m21(m01)._m22(m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0  0 -1
      * -1  0  0
@@ -5379,12 +5599,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnYnZnX() {
         return mapnYnZnX(this);
     }
+
     public Matrix3d mapnYnZnX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m10)._m01(-m11)._m02(-m12)._m10(-m20)._m11(-m21)._m12(-m22)._m20(-m00)._m21(-m01)._m22(-m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 1 0
      *  0 0 1
@@ -5396,13 +5619,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnZXY() {
         return mapnZXY(this);
     }
+
     public Matrix3d mapnZXY(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(m00)._m11(m01)._m12(m02)._m20(m10)._m21(m11)._m22(m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 1  0
      *  0 0 -1
@@ -5414,13 +5640,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnZXnY() {
         return mapnZXnY(this);
     }
+
     public Matrix3d mapnZXnY(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(m00)._m11(m01)._m12(m02)._m20(-m10)._m21(-m11)._m22(-m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 0 1
      *  0 1 0
@@ -5432,12 +5661,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnZYX() {
         return mapnZYX(this);
     }
+
     public Matrix3d mapnZYX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(m10)._m11(m11)._m12(m12)._m20(m00)._m21(m01)._m22(m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 0 -1
      *  0 1  0
@@ -5449,12 +5681,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnZYnX() {
         return mapnZYnX(this);
     }
+
     public Matrix3d mapnZYnX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(m10)._m11(m11)._m12(m12)._m20(-m00)._m21(-m01)._m22(-m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 -1 0
      *  0  0 1
@@ -5466,13 +5701,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnZnXY() {
         return mapnZnXY(this);
     }
+
     public Matrix3d mapnZnXY(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-m00)._m11(-m01)._m12(-m02)._m20(m10)._m21(m11)._m22(m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0 -1  0
      *  0  0 -1
@@ -5484,13 +5722,16 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnZnXnY() {
         return mapnZnXnY(this);
     }
+
     public Matrix3d mapnZnXnY(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         double m10 = this.m10, m11 = this.m11, m12 = this.m12;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-m00)._m11(-m01)._m12(-m02)._m20(-m10)._m21(-m11)._m22(-m12);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0  0 1
      *  0 -1 0
@@ -5502,12 +5743,15 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnZnYX() {
         return mapnZnYX(this);
     }
+
     public Matrix3d mapnZnYX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(m00)._m21(m01)._m22(m02);
     }
+
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      *  0  0 -1
      *  0 -1  0
@@ -5519,6 +5763,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d mapnZnYnX() {
         return mapnZnYnX(this);
     }
+
     public Matrix3d mapnZnYnX(Matrix3d dest) {
         double m00 = this.m00, m01 = this.m01, m02 = this.m02;
         return dest._m00(-m20)._m01(-m21)._m02(-m22)._m10(-m10)._m11(-m11)._m12(-m12)._m20(-m00)._m21(-m01)._m22(-m02);
@@ -5526,6 +5771,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
 
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * -1 0 0
      *  0 1 0
@@ -5537,12 +5783,14 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d negateX() {
         return _m00(-m00)._m01(-m01)._m02(-m02);
     }
+
     public Matrix3d negateX(Matrix3d dest) {
         return dest._m00(-m00)._m01(-m01)._m02(-m02)._m10(m10)._m11(m11)._m12(m12)._m20(m20)._m21(m21)._m22(m22);
     }
 
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 1  0 0
      * 0 -1 0
@@ -5554,12 +5802,14 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d negateY() {
         return _m10(-m10)._m11(-m11)._m12(-m12);
     }
+
     public Matrix3d negateY(Matrix3d dest) {
         return dest._m00(m00)._m01(m01)._m02(m02)._m10(-m10)._m11(-m11)._m12(-m12)._m20(m20)._m21(m21)._m22(m22);
     }
 
     /**
      * Multiply <code>this</code> by the matrix
+     * 
      * <pre>
      * 1 0  0
      * 0 1  0
@@ -5571,6 +5821,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Matrix3d negateZ() {
         return _m20(-m20)._m21(-m21)._m22(-m22);
     }
+
     public Matrix3d negateZ(Matrix3d dest) {
         return dest._m00(m00)._m01(m01)._m02(m02)._m10(m10)._m11(m11)._m12(m12)._m20(-m20)._m21(-m21)._m22(-m22);
     }
@@ -5578,5 +5829,4 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-
 }

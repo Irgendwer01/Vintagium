@@ -3,7 +3,9 @@ package me.jellysquid.mods.sodium.client.render.chunk.data;
 import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
 
 public class ChunkRenderBounds {
-    public static final ChunkRenderBounds ALWAYS_FALSE = new ChunkRenderBounds(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
+
+    public static final ChunkRenderBounds ALWAYS_FALSE = new ChunkRenderBounds(Float.POSITIVE_INFINITY,
+            Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
             Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY);
 
     public final float x1, y1, z1;
@@ -30,6 +32,7 @@ public class ChunkRenderBounds {
     }
 
     public static class Builder {
+
         // Bit-mask of the blocks set on each axis
         private int x = 0, y = 0, z = 0;
 
@@ -64,8 +67,7 @@ public class ChunkRenderBounds {
 
                     Math.min(x2, origin.getMaxX()) + 0.5f,
                     Math.min(y2, origin.getMaxY()) + 0.5f,
-                    Math.min(z2, origin.getMaxZ()) + 0.5f
-            );
+                    Math.min(z2, origin.getMaxZ()) + 0.5f);
         }
 
         // Return the left-bound of the bit-masked axis

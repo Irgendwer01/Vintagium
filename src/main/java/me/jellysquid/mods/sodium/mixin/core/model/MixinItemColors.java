@@ -1,8 +1,5 @@
 package me.jellysquid.mods.sodium.mixin.core.model;
 
-import it.unimi.dsi.fastutil.objects.Reference2ReferenceMap;
-import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
-import me.jellysquid.mods.sodium.client.world.biome.ItemColorsExtended;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -15,8 +12,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import it.unimi.dsi.fastutil.objects.Reference2ReferenceMap;
+import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
+import me.jellysquid.mods.sodium.client.world.biome.ItemColorsExtended;
+
 @Mixin(ItemColors.class)
 public class MixinItemColors implements ItemColorsExtended {
+
     private Reference2ReferenceMap<IRegistryDelegate<Item>, IItemColor> itemsToColor;
 
     private static final IItemColor DEFAULT_PROVIDER = (stack, tintIdx) -> -1;
@@ -27,7 +29,8 @@ public class MixinItemColors implements ItemColorsExtended {
         this.itemsToColor.defaultReturnValue(DEFAULT_PROVIDER);
     }
 
-    @Inject(method = "registerItemColorHandler(Lnet/minecraft/client/renderer/color/IItemColor;[Lnet/minecraft/item/Item;)V", at = @At("HEAD"))
+    @Inject(method = "registerItemColorHandler(Lnet/minecraft/client/renderer/color/IItemColor;[Lnet/minecraft/item/Item;)V",
+            at = @At("HEAD"))
     private void preRegisterColor(IItemColor mapper, Item[] convertibles, CallbackInfo ci) {
         // Synchronize because Forge mods register this without enqueuing the call on the main thread
         // and then blame Embeddium for the crash because of the mixin, despite vanilla using a non-concurrent
@@ -39,7 +42,8 @@ public class MixinItemColors implements ItemColorsExtended {
         }
     }
 
-    @Inject(method = "registerItemColorHandler(Lnet/minecraft/client/renderer/color/IItemColor;[Lnet/minecraft/block/Block;)V", at = @At("HEAD"))
+    @Inject(method = "registerItemColorHandler(Lnet/minecraft/client/renderer/color/IItemColor;[Lnet/minecraft/block/Block;)V",
+            at = @At("HEAD"))
     private void preRegisterColor(IItemColor mapper, Block[] convertibles, CallbackInfo ci) {
         // Synchronize because Forge mods register this without enqueuing the call on the main thread
         // and then blame Embeddium for the crash because of the mixin, despite vanilla using a non-concurrent

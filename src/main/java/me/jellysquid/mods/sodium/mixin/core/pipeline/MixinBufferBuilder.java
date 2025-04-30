@@ -1,5 +1,17 @@
 package me.jellysquid.mods.sodium.mixin.core.pipeline;
 
+import java.nio.ByteBuffer;
+
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GLAllocation;
+import net.minecraft.client.renderer.vertex.VertexFormat;
+
+import org.apache.logging.log4j.Logger;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+
 import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.gl.attribute.BufferVertexFormat;
 import me.jellysquid.mods.sodium.client.model.vertex.VertexDrain;
@@ -7,16 +19,6 @@ import me.jellysquid.mods.sodium.client.model.vertex.VertexSink;
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferView;
 import me.jellysquid.mods.sodium.client.model.vertex.type.BlittableVertexType;
 import me.jellysquid.mods.sodium.client.model.vertex.type.VertexType;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GLAllocation;
-import net.minecraft.client.renderer.vertex.VertexFormat;
-import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
-
-import java.nio.ByteBuffer;
 
 @Mixin(BufferBuilder.class)
 public abstract class MixinBufferBuilder implements VertexBufferView, VertexDrain {
@@ -48,10 +50,10 @@ public abstract class MixinBufferBuilder implements VertexBufferView, VertexDrai
             return j == 0 ? amount : amount + i - j;
         }
     }
-    
+
     @Override
     public boolean ensureBufferCapacity(int bytes) {
-    	if(vertexFormat != null) {
+        if (vertexFormat != null) {
             // Ensure that there is always space for 1 more vertex; see BufferBuilder.next()
             bytes += vertexFormat.getSize();
         }
@@ -62,7 +64,8 @@ public abstract class MixinBufferBuilder implements VertexBufferView, VertexDrai
 
         int newSize = this.byteBuffer.capacity() + roundBufferSize(bytes);
 
-        LOGGER.debug("Needed to grow BufferBuilder buffer: Old size {} bytes, new size {} bytes.", this.byteBuffer.capacity(), newSize);
+        LOGGER.debug("Needed to grow BufferBuilder buffer: Old size {} bytes, new size {} bytes.",
+                this.byteBuffer.capacity(), newSize);
 
         this.byteBuffer.position(0);
 
@@ -93,18 +96,19 @@ public abstract class MixinBufferBuilder implements VertexBufferView, VertexDrai
     @Override
     public void flush(int vertexCount, BufferVertexFormat format) {
         if (BufferVertexFormat.from(this.vertexFormat) != format) {
-            throw new IllegalStateException("Mis-matched vertex format (expected: [" + format + "], currently using: [" + this.vertexFormat + "])");
+            throw new IllegalStateException("Mis-matched vertex format (expected: [" + format +
+                    "], currently using: [" + this.vertexFormat + "])");
         }
 
         this.vertexCount += vertexCount;
-        //this.elementOffset += vertexCount * format.getStride();
+        // this.elementOffset += vertexCount * format.getStride();
     }
 
     @Override
     public <T extends VertexSink> T createSink(VertexType<T> factory) {
         BlittableVertexType<T> blittable = factory.asBlittable();
 
-        if (blittable != null && blittable.getBufferVertexFormat() == this.getVertexFormat())  {
+        if (blittable != null && blittable.getBufferVertexFormat() == this.getVertexFormat()) {
             return blittable.createBufferWriter(this, SodiumClientMod.isDirectMemoryAccessEnabled());
         }
 

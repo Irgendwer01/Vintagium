@@ -34,6 +34,7 @@ public class Random {
      * Reference <a href="http://xoroshiro.di.unimi.it/xoroshiro128plus.c">http://xoroshiro.di.unimi.it/</a>
      */
     private static final class Xorshiro128 {
+
         /**
          * = 0x1p-24f
          */
@@ -64,7 +65,8 @@ public class Random {
         }
 
         /**
-         * Reference: <a href="https://github.com/roquendm/JGO-Grabbag/blob/master/src/roquen/math/rng/PRNG.java">https://github.com/roquendm/</a>
+         * Reference: <a href=
+         * "https://github.com/roquendm/JGO-Grabbag/blob/master/src/roquen/math/rng/PRNG.java">https://github.com/roquendm/</a>
          *
          * @author roquendm
          */
@@ -80,24 +82,29 @@ public class Random {
             rotateLeft(s0, s1);
             return (int) (result & 0xFFFFFFFF);
         }
+
         private static long rotl_JDK4(final long x, final int k) {
             return (x << k) | (x >>> (64 - k));
         }
+
         private static long rotl_JDK5(final long x, final int k) {
             return Long.rotateLeft(x, k);
         }
+
         private static long rotl(final long x, final int k) {
             if (Runtime.HAS_Long_rotateLeft)
                 return rotl_JDK5(x, k);
             return rotl_JDK4(x, k);
         }
+
         private void rotateLeft(long s0, long s1) {
             _s0 = rotl(s0, 55) ^ s1 ^ (s1 << 14);
             _s1 = rotl(s1, 36);
         }
 
         /**
-         * Reference: <a href="https://github.com/roquendm/JGO-Grabbag/blob/master/src/roquen/math/rng/PRNG.java">https://github.com/roquendm/</a>
+         * Reference: <a href=
+         * "https://github.com/roquendm/JGO-Grabbag/blob/master/src/roquen/math/rng/PRNG.java">https://github.com/roquendm/</a>
          *
          * @author roquendm
          */
@@ -114,7 +121,7 @@ public class Random {
 
     private final Xorshiro128 rnd;
 
-    //8020463840 is from "Case File n_221: Kabukicho"
+    // 8020463840 is from "Case File n_221: Kabukicho"
     private static long seedHalf = 8020463840L;
 
     public static long newSeed() {
@@ -140,7 +147,7 @@ public class Random {
      * Create a new instance of {@link Random} and initialize it with the given <code>seed</code>.
      *
      * @param seed
-     *            the seed number
+     *             the seed number
      */
     public Random(long seed) {
         this.rnd = new Xorshiro128(seed);
@@ -159,11 +166,10 @@ public class Random {
      * Generate a uniformly distributed integer in the half-open range [0, n).
      *
      * @param n
-     *            the upper limit (exclusive) of the generated integer
+     *          the upper limit (exclusive) of the generated integer
      * @return a random integer in the range [0..n)
      */
     public int nextInt(int n) {
         return rnd.nextInt(n);
     }
-
 }

@@ -4,6 +4,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 public enum OptionImpact {
+
     LOW(TextFormatting.GREEN, new TextComponentTranslation("sodium.option_impact.low").getFormattedText()),
     MEDIUM(TextFormatting.YELLOW, new TextComponentTranslation("sodium.option_impact.medium").getFormattedText()),
     HIGH(TextFormatting.GOLD, new TextComponentTranslation("sodium.option_impact.high").getFormattedText()),

@@ -3,9 +3,11 @@ package me.jellysquid.mods.sodium.client.buffer;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 
 public interface ExtendedVertexFormat {
+
     Element[] embeddium$getExtendedElements();
 
     class Element {
+
         public final VertexFormatElement actual;
         public final int increment;
         public final int byteLength;

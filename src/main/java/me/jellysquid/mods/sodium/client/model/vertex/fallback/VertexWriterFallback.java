@@ -1,7 +1,8 @@
 package me.jellysquid.mods.sodium.client.model.vertex.fallback;
 
-import me.jellysquid.mods.sodium.client.model.vertex.VertexSink;
 import net.minecraft.client.renderer.BufferBuilder;
+
+import me.jellysquid.mods.sodium.client.model.vertex.VertexSink;
 
 /**
  * The base implementation for a {@link VertexSink} which writes to a black-boxed {@link BufferBuilder}. This is the
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.BufferBuilder;
  * to the backing implementation.
  */
 public abstract class VertexWriterFallback implements VertexSink {
+
     protected final BufferBuilder consumer;
 
     protected VertexWriterFallback(BufferBuilder consumer) {

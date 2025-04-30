@@ -2,8 +2,6 @@ package me.jellysquid.mods.sodium.client.gl.attribute;
 
 import java.util.EnumMap;
 
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
-
 /**
  * Provides a generic vertex format which contains the attributes defined by {@param T}. Other code can then retrieve
  * the attributes and work with encoded data in a generic manner without needing to rely on a specific format.
@@ -11,6 +9,7 @@ import me.jellysquid.mods.sodium.client.SodiumClientMod;
  * @param <T> The enumeration over the vertex attributes
  */
 public class GlVertexFormat<T extends Enum<T>> implements BufferVertexFormat {
+
     private final Class<T> attributeEnum;
     private final EnumMap<T, GlVertexAttribute> attributesKeyed;
     private final GlVertexAttribute[] attributesArray;
@@ -27,9 +26,10 @@ public class GlVertexFormat<T extends Enum<T>> implements BufferVertexFormat {
     public static <T extends Enum<T>> Builder<T> builder(Class<T> type, int stride) {
         return new Builder<>(type, stride);
     }
-    
+
     /**
      * Returns the {@link GlVertexAttribute} of this vertex format bound to the type {@param name}.
+     * 
      * @throws NullPointerException If the attribute does not exist in this format
      */
     public GlVertexAttribute getAttribute(T name) {
@@ -60,6 +60,7 @@ public class GlVertexFormat<T extends Enum<T>> implements BufferVertexFormat {
     }
 
     public static class Builder<T extends Enum<T>> {
+
         private final EnumMap<T, GlVertexAttribute> attributes;
         private final Class<T> type;
         private final int stride;
@@ -70,14 +71,15 @@ public class GlVertexFormat<T extends Enum<T>> implements BufferVertexFormat {
             this.stride = stride;
         }
 
-        public Builder<T> addElement(T type, int pointer, GlVertexAttributeFormat format, int count, boolean normalized) {
+        public Builder<T> addElement(T type, int pointer, GlVertexAttributeFormat format, int count,
+                                     boolean normalized) {
             return this.addElement(type, new GlVertexAttribute(format, count, normalized, pointer, this.stride));
         }
 
         /**
          * Adds an vertex attribute which will be bound to the given generic attribute type.
          *
-         * @param type The generic attribute type
+         * @param type      The generic attribute type
          * @param attribute The attribute to bind
          * @throws IllegalStateException If an attribute is already bound to the generic type
          */
@@ -91,7 +93,8 @@ public class GlVertexFormat<T extends Enum<T>> implements BufferVertexFormat {
             }
 
             if (this.attributes.put(type, attribute) != null) {
-                throw new IllegalStateException("Generic attribute " + type.name() + " already defined in vertex format");
+                throw new IllegalStateException(
+                        "Generic attribute " + type.name() + " already defined in vertex format");
             }
 
             return this;

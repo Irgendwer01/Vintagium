@@ -8,7 +8,9 @@ import org.lwjgl.opengl.GL30;
  * Requires OpenGL 3.0+ or the ARB_vertex_array_object extension.
  */
 public enum GlVertexArrayFunctions {
+
     BASE {
+
         @Override
         public void glBindVertexArray(int id) {
             GL30.glBindVertexArray(id);
@@ -25,6 +27,7 @@ public enum GlVertexArrayFunctions {
         }
     },
     ARB {
+
         @Override
         public void glBindVertexArray(int id) {
             ARBVertexArrayObject.glBindVertexArray(id);
@@ -41,6 +44,7 @@ public enum GlVertexArrayFunctions {
         }
     },
     UNSUPPORTED {
+
         @Override
         public void glBindVertexArray(int id) {
             throw new UnsupportedOperationException();

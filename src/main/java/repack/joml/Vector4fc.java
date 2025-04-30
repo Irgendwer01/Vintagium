@@ -65,7 +65,7 @@ public interface Vector4fc {
      * the absolute position as parameter.
      *
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z, w</code> order
+     *               will receive the values of this vector in <code>x, y, z, w</code> order
      * @return the passed in buffer
      * @see #get(int, FloatBuffer)
      */
@@ -78,9 +78,9 @@ public interface Vector4fc {
      * This method will not increment the position of the given FloatBuffer.
      *
      * @param index
-     *          the absolute position into the FloatBuffer
+     *               the absolute position into the FloatBuffer
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z, w</code> order
+     *               will receive the values of this vector in <code>x, y, z, w</code> order
      * @return the passed in buffer
      */
     FloatBuffer get(int index, FloatBuffer buffer);
@@ -96,7 +96,7 @@ public interface Vector4fc {
      * the absolute position as parameter.
      *
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z, w</code> order
+     *               will receive the values of this vector in <code>x, y, z, w</code> order
      * @return the passed in buffer
      * @see #get(int, ByteBuffer)
      */
@@ -109,9 +109,9 @@ public interface Vector4fc {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          will receive the values of this vector in <code>x, y, z, w</code> order
+     *               will receive the values of this vector in <code>x, y, z, w</code> order
      * @return the passed in buffer
      */
     ByteBuffer get(int index, ByteBuffer buffer);
@@ -121,10 +121,11 @@ public interface Vector4fc {
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *            the off-heap address where to store this vector
+     *                the off-heap address where to store this vector
      * @return this
      */
     Vector4fc getToAddress(long address);
@@ -133,9 +134,9 @@ public interface Vector4fc {
      * Subtract the supplied vector from this one and store the result in <code>dest</code>.
      *
      * @param v
-     *          the vector to subtract from <code>this</code>
+     *             the vector to subtract from <code>this</code>
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f sub(Vector4fc v, Vector4f dest);
@@ -144,15 +145,15 @@ public interface Vector4fc {
      * Subtract <code>(x, y, z, w)</code> from this and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component to subtract
+     *             the x component to subtract
      * @param y
-     *          the y component to subtract
+     *             the y component to subtract
      * @param z
-     *          the z component to subtract
+     *             the z component to subtract
      * @param w
-     *          the w component to subtract
+     *             the w component to subtract
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f sub(float x, float y, float z, float w, Vector4f dest);
@@ -161,9 +162,9 @@ public interface Vector4fc {
      * Add the supplied vector to this one and store the result in <code>dest</code>.
      *
      * @param v
-     *          the vector to add
+     *             the vector to add
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f add(Vector4fc v, Vector4f dest);
@@ -172,15 +173,15 @@ public interface Vector4fc {
      * Increment the components of this vector by the given values and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component to add
+     *             the x component to add
      * @param y
-     *          the y component to add
+     *             the y component to add
      * @param z
-     *          the z component to add
+     *             the z component to add
      * @param w
-     *          the w component to add
+     *             the w component to add
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f add(float x, float y, float z, float w, Vector4f dest);
@@ -190,11 +191,11 @@ public interface Vector4fc {
      * and store the result in <code>dest</code>.
      *
      * @param a
-     *          the first multiplicand
+     *             the first multiplicand
      * @param b
-     *          the second multiplicand
+     *             the second multiplicand
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f fma(Vector4fc a, Vector4fc b, Vector4f dest);
@@ -204,11 +205,11 @@ public interface Vector4fc {
      * and store the result in <code>dest</code>.
      *
      * @param a
-     *          the first multiplicand
+     *             the first multiplicand
      * @param b
-     *          the second multiplicand
+     *             the second multiplicand
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f fma(float a, Vector4fc b, Vector4f dest);
@@ -218,11 +219,11 @@ public interface Vector4fc {
      * and store the result in <code>dest</code>.
      *
      * @param a
-     *          the multiplicand
+     *             the multiplicand
      * @param b
-     *          the addend
+     *             the addend
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f mulAdd(Vector4fc a, Vector4fc b, Vector4f dest);
@@ -232,11 +233,11 @@ public interface Vector4fc {
      * and store the result in <code>dest</code>.
      *
      * @param a
-     *          the multiplicand
+     *             the multiplicand
      * @param b
-     *          the addend
+     *             the addend
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f mulAdd(float a, Vector4fc b, Vector4f dest);
@@ -245,9 +246,9 @@ public interface Vector4fc {
      * Multiply this Vector4f component-wise by another Vector4f and store the result in <code>dest</code>.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f mul(Vector4fc v, Vector4f dest);
@@ -256,9 +257,9 @@ public interface Vector4fc {
      * Divide this Vector4f component-wise by another Vector4f and store the result in <code>dest</code>.
      *
      * @param v
-     *          the vector to divide by
+     *             the vector to divide by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f div(Vector4fc v, Vector4f dest);
@@ -268,9 +269,9 @@ public interface Vector4fc {
      * <code>dest</code>.
      *
      * @param mat
-     *          the matrix to multiply the vector with
+     *             the matrix to multiply the vector with
      * @param dest
-     *          the destination vector to hold the result
+     *             the destination vector to hold the result
      * @return dest
      */
     Vector4f mul(Matrix4fc mat, Vector4f dest);
@@ -280,9 +281,9 @@ public interface Vector4fc {
      * <code>dest</code>.
      *
      * @param mat
-     *          the matrix whose transpose to multiply the vector with
+     *             the matrix whose transpose to multiply the vector with
      * @param dest
-     *          the destination vector to hold the result
+     *             the destination vector to hold the result
      * @return dest
      */
     Vector4f mulTranspose(Matrix4fc mat, Vector4f dest);
@@ -292,9 +293,9 @@ public interface Vector4fc {
      * <code>dest</code>.
      *
      * @param mat
-     *          the affine matrix to multiply the vector with
+     *             the affine matrix to multiply the vector with
      * @param dest
-     *          the destination vector to hold the result
+     *             the destination vector to hold the result
      * @return dest
      */
     Vector4f mulAffine(Matrix4fc mat, Vector4f dest);
@@ -304,9 +305,9 @@ public interface Vector4fc {
      * <code>dest</code>.
      *
      * @param mat
-     *          the affine matrix whose transpose to multiply the vector with
+     *             the affine matrix whose transpose to multiply the vector with
      * @param dest
-     *          the destination vector to hold the result
+     *             the destination vector to hold the result
      * @return dest
      */
     Vector4f mulAffineTranspose(Matrix4fc mat, Vector4f dest);
@@ -316,9 +317,9 @@ public interface Vector4fc {
      * <code>dest</code>.
      *
      * @param mat
-     *          the matrix to multiply the vector with
+     *             the matrix to multiply the vector with
      * @param dest
-     *          the destination vector to hold the result
+     *             the destination vector to hold the result
      * @return dest
      */
     Vector4f mul(Matrix4x3fc mat, Vector4f dest);
@@ -328,9 +329,9 @@ public interface Vector4fc {
      * and store the result in <code>dest</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f mulProject(Matrix4fc mat, Vector4f dest);
@@ -340,9 +341,9 @@ public interface Vector4fc {
      * and store the <code>(x, y, z)</code> result in <code>dest</code>.
      *
      * @param mat
-     *          the matrix to multiply this vector by
+     *             the matrix to multiply this vector by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector3f mulProject(Matrix4fc mat, Vector3f dest);
@@ -352,9 +353,9 @@ public interface Vector4fc {
      * value and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to multiply by
+     *               the scalar to multiply by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector4f mul(float scalar, Vector4f dest);
@@ -363,15 +364,15 @@ public interface Vector4fc {
      * Multiply the components of this Vector4f by the given scalar values and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component to multiply by
+     *             the x component to multiply by
      * @param y
-     *          the y component to multiply by
+     *             the y component to multiply by
      * @param z
-     *          the z component to multiply by
+     *             the z component to multiply by
      * @param w
-     *          the w component to multiply by
+     *             the w component to multiply by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f mul(float x, float y, float z, float w, Vector4f dest);
@@ -381,9 +382,9 @@ public interface Vector4fc {
      * value and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector4f div(float scalar, Vector4f dest);
@@ -392,15 +393,15 @@ public interface Vector4fc {
      * Divide the components of this Vector4f by the given scalar values and store the result in <code>dest</code>.
      *
      * @param x
-     *          the x component to divide by
+     *             the x component to divide by
      * @param y
-     *          the y component to divide by
+     *             the y component to divide by
      * @param z
-     *          the z component to divide by
+     *             the z component to divide by
      * @param w
-     *          the w component to divide by
+     *             the w component to divide by
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f div(float x, float y, float z, float w, Vector4f dest);
@@ -411,9 +412,9 @@ public interface Vector4fc {
      * @see Quaternionf#transform(Vector4f)
      *
      * @param quat
-     *          the quaternion to rotate this vector
+     *             the quaternion to rotate this vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f rotate(Quaternionfc quat, Vector4f dest);
@@ -423,15 +424,15 @@ public interface Vector4fc {
      * into <code>dest</code>.
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param aX
-     *          the x component of the rotation axis
+     *              the x component of the rotation axis
      * @param aY
-     *          the y component of the rotation axis
+     *              the y component of the rotation axis
      * @param aZ
-     *          the z component of the rotation axis
+     *              the z component of the rotation axis
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector4f rotateAxis(float angle, float aX, float aY, float aZ, Vector4f dest);
@@ -441,9 +442,9 @@ public interface Vector4fc {
      * into <code>dest</code>.
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector4f rotateX(float angle, Vector4f dest);
@@ -453,9 +454,9 @@ public interface Vector4fc {
      * into <code>dest</code>.
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector4f rotateY(float angle, Vector4f dest);
@@ -465,9 +466,9 @@ public interface Vector4fc {
      * into <code>dest</code>.
      *
      * @param angle
-     *          the angle in radians
+     *              the angle in radians
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector4f rotateZ(float angle, Vector4f dest);
@@ -490,7 +491,7 @@ public interface Vector4fc {
      * Normalizes this vector and store the result in <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f normalize(Vector4f dest);
@@ -499,18 +500,19 @@ public interface Vector4fc {
      * Scale this vector to have the given length and store the result in <code>dest</code>.
      *
      * @param length
-     *          the desired length
+     *               the desired length
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector4f normalize(float length, Vector4f dest);
 
     /**
-     * Normalize this vector by computing only the norm of <code>(x, y, z)</code> and store the result in <code>dest</code>.
+     * Normalize this vector by computing only the norm of <code>(x, y, z)</code> and store the result in
+     * <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f normalize3(Vector4f dest);
@@ -590,7 +592,8 @@ public interface Vector4fc {
     float dot(float x, float y, float z, float w);
 
     /**
-     * Return the cosine of the angle between this vector and the supplied vector. Use this instead of <code>Math.cos(angle(v))</code>.
+     * Return the cosine of the angle between this vector and the supplied vector. Use this instead of
+     * <code>Math.cos(angle(v))</code>.
      *
      * @see #angle(Vector4fc)
      *
@@ -615,7 +618,7 @@ public interface Vector4fc {
      * Negate this vector and store the result in <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f negate(Vector4f dest);
@@ -624,9 +627,9 @@ public interface Vector4fc {
      * Set the components of <code>dest</code> to be the component-wise minimum of this and the other vector.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f min(Vector4fc v, Vector4f dest);
@@ -635,9 +638,9 @@ public interface Vector4fc {
      * Set the components of <code>dest</code> to be the component-wise maximum of this and the other vector.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f max(Vector4fc v, Vector4f dest);
@@ -646,15 +649,16 @@ public interface Vector4fc {
      * Linearly interpolate <code>this</code> and <code>other</code> using the given interpolation factor <code>t</code>
      * and store the result in <code>dest</code>.
      * <p>
-     * If <code>t</code> is <code>0.0</code> then the result is <code>this</code>. If the interpolation factor is <code>1.0</code>
+     * If <code>t</code> is <code>0.0</code> then the result is <code>this</code>. If the interpolation factor is
+     * <code>1.0</code>
      * then the result is <code>other</code>.
      *
      * @param other
-     *          the other vector
+     *              the other vector
      * @param t
-     *          the interpolation factor between 0.0 and 1.0
+     *              the interpolation factor between 0.0 and 1.0
      * @param dest
-     *          will hold the result
+     *              will hold the result
      * @return dest
      */
     Vector4f lerp(Vector4fc other, float t, Vector4f dest);
@@ -665,11 +669,11 @@ public interface Vector4fc {
      * store the result in <code>dest</code>.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param t
-     *          the interpolation factor, within <code>[0..1]</code>
+     *             the interpolation factor, within <code>[0..1]</code>
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f smoothStep(Vector4fc v, float t, Vector4f dest);
@@ -681,15 +685,15 @@ public interface Vector4fc {
      * <code>dest</code>.
      *
      * @param t0
-     *          the tangent of <code>this</code> vector
+     *             the tangent of <code>this</code> vector
      * @param v1
-     *          the other vector
+     *             the other vector
      * @param t1
-     *          the tangent of the other vector
+     *             the tangent of the other vector
      * @param t
-     *          the interpolation factor, within <code>[0..1]</code>
+     *             the interpolation factor, within <code>[0..1]</code>
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f hermite(Vector4fc t0, Vector4fc v1, Vector4fc t1, float t, Vector4f dest);
@@ -698,7 +702,7 @@ public interface Vector4fc {
      * Get the value of the specified component of this vector.
      *
      * @param component
-     *          the component, within <code>[0..3]</code>
+     *                  the component, within <code>[0..3]</code>
      * @return the value
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..3]</code>
      */
@@ -709,9 +713,9 @@ public interface Vector4fc {
      * using the given {@link RoundingMode}.
      *
      * @param mode
-     *          the {@link RoundingMode} to use
+     *             the {@link RoundingMode} to use
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4i get(int mode, Vector4i dest);
@@ -720,7 +724,7 @@ public interface Vector4fc {
      * Set the components of the given vector <code>dest</code> to those of <code>this</code> vector.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f get(Vector4f dest);
@@ -729,7 +733,7 @@ public interface Vector4fc {
      * Set the components of the given vector <code>dest</code> to those of <code>this</code> vector.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4d get(Vector4d dest);
@@ -755,7 +759,7 @@ public interface Vector4fc {
      * <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f floor(Vector4f dest);
@@ -767,7 +771,7 @@ public interface Vector4fc {
      * <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f ceil(Vector4f dest);
@@ -778,7 +782,7 @@ public interface Vector4fc {
      * the result in <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f round(Vector4f dest);
@@ -798,23 +802,25 @@ public interface Vector4fc {
      * and store the result into <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector4f absolute(Vector4f dest);
 
     /**
-     * Compare the vector components of <code>this</code> vector with the given vector using the given <code>delta</code>
+     * Compare the vector components of <code>this</code> vector with the given vector using the given
+     * <code>delta</code>
      * and return whether all of them are equal within a maximum difference of <code>delta</code>.
      * <p>
-     * Please note that this method is not used by any data structure such as {@link ArrayList} {@link HashSet} or {@link HashMap}
+     * Please note that this method is not used by any data structure such as {@link ArrayList} {@link HashSet} or
+     * {@link HashMap}
      * and their operations, such as {@link ArrayList#contains(Object)} or {@link HashSet#remove(Object)}, since those
      * data structures only use the {@link Object#equals(Object)} and {@link Object#hashCode()} methods.
      *
      * @param v
-     *          the other vector
+     *              the other vector
      * @param delta
-     *          the allowed maximum difference
+     *              the allowed maximum difference
      * @return <code>true</code> whether all of the vector components are equal; <code>false</code> otherwise
      */
     boolean equals(Vector4fc v, float delta);
@@ -834,5 +840,4 @@ public interface Vector4fc {
      * @return <code>true</code> if all the vector components are equal
      */
     boolean equals(float x, float y, float z, float w);
-
 }

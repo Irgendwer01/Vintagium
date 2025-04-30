@@ -1,5 +1,11 @@
 package me.jellysquid.mods.sodium.client.render.chunk;
 
+import java.lang.reflect.Array;
+import java.util.concurrent.CompletableFuture;
+
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.math.BlockPos;
+
 import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
 import me.jellysquid.mods.sodium.client.render.SodiumWorldRenderer;
 import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkRenderBounds;
@@ -8,17 +14,13 @@ import me.jellysquid.mods.sodium.client.render.chunk.passes.BlockRenderPass;
 import me.jellysquid.mods.sodium.client.render.texture.SpriteUtil;
 import me.jellysquid.mods.sodium.client.util.math.ChunkSectionPos;
 import me.jellysquid.mods.sodium.client.util.math.FrustumExtended;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.math.BlockPos;
-
-import java.lang.reflect.Array;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * The render state object for a chunk section. This contains all the graphics state for each render pass along with
  * data about the render in the chunk visibility graph.
  */
 public class ChunkRenderContainer<T extends ChunkGraphicsState> {
+
     private final SodiumWorldRenderer worldRenderer;
     private final int chunkX, chunkY, chunkZ;
 
@@ -38,14 +40,15 @@ public class ChunkRenderContainer<T extends ChunkGraphicsState> {
 
     private boolean rebuildableForTranslucents;
 
-    public ChunkRenderContainer(ChunkRenderBackend<T> backend, SodiumWorldRenderer worldRenderer, int chunkX, int chunkY, int chunkZ, ChunkRenderColumn<T> column) {
+    public ChunkRenderContainer(ChunkRenderBackend<T> backend, SodiumWorldRenderer worldRenderer, int chunkX,
+                                int chunkY, int chunkZ, ChunkRenderColumn<T> column) {
         this.worldRenderer = worldRenderer;
 
         this.chunkX = chunkX;
         this.chunkY = chunkY;
         this.chunkZ = chunkZ;
 
-        //noinspection unchecked
+        // noinspection unchecked
         this.graphicsStates = (T[]) Array.newInstance(backend.getGraphicsStateType(), BlockRenderPass.COUNT);
         this.rebuildableForTranslucents = false;
         this.column = column;
@@ -120,7 +123,6 @@ public class ChunkRenderContainer<T extends ChunkGraphicsState> {
         this.rebuildableForTranslucents = flag;
     }
 
-
     public void setData(ChunkRenderData info) {
         if (info == null) {
             throw new NullPointerException("Mesh information must not be null");
@@ -135,6 +137,7 @@ public class ChunkRenderContainer<T extends ChunkGraphicsState> {
     /**
      * Marks this render as needing an update. Important updates are scheduled as "blocking" and will prevent the next
      * frame from being rendered until the update is performed.
+     * 
      * @param important True if the update is blocking, otherwise false
      */
     public boolean scheduleRebuild(boolean important) {
@@ -173,6 +176,7 @@ public class ChunkRenderContainer<T extends ChunkGraphicsState> {
 
     /**
      * Tests if the given chunk render is visible within the provided frustum.
+     * 
      * @param frustum The frustum to test against
      * @return True if visible, otherwise false
      */

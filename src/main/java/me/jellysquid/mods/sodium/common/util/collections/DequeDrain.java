@@ -4,6 +4,7 @@ import java.util.Deque;
 import java.util.Iterator;
 
 public class DequeDrain<T> implements Iterator<T> {
+
     private final Deque<T> deque;
 
     public DequeDrain(Deque<T> deque) {

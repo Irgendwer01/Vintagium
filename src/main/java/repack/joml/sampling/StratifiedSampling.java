@@ -39,7 +39,7 @@ public class StratifiedSampling {
      * <code>seed</code>.
      *
      * @param seed
-     *            the seed to initialize the random number generator with
+     *             the seed to initialize the random number generator with
      */
     public StratifiedSampling(long seed) {
         this.rnd = new Random(seed);
@@ -51,9 +51,9 @@ public class StratifiedSampling {
      * Each sample within its stratum is distributed randomly.
      *
      * @param n
-     *            the number of strata in each dimension
+     *                 the number of strata in each dimension
      * @param callback
-     *            will be called for each generated sample position
+     *                 will be called for each generated sample position
      */
     public void generateRandom(int n, Callback2d callback) {
         for (int y = 0; y < n; y++) {
@@ -71,12 +71,12 @@ public class StratifiedSampling {
      * Each sample within its stratum is confined to be within <code>[-centering/2..1-centering]</code> of its stratum.
      *
      * @param n
-     *            the number of strata in each dimension
+     *                  the number of strata in each dimension
      * @param centering
-     *            determines how much the random samples in each stratum are confined to be near the center of the
-     *            stratum. Possible values are <code>[0..1]</code>
+     *                  determines how much the random samples in each stratum are confined to be near the center of the
+     *                  stratum. Possible values are <code>[0..1]</code>
      * @param callback
-     *            will be called for each generated sample position
+     *                  will be called for each generated sample position
      */
     public void generateCentered(int n, float centering, Callback2d callback) {
         float start = centering * 0.5f;
@@ -89,5 +89,4 @@ public class StratifiedSampling {
             }
         }
     }
-
 }

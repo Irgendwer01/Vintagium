@@ -1,5 +1,8 @@
 package me.jellysquid.mods.sodium.client.render.chunk.backends.oneshot;
 
+import java.util.Arrays;
+import java.util.Map;
+
 import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexAttributeBinding;
 import me.jellysquid.mods.sodium.client.gl.attribute.GlVertexFormat;
 import me.jellysquid.mods.sodium.client.gl.buffer.GlBufferUsage;
@@ -18,10 +21,8 @@ import me.jellysquid.mods.sodium.client.render.chunk.data.ChunkMeshData;
 import me.jellysquid.mods.sodium.client.render.chunk.format.ChunkMeshAttribute;
 import me.jellysquid.mods.sodium.client.render.chunk.shader.ChunkShaderBindingPoints;
 
-import java.util.Arrays;
-import java.util.Map;
-
 public class ChunkOneshotGraphicsState extends ChunkGraphicsState {
+
     private final GlMutableBuffer vertexBuffer;
 
     protected GlTessellation tessellation;
@@ -73,10 +74,14 @@ public class ChunkOneshotGraphicsState extends ChunkGraphicsState {
 
         this.tessellation = commandList.createTessellation(GlPrimitiveType.QUADS, new TessellationBinding[] {
                 new TessellationBinding(this.vertexBuffer, new GlVertexAttributeBinding[] {
-                        new GlVertexAttributeBinding(ChunkShaderBindingPoints.POSITION, vertexFormat.getAttribute(ChunkMeshAttribute.POSITION)),
-                        new GlVertexAttributeBinding(ChunkShaderBindingPoints.COLOR, vertexFormat.getAttribute(ChunkMeshAttribute.COLOR)),
-                        new GlVertexAttributeBinding(ChunkShaderBindingPoints.TEX_COORD, vertexFormat.getAttribute(ChunkMeshAttribute.TEXTURE)),
-                        new GlVertexAttributeBinding(ChunkShaderBindingPoints.LIGHT_COORD, vertexFormat.getAttribute(ChunkMeshAttribute.LIGHT))
+                        new GlVertexAttributeBinding(ChunkShaderBindingPoints.POSITION,
+                                vertexFormat.getAttribute(ChunkMeshAttribute.POSITION)),
+                        new GlVertexAttributeBinding(ChunkShaderBindingPoints.COLOR,
+                                vertexFormat.getAttribute(ChunkMeshAttribute.COLOR)),
+                        new GlVertexAttributeBinding(ChunkShaderBindingPoints.TEX_COORD,
+                                vertexFormat.getAttribute(ChunkMeshAttribute.TEXTURE)),
+                        new GlVertexAttributeBinding(ChunkShaderBindingPoints.LIGHT_COORD,
+                                vertexFormat.getAttribute(ChunkMeshAttribute.LIGHT))
                 }, false)
         });
 

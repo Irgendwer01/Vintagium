@@ -5,6 +5,7 @@ import me.jellysquid.mods.sodium.client.gui.utils.Rect2i;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 
 public class TickBoxControl implements Control<Boolean> {
+
     private final Option<Boolean> option;
 
     public TickBoxControl(Option<Boolean> option) {
@@ -27,6 +28,7 @@ public class TickBoxControl implements Control<Boolean> {
     }
 
     private static class TickBoxControlElement extends ControlElement<Boolean> {
+
         private final Rect2i button;
 
         public TickBoxControlElement(Option<Boolean> option, Dim2i dim) {
@@ -88,6 +90,4 @@ public class TickBoxControl implements Control<Boolean> {
             });
         }
     }
-
-
 }

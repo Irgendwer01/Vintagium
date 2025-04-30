@@ -56,7 +56,7 @@ public interface Vector2ic {
      * @see #get(int, ByteBuffer)
      *
      * @param buffer
-     *          will receive the values of this vector in <code>x, y</code> order
+     *               will receive the values of this vector in <code>x, y</code> order
      * @return the passed in buffer
      */
     ByteBuffer get(ByteBuffer buffer);
@@ -68,9 +68,9 @@ public interface Vector2ic {
      * This method will not increment the position of the given ByteBuffer.
      *
      * @param index
-     *          the absolute position into the ByteBuffer
+     *               the absolute position into the ByteBuffer
      * @param buffer
-     *          will receive the values of this vector in <code>x, y</code> order
+     *               will receive the values of this vector in <code>x, y</code> order
      * @return the passed in buffer
      */
     ByteBuffer get(int index, ByteBuffer buffer);
@@ -88,7 +88,7 @@ public interface Vector2ic {
      * @see #get(int, IntBuffer)
      *
      * @param buffer
-     *          will receive the values of this vector in <code>x, y</code> order
+     *               will receive the values of this vector in <code>x, y</code> order
      * @return the passed in buffer
      */
     IntBuffer get(IntBuffer buffer);
@@ -100,9 +100,9 @@ public interface Vector2ic {
      * This method will not increment the position of the given IntBuffer.
      *
      * @param index
-     *          the absolute position into the IntBuffer
+     *               the absolute position into the IntBuffer
      * @param buffer
-     *          will receive the values of this vector in <code>x, y</code> order
+     *               will receive the values of this vector in <code>x, y</code> order
      * @return the passed in buffer
      */
     IntBuffer get(int index, IntBuffer buffer);
@@ -112,10 +112,11 @@ public interface Vector2ic {
      * <p>
      * This method will throw an {@link UnsupportedOperationException} when JOML is used with `-Djoml.nounsafe`.
      * <p>
-     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does not belong to this process.</em>
+     * <em>This method is unsafe as it can result in a crash of the JVM process when the specified address range does
+     * not belong to this process.</em>
      *
      * @param address
-     *            the off-heap address where to store this vector
+     *                the off-heap address where to store this vector
      * @return this
      */
     Vector2ic getToAddress(long address);
@@ -125,9 +126,9 @@ public interface Vector2ic {
      * <code>dest</code>.
      *
      * @param v
-     *          the vector to subtract
+     *             the vector to subtract
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector2i sub(Vector2ic v, Vector2i dest);
@@ -137,11 +138,11 @@ public interface Vector2ic {
      * result in <code>dest</code>.
      *
      * @param x
-     *          the x component to subtract
+     *             the x component to subtract
      * @param y
-     *          the y component to subtract
+     *             the y component to subtract
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector2i sub(int x, int y, Vector2i dest);
@@ -228,9 +229,9 @@ public interface Vector2ic {
      * <code>dest</code>.
      *
      * @param v
-     *          the vector to add
+     *             the vector to add
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector2i add(Vector2ic v, Vector2i dest);
@@ -240,11 +241,11 @@ public interface Vector2ic {
      * result in <code>dest</code>.
      *
      * @param x
-     *          the x component to add
+     *             the x component to add
      * @param y
-     *          the y component to add
+     *             the y component to add
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector2i add(int x, int y, Vector2i dest);
@@ -254,9 +255,9 @@ public interface Vector2ic {
      * value and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to multiply this vector by
+     *               the scalar to multiply this vector by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector2i mul(int scalar, Vector2i dest);
@@ -266,9 +267,9 @@ public interface Vector2ic {
      * <code>dest</code>.
      *
      * @param v
-     *          the vector to multiply
+     *             the vector to multiply
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector2i mul(Vector2ic v, Vector2i dest);
@@ -278,11 +279,11 @@ public interface Vector2ic {
      * result in <code>dest</code>.
      *
      * @param x
-     *          the x component to multiply
+     *             the x component to multiply
      * @param y
-     *          the y component to multiply
+     *             the y component to multiply
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector2i mul(int x, int y, Vector2i dest);
@@ -292,9 +293,9 @@ public interface Vector2ic {
      * and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector2i div(float scalar, Vector2i dest);
@@ -304,9 +305,9 @@ public interface Vector2ic {
      * and store the result in <code>dest</code>.
      *
      * @param scalar
-     *          the scalar to divide by
+     *               the scalar to divide by
      * @param dest
-     *          will hold the result
+     *               will hold the result
      * @return dest
      */
     Vector2i div(int scalar, Vector2i dest);
@@ -315,7 +316,7 @@ public interface Vector2ic {
      * Negate this vector and store the result in <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector2i negate(Vector2i dest);
@@ -324,9 +325,9 @@ public interface Vector2ic {
      * Set the components of <code>dest</code> to be the component-wise minimum of this and the other vector.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector2i min(Vector2ic v, Vector2i dest);
@@ -335,9 +336,9 @@ public interface Vector2ic {
      * Set the components of <code>dest</code> to be the component-wise maximum of this and the other vector.
      *
      * @param v
-     *          the other vector
+     *             the other vector
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector2i max(Vector2ic v, Vector2i dest);
@@ -361,7 +362,7 @@ public interface Vector2ic {
      * and store the result into <code>dest</code>.
      *
      * @param dest
-     *          will hold the result
+     *             will hold the result
      * @return dest
      */
     Vector2i absolute(Vector2i dest);
@@ -370,7 +371,7 @@ public interface Vector2ic {
      * Get the value of the specified component of this vector.
      *
      * @param component
-     *          the component, within <code>[0..1]</code>
+     *                  the component, within <code>[0..1]</code>
      * @return the value
      * @throws IllegalArgumentException if <code>component</code> is not within <code>[0..1]</code>
      */
@@ -387,5 +388,4 @@ public interface Vector2ic {
      * @return <code>true</code> if all the vector components are equal
      */
     boolean equals(int x, int y);
-
 }

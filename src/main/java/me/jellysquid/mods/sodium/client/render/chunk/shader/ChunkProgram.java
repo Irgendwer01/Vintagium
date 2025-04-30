@@ -1,17 +1,20 @@
 package me.jellysquid.mods.sodium.client.render.chunk.shader;
 
-import me.jellysquid.mods.sodium.client.gl.shader.GlProgram;
-import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
-import me.jellysquid.mods.sodium.client.render.GameRendererContext;
+import java.util.function.Function;
+
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL20;
 
-import java.util.function.Function;
+import me.jellysquid.mods.sodium.client.gl.device.RenderDevice;
+import me.jellysquid.mods.sodium.client.gl.shader.GlProgram;
+import me.jellysquid.mods.sodium.client.render.GameRendererContext;
 
 /**
  * A forward-rendering shader program for chunks.
  */
 public class ChunkProgram extends GlProgram {
+
     // Uniform variable binding indexes
     private final int uModelViewProjectionMatrix;
     private final int uModelScale;
@@ -22,7 +25,8 @@ public class ChunkProgram extends GlProgram {
     // The fog shader component used by this program in order to setup the appropriate GL state
     private final ChunkShaderFogComponent fogShader;
 
-    protected ChunkProgram(RenderDevice owner, ResourceLocation name, int handle, Function<ChunkProgram, ChunkShaderFogComponent> fogShaderFunction) {
+    protected ChunkProgram(RenderDevice owner, ResourceLocation name, int handle,
+                           Function<ChunkProgram, ChunkShaderFogComponent> fogShaderFunction) {
         super(owner, name, handle);
 
         this.uModelViewProjectionMatrix = this.getUniformLocation("u_ModelViewProjectionMatrix");
@@ -44,6 +48,7 @@ public class ChunkProgram extends GlProgram {
 
         this.fogShader.setup();
 
-        GL20.glUniformMatrix4(this.uModelViewProjectionMatrix, false, GameRendererContext.getModelViewProjectionMatrix());
+        GL20.glUniformMatrix4(this.uModelViewProjectionMatrix, false,
+                GameRendererContext.getModelViewProjectionMatrix());
     }
 }

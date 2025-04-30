@@ -42,7 +42,8 @@ public class Matrix3fStack extends Matrix3f {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The matrix stack as a non-growable array. The size of the stack must be specified in the {@link #Matrix3fStack(int) constructor}.
+     * The matrix stack as a non-growable array. The size of the stack must be specified in the
+     * {@link #Matrix3fStack(int) constructor}.
      */
     private Matrix3f[] mats;
 
@@ -57,8 +58,9 @@ public class Matrix3fStack extends Matrix3f {
      * Initially the stack pointer is at zero and the current matrix is set to identity.
      *
      * @param stackSize
-     *            the size of the stack. This must be at least 1, in which case the {@link Matrix3fStack} simply only consists of <code>this</code>
-     *            {@link Matrix3f}
+     *                  the size of the stack. This must be at least 1, in which case the {@link Matrix3fStack} simply
+     *                  only consists of <code>this</code>
+     *                  {@link Matrix3f}
      */
     public Matrix3fStack(int stackSize) {
         if (stackSize < 1) {
@@ -135,7 +137,8 @@ public class Matrix3fStack extends Matrix3f {
      *
      * - Matrix3f.equals(Matrix3fStack) is true iff all the 9 matrix elements are equal
      * - Matrix3fStack.equals(Matrix3f) is true iff all the 9 matrix elements are equal
-     * - Matrix3fStack.equals(Matrix3fStack) is true iff all 9 matrix elements are equal AND the matrix arrays as well as the stack pointer are equal
+     * - Matrix3fStack.equals(Matrix3fStack) is true iff all 9 matrix elements are equal AND the matrix arrays as well
+     * as the stack pointer are equal
      * - everything else is inequal
      */
     public boolean equals(Object obj) {
@@ -182,5 +185,4 @@ public class Matrix3fStack extends Matrix3f {
         cloned.mats = clonedMats;
         return cloned;
     }
-
 }

@@ -1,15 +1,17 @@
 package me.jellysquid.mods.sodium.client.util.math;
 
 import net.minecraft.util.EnumFacing;
+
 import repack.joml.Vector3f;
 
 public interface Matrix3fExtended {
+
     /**
      * Applies the specified rotation to this matrix in-place.
      *
      * @param quaternion The quaternion to rotate this matrix by
      */
-    //void rotate(Quaternion quaternion);
+    // void rotate(Quaternion quaternion);
 
     int computeNormal(EnumFacing dir);
 

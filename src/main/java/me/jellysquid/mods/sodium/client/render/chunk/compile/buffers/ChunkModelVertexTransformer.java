@@ -5,6 +5,7 @@ import me.jellysquid.mods.sodium.client.render.chunk.format.ChunkModelOffset;
 import me.jellysquid.mods.sodium.client.render.chunk.format.ModelVertexSink;
 
 public class ChunkModelVertexTransformer extends AbstractVertexTransformer<ModelVertexSink> implements ModelVertexSink {
+
     /**
      * The translation to be applied to all quads written into this mesh builder.
      */

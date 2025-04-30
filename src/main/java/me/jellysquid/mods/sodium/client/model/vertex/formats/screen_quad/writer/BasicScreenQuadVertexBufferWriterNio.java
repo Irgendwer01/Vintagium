@@ -1,13 +1,14 @@
 package me.jellysquid.mods.sodium.client.model.vertex.formats.screen_quad.writer;
 
+import java.nio.ByteBuffer;
+
 import me.jellysquid.mods.sodium.client.model.vertex.VanillaVertexTypes;
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferView;
 import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferWriterNio;
 import me.jellysquid.mods.sodium.client.model.vertex.formats.screen_quad.BasicScreenQuadVertexSink;
 
-import java.nio.ByteBuffer;
-
 public class BasicScreenQuadVertexBufferWriterNio extends VertexBufferWriterNio implements BasicScreenQuadVertexSink {
+
     public BasicScreenQuadVertexBufferWriterNio(VertexBufferView backingBuffer) {
         super(backingBuffer, VanillaVertexTypes.BASIC_SCREEN_QUADS);
     }

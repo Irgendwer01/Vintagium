@@ -1,10 +1,11 @@
 package me.jellysquid.mods.sodium.client.render.chunk;
 
-import me.jellysquid.mods.sodium.client.gl.device.CommandList;
-
 import java.nio.ByteBuffer;
 
+import me.jellysquid.mods.sodium.client.gl.device.CommandList;
+
 public abstract class ChunkGraphicsState {
+
     private final int x, y, z;
 
     private ByteBuffer translucencyData;

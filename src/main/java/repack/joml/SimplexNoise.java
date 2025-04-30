@@ -32,8 +32,11 @@ package repack.joml;
  * href="http://staffwww.itn.liu.se/~stegu/simplexnoise/SimplexNoise.java">http://http://staffwww.itn.liu.se/</a>.
  */
 public class SimplexNoise {
+
     private static class Vector3b {
+
         byte x, y, z;
+
         Vector3b(int x, int y, int z) {
             super();
             this.x = (byte) x;
@@ -41,8 +44,11 @@ public class SimplexNoise {
             this.z = (byte) z;
         }
     }
+
     private static class Vector4b {
+
         byte x, y, z, w;
+
         Vector4b(int x, int y, int z, int w) {
             super();
             this.x = (byte) x;
@@ -56,31 +62,47 @@ public class SimplexNoise {
     // Use a three-component vector here to save memory. (instead of using 4-component 'Grad' class)
     // And as the original author mentioned on the 'Grad' class, using a class to store the gradient components
     // is indeed faster compared to using a simple int[] array...
-    private static final Vector3b[] grad3 = { new Vector3b(1, 1, 0), new Vector3b(-1, 1, 0), new Vector3b(1, -1, 0), new Vector3b(-1, -1, 0),
-            new Vector3b(1, 0, 1), new Vector3b(-1, 0, 1), new Vector3b(1, 0, -1), new Vector3b(-1, 0, -1), new Vector3b(0, 1, 1), new Vector3b(0, -1, 1),
+    private static final Vector3b[] grad3 = { new Vector3b(1, 1, 0), new Vector3b(-1, 1, 0), new Vector3b(1, -1, 0),
+            new Vector3b(-1, -1, 0),
+            new Vector3b(1, 0, 1), new Vector3b(-1, 0, 1), new Vector3b(1, 0, -1), new Vector3b(-1, 0, -1),
+            new Vector3b(0, 1, 1), new Vector3b(0, -1, 1),
             new Vector3b(0, 1, -1), new Vector3b(0, -1, -1) };
 
     // Kai Burjack:
     // As the original author mentioned on the 'Grad' class, using a class to store the gradient components
     // is indeed faster compared to using a simple int[] array...
-    private static final Vector4b[] grad4 = { new Vector4b(0, 1, 1, 1), new Vector4b(0, 1, 1, -1), new Vector4b(0, 1, -1, 1), new Vector4b(0, 1, -1, -1),
-            new Vector4b(0, -1, 1, 1), new Vector4b(0, -1, 1, -1), new Vector4b(0, -1, -1, 1), new Vector4b(0, -1, -1, -1), new Vector4b(1, 0, 1, 1),
-            new Vector4b(1, 0, 1, -1), new Vector4b(1, 0, -1, 1), new Vector4b(1, 0, -1, -1), new Vector4b(-1, 0, 1, 1), new Vector4b(-1, 0, 1, -1),
-            new Vector4b(-1, 0, -1, 1), new Vector4b(-1, 0, -1, -1), new Vector4b(1, 1, 0, 1), new Vector4b(1, 1, 0, -1), new Vector4b(1, -1, 0, 1),
-            new Vector4b(1, -1, 0, -1), new Vector4b(-1, 1, 0, 1), new Vector4b(-1, 1, 0, -1), new Vector4b(-1, -1, 0, 1), new Vector4b(-1, -1, 0, -1),
-            new Vector4b(1, 1, 1, 0), new Vector4b(1, 1, -1, 0), new Vector4b(1, -1, 1, 0), new Vector4b(1, -1, -1, 0), new Vector4b(-1, 1, 1, 0),
+    private static final Vector4b[] grad4 = { new Vector4b(0, 1, 1, 1), new Vector4b(0, 1, 1, -1),
+            new Vector4b(0, 1, -1, 1), new Vector4b(0, 1, -1, -1),
+            new Vector4b(0, -1, 1, 1), new Vector4b(0, -1, 1, -1), new Vector4b(0, -1, -1, 1),
+            new Vector4b(0, -1, -1, -1), new Vector4b(1, 0, 1, 1),
+            new Vector4b(1, 0, 1, -1), new Vector4b(1, 0, -1, 1), new Vector4b(1, 0, -1, -1), new Vector4b(-1, 0, 1, 1),
+            new Vector4b(-1, 0, 1, -1),
+            new Vector4b(-1, 0, -1, 1), new Vector4b(-1, 0, -1, -1), new Vector4b(1, 1, 0, 1),
+            new Vector4b(1, 1, 0, -1), new Vector4b(1, -1, 0, 1),
+            new Vector4b(1, -1, 0, -1), new Vector4b(-1, 1, 0, 1), new Vector4b(-1, 1, 0, -1),
+            new Vector4b(-1, -1, 0, 1), new Vector4b(-1, -1, 0, -1),
+            new Vector4b(1, 1, 1, 0), new Vector4b(1, 1, -1, 0), new Vector4b(1, -1, 1, 0), new Vector4b(1, -1, -1, 0),
+            new Vector4b(-1, 1, 1, 0),
             new Vector4b(-1, 1, -1, 0), new Vector4b(-1, -1, 1, 0), new Vector4b(-1, -1, -1, 0) };
 
     // Kai Burjack:
     // Use a byte[] instead of a short[] to save memory
-    private static final byte[] p = { -105, -96, -119, 91, 90, 15, -125, 13, -55, 95, 96, 53, -62, -23, 7, -31, -116, 36, 103, 30, 69, -114, 8, 99, 37, -16,
-            21, 10, 23, -66, 6, -108, -9, 120, -22, 75, 0, 26, -59, 62, 94, -4, -37, -53, 117, 35, 11, 32, 57, -79, 33, 88, -19, -107, 56, 87, -82, 20, 125,
-            -120, -85, -88, 68, -81, 74, -91, 71, -122, -117, 48, 27, -90, 77, -110, -98, -25, 83, 111, -27, 122, 60, -45, -123, -26, -36, 105, 92, 41, 55, 46,
-            -11, 40, -12, 102, -113, 54, 65, 25, 63, -95, 1, -40, 80, 73, -47, 76, -124, -69, -48, 89, 18, -87, -56, -60, -121, -126, 116, -68, -97, 86, -92,
-            100, 109, -58, -83, -70, 3, 64, 52, -39, -30, -6, 124, 123, 5, -54, 38, -109, 118, 126, -1, 82, 85, -44, -49, -50, 59, -29, 47, 16, 58, 17, -74,
-            -67, 28, 42, -33, -73, -86, -43, 119, -8, -104, 2, 44, -102, -93, 70, -35, -103, 101, -101, -89, 43, -84, 9, -127, 22, 39, -3, 19, 98, 108, 110,
-            79, 113, -32, -24, -78, -71, 112, 104, -38, -10, 97, -28, -5, 34, -14, -63, -18, -46, -112, 12, -65, -77, -94, -15, 81, 51, -111, -21, -7, 14, -17,
-            107, 49, -64, -42, 31, -75, -57, 106, -99, -72, 84, -52, -80, 115, 121, 50, 45, 127, 4, -106, -2, -118, -20, -51, 93, -34, 114, 67, 29, 24, 72,
+    private static final byte[] p = { -105, -96, -119, 91, 90, 15, -125, 13, -55, 95, 96, 53, -62, -23, 7, -31, -116,
+            36, 103, 30, 69, -114, 8, 99, 37, -16,
+            21, 10, 23, -66, 6, -108, -9, 120, -22, 75, 0, 26, -59, 62, 94, -4, -37, -53, 117, 35, 11, 32, 57, -79, 33,
+            88, -19, -107, 56, 87, -82, 20, 125,
+            -120, -85, -88, 68, -81, 74, -91, 71, -122, -117, 48, 27, -90, 77, -110, -98, -25, 83, 111, -27, 122, 60,
+            -45, -123, -26, -36, 105, 92, 41, 55, 46,
+            -11, 40, -12, 102, -113, 54, 65, 25, 63, -95, 1, -40, 80, 73, -47, 76, -124, -69, -48, 89, 18, -87, -56,
+            -60, -121, -126, 116, -68, -97, 86, -92,
+            100, 109, -58, -83, -70, 3, 64, 52, -39, -30, -6, 124, 123, 5, -54, 38, -109, 118, 126, -1, 82, 85, -44,
+            -49, -50, 59, -29, 47, 16, 58, 17, -74,
+            -67, 28, 42, -33, -73, -86, -43, 119, -8, -104, 2, 44, -102, -93, 70, -35, -103, 101, -101, -89, 43, -84, 9,
+            -127, 22, 39, -3, 19, 98, 108, 110,
+            79, 113, -32, -24, -78, -71, 112, 104, -38, -10, 97, -28, -5, 34, -14, -63, -18, -46, -112, 12, -65, -77,
+            -94, -15, 81, 51, -111, -21, -7, 14, -17,
+            107, 49, -64, -42, 31, -75, -57, 106, -99, -72, 84, -52, -80, 115, 121, 50, 45, 127, 4, -106, -2, -118, -20,
+            -51, 93, -34, 114, 67, 29, 24, 72,
             -13, -115, -128, -61, 78, 66, -41, 61, -100, -76 };
     // To remove the need for index wrapping, float the permutation table length
     private static final byte[] perm = new byte[512];
@@ -88,7 +110,7 @@ public class SimplexNoise {
     static {
         for (int i = 0; i < 512; i++) {
             perm[i] = p[i & 255];
-            permMod12[i] = (byte) ((perm[i]&0xFF) % 12);
+            permMod12[i] = (byte) ((perm[i] & 0xFF) % 12);
         }
     }
 
@@ -161,9 +183,9 @@ public class SimplexNoise {
         // Work out the hashed gradient indices of the three simplex corners
         int ii = i & 255;
         int jj = j & 255;
-        int gi0 = permMod12[ii + perm[jj]&0xFF]&0xFF;
-        int gi1 = permMod12[ii + i1 + perm[jj + j1]&0xFF]&0xFF;
-        int gi2 = permMod12[ii + 1 + perm[jj + 1]&0xFF]&0xFF;
+        int gi0 = permMod12[ii + perm[jj] & 0xFF] & 0xFF;
+        int gi1 = permMod12[ii + i1 + perm[jj + j1] & 0xFF] & 0xFF;
+        int gi2 = permMod12[ii + 1 + perm[jj + 1] & 0xFF] & 0xFF;
         // Calculate the contribution from the three corners
         float t0 = 0.5f - x0 * x0 - y0 * y0;
         if (t0 < 0.0f)
@@ -290,10 +312,10 @@ public class SimplexNoise {
         int ii = i & 255;
         int jj = j & 255;
         int kk = k & 255;
-        int gi0 = permMod12[ii + perm[jj + perm[kk]&0xFF]&0xFF]&0xFF;
-        int gi1 = permMod12[ii + i1 + perm[jj + j1 + perm[kk + k1]&0xFF]&0xFF]&0xFF;
-        int gi2 = permMod12[ii + i2 + perm[jj + j2 + perm[kk + k2]&0xFF]&0xFF]&0xFF;
-        int gi3 = permMod12[ii + 1 + perm[jj + 1 + perm[kk + 1]&0xFF]&0xFF]&0xFF;
+        int gi0 = permMod12[ii + perm[jj + perm[kk] & 0xFF] & 0xFF] & 0xFF;
+        int gi1 = permMod12[ii + i1 + perm[jj + j1 + perm[kk + k1] & 0xFF] & 0xFF] & 0xFF;
+        int gi2 = permMod12[ii + i2 + perm[jj + j2 + perm[kk + k2] & 0xFF] & 0xFF] & 0xFF;
+        int gi3 = permMod12[ii + 1 + perm[jj + 1 + perm[kk + 1] & 0xFF] & 0xFF] & 0xFF;
         // Calculate the contribution from the four corners
         float t0 = 0.6f - x0 * x0 - y0 * y0 - z0 * z0;
         if (t0 < 0.0f)
@@ -437,11 +459,11 @@ public class SimplexNoise {
         int jj = j & 255;
         int kk = k & 255;
         int ll = l & 255;
-        int gi0 = (perm[ii + perm[jj + perm[kk + perm[ll]&0xFF]&0xFF]&0xFF]&0xFF) % 32;
-        int gi1 = (perm[ii + i1 + perm[jj + j1 + perm[kk + k1 + perm[ll + l1]&0xFF]&0xFF]&0xFF]&0xFF) % 32;
-        int gi2 = (perm[ii + i2 + perm[jj + j2 + perm[kk + k2 + perm[ll + l2]&0xFF]&0xFF]&0xFF]&0xFF) % 32;
-        int gi3 = (perm[ii + i3 + perm[jj + j3 + perm[kk + k3 + perm[ll + l3]&0xFF]&0xFF]&0xFF]&0xFF) % 32;
-        int gi4 = (perm[ii + 1 + perm[jj + 1 + perm[kk + 1 + perm[ll + 1]&0xFF]&0xFF]&0xFF]&0xFF) % 32;
+        int gi0 = (perm[ii + perm[jj + perm[kk + perm[ll] & 0xFF] & 0xFF] & 0xFF] & 0xFF) % 32;
+        int gi1 = (perm[ii + i1 + perm[jj + j1 + perm[kk + k1 + perm[ll + l1] & 0xFF] & 0xFF] & 0xFF] & 0xFF) % 32;
+        int gi2 = (perm[ii + i2 + perm[jj + j2 + perm[kk + k2 + perm[ll + l2] & 0xFF] & 0xFF] & 0xFF] & 0xFF) % 32;
+        int gi3 = (perm[ii + i3 + perm[jj + j3 + perm[kk + k3 + perm[ll + l3] & 0xFF] & 0xFF] & 0xFF] & 0xFF) % 32;
+        int gi4 = (perm[ii + 1 + perm[jj + 1 + perm[kk + 1 + perm[ll + 1] & 0xFF] & 0xFF] & 0xFF] & 0xFF) % 32;
         // Calculate the contribution from the five corners
         float t0 = 0.6f - x0 * x0 - y0 * y0 - z0 * z0 - w0 * w0;
         if (t0 < 0.0f)
@@ -481,5 +503,4 @@ public class SimplexNoise {
         // Sum up and scale the result to cover the range [-1,1]
         return 27.0f * (n0 + n1 + n2 + n3 + n4);
     }
-
 }

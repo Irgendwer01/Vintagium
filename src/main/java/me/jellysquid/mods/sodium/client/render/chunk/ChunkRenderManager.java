@@ -1,5 +1,18 @@
 package me.jellysquid.mods.sodium.client.render.chunk;
 
+import java.util.ArrayDeque;
+import java.util.Collection;
+import java.util.Deque;
+import java.util.concurrent.CompletableFuture;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
+
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
@@ -31,20 +44,9 @@ import me.jellysquid.mods.sodium.client.world.ChunkStatusListener;
 import me.jellysquid.mods.sodium.common.util.DirectionUtil;
 import me.jellysquid.mods.sodium.common.util.IdTable;
 import me.jellysquid.mods.sodium.common.util.collections.FutureDequeDrain;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
-
-import java.util.ArrayDeque;
-import java.util.Collection;
-import java.util.Deque;
-import java.util.concurrent.CompletableFuture;
 
 public class ChunkRenderManager<T extends ChunkGraphicsState> implements ChunkStatusListener {
+
     /**
      * The maximum distance a chunk can be from the player's camera in order to be eligible for blocking updates.
      */
@@ -100,10 +102,11 @@ public class ChunkRenderManager<T extends ChunkGraphicsState> implements ChunkSt
     private double fogRenderCutoff;
 
     private final int translucencyBlockRenderDistance;
-    
+
     private boolean alwaysDeferChunkUpdates;
 
-    public ChunkRenderManager(SodiumWorldRenderer renderer, ChunkRenderBackend<T> backend, BlockRenderPassManager renderPassManager, WorldClient world, int renderDistance) {
+    public ChunkRenderManager(SodiumWorldRenderer renderer, ChunkRenderBackend<T> backend,
+                              BlockRenderPassManager renderPassManager, WorldClient world, int renderDistance) {
         this.backend = backend;
         this.renderer = renderer;
         this.world = world;
@@ -155,16 +158,17 @@ public class ChunkRenderManager<T extends ChunkGraphicsState> implements ChunkSt
 
     private void iterateChunks(FrustumExtended frustum, int frame, boolean spectator) {
         // Schedule new translucency sorting tasks if the camera has moved
-        if(this.translucencySorting) {
+        if (this.translucencySorting) {
             this.checkTranslucencyCameraMoved();
-            if(this.hasCameraMovedTranslucent) {
-                for(Object o : this.renders.getElements()) {
-                    if(o == null)
+            if (this.hasCameraMovedTranslucent) {
+                for (Object o : this.renders.getElements()) {
+                    if (o == null)
                         continue;
-                    ChunkRenderContainer<T> render = (ChunkRenderContainer<T>)o;
-                    if(render.getData().isEmpty())
+                    ChunkRenderContainer<T> render = (ChunkRenderContainer<T>) o;
+                    if (render.getData().isEmpty())
                         continue;
-                    if(!render.needsRebuild() && render.canRebuild() && render.shouldRebuildForTranslucents() && render.getSquaredDistance(cameraX, cameraY, cameraZ) < translucencyBlockRenderDistance) {
+                    if (!render.needsRebuild() && render.canRebuild() && render.shouldRebuildForTranslucents() &&
+                            render.getSquaredDistance(cameraX, cameraY, cameraZ) < translucencyBlockRenderDistance) {
                         // put it at the end of the queue, after any "real" rebuild tasks
                         render.scheduleSort(false);
                     }
@@ -189,7 +193,7 @@ public class ChunkRenderManager<T extends ChunkGraphicsState> implements ChunkSt
         float dx = (cameraX - lastCameraTranslucentX);
         float dy = (cameraY - lastCameraTranslucentY);
         float dz = (cameraZ - lastCameraTranslucentZ);
-        if((dx * dx + dy * dy + dz * dz) > 1.0) {
+        if ((dx * dx + dy * dy + dz * dz) > 1.0) {
             lastCameraTranslucentX = cameraX;
             lastCameraTranslucentY = cameraY;
             lastCameraTranslucentZ = cameraZ;
@@ -234,7 +238,8 @@ public class ChunkRenderManager<T extends ChunkGraphicsState> implements ChunkSt
 
             if (state != null) {
                 ChunkRenderList<T> list = this.chunkRenderLists[i];
-                list.add(state, (this.translucencySorting && BlockRenderPass.VALUES[i].isTranslucent()) ? (ChunkFaceFlags.ALL & render.getFacesWithData()) : visibleFaces);
+                list.add(state, (this.translucencySorting && BlockRenderPass.VALUES[i].isTranslucent()) ?
+                        (ChunkFaceFlags.ALL & render.getFacesWithData()) : visibleFaces);
 
                 added = true;
             }
@@ -453,7 +458,7 @@ public class ChunkRenderManager<T extends ChunkGraphicsState> implements ChunkSt
 
         this.backend.begin();
         // Ensure multidraw regions are ordered appropriately
-        if(this.backend instanceof MultidrawChunkRenderBackend) {
+        if (this.backend instanceof MultidrawChunkRenderBackend) {
             ((MultidrawChunkRenderBackend) this.backend).setReverseRegions(pass.isTranslucent());
         }
         this.backend.render(commandList, iterator, new ChunkCameraContext(x, y, z));
@@ -486,7 +491,7 @@ public class ChunkRenderManager<T extends ChunkGraphicsState> implements ChunkSt
             if (render == null) {
                 continue;
             }
-            
+
             // Do not allow distant chunks to block rendering
             if (this.alwaysDeferChunkUpdates || !this.isChunkPrioritized(render)) {
                 this.builder.deferRebuild(render);
@@ -528,7 +533,8 @@ public class ChunkRenderManager<T extends ChunkGraphicsState> implements ChunkSt
 
         if (!futures.isEmpty()) {
             this.dirty = true;
-            this.backend.upload(RenderDevice.INSTANCE.createCommandList(), this.builder.filterChunkBuilds(new FutureDequeDrain<>(futures)));
+            this.backend.upload(RenderDevice.INSTANCE.createCommandList(),
+                    this.builder.filterChunkBuilds(new FutureDequeDrain<>(futures)));
         }
     }
 
@@ -621,7 +627,8 @@ public class ChunkRenderManager<T extends ChunkGraphicsState> implements ChunkSt
     }
 
     public boolean isChunkPrioritized(ChunkRenderContainer<T> render) {
-        return render != null && render.getSquaredDistance(this.cameraX, this.cameraY, this.cameraZ) <= NEARBY_CHUNK_DISTANCE;
+        return render != null &&
+                render.getSquaredDistance(this.cameraX, this.cameraY, this.cameraZ) <= NEARBY_CHUNK_DISTANCE;
     }
 
     public int getVisibleChunkCount() {

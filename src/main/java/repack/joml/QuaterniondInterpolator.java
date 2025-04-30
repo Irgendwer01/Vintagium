@@ -35,11 +35,13 @@ public class QuaterniondInterpolator {
     /**
      * Performs singular value decomposition on {@link Matrix3d}.
      * <p>
-     * This code was adapted from <a href="http://www.public.iastate.edu/~dicook/JSS/paper/code/svd.c">http://www.public.iastate.edu/</a>.
+     * This code was adapted from
+     * <a href="http://www.public.iastate.edu/~dicook/JSS/paper/code/svd.c">http://www.public.iastate.edu/</a>.
      *
      * @author Kai Burjack
      */
     private static class SvdDecomposition3d {
+
         private final double rv1[];
         private final double w[];
         private final double v[];
@@ -293,19 +295,22 @@ public class QuaterniondInterpolator {
     private final Matrix3d v = new Matrix3d();
 
     /**
-     * Compute the weighted average of all of the quaternions given in <code>qs</code> using the specified interpolation factors <code>weights</code>, and store the result in <code>dest</code>.
+     * Compute the weighted average of all of the quaternions given in <code>qs</code> using the specified interpolation
+     * factors <code>weights</code>, and store the result in <code>dest</code>.
      *
      * @param qs
-     *            the quaternions to interpolate over
+     *                         the quaternions to interpolate over
      * @param weights
-     *            the weights of each individual quaternion in <code>qs</code>
+     *                         the weights of each individual quaternion in <code>qs</code>
      * @param maxSvdIterations
-     *            the maximum number of iterations in the Singular Value Decomposition step used by this method
+     *                         the maximum number of iterations in the Singular Value Decomposition step used by this
+     *                         method
      * @param dest
-     *            will hold the result
+     *                         will hold the result
      * @return dest
      */
-    public Quaterniond computeWeightedAverage(Quaterniond[] qs, double[] weights, int maxSvdIterations, Quaterniond dest) {
+    public Quaterniond computeWeightedAverage(Quaterniond[] qs, double[] weights, int maxSvdIterations,
+                                              Quaterniond dest) {
         double m00 = 0.0, m01 = 0.0, m02 = 0.0;
         double m10 = 0.0, m11 = 0.0, m12 = 0.0;
         double m20 = 0.0, m21 = 0.0, m22 = 0.0;
@@ -350,5 +355,4 @@ public class QuaterniondInterpolator {
         // Build quaternion from it
         return dest.setFromNormalized(u).normalize();
     }
-
 }

@@ -6,7 +6,9 @@ import me.jellysquid.mods.sodium.client.model.vertex.buffer.VertexBufferWriterUn
 import me.jellysquid.mods.sodium.client.model.vertex.formats.screen_quad.BasicScreenQuadVertexSink;
 import me.jellysquid.mods.sodium.client.util.CompatMemoryUtil;
 
-public class BasicScreenQuadVertexBufferWriterUnsafe extends VertexBufferWriterUnsafe implements BasicScreenQuadVertexSink {
+public class BasicScreenQuadVertexBufferWriterUnsafe extends VertexBufferWriterUnsafe
+                                                     implements BasicScreenQuadVertexSink {
+
     public BasicScreenQuadVertexBufferWriterUnsafe(VertexBufferView backingBuffer) {
         super(backingBuffer, VanillaVertexTypes.BASIC_SCREEN_QUADS);
     }

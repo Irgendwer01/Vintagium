@@ -4,6 +4,7 @@ import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GLContext;
 
 public class GlFunctions {
+
     private static final ContextCapabilities capabilities = GLContext.getCapabilities();
 
     public static final GlVertexArrayFunctions VERTEX_ARRAY = GlVertexArrayFunctions.load(capabilities);

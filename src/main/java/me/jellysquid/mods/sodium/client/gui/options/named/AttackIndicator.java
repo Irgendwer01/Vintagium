@@ -2,19 +2,21 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-
 package me.jellysquid.mods.sodium.client.gui.options.named;
 
 import java.util.Arrays;
 import java.util.Comparator;
+
 import net.minecraft.util.math.MathHelper;
 
 public enum AttackIndicator {
+
     OFF(0, "options.off"),
     CROSSHAIR(1, "options.attack.crosshair"),
     HOTBAR(2, "options.attack.hotbar");
 
-    private static final AttackIndicator[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(AttackIndicator::getId)).toArray(AttackIndicator[]::new);
+    private static final AttackIndicator[] VALUES = Arrays.stream(values())
+            .sorted(Comparator.comparingInt(AttackIndicator::getId)).toArray(AttackIndicator[]::new);
     private final int id;
     private final String translationKey;
 

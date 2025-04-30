@@ -1,9 +1,11 @@
 package me.jellysquid.mods.sodium.client.render.chunk;
 
-import me.jellysquid.mods.sodium.common.util.DirectionUtil;
 import net.minecraft.util.EnumFacing;
 
+import me.jellysquid.mods.sodium.common.util.DirectionUtil;
+
 public class ChunkRenderColumn<T extends ChunkGraphicsState> {
+
     @SuppressWarnings("unchecked")
     private final ChunkRenderContainer<T>[] renders = new ChunkRenderContainer[16];
 

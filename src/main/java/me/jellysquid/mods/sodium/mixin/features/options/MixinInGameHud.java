@@ -1,11 +1,12 @@
 package me.jellysquid.mods.sodium.mixin.features.options;
 
-import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import net.minecraftforge.client.GuiIngameForge;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+
+import me.jellysquid.mods.sodium.client.SodiumClientMod;
 
 /**
  * note that both {@link net.minecraft.client.gui.GuiIngame} and {@link net.minecraftforge.client.GuiIngameForge}
@@ -14,11 +15,14 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  */
 @Mixin(GuiIngameForge.class)
 public class MixinInGameHud {
-    @Redirect(method = "renderGameOverlay", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;isFancyGraphicsEnabled()Z"))
+
+    @Redirect(method = "renderGameOverlay",
+              at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;isFancyGraphicsEnabled()Z"))
     private boolean vintagium$redirectVignette() {
-        //mixin target is `if (renderVignette && Minecraft.isFancyGraphicsEnabled())`
-        //we assume that `renderVignette` is always true, because vanilla/forge will not change its value, and mods that
-        //will change it explicitly must have a reason.
+        // mixin target is `if (renderVignette && Minecraft.isFancyGraphicsEnabled())`
+        // we assume that `renderVignette` is always true, because vanilla/forge will not change its value, and mods
+        // that
+        // will change it explicitly must have a reason.
         return SodiumClientMod.options().quality.enableVignette;
     }
 }

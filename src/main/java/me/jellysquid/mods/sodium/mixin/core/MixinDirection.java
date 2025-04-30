@@ -1,11 +1,13 @@
 package me.jellysquid.mods.sodium.mixin.core;
 
 import net.minecraft.util.EnumFacing;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(EnumFacing.class)
 public class MixinDirection {
+
     /**
      * @author <a href="mailto:skaggsm333@gmail.com">Mitchell Skaggs</a>
      * @reason Avoid looping over all directions and computing the dot product

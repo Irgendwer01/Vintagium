@@ -1,16 +1,18 @@
 package me.jellysquid.mods.sodium.client.model.quad.blender;
 
-import me.jellysquid.mods.sodium.client.model.quad.ModelQuadView;
-import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFlags;
-import me.jellysquid.mods.sodium.client.util.color.ColorABGR;
-import me.jellysquid.mods.sodium.client.util.color.ColorARGB;
-import me.jellysquid.mods.sodium.client.util.color.ColorU8;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+import me.jellysquid.mods.sodium.client.model.quad.ModelQuadView;
+import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFlags;
+import me.jellysquid.mods.sodium.client.util.color.ColorABGR;
+import me.jellysquid.mods.sodium.client.util.color.ColorARGB;
+import me.jellysquid.mods.sodium.client.util.color.ColorU8;
+
 public class SmoothBiomeColorBlender implements BiomeColorBlender {
+
     private final int[] cachedRet = new int[4];
 
     private final BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
@@ -69,7 +71,8 @@ public class SmoothBiomeColorBlender implements BiomeColorBlender {
         final int c1 = this.getBlockColor(colorizer, world, state, origin, originX, originZ, quad.getColorIndex());
         final int c2 = this.getBlockColor(colorizer, world, state, origin, originX, originZ + 1, quad.getColorIndex());
         final int c3 = this.getBlockColor(colorizer, world, state, origin, originX + 1, originZ, quad.getColorIndex());
-        final int c4 = this.getBlockColor(colorizer, world, state, origin, originX + 1, originZ + 1, quad.getColorIndex());
+        final int c4 = this.getBlockColor(colorizer, world, state, origin, originX + 1, originZ + 1,
+                quad.getColorIndex());
 
         final float fr, fg, fb;
 

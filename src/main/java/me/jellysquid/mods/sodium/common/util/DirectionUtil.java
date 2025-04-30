@@ -7,9 +7,11 @@ import net.minecraft.util.EnumFacing;
  * be cloned every time.
  */
 public class DirectionUtil {
+
     public static final EnumFacing[] ALL_DIRECTIONS = EnumFacing.values();
     public static final int DIRECTION_COUNT = ALL_DIRECTIONS.length;
 
     // Provides the same order as enumerating Direction and checking the axis of each value
-    public static final EnumFacing[] HORIZONTAL_DIRECTIONS = new EnumFacing[] { EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.WEST, EnumFacing.EAST };
+    public static final EnumFacing[] HORIZONTAL_DIRECTIONS = new EnumFacing[] { EnumFacing.NORTH, EnumFacing.SOUTH,
+            EnumFacing.WEST, EnumFacing.EAST };
 }
